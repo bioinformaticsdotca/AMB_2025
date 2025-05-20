@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 4 - Lab practical | Advanced Microbiome Analysis 2025</title>
+  <meta name="description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 4 - Lab practical | Advanced Microbiome Analysis 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="github-repo" content="cbw-dev/AMB_2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 4 - Lab practical | Advanced Microbiome Analysis 2025" />
+  
+  <meta name="twitter:description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="twitter:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-4-visualization-and-finding-functional-significance.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+
+ <li><a href="./">Advanced Microbiome Analysis 2025</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="course-schedule.html"><a href="course-schedule.html"><i class="fa fa-check"></i>Course Schedule</a>
+<ul>
+<li class="chapter" data-level="" data-path="course-schedule.html"><a href="course-schedule.html#meet-your-faculty"><i class="fa fa-check"></i>Meet Your Faculty</a></li>
+</ul></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a></li>
+<li class="chapter" data-level="" data-path="module-3-assigning-functions.html"><a href="module-3-assigning-functions.html"><i class="fa fa-check"></i>Module 3: Assigning Functions</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html"><i class="fa fa-check"></i>Module 3 - Lab practical</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#setting-up-the-workspace"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#ssh-port-forwarding"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#workspace"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#start-container"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#jupyter"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#prodigal"><i class="fa fa-check"></i>Prodigal</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#sequence-similarity"><i class="fa fa-check"></i>Sequence similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#diamond"><i class="fa fa-check"></i>Diamond</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#bakta"><i class="fa fa-check"></i>Bakta</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#resistance-gene-identifier-rgi"><i class="fa fa-check"></i>Resistance Gene Identifier (RGI)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#machine-learning"><i class="fa fa-check"></i>Machine learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#kofamscan"><i class="fa fa-check"></i>Kofamscan</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#deepfri"><i class="fa fa-check"></i>deepFRI</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#deepec"><i class="fa fa-check"></i>deepEC</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#proteinbert"><i class="fa fa-check"></i>proteinBERT</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#metabolic-modelling"><i class="fa fa-check"></i>Metabolic modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#gapseq"><i class="fa fa-check"></i>gapseq</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-visualization-and-finding-functional-significance.html"><a href="module-4-visualization-and-finding-functional-significance.html"><i class="fa fa-check"></i>Module 4: Visualization and Finding Functional Significance</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html"><i class="fa fa-check"></i>Module 4 - Lab practical</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#overview-1"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#setting-up-the-workspace-1"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#the-compute-environment"><i class="fa fa-check"></i>The compute environment</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#port-forward"><i class="fa fa-check"></i>Port forward</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#start-container-1"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#jupyter-1"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#salmon"><i class="fa fa-check"></i>Salmon</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#deseq2"><i class="fa fa-check"></i>Deseq2</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#gene-set-enrichment-analysis-gsea"><i class="fa fa-check"></i>Gene set enrichment analysis (GSEA)</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+ <center>
+ <a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+ <a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.webp" width=40% style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+ <a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" width=40% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Genomics logo.">
+ <br><br>
+ <a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=25% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+ <a href="https://www.hpcforhealth.ca/"><img src="img/sponsors/hpc4health.png" width=60% style="display:inline-block;" style="padding-bottom: 20px "alt="HPC4Health logo.">
+ <br><br>
+ <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Microbiome Analysis 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-4---lab-practical" class="section level1 hasAnchor">
+<h1>Module 4 - Lab practical<a href="module-4---lab-practical.html#module-4---lab-practical" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview-1" class="section level2 hasAnchor">
+<h2>Overview<a href="module-4---lab-practical.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="module-4---lab-practical.html#salmon">Salmon</a></li>
+<li><a href="module-4---lab-practical.html#deseq2">Deseq2</a></li>
+<li><a href="module-4---lab-practical.html#gene-set-enrichment-analysis-gsea">Gene set enrichment analysis (GSEA)</a></li>
+<li>[Cytoscape]</li>
+</ul>
+</div>
+<div id="setting-up-the-workspace-1" class="section level2 hasAnchor">
+<h2>Setting up the workspace<a href="module-4---lab-practical.html#setting-up-the-workspace-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following procedure to set up the workspace will be near identical to that of the previous lab.</p>
+<div id="the-compute-environment" class="section level3 hasAnchor">
+<h3>The compute environment<a href="module-4---lab-practical.html#the-compute-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All software dependencies for this lab are packaged as containers.</p>
+</div>
+<div id="port-forward" class="section level3 hasAnchor">
+<h3>Port forward<a href="module-4---lab-practical.html#port-forward" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="terminal-unixmacos-1" class="section level4 hasAnchor">
+<h4>Terminal (Unix/MacOS)<a href="module-4---lab-practical.html#terminal-unixmacos-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb47-1"><a href="module-4---lab-practical.html#cb47-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 48888:localhost:48888 ubuntu@main.uhn-hpc.ca <span class="at">-i</span> <span class="va">${path_to_your_key}</span></span></code></pre></div>
+</div>
+<div id="putty-windows-1" class="section level4 hasAnchor">
+<h4>Putty (Windows)<a href="module-4---lab-practical.html#putty-windows-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="float">
+<img src="img/lab3/putty_port_forward.png" alt="how to set port forward with putty" />
+<div class="figcaption">how to set port forward with putty</div>
+</div>
+</div>
+</div>
+<div id="start-container-1" class="section level3 hasAnchor">
+<h3>Start container<a href="module-4---lab-practical.html#start-container-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="module-4---lab-practical.html#cb48-1" tabindex="-1"></a><span class="ex">apptainer</span> exec ./amb_2025.sif unpack</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="module-4---lab-practical.html#cb49-1" tabindex="-1"></a><span class="ex">start_lab</span></span></code></pre></div>
+</div>
+<div id="jupyter-1" class="section level3 hasAnchor">
+<h3>Jupyter<a href="module-4---lab-practical.html#jupyter-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="http://localhost:48888/lab" class="uri">http://localhost:48888/lab</a></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb50-1"><a href="module-4---lab-practical.html#cb50-1"></a><span class="im">import</span> os, sys</span>
+<span id="cb50-2"><a href="module-4---lab-practical.html#cb50-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb50-3"><a href="module-4---lab-practical.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="module-4---lab-practical.html#cb50-4"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb50-5"><a href="module-4---lab-practical.html#cb50-5"></a><span class="im">from</span> local.ipc <span class="im">import</span> Shell</span>
+<span id="cb50-6"><a href="module-4---lab-practical.html#cb50-6"></a><span class="im">from</span> local.constants <span class="im">import</span> WORKSPACE_ROOT</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb51-1"><a href="module-4---lab-practical.html#cb51-1"></a>LIB <span class="op">=</span> WORKSPACE_ROOT<span class="op">/</span><span class="st">&quot;lib&quot;</span></span>
+<span id="cb51-2"><a href="module-4---lab-practical.html#cb51-2"></a><span class="cf">if</span> <span class="kw">not</span> LIB.exists(): LIB.mkdir()</span>
+<span id="cb51-3"><a href="module-4---lab-practical.html#cb51-3"></a>DATA <span class="op">=</span> Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb52-1"><a href="module-4---lab-practical.html#cb52-1"></a>Shell(<span class="st">&quot;pwd -P&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="salmon" class="section level2 hasAnchor">
+<h2>Salmon<a href="module-4---lab-practical.html#salmon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb53-1"><a href="module-4---lab-practical.html#cb53-1"></a>os.system(<span class="ss">f&quot;salmon --help&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb54-1"><a href="module-4---lab-practical.html#cb54-1"></a>os.system(<span class="ss">f&quot;salmon index --help&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb55-1"><a href="module-4---lab-practical.html#cb55-1"></a>os.system(<span class="ss">f&quot;salmon quant --help&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb56-1"><a href="module-4---lab-practical.html#cb56-1"></a>assembly <span class="op">=</span> Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab3/scratch/mock/outputs/bakta.chicken/final.contigs.ffn&quot;</span>)</span>
+<span id="cb56-2"><a href="module-4---lab-practical.html#cb56-2"></a>index <span class="op">=</span> WORKSPACE_ROOT<span class="op">/</span><span class="st">&quot;asm_index&quot;</span></span>
+<span id="cb56-3"><a href="module-4---lab-practical.html#cb56-3"></a>os.system(<span class="ss">f&quot;salmon index -t </span><span class="sc">{</span>assembly<span class="sc">}</span><span class="ss"> -i </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb57-1"><a href="module-4---lab-practical.html#cb57-1"></a><span class="co"># 6 mins</span></span>
+<span id="cb57-2"><a href="module-4---lab-practical.html#cb57-2"></a>reads_dir <span class="op">=</span> Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/inputs/reads_for_assembly&quot;</span>)</span>
+<span id="cb57-3"><a href="module-4---lab-practical.html#cb57-3"></a>todo <span class="op">=</span> <span class="bu">list</span>(reads_dir.iterdir())</span>
+<span id="cb57-4"><a href="module-4---lab-practical.html#cb57-4"></a><span class="cf">for</span> read_file <span class="kw">in</span> tqdm(todo, total<span class="op">=</span><span class="bu">len</span>(todo)):</span>
+<span id="cb57-5"><a href="module-4---lab-practical.html#cb57-5"></a>    srr <span class="op">=</span> read_file.name.split(<span class="st">&quot;_&quot;</span>)[<span class="dv">0</span>]</span>
+<span id="cb57-6"><a href="module-4---lab-practical.html#cb57-6"></a>    out <span class="op">=</span> WORKSPACE_ROOT<span class="op">/</span><span class="ss">f&quot;salmon/</span><span class="sc">{</span>srr<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb57-7"><a href="module-4---lab-practical.html#cb57-7"></a>    os.system(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb57-8"><a href="module-4---lab-practical.html#cb57-8"></a><span class="ss">        mkdir -p </span><span class="sc">{</span>out<span class="sc">}</span></span>
+<span id="cb57-9"><a href="module-4---lab-practical.html#cb57-9"></a><span class="ss">        salmon quant -i </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss"> -l A -p 14 </span><span class="op">\</span></span>
+<span id="cb57-10"><a href="module-4---lab-practical.html#cb57-10"></a><span class="ss">            -r </span><span class="sc">{</span>read_file<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb57-11"><a href="module-4---lab-practical.html#cb57-11"></a><span class="ss">            -o </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss"> &gt;</span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">/salmon.log 2&gt;</span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">/salmon.err</span></span>
+<span id="cb57-12"><a href="module-4---lab-practical.html#cb57-12"></a><span class="ss">    &quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+<div id="deseq2" class="section level2 hasAnchor">
+<h2>Deseq2<a href="module-4---lab-practical.html#deseq2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>look at 1 quant.sf file</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb58-1"><a href="module-4---lab-practical.html#cb58-1"></a>out_dir <span class="op">=</span> Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon&quot;</span>)</span>
+<span id="cb58-2"><a href="module-4---lab-practical.html#cb58-2"></a><span class="co"># look at the quant.sf file</span></span>
+<span id="cb58-3"><a href="module-4---lab-practical.html#cb58-3"></a><span class="cf">for</span> srr <span class="kw">in</span> out_dir.iterdir():</span>
+<span id="cb58-4"><a href="module-4---lab-practical.html#cb58-4"></a>    df <span class="op">=</span> pd.read_csv(srr<span class="op">/</span><span class="st">&quot;quant.sf&quot;</span>, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb58-5"><a href="module-4---lab-practical.html#cb58-5"></a>    <span class="cf">break</span></span>
+<span id="cb58-6"><a href="module-4---lab-practical.html#cb58-6"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb59-1"><a href="module-4---lab-practical.html#cb59-1"></a>df_meta <span class="op">=</span> pd.read_csv(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/inputs/metagenome_metadata.txt&quot;</span>, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb59-2"><a href="module-4---lab-practical.html#cb59-2"></a><span class="bu">print</span>(df_meta.shape)</span>
+<span id="cb59-3"><a href="module-4---lab-practical.html#cb59-3"></a>df_meta.head(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb60-1"><a href="module-4---lab-practical.html#cb60-1"></a>out_dir <span class="op">=</span> Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon&quot;</span>)</span>
+<span id="cb60-2"><a href="module-4---lab-practical.html#cb60-2"></a></span>
+<span id="cb60-3"><a href="module-4---lab-practical.html#cb60-3"></a>mtx <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="bu">len</span>(gene2i), <span class="bu">len</span>(todo)), dtype<span class="op">=</span>np.int32) <span class="co"># genes x samples</span></span>
+<span id="cb60-4"><a href="module-4---lab-practical.html#cb60-4"></a><span class="cf">for</span> i, srr <span class="kw">in</span> tqdm(<span class="bu">enumerate</span>(df_meta[<span class="st">&quot;sample_name&quot;</span>]), total<span class="op">=</span><span class="bu">len</span>(df_meta)):</span>
+<span id="cb60-5"><a href="module-4---lab-practical.html#cb60-5"></a>    df <span class="op">=</span> pd.read_csv(out_dir<span class="op">/</span><span class="ss">f&quot;</span><span class="sc">{</span>srr<span class="sc">}</span><span class="ss">/quant.sf&quot;</span>, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb60-6"><a href="module-4---lab-practical.html#cb60-6"></a></span>
+<span id="cb60-7"><a href="module-4---lab-practical.html#cb60-7"></a>    gene_indexes <span class="op">=</span> [gene2i[row[<span class="st">&quot;Name&quot;</span>]] <span class="cf">for</span> _, row <span class="kw">in</span> df.iterrows()]</span>
+<span id="cb60-8"><a href="module-4---lab-practical.html#cb60-8"></a>    counts <span class="op">=</span> df[<span class="st">&quot;NumReads&quot;</span>]</span>
+<span id="cb60-9"><a href="module-4---lab-practical.html#cb60-9"></a>    mtx[gene_indexes, i] <span class="op">=</span> counts</span>
+<span id="cb60-10"><a href="module-4---lab-practical.html#cb60-10"></a>mtx.shape</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb61-1"><a href="module-4---lab-practical.html#cb61-1"></a>gene_ids <span class="op">=</span> <span class="bu">list</span>(gene2i.keys())</span>
+<span id="cb61-2"><a href="module-4---lab-practical.html#cb61-2"></a>sample_ids <span class="op">=</span> <span class="bu">list</span>(df_meta[<span class="st">&quot;sample_name&quot;</span>])</span>
+<span id="cb61-3"><a href="module-4---lab-practical.html#cb61-3"></a></span>
+<span id="cb61-4"><a href="module-4---lab-practical.html#cb61-4"></a>df <span class="op">=</span> pd.DataFrame(mtx[:, :, <span class="dv">0</span>], columns<span class="op">=</span>sample_ids)</span>
+<span id="cb61-5"><a href="module-4---lab-practical.html#cb61-5"></a>df[<span class="st">&quot;gene_id&quot;</span>] <span class="op">=</span> gene_ids</span>
+<span id="cb61-6"><a href="module-4---lab-practical.html#cb61-6"></a>df <span class="op">=</span> df.set_index(<span class="st">&quot;gene_id&quot;</span>)</span>
+<span id="cb61-7"><a href="module-4---lab-practical.html#cb61-7"></a><span class="bu">print</span>(df.shape)</span>
+<span id="cb61-8"><a href="module-4---lab-practical.html#cb61-8"></a>df.to_csv(WORKSPACE_ROOT<span class="op">/</span><span class="st">&quot;salmon/counts.mtx&quot;</span>)</span>
+<span id="cb61-9"><a href="module-4---lab-practical.html#cb61-9"></a>df.head(<span class="dv">2</span>)</span></code></pre></div>
+<p>Transistion to an R notebook.
+<a href="http://localhost:48888/lab" class="uri">http://localhost:48888/lab</a></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb62-1"><a href="module-4---lab-practical.html#cb62-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb62-2"><a href="module-4---lab-practical.html#cb62-2"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb63-1"><a href="module-4---lab-practical.html#cb63-1"></a>cts <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.csv</span>(</span>
+<span id="cb63-2"><a href="module-4---lab-practical.html#cb63-2"></a>    <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon/counts.mtx&quot;</span>,</span>
+<span id="cb63-3"><a href="module-4---lab-practical.html#cb63-3"></a>    <span class="at">row.names =</span> <span class="st">&quot;gene_id&quot;</span></span>
+<span id="cb63-4"><a href="module-4---lab-practical.html#cb63-4"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb64-1"><a href="module-4---lab-practical.html#cb64-1"></a>coldata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb64-2"><a href="module-4---lab-practical.html#cb64-2"></a>    <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/inputs/metagenome_metadata.txt&quot;</span>,</span>
+<span id="cb64-3"><a href="module-4---lab-practical.html#cb64-3"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb64-4"><a href="module-4---lab-practical.html#cb64-4"></a>)</span></code></pre></div>
+<p>We will compare Bacteroides vs Non-Bacteroides</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb65-1"><a href="module-4---lab-practical.html#cb65-1"></a>coldata<span class="sc">$</span>grouping</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb66-1"><a href="module-4---lab-practical.html#cb66-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(</span>
+<span id="cb66-2"><a href="module-4---lab-practical.html#cb66-2"></a>  <span class="at">countData =</span> cts,</span>
+<span id="cb66-3"><a href="module-4---lab-practical.html#cb66-3"></a>  <span class="at">colData =</span> coldata,</span>
+<span id="cb66-4"><a href="module-4---lab-practical.html#cb66-4"></a>  <span class="at">design =</span> <span class="sc">~</span> grouping</span>
+<span id="cb66-5"><a href="module-4---lab-practical.html#cb66-5"></a>)</span>
+<span id="cb66-6"><a href="module-4---lab-practical.html#cb66-6"></a>dds</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb67-1"><a href="module-4---lab-practical.html#cb67-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb68-1"><a href="module-4---lab-practical.html#cb68-1"></a>deseq_save <span class="ot">&lt;-</span> <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/deseq2.rds&quot;</span></span>
+<span id="cb68-2"><a href="module-4---lab-practical.html#cb68-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(deseq_save)) {</span>
+<span id="cb68-3"><a href="module-4---lab-practical.html#cb68-3"></a>  dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds)</span>
+<span id="cb68-4"><a href="module-4---lab-practical.html#cb68-4"></a>  <span class="fu">saveRDS</span>(dds, deseq_save)</span>
+<span id="cb68-5"><a href="module-4---lab-practical.html#cb68-5"></a>} <span class="cf">else</span> {</span>
+<span id="cb68-6"><a href="module-4---lab-practical.html#cb68-6"></a>  dds <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(deseq_save)</span>
+<span id="cb68-7"><a href="module-4---lab-practical.html#cb68-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb69-1"><a href="module-4---lab-practical.html#cb69-1"></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">&quot;grouping&quot;</span>, <span class="st">&quot;Bacteroides&quot;</span>, <span class="st">&quot;Non-Bacteroides&quot;</span>))</span>
+<span id="cb69-2"><a href="module-4---lab-practical.html#cb69-2"></a>results_table <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(res)</span>
+<span id="cb69-3"><a href="module-4---lab-practical.html#cb69-3"></a><span class="fu">write.csv</span>(results_table, <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/deseq2_results.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Next, we will compute a null distribution for Gene set enrichment analysis (GSEA).
+GSEA randomly assigns conditions to samples to compute the null distribution.
+When the number of samples is low, genes can be randomly assigned to gene sets instead, but this fails to take into account gene-gene correlations.</p>
+<details>
+<summary>
+What is the minimum number of samples to simulate a null distribution with a precision of at least 0.05?
+</summary>
+4! = 24. 1/24 is about 0.04. This will be explored further in the next section.
+</details>
+<p>normalized counts</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb70-1"><a href="module-4---lab-practical.html#cb70-1"></a>vst <span class="ot">&lt;-</span> <span class="fu">vst</span>(dds, <span class="at">blind =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb70-2"><a href="module-4---lab-practical.html#cb70-2"></a>vst_counts <span class="ot">&lt;-</span> <span class="fu">assay</span>(vst)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb71-1"><a href="module-4---lab-practical.html#cb71-1"></a>coldata<span class="sc">$</span>grouping</span>
+<span id="cb71-2"><a href="module-4---lab-practical.html#cb71-2"></a>class_labels_numeric <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(<span class="fu">factor</span>(coldata<span class="sc">$</span>grouping)) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb71-3"><a href="module-4---lab-practical.html#cb71-3"></a>class_labels_numeric</span></code></pre></div>
+<p>The point biserial correlation is a special case of the Pearson correlation designed to compare a continuous variable with a binary variable.
+Alternatively the biserial correlation compares the same, but assumes that the binary variable is the result of thresholding a continuous variable.
+For example, it would be appropriate to use the point biserial correlation for a coin toss, while the biserial correlation would be more appropriate for pass/fails from percentage grades.
+Practically, the biserial correlation also requires the relative propotions of each class.</p>
+<p>We will compute the point biserial correlation between genes and conditions for GSEA. While there likely is a genetic spectrum of bacteria spanning
+from Bacteroides to Non-Bacteroides, the chicken gut microbiome likely doesn’t have sufficient diversity to realize this spectrum.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb72-1"><a href="module-4---lab-practical.html#cb72-1"></a>point_biserial <span class="ot">&lt;-</span> <span class="cf">function</span>(expression, classes) {</span>
+<span id="cb72-2"><a href="module-4---lab-practical.html#cb72-2"></a>  <span class="cf">if</span> (<span class="fu">sd</span>(expression) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb72-3"><a href="module-4---lab-practical.html#cb72-3"></a>  <span class="fu">return</span>(<span class="fu">cor</span>(expression, classes, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>))</span>
+<span id="cb72-4"><a href="module-4---lab-practical.html#cb72-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb73-1"><a href="module-4---lab-practical.html#cb73-1"></a>gene_correlations <span class="ot">&lt;-</span> <span class="fu">apply</span>(vst_counts, <span class="dv">1</span>, point_biserial, <span class="at">classes =</span> class_labels_numeric)</span>
+<span id="cb73-2"><a href="module-4---lab-practical.html#cb73-2"></a>gene_correlations <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(gene_correlations)</span>
+<span id="cb73-3"><a href="module-4---lab-practical.html#cb73-3"></a><span class="fu">write.csv</span>(gene_correlations, <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/gene_correlations.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb74-1"><a href="module-4---lab-practical.html#cb74-1"></a><span class="fu">library</span>(pbapply)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb75-1"><a href="module-4---lab-practical.html#cb75-1"></a>bootstrap_save <span class="ot">&lt;-</span> <span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/null_distr.csv&quot;</span></span>
+<span id="cb75-2"><a href="module-4---lab-practical.html#cb75-2"></a></span>
+<span id="cb75-3"><a href="module-4---lab-practical.html#cb75-3"></a><span class="co"># about 1 minute</span></span>
+<span id="cb75-4"><a href="module-4---lab-practical.html#cb75-4"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(bootstrap_save)) {</span>
+<span id="cb75-5"><a href="module-4---lab-practical.html#cb75-5"></a>  <span class="fu">tryCatch</span>(</span>
+<span id="cb75-6"><a href="module-4---lab-practical.html#cb75-6"></a>    {</span>
+<span id="cb75-7"><a href="module-4---lab-practical.html#cb75-7"></a>      cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(<span class="dv">8</span>) <span class="co"># N cpus</span></span>
+<span id="cb75-8"><a href="module-4---lab-practical.html#cb75-8"></a>      <span class="fu">clusterExport</span>(cl, <span class="fu">c</span>(<span class="st">&quot;vst_counts&quot;</span>, <span class="st">&quot;point_biserial&quot;</span>, <span class="st">&quot;class_labels_numeric&quot;</span>))</span>
+<span id="cb75-9"><a href="module-4---lab-practical.html#cb75-9"></a></span>
+<span id="cb75-10"><a href="module-4---lab-practical.html#cb75-10"></a>      n_permutations <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb75-11"><a href="module-4---lab-practical.html#cb75-11"></a>      permutation_results <span class="ot">&lt;-</span> <span class="fu">pbsapply</span>(</span>
+<span id="cb75-12"><a href="module-4---lab-practical.html#cb75-12"></a>        <span class="dv">1</span><span class="sc">:</span>n_permutations,</span>
+<span id="cb75-13"><a href="module-4---lab-practical.html#cb75-13"></a>        <span class="cf">function</span>(i) {</span>
+<span id="cb75-14"><a href="module-4---lab-practical.html#cb75-14"></a>          <span class="co"># Shuffle labels</span></span>
+<span id="cb75-15"><a href="module-4---lab-practical.html#cb75-15"></a>          n <span class="ot">&lt;-</span> <span class="fu">length</span>(class_labels_numeric)</span>
+<span id="cb75-16"><a href="module-4---lab-practical.html#cb75-16"></a>          shuffled_labels <span class="ot">&lt;-</span> <span class="fu">sample</span>(class_labels_numeric, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb75-17"><a href="module-4---lab-practical.html#cb75-17"></a></span>
+<span id="cb75-18"><a href="module-4---lab-practical.html#cb75-18"></a>          <span class="co"># Calculate correlations for all genes</span></span>
+<span id="cb75-19"><a href="module-4---lab-practical.html#cb75-19"></a>          <span class="fu">return</span>(<span class="fu">apply</span>(vst_counts, <span class="dv">1</span>, point_biserial, <span class="at">classes =</span> shuffled_labels))</span>
+<span id="cb75-20"><a href="module-4---lab-practical.html#cb75-20"></a>        },</span>
+<span id="cb75-21"><a href="module-4---lab-practical.html#cb75-21"></a>        <span class="at">cl =</span> cl  <span class="co"># This enables parallel processing</span></span>
+<span id="cb75-22"><a href="module-4---lab-practical.html#cb75-22"></a>      )</span>
+<span id="cb75-23"><a href="module-4---lab-practical.html#cb75-23"></a>    },</span>
+<span id="cb75-24"><a href="module-4---lab-practical.html#cb75-24"></a>    <span class="at">finally =</span> {</span>
+<span id="cb75-25"><a href="module-4---lab-practical.html#cb75-25"></a>      <span class="fu">stopCluster</span>(cl)</span>
+<span id="cb75-26"><a href="module-4---lab-practical.html#cb75-26"></a>    }</span>
+<span id="cb75-27"><a href="module-4---lab-practical.html#cb75-27"></a>  )</span>
+<span id="cb75-28"><a href="module-4---lab-practical.html#cb75-28"></a></span>
+<span id="cb75-29"><a href="module-4---lab-practical.html#cb75-29"></a>  null_distr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb75-30"><a href="module-4---lab-practical.html#cb75-30"></a>    <span class="at">sample =</span> permutation_results,</span>
+<span id="cb75-31"><a href="module-4---lab-practical.html#cb75-31"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb75-32"><a href="module-4---lab-practical.html#cb75-32"></a>  )</span>
+<span id="cb75-33"><a href="module-4---lab-practical.html#cb75-33"></a>  <span class="fu">write.csv</span>(</span>
+<span id="cb75-34"><a href="module-4---lab-practical.html#cb75-34"></a>    null_distr,</span>
+<span id="cb75-35"><a href="module-4---lab-practical.html#cb75-35"></a>    bootstrap_save,</span>
+<span id="cb75-36"><a href="module-4---lab-practical.html#cb75-36"></a>    <span class="at">row.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb75-37"><a href="module-4---lab-practical.html#cb75-37"></a>  )</span>
+<span id="cb75-38"><a href="module-4---lab-practical.html#cb75-38"></a>} <span class="cf">else</span> {</span>
+<span id="cb75-39"><a href="module-4---lab-practical.html#cb75-39"></a>  null_distr <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(bootstrap_save)</span>
+<span id="cb75-40"><a href="module-4---lab-practical.html#cb75-40"></a>}</span>
+<span id="cb75-41"><a href="module-4---lab-practical.html#cb75-41"></a></span>
+<span id="cb75-42"><a href="module-4---lab-practical.html#cb75-42"></a><span class="fu">dim</span>(null_distr)</span></code></pre></div>
+</div>
+<div id="gene-set-enrichment-analysis-gsea" class="section level2 hasAnchor">
+<h2>Gene set enrichment analysis (GSEA)<a href="module-4---lab-practical.html#gene-set-enrichment-analysis-gsea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb76-1"><a href="module-4---lab-practical.html#cb76-1"></a><span class="im">from</span> local.models.kegg_orthology <span class="im">import</span> ParseKofamScanResults</span>
+<span id="cb76-2"><a href="module-4---lab-practical.html#cb76-2"></a></span>
+<span id="cb76-3"><a href="module-4---lab-practical.html#cb76-3"></a>model <span class="op">=</span> ParseKofamScanResults(</span>
+<span id="cb76-4"><a href="module-4---lab-practical.html#cb76-4"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab3/scratch/mock/outputs/kofamscan/chicken.out&quot;</span>),</span>
+<span id="cb76-5"><a href="module-4---lab-practical.html#cb76-5"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/api_kegg.db&quot;</span>),</span>
+<span id="cb76-6"><a href="module-4---lab-practical.html#cb76-6"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/brite.json&quot;</span>),</span>
+<span id="cb76-7"><a href="module-4---lab-practical.html#cb76-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb77-1"><a href="module-4---lab-practical.html#cb77-1"></a>function2genes <span class="op">=</span> {}</span>
+<span id="cb77-2"><a href="module-4---lab-practical.html#cb77-2"></a><span class="cf">for</span> _, r <span class="kw">in</span> model.df.iterrows():</span>
+<span id="cb77-3"><a href="module-4---lab-practical.html#cb77-3"></a>    ko <span class="op">=</span> r[<span class="st">&quot;ko&quot;</span>]</span>
+<span id="cb77-4"><a href="module-4---lab-practical.html#cb77-4"></a>    orf <span class="op">=</span> r[<span class="st">&quot;orf&quot;</span>]</span>
+<span id="cb77-5"><a href="module-4---lab-practical.html#cb77-5"></a>    function2genes[ko] <span class="op">=</span> function2genes.get(ko, <span class="bu">set</span>())<span class="op">|</span>{orf}</span>
+<span id="cb77-6"><a href="module-4---lab-practical.html#cb77-6"></a></span>
+<span id="cb77-7"><a href="module-4---lab-practical.html#cb77-7"></a>reactions2functions <span class="op">=</span> {}</span>
+<span id="cb77-8"><a href="module-4---lab-practical.html#cb77-8"></a><span class="cf">for</span> ko <span class="kw">in</span> function2genes:</span>
+<span id="cb77-9"><a href="module-4---lab-practical.html#cb77-9"></a>    meta <span class="op">=</span> model.Functions[ko]</span>
+<span id="cb77-10"><a href="module-4---lab-practical.html#cb77-10"></a>    <span class="cf">for</span> r <span class="kw">in</span> meta.reactions:</span>
+<span id="cb77-11"><a href="module-4---lab-practical.html#cb77-11"></a>        reactions2functions[r] <span class="op">=</span> reactions2functions.get(r, <span class="bu">set</span>())<span class="op">|</span>{ko}</span>
+<span id="cb77-12"><a href="module-4---lab-practical.html#cb77-12"></a></span>
+<span id="cb77-13"><a href="module-4---lab-practical.html#cb77-13"></a>pathway2reactions <span class="op">=</span> {}</span>
+<span id="cb77-14"><a href="module-4---lab-practical.html#cb77-14"></a><span class="cf">for</span> r <span class="kw">in</span> reactions2functions:</span>
+<span id="cb77-15"><a href="module-4---lab-practical.html#cb77-15"></a>    meta <span class="op">=</span> model.Reactions[r]</span>
+<span id="cb77-16"><a href="module-4---lab-practical.html#cb77-16"></a>    <span class="cf">for</span> p <span class="kw">in</span> meta.pathways:</span>
+<span id="cb77-17"><a href="module-4---lab-practical.html#cb77-17"></a>        pathway2reactions[p] <span class="op">=</span> pathway2reactions.get(p, <span class="bu">set</span>())<span class="op">|</span>{r}</span>
+<span id="cb77-18"><a href="module-4---lab-practical.html#cb77-18"></a></span>
+<span id="cb77-19"><a href="module-4---lab-practical.html#cb77-19"></a>gene_sets <span class="op">=</span> {}</span>
+<span id="cb77-20"><a href="module-4---lab-practical.html#cb77-20"></a><span class="cf">for</span> p, reactions <span class="kw">in</span> pathway2reactions.items():</span>
+<span id="cb77-21"><a href="module-4---lab-practical.html#cb77-21"></a>    genes <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb77-22"><a href="module-4---lab-practical.html#cb77-22"></a>    <span class="cf">for</span> r <span class="kw">in</span> reactions:</span>
+<span id="cb77-23"><a href="module-4---lab-practical.html#cb77-23"></a>        functions <span class="op">=</span> reactions2functions[r]</span>
+<span id="cb77-24"><a href="module-4---lab-practical.html#cb77-24"></a>        <span class="cf">for</span> f <span class="kw">in</span> functions:</span>
+<span id="cb77-25"><a href="module-4---lab-practical.html#cb77-25"></a>            genes <span class="op">|=</span> function2genes[f]</span>
+<span id="cb77-26"><a href="module-4---lab-practical.html#cb77-26"></a>    gene_sets[p] <span class="op">=</span> genes</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb78-1"><a href="module-4---lab-practical.html#cb78-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb78-2"><a href="module-4---lab-practical.html#cb78-2"></a></span>
+<span id="cb78-3"><a href="module-4---lab-practical.html#cb78-3"></a><span class="at">@dataclass</span></span>
+<span id="cb78-4"><a href="module-4---lab-practical.html#cb78-4"></a><span class="kw">class</span> GseaResult:</span>
+<span id="cb78-5"><a href="module-4---lab-practical.html#cb78-5"></a>    set_name: <span class="bu">str</span></span>
+<span id="cb78-6"><a href="module-4---lab-practical.html#cb78-6"></a>    set_size: <span class="bu">int</span></span>
+<span id="cb78-7"><a href="module-4---lab-practical.html#cb78-7"></a>    score: <span class="bu">float</span></span>
+<span id="cb78-8"><a href="module-4---lab-practical.html#cb78-8"></a>    pvalue: <span class="bu">float</span></span>
+<span id="cb78-9"><a href="module-4---lab-practical.html#cb78-9"></a>    hits: np.ndarray</span>
+<span id="cb78-10"><a href="module-4---lab-practical.html#cb78-10"></a>    running_sum_statistic: np.ndarray</span>
+<span id="cb78-11"><a href="module-4---lab-practical.html#cb78-11"></a></span>
+<span id="cb78-12"><a href="module-4---lab-practical.html#cb78-12"></a><span class="kw">class</span> Gsea:</span>
+<span id="cb78-13"><a href="module-4---lab-practical.html#cb78-13"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, labels: np.ndarray, corr: np.ndarray, permuted: np.ndarray) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb78-14"><a href="module-4---lab-practical.html#cb78-14"></a>        <span class="va">self</span>.labels <span class="op">=</span> labels</span>
+<span id="cb78-15"><a href="module-4---lab-practical.html#cb78-15"></a>        mat <span class="op">=</span> np.hstack([corr, permuted])</span>
+<span id="cb78-16"><a href="module-4---lab-practical.html#cb78-16"></a>        <span class="va">self</span>.mat_index <span class="op">=</span> np.argsort(<span class="op">-</span>mat.T, stable<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb78-17"><a href="module-4---lab-practical.html#cb78-17"></a>        <span class="va">self</span>.mat_sorted <span class="op">=</span> np.zeros_like(mat)</span>
+<span id="cb78-18"><a href="module-4---lab-practical.html#cb78-18"></a>        <span class="cf">for</span> i, order <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.mat_index):</span>
+<span id="cb78-19"><a href="module-4---lab-practical.html#cb78-19"></a>            <span class="va">self</span>.mat_sorted[:, i] <span class="op">=</span> mat[:, i][order]</span>
+<span id="cb78-20"><a href="module-4---lab-practical.html#cb78-20"></a></span>
+<span id="cb78-21"><a href="module-4---lab-practical.html#cb78-21"></a>    <span class="kw">def</span> run(<span class="va">self</span>, name: <span class="bu">str</span>, gene_set: <span class="bu">set</span>, p<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb78-22"><a href="module-4---lab-practical.html#cb78-22"></a>        S <span class="op">=</span> np.array([k <span class="kw">in</span> s <span class="cf">for</span> k <span class="kw">in</span> <span class="va">self</span>.labels], dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb78-23"><a href="module-4---lab-practical.html#cb78-23"></a>        S <span class="op">=</span> S[<span class="va">self</span>.mat_index.T]</span>
+<span id="cb78-24"><a href="module-4---lab-practical.html#cb78-24"></a></span>
+<span id="cb78-25"><a href="module-4---lab-practical.html#cb78-25"></a>        corr <span class="op">=</span> np.<span class="bu">pow</span>(np.<span class="bu">abs</span>(<span class="va">self</span>.mat_sorted), p)</span>
+<span id="cb78-26"><a href="module-4---lab-practical.html#cb78-26"></a>        N_R <span class="op">=</span> np.<span class="bu">sum</span>(corr<span class="op">*</span>S, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb78-27"><a href="module-4---lab-practical.html#cb78-27"></a></span>
+<span id="cb78-28"><a href="module-4---lab-practical.html#cb78-28"></a>        P_hit <span class="op">=</span> corr<span class="op">/</span>N_R</span>
+<span id="cb78-29"><a href="module-4---lab-practical.html#cb78-29"></a>        P_hit <span class="op">=</span> P_hit<span class="op">*</span>S <span class="co"># g_j in S</span></span>
+<span id="cb78-30"><a href="module-4---lab-practical.html#cb78-30"></a>        P_hit <span class="op">=</span> np.cumsum(P_hit, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb78-31"><a href="module-4---lab-practical.html#cb78-31"></a></span>
+<span id="cb78-32"><a href="module-4---lab-practical.html#cb78-32"></a>        miss <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="bu">len</span>(<span class="va">self</span>.labels) <span class="op">-</span> <span class="bu">len</span>(s))</span>
+<span id="cb78-33"><a href="module-4---lab-practical.html#cb78-33"></a>        miss <span class="op">=</span> np.ones_like(<span class="va">self</span>.labels)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>S.T)<span class="op">*</span>miss</span>
+<span id="cb78-34"><a href="module-4---lab-practical.html#cb78-34"></a>        P_miss <span class="op">=</span> np.cumsum(miss.T, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb78-35"><a href="module-4---lab-practical.html#cb78-35"></a></span>
+<span id="cb78-36"><a href="module-4---lab-practical.html#cb78-36"></a>        S_distr <span class="op">=</span> (P_hit <span class="op">-</span> P_miss).T</span>
+<span id="cb78-37"><a href="module-4---lab-practical.html#cb78-37"></a></span>
+<span id="cb78-38"><a href="module-4---lab-practical.html#cb78-38"></a>        ES_pos <span class="op">=</span> S_distr.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb78-39"><a href="module-4---lab-practical.html#cb78-39"></a>        ES_neg <span class="op">=</span> S_distr.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb78-40"><a href="module-4---lab-practical.html#cb78-40"></a>        ES_candidates <span class="op">=</span> np.vstack([ES_pos, ES_neg]).T</span>
+<span id="cb78-41"><a href="module-4---lab-practical.html#cb78-41"></a>        to_take <span class="op">=</span> np.argmax(np.<span class="bu">abs</span>(ES_candidates), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb78-42"><a href="module-4---lab-practical.html#cb78-42"></a>        ES <span class="op">=</span> (ES_neg<span class="op">*</span>to_take) <span class="op">+</span> (ES_pos<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>to_take))</span>
+<span id="cb78-43"><a href="module-4---lab-practical.html#cb78-43"></a>        score, boot <span class="op">=</span> ES[<span class="dv">0</span>], ES[<span class="dv">1</span>:]</span>
+<span id="cb78-44"><a href="module-4---lab-practical.html#cb78-44"></a>        pvalue <span class="op">=</span> np.<span class="bu">sum</span>(boot <span class="op">&gt;=</span> score) <span class="op">/</span> boot.shape[<span class="dv">0</span>]</span>
+<span id="cb78-45"><a href="module-4---lab-practical.html#cb78-45"></a>        <span class="cf">if</span> pvalue <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb78-46"><a href="module-4---lab-practical.html#cb78-46"></a>            pvalue <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> boot.shape[<span class="dv">0</span>]</span>
+<span id="cb78-47"><a href="module-4---lab-practical.html#cb78-47"></a></span>
+<span id="cb78-48"><a href="module-4---lab-practical.html#cb78-48"></a>        <span class="cf">return</span> GseaResult(</span>
+<span id="cb78-49"><a href="module-4---lab-practical.html#cb78-49"></a>            set_name<span class="op">=</span>name,</span>
+<span id="cb78-50"><a href="module-4---lab-practical.html#cb78-50"></a>            set_size<span class="op">=</span><span class="bu">len</span>(gene_set),</span>
+<span id="cb78-51"><a href="module-4---lab-practical.html#cb78-51"></a>            score<span class="op">=</span>score,</span>
+<span id="cb78-52"><a href="module-4---lab-practical.html#cb78-52"></a>            pvalue<span class="op">=</span>pvalue,</span>
+<span id="cb78-53"><a href="module-4---lab-practical.html#cb78-53"></a>            hits<span class="op">=</span>S.T[<span class="dv">0</span>],</span>
+<span id="cb78-54"><a href="module-4---lab-practical.html#cb78-54"></a>            running_sum_statistic<span class="op">=</span>S_distr[<span class="dv">0</span>],</span>
+<span id="cb78-55"><a href="module-4---lab-practical.html#cb78-55"></a>        )</span>
+<span id="cb78-56"><a href="module-4---lab-practical.html#cb78-56"></a>    </span>
+<span id="cb78-57"><a href="module-4---lab-practical.html#cb78-57"></a><span class="kw">def</span> _only_enzymes(df: pd.DataFrame):</span>
+<span id="cb78-58"><a href="module-4---lab-practical.html#cb78-58"></a>    <span class="cf">return</span> df.loc[df.index.isin(enzymes)]</span>
+<span id="cb78-59"><a href="module-4---lab-practical.html#cb78-59"></a>_df_corr_e <span class="op">=</span> _only_enzymes(df_corr)</span>
+<span id="cb78-60"><a href="module-4---lab-practical.html#cb78-60"></a>gsea <span class="op">=</span> Gsea(</span>
+<span id="cb78-61"><a href="module-4---lab-practical.html#cb78-61"></a>    labels<span class="op">=</span>_df_corr_e.index.to_numpy(),</span>
+<span id="cb78-62"><a href="module-4---lab-practical.html#cb78-62"></a>    corr<span class="op">=</span>_df_corr_e.to_numpy(),</span>
+<span id="cb78-63"><a href="module-4---lab-practical.html#cb78-63"></a>    permuted<span class="op">=</span>_only_enzymes(df_bootstrap).to_numpy(),</span>
+<span id="cb78-64"><a href="module-4---lab-practical.html#cb78-64"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb79-1"><a href="module-4---lab-practical.html#cb79-1"></a>results: <span class="bu">list</span>[GseaResult] <span class="op">=</span> []</span>
+<span id="cb79-2"><a href="module-4---lab-practical.html#cb79-2"></a><span class="cf">for</span> k, s <span class="kw">in</span> tqdm(gene_sets.items(), total<span class="op">=</span><span class="bu">len</span>(gene_sets)):</span>
+<span id="cb79-3"><a href="module-4---lab-practical.html#cb79-3"></a>    res <span class="op">=</span> gsea.run(k, s)</span>
+<span id="cb79-4"><a href="module-4---lab-practical.html#cb79-4"></a>    results.append(res)</span>
+<span id="cb79-5"><a href="module-4---lab-practical.html#cb79-5"></a>results_map <span class="op">=</span> {r.set_name: r <span class="cf">for</span> r <span class="kw">in</span> results}</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb80-1"><a href="module-4---lab-practical.html#cb80-1"></a><span class="kw">def</span> draw_gsea(res: GseaResult, gsea: Gsea):</span>
+<span id="cb80-2"><a href="module-4---lab-practical.html#cb80-2"></a>    k <span class="op">=</span> res.set_name</span>
+<span id="cb80-3"><a href="module-4---lab-practical.html#cb80-3"></a>    fig <span class="op">=</span> BaseFigure(</span>
+<span id="cb80-4"><a href="module-4---lab-practical.html#cb80-4"></a>        shape<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb80-5"><a href="module-4---lab-practical.html#cb80-5"></a>        row_heights<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.6</span>],</span>
+<span id="cb80-6"><a href="module-4---lab-practical.html#cb80-6"></a>        vertical_spacing<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb80-7"><a href="module-4---lab-practical.html#cb80-7"></a>    )</span>
+<span id="cb80-8"><a href="module-4---lab-practical.html#cb80-8"></a></span>
+<span id="cb80-9"><a href="module-4---lab-practical.html#cb80-9"></a>    _f <span class="op">=</span> res.hits.astype(<span class="bu">bool</span>)</span>
+<span id="cb80-10"><a href="module-4---lab-practical.html#cb80-10"></a>    fig.add_trace(</span>
+<span id="cb80-11"><a href="module-4---lab-practical.html#cb80-11"></a>        go.Scatter(</span>
+<span id="cb80-12"><a href="module-4---lab-practical.html#cb80-12"></a>            x <span class="op">=</span> np.arange(gsea.labels.shape[<span class="dv">0</span>])[_f],</span>
+<span id="cb80-13"><a href="module-4---lab-practical.html#cb80-13"></a>            y <span class="op">=</span> np.zeros_like(gsea.labels)[_f],</span>
+<span id="cb80-14"><a href="module-4---lab-practical.html#cb80-14"></a>            mode <span class="op">=</span> <span class="st">&quot;markers&quot;</span>,</span>
+<span id="cb80-15"><a href="module-4---lab-practical.html#cb80-15"></a>            marker<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb80-16"><a href="module-4---lab-practical.html#cb80-16"></a>                size<span class="op">=</span><span class="dv">25</span>,</span>
+<span id="cb80-17"><a href="module-4---lab-practical.html#cb80-17"></a>                color<span class="op">=</span>COLORS.TRANSPARENT,</span>
+<span id="cb80-18"><a href="module-4---lab-practical.html#cb80-18"></a>                symbol<span class="op">=</span><span class="st">&quot;line-ns&quot;</span>,</span>
+<span id="cb80-19"><a href="module-4---lab-practical.html#cb80-19"></a>                line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb80-20"><a href="module-4---lab-practical.html#cb80-20"></a>            ),</span>
+<span id="cb80-21"><a href="module-4---lab-practical.html#cb80-21"></a>            showlegend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb80-22"><a href="module-4---lab-practical.html#cb80-22"></a>        ),</span>
+<span id="cb80-23"><a href="module-4---lab-practical.html#cb80-23"></a>        col<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb80-24"><a href="module-4---lab-practical.html#cb80-24"></a>    )</span>
+<span id="cb80-25"><a href="module-4---lab-practical.html#cb80-25"></a></span>
+<span id="cb80-26"><a href="module-4---lab-practical.html#cb80-26"></a>    fig.add_trace(</span>
+<span id="cb80-27"><a href="module-4---lab-practical.html#cb80-27"></a>        go.Bar(</span>
+<span id="cb80-28"><a href="module-4---lab-practical.html#cb80-28"></a>            x <span class="op">=</span> np.arange(gsea.labels.shape[<span class="dv">0</span>]),</span>
+<span id="cb80-29"><a href="module-4---lab-practical.html#cb80-29"></a>            y <span class="op">=</span> gsea.mat_sorted.T[<span class="dv">0</span>],</span>
+<span id="cb80-30"><a href="module-4---lab-practical.html#cb80-30"></a>            showlegend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb80-31"><a href="module-4---lab-practical.html#cb80-31"></a>            marker<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb80-32"><a href="module-4---lab-practical.html#cb80-32"></a>                color<span class="op">=</span>COLORS.BLACK,</span>
+<span id="cb80-33"><a href="module-4---lab-practical.html#cb80-33"></a>                line<span class="op">=</span><span class="bu">dict</span>(width<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb80-34"><a href="module-4---lab-practical.html#cb80-34"></a>            ),</span>
+<span id="cb80-35"><a href="module-4---lab-practical.html#cb80-35"></a>        ),</span>
+<span id="cb80-36"><a href="module-4---lab-practical.html#cb80-36"></a>        col<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb80-37"><a href="module-4---lab-practical.html#cb80-37"></a>    )</span>
+<span id="cb80-38"><a href="module-4---lab-practical.html#cb80-38"></a></span>
+<span id="cb80-39"><a href="module-4---lab-practical.html#cb80-39"></a>    fig.add_trace(</span>
+<span id="cb80-40"><a href="module-4---lab-practical.html#cb80-40"></a>        go.Scatter(</span>
+<span id="cb80-41"><a href="module-4---lab-practical.html#cb80-41"></a>            x <span class="op">=</span> np.arange(gsea.labels.shape[<span class="dv">0</span>]),</span>
+<span id="cb80-42"><a href="module-4---lab-practical.html#cb80-42"></a>            y <span class="op">=</span> res.running_sum_statistic,</span>
+<span id="cb80-43"><a href="module-4---lab-practical.html#cb80-43"></a>            mode <span class="op">=</span> <span class="st">&quot;lines&quot;</span>,</span>
+<span id="cb80-44"><a href="module-4---lab-practical.html#cb80-44"></a>            showlegend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb80-45"><a href="module-4---lab-practical.html#cb80-45"></a>            line<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb80-46"><a href="module-4---lab-practical.html#cb80-46"></a>                color <span class="op">=</span> COLORS.BLACK,</span>
+<span id="cb80-47"><a href="module-4---lab-practical.html#cb80-47"></a>            ),</span>
+<span id="cb80-48"><a href="module-4---lab-practical.html#cb80-48"></a>        ),</span>
+<span id="cb80-49"><a href="module-4---lab-practical.html#cb80-49"></a>        col<span class="op">=</span><span class="dv">1</span>, row<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb80-50"><a href="module-4---lab-practical.html#cb80-50"></a>    )</span>
+<span id="cb80-51"><a href="module-4---lab-practical.html#cb80-51"></a></span>
+<span id="cb80-52"><a href="module-4---lab-practical.html#cb80-52"></a>    hidden <span class="op">=</span> <span class="bu">dict</span>(ticks<span class="op">=</span><span class="va">None</span>, linecolor<span class="op">=</span>COLORS.TRANSPARENT, showticklabels<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb80-53"><a href="module-4---lab-practical.html#cb80-53"></a>    fig <span class="op">=</span> ApplyTemplate(</span>
+<span id="cb80-54"><a href="module-4---lab-practical.html#cb80-54"></a>        fig,</span>
+<span id="cb80-55"><a href="module-4---lab-practical.html#cb80-55"></a>        default_xaxis<span class="op">=</span>hidden,</span>
+<span id="cb80-56"><a href="module-4---lab-practical.html#cb80-56"></a>        default_yaxis<span class="op">=</span>hidden,</span>
+<span id="cb80-57"><a href="module-4---lab-practical.html#cb80-57"></a>        layout<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb80-58"><a href="module-4---lab-practical.html#cb80-58"></a>            width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="cb80-59"><a href="module-4---lab-practical.html#cb80-59"></a>            margin<span class="op">=</span><span class="bu">dict</span>(l<span class="op">=</span><span class="dv">15</span>, r<span class="op">=</span><span class="dv">15</span>, t<span class="op">=</span><span class="dv">50</span>, b<span class="op">=</span><span class="dv">15</span>),</span>
+<span id="cb80-60"><a href="module-4---lab-practical.html#cb80-60"></a>            title<span class="op">=</span><span class="bu">dict</span>(text<span class="op">=</span><span class="ss">f&quot;(p=</span><span class="sc">{</span>res<span class="sc">.</span>pvalue<span class="sc">}</span><span class="ss">) </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>model<span class="sc">.</span>Pathways[k]<span class="sc">.</span>name<span class="sc">}</span><span class="ss">&quot;</span>, font_size<span class="op">=</span><span class="dv">18</span>, x<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb80-61"><a href="module-4---lab-practical.html#cb80-61"></a>        ),</span>
+<span id="cb80-62"><a href="module-4---lab-practical.html#cb80-62"></a>    )</span>
+<span id="cb80-63"><a href="module-4---lab-practical.html#cb80-63"></a>    fig.show()</span>
+<span id="cb80-64"><a href="module-4---lab-practical.html#cb80-64"></a></span>
+<span id="cb80-65"><a href="module-4---lab-practical.html#cb80-65"></a>draw_gsea(results_map[<span class="st">&quot;rn00600&quot;</span>], gsea)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb81-1"><a href="module-4---lab-practical.html#cb81-1"></a>results <span class="op">=</span> <span class="bu">sorted</span>(results, key<span class="op">=</span><span class="kw">lambda</span> x: x.pvalue)</span>
+<span id="cb81-2"><a href="module-4---lab-practical.html#cb81-2"></a><span class="cf">for</span> r <span class="kw">in</span> results[<span class="dv">15</span>:<span class="dv">35</span>]:</span>
+<span id="cb81-3"><a href="module-4---lab-practical.html#cb81-3"></a>    meta <span class="op">=</span> model.Pathways[r.set_name]</span>
+<span id="cb81-4"><a href="module-4---lab-practical.html#cb81-4"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>r<span class="sc">.</span>pvalue<span class="sc">:.2}</span><span class="ss"> </span><span class="sc">{</span>r<span class="sc">.</span>score<span class="sc">:.2}</span><span class="ss"> </span><span class="sc">{</span>r<span class="sc">.</span>set_name<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>meta<span class="sc">.</span>name<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb82-1"><a href="module-4---lab-practical.html#cb82-1"></a>draw_gsea(results_map[<span class="st">&quot;rn00260&quot;</span>], gsea)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-4-visualization-and-finding-functional-significance.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/cbw-dev/bookdown-template/blob/main/051-module-4-lab.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

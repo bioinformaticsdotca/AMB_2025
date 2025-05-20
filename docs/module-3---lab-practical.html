@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 3 - Lab practical | Advanced Microbiome Analysis 2025</title>
+  <meta name="description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 3 - Lab practical | Advanced Microbiome Analysis 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="github-repo" content="cbw-dev/AMB_2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 3 - Lab practical | Advanced Microbiome Analysis 2025" />
+  
+  <meta name="twitter:description" content="CBW’s Bookdown Template for Workshops" />
+  <meta name="twitter:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-3-assigning-functions.html"/>
+<link rel="next" href="module-4-visualization-and-finding-functional-significance.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+
+ <li><a href="./">Advanced Microbiome Analysis 2025</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="course-schedule.html"><a href="course-schedule.html"><i class="fa fa-check"></i>Course Schedule</a>
+<ul>
+<li class="chapter" data-level="" data-path="course-schedule.html"><a href="course-schedule.html#meet-your-faculty"><i class="fa fa-check"></i>Meet Your Faculty</a></li>
+</ul></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a></li>
+<li class="chapter" data-level="" data-path="module-3-assigning-functions.html"><a href="module-3-assigning-functions.html"><i class="fa fa-check"></i>Module 3: Assigning Functions</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html"><i class="fa fa-check"></i>Module 3 - Lab practical</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#setting-up-the-workspace"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#ssh-port-forwarding"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#workspace"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#start-container"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#jupyter"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#prodigal"><i class="fa fa-check"></i>Prodigal</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#sequence-similarity"><i class="fa fa-check"></i>Sequence similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#diamond"><i class="fa fa-check"></i>Diamond</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#bakta"><i class="fa fa-check"></i>Bakta</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#resistance-gene-identifier-rgi"><i class="fa fa-check"></i>Resistance Gene Identifier (RGI)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#machine-learning"><i class="fa fa-check"></i>Machine learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#kofamscan"><i class="fa fa-check"></i>Kofamscan</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#deepfri"><i class="fa fa-check"></i>deepFRI</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#deepec"><i class="fa fa-check"></i>deepEC</a></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#proteinbert"><i class="fa fa-check"></i>proteinBERT</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#metabolic-modelling"><i class="fa fa-check"></i>Metabolic modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3---lab-practical.html"><a href="module-3---lab-practical.html#gapseq"><i class="fa fa-check"></i>gapseq</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-visualization-and-finding-functional-significance.html"><a href="module-4-visualization-and-finding-functional-significance.html"><i class="fa fa-check"></i>Module 4: Visualization and Finding Functional Significance</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html"><i class="fa fa-check"></i>Module 4 - Lab practical</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#overview-1"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#setting-up-the-workspace-1"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#the-compute-environment"><i class="fa fa-check"></i>The compute environment</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#port-forward"><i class="fa fa-check"></i>Port forward</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#start-container-1"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#jupyter-1"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#salmon"><i class="fa fa-check"></i>Salmon</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#deseq2"><i class="fa fa-check"></i>Deseq2</a></li>
+<li class="chapter" data-level="" data-path="module-4---lab-practical.html"><a href="module-4---lab-practical.html#gene-set-enrichment-analysis-gsea"><i class="fa fa-check"></i>Gene set enrichment analysis (GSEA)</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+ <center>
+ <a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+ <a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.webp" width=40% style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+ <a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" width=40% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Genomics logo.">
+ <br><br>
+ <a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=25% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+ <a href="https://www.hpcforhealth.ca/"><img src="img/sponsors/hpc4health.png" width=60% style="display:inline-block;" style="padding-bottom: 20px "alt="HPC4Health logo.">
+ <br><br>
+ <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Microbiome Analysis 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-3---lab-practical" class="section level1 hasAnchor">
+<h1>Module 3 - Lab practical<a href="module-3---lab-practical.html#module-3---lab-practical" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this lab, we will predict and briefly examine the functions encoded in the assembled metagenome from the previous labs.
+All instructions required to completed this lab are provided below, so you are free to work asynchronously at your own pace.
+Active discussions with both peers and instructors are encouraged.</p>
+<div id="setting-up-the-workspace" class="section level2 hasAnchor">
+<h2>Setting up the workspace<a href="module-3---lab-practical.html#setting-up-the-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we begin, this section will guide you through the set up of your workspace and compute environment.
+The software tools used in this lab all have dependencies that must be installed separately.
+Constructing the environment for each tool is non-trivial and error-prone.
+The difficulty of replicating compute environments for bioinformatics software is one of the key contributing factors
+to the reproducibility crisis [1].</p>
+<p>We will instead be using prepackaged compute environments called “containers”, implemented by Apptainer (formerly Singularity) [2].
+One of these containers will enable the use of jupyter notebooks along with a collection of utilities.</p>
+<div id="steps-for-setup" class="section level4 hasAnchor">
+<h4>Steps for setup:<a href="module-3---lab-practical.html#steps-for-setup" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="img/lab3/compute_env.png" /></p>
+<ol style="list-style-type: decimal">
+<li>Open an additional port via SSH for the new jupyter notebook</li>
+<li>Create a new workspace directory for this lab</li>
+<li>Unpack and start the container</li>
+<li>Open the jupyter notebook in your browser</li>
+</ol>
+</div>
+<div id="references" class="section level4 hasAnchor">
+<h4>References<a href="module-3---lab-practical.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Mangul S, Martin LS, Eskin E, Blekhman R. Improving the usability and archival stability of bioinformatics software. Genome Biol. 2019;20(1):47. <a href="doi:10.1186/s13059-019-1649-8" class="uri">doi:10.1186/s13059-019-1649-8</a></li>
+<li>Kurtzer GM, Sochat V, Bauer MW. Singularity: Scientific containers for mobility of compute. PLOS ONE. 2017;12(5):e0177459. <a href="doi:10.1371/journal.pone.0177459" class="uri">doi:10.1371/journal.pone.0177459</a></li>
+</ol>
+</div>
+<div id="ssh-port-forwarding" class="section level3 hasAnchor">
+<h3>SSH port forwarding<a href="module-3---lab-practical.html#ssh-port-forwarding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="terminal-unixmacos" class="section level4 hasAnchor">
+<h4>Terminal (Unix/MacOS)<a href="module-3---lab-practical.html#terminal-unixmacos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Add <code>-L 48888:localhost:48888</code> to the SSH command you use to connect to the server. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="module-3---lab-practical.html#cb1-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 48888:localhost:48888 ubuntu@main.uhn-hpc.ca <span class="at">-i</span> <span class="va">${path_to_your_key}</span></span></code></pre></div>
+<p>This means port <code>48888</code> on the remote server will be forwarded to your machine at <code>localhost:48888</code>.</p>
+</div>
+<div id="putty-windows" class="section level4 hasAnchor">
+<h4>Putty (Windows)<a href="module-3---lab-practical.html#putty-windows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Modern versions of Windows should have <code>ssh</code> available through Powershell. Putty is available as a backup.</p>
+<p><img src="img/lab3/putty_port_forward.png" /></p>
+</div>
+</div>
+<div id="workspace" class="section level3 hasAnchor">
+<h3>Workspace<a href="module-3---lab-practical.html#workspace" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a new workspace in your home directory.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="module-3---lab-practical.html#cb2-1" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb2-2"><a href="module-3---lab-practical.html#cb2-2" tabindex="-1"></a><span class="fu">mkdir</span> amb_lab3</span>
+<span id="cb2-3"><a href="module-3---lab-practical.html#cb2-3" tabindex="-1"></a><span class="bu">cd</span> amb_lab3</span></code></pre></div>
+<p>Link the resource folder for easy access.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="module-3---lab-practical.html#cb3-1" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/CourseData/MIC_data/amb_module3/ ./lib</span></code></pre></div>
+</div>
+<div id="start-container" class="section level3 hasAnchor">
+<h3>Start container<a href="module-3---lab-practical.html#start-container" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Most containers for this lab were obtained from the biocontainers project, which provides a large collection of bioinformatics software in a standard format.
+For each tool, we will provide URIs for the the specific container image used and where to get future versions.
+The <code>pull</code> command of <code>apptainer</code> can be used to download images <a href="https://apptainer.org/docs/user/main/cli/apptainer_pull.html" class="uri">https://apptainer.org/docs/user/main/cli/apptainer_pull.html</a>.</p>
+<p>Here is an example which downloads <code>prodigal</code> as the container image <code>example.sif</code> from <code>docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10</code>.
+The image URI takes the form of <code>&lt;protocol&gt;://&lt;address&gt;:&lt;tag&gt;</code>. Tags are used to identify versions <a href="https://quay.io/repository/biocontainers/prodigal?tab=tags" class="uri">https://quay.io/repository/biocontainers/prodigal?tab=tags</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="module-3---lab-practical.html#cb4-1"></a>apptainer pull example.sif docker:<span class="op">//</span>quay.io<span class="op">/</span>biocontainers<span class="op">/</span>prodigal:<span class="fl">2.6.3</span><span class="op">--</span>h7b50bb2_10</span></code></pre></div>
+<p>We can now run the prodigal executable inside the container using <code>exec</code> (execute) like so.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="module-3---lab-practical.html#cb5-1" tabindex="-1"></a><span class="ex">apptainer</span> exec ./example.sif prodigal <span class="at">-h</span></span></code></pre></div>
+<p>All containers for this lab were pre-downloaded in the <code>./lib</code> directory, including a main container with Jupyter and miscellaneous utilities.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="module-3---lab-practical.html#cb6-1" tabindex="-1"></a><span class="ex">apptainer</span> exec ./lib/amb_lab3.sif unpack</span></code></pre></div>
+<p>The following will dedicate the current terminal to running the juptyer notebook on port 48888.
+You may want to connect another terminal to maintain terminal access.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="module-3---lab-practical.html#cb7-1" tabindex="-1"></a><span class="ex">start_lab</span></span></code></pre></div>
+</div>
+<div id="jupyter" class="section level3 hasAnchor">
+<h3>Jupyter<a href="module-3---lab-practical.html#jupyter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>JupyterLab should now be accessible at <a href="http://localhost:48888/lab" class="uri">http://localhost:48888/lab</a>. Create a new python notebook and import dependencies.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="module-3---lab-practical.html#cb8-1"></a><span class="im">import</span> os, sys</span>
+<span id="cb8-2"><a href="module-3---lab-practical.html#cb8-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="module-3---lab-practical.html#cb8-3"></a></span>
+<span id="cb8-4"><a href="module-3---lab-practical.html#cb8-4"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-5"><a href="module-3---lab-practical.html#cb8-5"></a><span class="im">from</span> local.ipc <span class="im">import</span> Shell</span>
+<span id="cb8-6"><a href="module-3---lab-practical.html#cb8-6"></a></span>
+<span id="cb8-7"><a href="module-3---lab-practical.html#cb8-7"></a>LIB <span class="op">=</span> Path(<span class="st">&quot;./lib&quot;</span>)</span></code></pre></div>
+<p>A special <code>Shell</code> function is provided to access the terminal outside the container.
+We can not run the container for another tool inside this container.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="module-3---lab-practical.html#cb9-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb9-2"><a href="module-3---lab-practical.html#cb9-2"></a><span class="ss">pwd -P</span></span>
+<span id="cb9-3"><a href="module-3---lab-practical.html#cb9-3"></a><span class="ss">echo </span><span class="sc">{</span>LIB<span class="sc">}</span></span>
+<span id="cb9-4"><a href="module-3---lab-practical.html#cb9-4"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p>Triple quotes allows multi-line strings. The <code>f</code> enables the evaluation of python variables in the string.
+For example, <code>f"echo {LIB}"</code> evaluates to <code>echo ./lib</code>.</p>
+</div>
+</div>
+<div id="overview" class="section level2 hasAnchor">
+<h2>Overview<a href="module-3---lab-practical.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This lab will guide you through finding and identifying the functional units
+(represented by the red and orange features below) of a metagenomic assembly, with a focus on proteins and enzymes.</p>
+<p><img src="img/lab3/data_layout.png" /></p>
+<p>We will begin by exploring techniques related to sequence similarity, which seeks to identify known genes through comparison with reference databases.</p>
+<ul>
+<li><a href="module-3---lab-practical.html#prodigal">Prodigal</a></li>
+<li><a href="module-3---lab-practical.html#diamond">Diamond</a></li>
+<li><a href="module-3---lab-practical.html#bakta">Bakta</a></li>
+<li><a href="module-3---lab-practical.html#resistance-gene-identifier-rgi">Resistance Gene Identifier (RGI)</a></li>
+</ul>
+<p>Then we will transition to machine-learning tools, which move away from “lookup table” approach.</p>
+<ul>
+<li><a href="module-3---lab-practical.html#kofamscan">Kofamscan</a></li>
+<li><a href="module-3---lab-practical.html#deepfri">deepFRI</a></li>
+<li><a href="module-3---lab-practical.html#deepec">deepEC</a></li>
+<li><a href="module-3---lab-practical.html#proteinbert">proteinBERT</a></li>
+</ul>
+<p>Finally, we will use gapseq to construct toy metabolic models using techniques to predict the existence of enzymes.</p>
+<ul>
+<li><a href="module-3---lab-practical.html#gapseq">gapseq</a></li>
+</ul>
+</div>
+<div id="prodigal" class="section level2 hasAnchor">
+<h2>Prodigal<a href="module-3---lab-practical.html#prodigal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Containers are used to preserve the long-term executability of software tools used for this lab.</p>
+<p><a href="https://quay.io/repository/biocontainers/prodigal?tab=tags" class="uri">https://quay.io/repository/biocontainers/prodigal?tab=tags</a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="module-3---lab-practical.html#cb10-1"></a><span class="co"># docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10</span></span>
+<span id="cb10-2"><a href="module-3---lab-practical.html#cb10-2"></a>prodigal_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;prodigal.sif&quot;</span></span></code></pre></div>
+<p>All containers for this lab
+To obtain a container with apptainer, we can use the pull command.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="module-3---lab-practical.html#cb11-1"></a><span class="co"># docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10</span></span>
+<span id="cb11-2"><a href="module-3---lab-practical.html#cb11-2"></a>prodigal_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;prodigal.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="module-3---lab-practical.html#cb12-1"></a><span class="co"># docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10</span></span>
+<span id="cb12-2"><a href="module-3---lab-practical.html#cb12-2"></a>prodigal_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;prodigal.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="module-3---lab-practical.html#cb13-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> prodigal -h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="module-3---lab-practical.html#cb14-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb14-2"><a href="module-3---lab-practical.html#cb14-2"></a><span class="ss">mkdir -p prodigal_out</span></span>
+<span id="cb14-3"><a href="module-3---lab-practical.html#cb14-3"></a><span class="ss">apptainer exec </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb14-4"><a href="module-3---lab-practical.html#cb14-4"></a><span class="ss">    prodigal </span><span class="op">\</span></span>
+<span id="cb14-5"><a href="module-3---lab-practical.html#cb14-5"></a><span class="ss">        -i /data/inputs/mg1655.fna </span><span class="op">\</span></span>
+<span id="cb14-6"><a href="module-3---lab-practical.html#cb14-6"></a><span class="ss">        -a ./prodigal_out/mg1655.faa </span><span class="op">\</span></span>
+<span id="cb14-7"><a href="module-3---lab-practical.html#cb14-7"></a><span class="ss">        -d ./prodigal_out/mg1655.fna </span><span class="op">\</span></span>
+<span id="cb14-8"><a href="module-3---lab-practical.html#cb14-8"></a><span class="ss">        -f gff </span><span class="op">\</span></span>
+<span id="cb14-9"><a href="module-3---lab-practical.html#cb14-9"></a><span class="ss">        -o ./prodigal_out/mg1655.gff</span></span>
+<span id="cb14-10"><a href="module-3---lab-practical.html#cb14-10"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+<div id="sequence-similarity" class="section level2 hasAnchor">
+<h2>Sequence similarity<a href="module-3---lab-practical.html#sequence-similarity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="diamond" class="section level3 hasAnchor">
+<h3>Diamond<a href="module-3---lab-practical.html#diamond" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/biocontainers/diamond?tab=tags" class="uri">https://quay.io/repository/biocontainers/diamond?tab=tags</a></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb15-1"><a href="module-3---lab-practical.html#cb15-1"></a><span class="co"># docker://quay.io/biocontainers/diamond:2.1.11--h5ca1c30_2</span></span>
+<span id="cb15-2"><a href="module-3---lab-practical.html#cb15-2"></a>diamond_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;diamond.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="module-3---lab-practical.html#cb16-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond --help&quot;</span>)</span></code></pre></div>
+<ul>
+<li><a href="https://www.tcdb.org/public/tcdb" class="uri">https://www.tcdb.org/public/tcdb</a></li>
+<li><a href="https://www.tcdb.org/cgi-bin/substrates/getSubstrates.py" class="uri">https://www.tcdb.org/cgi-bin/substrates/getSubstrates.py</a></li>
+<li><a href="https://www.tcdb.org/cgi-bin/substrates/listSuperfamilies.py" class="uri">https://www.tcdb.org/cgi-bin/substrates/listSuperfamilies.py</a></li>
+<li><a href="https://www.tcdb.org/cgi-bin/projectv/public/families.py" class="uri">https://www.tcdb.org/cgi-bin/projectv/public/families.py</a></li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb17-1"><a href="module-3---lab-practical.html#cb17-1"></a>transporter_db <span class="op">=</span> DATA<span class="op">/</span><span class="st">&quot;lib/transporter_classification_db&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb18-1"><a href="module-3---lab-practical.html#cb18-1"></a>transporter_dmdb <span class="op">=</span> transporter_db<span class="op">/</span><span class="st">&quot;tcdb.dmnd&quot;</span></span>
+<span id="cb18-2"><a href="module-3---lab-practical.html#cb18-2"></a><span class="cf">if</span> <span class="kw">not</span> transporter_dmdb.exists():</span>
+<span id="cb18-3"><a href="module-3---lab-practical.html#cb18-3"></a>    Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb18-4"><a href="module-3---lab-practical.html#cb18-4"></a><span class="ss">    apptainer exec </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond makedb </span><span class="op">\</span></span>
+<span id="cb18-5"><a href="module-3---lab-practical.html#cb18-5"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb18-6"><a href="module-3---lab-practical.html#cb18-6"></a><span class="ss">        --in /data/lib/</span><span class="sc">{</span>transporter_db<span class="sc">.</span>name<span class="sc">}</span><span class="ss">/tcdb.faa </span><span class="op">\</span></span>
+<span id="cb18-7"><a href="module-3---lab-practical.html#cb18-7"></a><span class="ss">        --db /data/lib/</span><span class="sc">{</span>transporter_db<span class="sc">.</span>name<span class="sc">}</span><span class="ss">/tcdb</span></span>
+<span id="cb18-8"><a href="module-3---lab-practical.html#cb18-8"></a><span class="ss">    &quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><strong>TODO</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb19-1"><a href="module-3---lab-practical.html#cb19-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb19-2"><a href="module-3---lab-practical.html#cb19-2"></a><span class="ss">apptainer exec </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb19-3"><a href="module-3---lab-practical.html#cb19-3"></a><span class="ss">    diamond blastp </span><span class="op">\</span></span>
+<span id="cb19-4"><a href="module-3---lab-practical.html#cb19-4"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb19-5"><a href="module-3---lab-practical.html#cb19-5"></a></span>
+<span id="cb19-6"><a href="module-3---lab-practical.html#cb19-6"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+<div id="bakta" class="section level3 hasAnchor">
+<h3>Bakta<a href="module-3---lab-practical.html#bakta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/biocontainers/bakta?tab=tags" class="uri">https://quay.io/repository/biocontainers/bakta?tab=tags</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb20-1"><a href="module-3---lab-practical.html#cb20-1"></a><span class="co"># docker://quay.io/biocontainers/bakta:1.9.4--pyhdfd78af_0</span></span>
+<span id="cb20-2"><a href="module-3---lab-practical.html#cb20-2"></a>bakta_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;diamond.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="module-3---lab-practical.html#cb21-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> bakta --help&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="module-3---lab-practical.html#cb22-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> bakta_db list&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb23-1"><a href="module-3---lab-practical.html#cb23-1"></a><span class="co"># bakta_db = LIB/&quot;bakta_db/db&quot;        # 2 hours</span></span>
+<span id="cb23-2"><a href="module-3---lab-practical.html#cb23-2"></a>bakta_db <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;bakta_db/db-light&quot;</span>  <span class="co"># 30 mins</span></span>
+<span id="cb23-3"><a href="module-3---lab-practical.html#cb23-3"></a><span class="cf">if</span> <span class="kw">not</span> bakta_db.exists():</span>
+<span id="cb23-4"><a href="module-3---lab-practical.html#cb23-4"></a>    <span class="cf">if</span> <span class="st">&quot;light&quot;</span> <span class="kw">in</span> <span class="bu">str</span>(bakta_db):</span>
+<span id="cb23-5"><a href="module-3---lab-practical.html#cb23-5"></a>        _type <span class="op">=</span> <span class="st">&quot;light&quot;</span></span>
+<span id="cb23-6"><a href="module-3---lab-practical.html#cb23-6"></a>    <span class="cf">else</span>:</span>
+<span id="cb23-7"><a href="module-3---lab-practical.html#cb23-7"></a>        _type <span class="op">=</span> <span class="st">&quot;full&quot;</span></span>
+<span id="cb23-8"><a href="module-3---lab-practical.html#cb23-8"></a>    Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> bakta_db download --output </span><span class="sc">{</span>bakta_db<span class="sc">}</span><span class="ss"> --type </span><span class="sc">{</span>_type<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>meta</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb24-1"><a href="module-3---lab-practical.html#cb24-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb24-2"><a href="module-3---lab-practical.html#cb24-2"></a><span class="ss">apptainer exec </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb24-3"><a href="module-3---lab-practical.html#cb24-3"></a><span class="ss">    bakta --meta --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --force --skip-plot </span><span class="op">\</span></span>
+<span id="cb24-4"><a href="module-3---lab-practical.html#cb24-4"></a><span class="ss">        --db </span><span class="sc">{</span>bakta_db<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb24-5"><a href="module-3---lab-practical.html#cb24-5"></a><span class="ss">        --output ./outputs/bakta.chicken </span><span class="op">\</span></span>
+<span id="cb24-6"><a href="module-3---lab-practical.html#cb24-6"></a><span class="ss">        /home/tony/workspace/projects/AMB_2025/data/inputs/final.contigs.fa</span></span>
+<span id="cb24-7"><a href="module-3---lab-practical.html#cb24-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+<div id="resistance-gene-identifier-rgi" class="section level3 hasAnchor">
+<h3>Resistance Gene Identifier (RGI)<a href="module-3---lab-practical.html#resistance-gene-identifier-rgi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/biocontainers/rgi?tab=tags" class="uri">https://quay.io/repository/biocontainers/rgi?tab=tags</a></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb25-1"><a href="module-3---lab-practical.html#cb25-1"></a><span class="co"># docker://quay.io/biocontainers/rgi:6.0.4--pyh05cac1d_0</span></span>
+<span id="cb25-2"><a href="module-3---lab-practical.html#cb25-2"></a>rgi_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;rgi.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb26-1"><a href="module-3---lab-practical.html#cb26-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> rgi --help&quot;</span>)</span></code></pre></div>
+<p>It looks like RGI accepts different commands (<code>usage: rgi &lt;command&gt; [&lt;args&gt;]</code>) and <code>main</code> seems to be the one that generates annotations.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb27-1"><a href="module-3---lab-practical.html#cb27-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> rgi main --help&quot;</span>)</span></code></pre></div>
+<ul>
+<li>RGI is a bit picky and doesn’t provide any indication of progress or successful completion.</li>
+<li>Tackle the errors in the order in which they appear until you get a successful run, which should take no more than 1 min.</li>
+<li>Don’t worry about the <code>SyntaxWarning</code> since it looks like a typo in the source code that doesn’t otherwise impact the execution of the tool.</li>
+</ul>
+<details>
+<summary>
+Hint 1
+</summary>
+<pre><code>Consider the inputs and outputs
+    </code></pre>
+</details>
+<details>
+<summary>
+Hint 2
+</summary>
+<pre><code>-i -o -t
+    </code></pre>
+</details>
+<details>
+<summary>
+Hint <code>Read-only file system</code>
+</summary>
+<pre><code>-i -o -t
+    </code></pre>
+</details>
+<details>
+<summary>
+Answer
+</summary>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb31-1"><a href="module-3---lab-practical.html#cb31-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb31-2"><a href="module-3---lab-practical.html#cb31-2"></a><span class="ss">mkdir -p ./outputs/rgi</span></span>
+<span id="cb31-3"><a href="module-3---lab-practical.html#cb31-3"></a><span class="ss">apptainer exec -B ./cache:/usr/local/lib/python3.12/site-packages/app/_db </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb31-4"><a href="module-3---lab-practical.html#cb31-4"></a><span class="ss">    rgi main --num_threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb31-5"><a href="module-3---lab-practical.html#cb31-5"></a><span class="ss">        -i ./outputs/bakta_light/mg1655.faa </span><span class="op">\</span></span>
+<span id="cb31-6"><a href="module-3---lab-practical.html#cb31-6"></a><span class="ss">        -t protein </span><span class="op">\</span></span>
+<span id="cb31-7"><a href="module-3---lab-practical.html#cb31-7"></a><span class="ss">        -o ./outputs/rgi/mg1655</span></span>
+<span id="cb31-8"><a href="module-3---lab-practical.html#cb31-8"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</details>
+<p>Stub:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb32-1"><a href="module-3---lab-practical.html#cb32-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb32-2"><a href="module-3---lab-practical.html#cb32-2"></a><span class="ss"># your solution here</span></span>
+<span id="cb32-3"><a href="module-3---lab-practical.html#cb32-3"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="machine-learning" class="section level2 hasAnchor">
+<h2>Machine learning<a href="module-3---lab-practical.html#machine-learning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="kofamscan" class="section level3 hasAnchor">
+<h3>Kofamscan<a href="module-3---lab-practical.html#kofamscan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/hallamlab/external_kofamscan?tab=tags" class="uri">https://quay.io/repository/hallamlab/external_kofamscan?tab=tags</a></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb33-1"><a href="module-3---lab-practical.html#cb33-1"></a><span class="co"># docker://quay.io/hallamlab/external_kofamscan:1.3.0</span></span>
+<span id="cb33-2"><a href="module-3---lab-practical.html#cb33-2"></a>kofamscan_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;kofamscan.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb34-1"><a href="module-3---lab-practical.html#cb34-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>kofamscan_sif<span class="sc">}</span><span class="ss"> kofamscan --help&quot;</span>)</span></code></pre></div>
+<p><a href="https://www.genome.jp/ftp/tools/kofam_scan/README.md" class="uri">https://www.genome.jp/ftp/tools/kofam_scan/README.md</a></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb35-1"><a href="module-3---lab-practical.html#cb35-1"></a>Shell(<span class="ss">f&quot;apptainer exec </span><span class="sc">{</span>kofamscan_sif<span class="sc">}</span><span class="ss"> exec_annotation --help&quot;</span>)</span></code></pre></div>
+<ul>
+<li><code>ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz</code></li>
+<li><code>ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz</code></li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb36-1"><a href="module-3---lab-practical.html#cb36-1"></a><span class="co"># about 12 mins</span></span>
+<span id="cb36-2"><a href="module-3---lab-practical.html#cb36-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb36-3"><a href="module-3---lab-practical.html#cb36-3"></a><span class="ss">mkdir -p ./outputs/kofamscan</span></span>
+<span id="cb36-4"><a href="module-3---lab-practical.html#cb36-4"></a><span class="ss">apptainer exec </span><span class="sc">{</span>kofamscan_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb36-5"><a href="module-3---lab-practical.html#cb36-5"></a><span class="ss">    exec_annotation </span><span class="op">\</span></span>
+<span id="cb36-6"><a href="module-3---lab-practical.html#cb36-6"></a><span class="ss">        --cpu=</span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --format=detail --no-report-unannotated </span><span class="op">\</span></span>
+<span id="cb36-7"><a href="module-3---lab-practical.html#cb36-7"></a><span class="ss">        --profile=/data/lib/kofamscan_db/profiles/prokaryote.hal --ko-list=/data/lib//kofamscan_db/ko_list </span><span class="op">\</span></span>
+<span id="cb36-8"><a href="module-3---lab-practical.html#cb36-8"></a><span class="ss">        -o ./outputs/kofamscan/chicken.out </span><span class="op">\</span></span>
+<span id="cb36-9"><a href="module-3---lab-practical.html#cb36-9"></a><span class="ss">        ./outputs/bakta.chicken/final.contigs.faa</span></span>
+<span id="cb36-10"><a href="module-3---lab-practical.html#cb36-10"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb37-1"><a href="module-3---lab-practical.html#cb37-1"></a><span class="im">from</span> local.models.kegg_orthology <span class="im">import</span> ParseKofamScanResults</span>
+<span id="cb37-2"><a href="module-3---lab-practical.html#cb37-2"></a></span>
+<span id="cb37-3"><a href="module-3---lab-practical.html#cb37-3"></a>model <span class="op">=</span> ParseKofamScanResults(</span>
+<span id="cb37-4"><a href="module-3---lab-practical.html#cb37-4"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/main/amb_lab3/scratch/mock/outputs/kofamscan/chicken.out&quot;</span>),</span>
+<span id="cb37-5"><a href="module-3---lab-practical.html#cb37-5"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/api_kegg.db&quot;</span>),</span>
+<span id="cb37-6"><a href="module-3---lab-practical.html#cb37-6"></a>    Path(<span class="st">&quot;/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/brite.json&quot;</span>),</span>
+<span id="cb37-7"><a href="module-3---lab-practical.html#cb37-7"></a>)</span></code></pre></div>
+</div>
+<div id="deepfri" class="section level3 hasAnchor">
+<h3>deepFRI<a href="module-3---lab-practical.html#deepfri" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/hallamlab/external_deepfri?tab=tags" class="uri">https://quay.io/repository/hallamlab/external_deepfri?tab=tags</a></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb38-1"><a href="module-3---lab-practical.html#cb38-1"></a><span class="co"># docker://quay.io/hallamlab/external_deepfri:1.0.1</span></span>
+<span id="cb38-2"><a href="module-3---lab-practical.html#cb38-2"></a>deepfri_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;deepfri.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb39-1"><a href="module-3---lab-practical.html#cb39-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb39-2"><a href="module-3---lab-practical.html#cb39-2"></a><span class="ss">apptainer exec </span><span class="sc">{</span>deepfri_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb39-3"><a href="module-3---lab-practical.html#cb39-3"></a><span class="ss">    deepfri </span><span class="op">\</span></span>
+<span id="cb39-4"><a href="module-3---lab-practical.html#cb39-4"></a><span class="ss">        --ont mf bp ec </span><span class="op">\</span></span>
+<span id="cb39-5"><a href="module-3---lab-practical.html#cb39-5"></a><span class="ss">        --fasta_fn ./outputs/bakta.chicken/final.contigs.faa </span><span class="op">\</span></span>
+<span id="cb39-6"><a href="module-3---lab-practical.html#cb39-6"></a><span class="ss">        --output_fn_prefix ./outputs/deepfri </span></span>
+<span id="cb39-7"><a href="module-3---lab-practical.html#cb39-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+</div>
+<div id="deepec" class="section level3 hasAnchor">
+<h3>deepEC<a href="module-3---lab-practical.html#deepec" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/hallamlab/external_deepec?tab=tags" class="uri">https://quay.io/repository/hallamlab/external_deepec?tab=tags</a></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb40-1"><a href="module-3---lab-practical.html#cb40-1"></a><span class="co"># docker://quay.io/hallamlab/external_deepec:0.4.1</span></span>
+<span id="cb40-2"><a href="module-3---lab-practical.html#cb40-2"></a>deepec_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;deepec.sif&quot;</span></span></code></pre></div>
+<p><strong>TODO</strong></p>
+</div>
+<div id="proteinbert" class="section level3 hasAnchor">
+<h3>proteinBERT<a href="module-3---lab-practical.html#proteinbert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/hallamlab/external_proteinbert?tab=tags" class="uri">https://quay.io/repository/hallamlab/external_proteinbert?tab=tags</a></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb41-1"><a href="module-3---lab-practical.html#cb41-1"></a><span class="co"># docker://quay.io/hallamlab/external_proteinbert:2024.03.28</span></span>
+<span id="cb41-2"><a href="module-3---lab-practical.html#cb41-2"></a>proteinbert_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;proteinbert.sif&quot;</span></span></code></pre></div>
+<p><strong>TODO</strong></p>
+</div>
+</div>
+<div id="metabolic-modelling" class="section level2 hasAnchor">
+<h2>Metabolic modelling<a href="module-3---lab-practical.html#metabolic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="gapseq" class="section level3 hasAnchor">
+<h3>gapseq<a href="module-3---lab-practical.html#gapseq" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://quay.io/repository/biocontainers/gapseq?tab=tags" class="uri">https://quay.io/repository/biocontainers/gapseq?tab=tags</a></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb42-1"><a href="module-3---lab-practical.html#cb42-1"></a><span class="co"># docker://quay.io/biocontainers/gapseq:1.4.0--h9ee0642_1</span></span>
+<span id="cb42-2"><a href="module-3---lab-practical.html#cb42-2"></a>gapseqt_sif <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;gapseq.sif&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb43-1"><a href="module-3---lab-practical.html#cb43-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb43-2"><a href="module-3---lab-practical.html#cb43-2"></a><span class="ss">mkdir -p ./outputs/gapseq/</span></span>
+<span id="cb43-3"><a href="module-3---lab-practical.html#cb43-3"></a><span class="ss">rm ./outputs/gapseq/mg1655.*</span></span>
+<span id="cb43-4"><a href="module-3---lab-practical.html#cb43-4"></a><span class="ss">apptainer exec </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb43-5"><a href="module-3---lab-practical.html#cb43-5"></a><span class="ss">    gapseq find -p glycolysis -l KEGG -K 14 -O -f ./outputs/gapseq/mg1655 ./outputs/bakta_light/mg1655.faa </span><span class="op">\</span></span>
+<span id="cb43-6"><a href="module-3---lab-practical.html#cb43-6"></a><span class="ss">        &gt; ./outputs/gapseq/mg1655.out 2&gt; ./outputs/gapseq/mg1655.err</span></span>
+<span id="cb43-7"><a href="module-3---lab-practical.html#cb43-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb44-1"><a href="module-3---lab-practical.html#cb44-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb44-2"><a href="module-3---lab-practical.html#cb44-2"></a><span class="ss">rm ./outputs/gapseq/mg1655.tr*</span></span>
+<span id="cb44-3"><a href="module-3---lab-practical.html#cb44-3"></a><span class="ss">apptainer exec </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb44-4"><a href="module-3---lab-practical.html#cb44-4"></a><span class="ss">    gapseq find-transport -K 14 -f ./outputs/gapseq/mg1655 ./outputs/bakta_light/mg1655.faa </span><span class="op">\</span></span>
+<span id="cb44-5"><a href="module-3---lab-practical.html#cb44-5"></a><span class="ss">        &gt; ./outputs/gapseq/mg1655.trout 2&gt; ./outputs/gapseq/mg1655.trerr</span></span>
+<span id="cb44-6"><a href="module-3---lab-practical.html#cb44-6"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb45-1"><a href="module-3---lab-practical.html#cb45-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb45-2"><a href="module-3---lab-practical.html#cb45-2"></a><span class="ss">apptainer exec </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb45-3"><a href="module-3---lab-practical.html#cb45-3"></a><span class="ss">    gapseq draft </span><span class="op">\</span></span>
+<span id="cb45-4"><a href="module-3---lab-practical.html#cb45-4"></a><span class="ss">        -r ./outputs/gapseq/mg1655/mg1655-glycolysis-Reactions.tbl </span><span class="op">\</span></span>
+<span id="cb45-5"><a href="module-3---lab-practical.html#cb45-5"></a><span class="ss">        -p ./outputs/gapseq/mg1655/mg1655-glycolysis-Pathways.tbl </span><span class="op">\</span></span>
+<span id="cb45-6"><a href="module-3---lab-practical.html#cb45-6"></a><span class="ss">        -t ./outputs/gapseq/mg1655/mg1655-Transporter.tbl </span><span class="op">\</span></span>
+<span id="cb45-7"><a href="module-3---lab-practical.html#cb45-7"></a><span class="ss">        -c ./outputs/bakta_light/mg1655.faa </span><span class="op">\</span></span>
+<span id="cb45-8"><a href="module-3---lab-practical.html#cb45-8"></a><span class="ss">        -f ./outputs/gapseq/mg1655</span></span>
+<span id="cb45-9"><a href="module-3---lab-practical.html#cb45-9"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb46-1"><a href="module-3---lab-practical.html#cb46-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb46-2"><a href="module-3---lab-practical.html#cb46-2"></a><span class="ss">apptainer exec </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb46-3"><a href="module-3---lab-practical.html#cb46-3"></a><span class="ss">    gapseq fill --quick.gf </span><span class="op">\</span></span>
+<span id="cb46-4"><a href="module-3---lab-practical.html#cb46-4"></a><span class="ss">        -m ./outputs/gapseq/mg1655/mg1655-draft.RDS </span><span class="op">\</span></span>
+<span id="cb46-5"><a href="module-3---lab-practical.html#cb46-5"></a><span class="ss">        -n ./outputs/gapseq/mg1655/m9.csv </span><span class="op">\</span></span>
+<span id="cb46-6"><a href="module-3---lab-practical.html#cb46-6"></a><span class="ss">        --output.dir ./outputs/gapseq/mg1655</span></span>
+<span id="cb46-7"><a href="module-3---lab-practical.html#cb46-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><strong>TODO:</strong> kegg mapper
+look at what reactions were filled</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-3-assigning-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-4-visualization-and-finding-functional-significance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/cbw-dev/bookdown-template/blob/main/041-module-3-lab.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

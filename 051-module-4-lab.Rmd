@@ -1,0 +1,487 @@
+# Module 4 - Lab practical
+
+## Overview
+
+* [Salmon]
+* [Deseq2]
+* [Gene set enrichment analysis (GSEA)]
+* [Cytoscape]
+
+## Setting up the workspace
+
+The following procedure to set up the workspace will be near identical to that of the previous lab.
+
+### The compute environment
+
+All software dependencies for this lab are packaged as containers.
+
+### Port forward
+
+#### Terminal (Unix/MacOS)
+
+```{bash, eval=FALSE, attr.source='.numberLines'}
+ssh -L 48888:localhost:48888 ubuntu@main.uhn-hpc.ca -i ${path_to_your_key}
+```
+
+#### Putty (Windows)
+
+![how to set port forward with putty](img/lab3/putty_port_forward.png)
+
+### Start container
+
+```{bash, eval=FALSE}
+apptainer exec ./amb_2025.sif unpack
+```
+
+```{bash, eval=FALSE}
+start_lab
+```
+
+### Jupyter
+
+http://localhost:48888/lab
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+import os, sys
+import pandas as pd
+
+from pathlib import Path
+from local.ipc import Shell
+from local.constants import WORKSPACE_ROOT
+```
+
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+LIB = WORKSPACE_ROOT/"lib"
+if not LIB.exists(): LIB.mkdir()
+DATA = Path("/home/tony/workspace/projects/AMB_2025/data")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+Shell("pwd -P")
+```
+
+## Salmon
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+os.system(f"salmon --help")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+os.system(f"salmon index --help")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+os.system(f"salmon quant --help")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+assembly = Path("/home/tony/workspace/projects/AMB_2025/main/amb_lab3/scratch/mock/outputs/bakta.chicken/final.contigs.ffn")
+index = WORKSPACE_ROOT/"asm_index"
+os.system(f"salmon index -t {assembly} -i {index}")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+# 6 mins
+reads_dir = Path("/home/tony/workspace/projects/AMB_2025/data/inputs/reads_for_assembly")
+todo = list(reads_dir.iterdir())
+for read_file in tqdm(todo, total=len(todo)):
+    srr = read_file.name.split("_")[0]
+    out = WORKSPACE_ROOT/f"salmon/{srr}"
+    os.system(f"""
+        mkdir -p {out}
+        salmon quant -i {index} -l A -p 14 \
+            -r {read_file} \
+            -o {out} >{out}/salmon.log 2>{out}/salmon.err
+    """)
+```
+
+## Deseq2
+
+look at 1 quant.sf file
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+out_dir = Path("/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon")
+# look at the quant.sf file
+for srr in out_dir.iterdir():
+    df = pd.read_csv(srr/"quant.sf", sep="\t")
+    break
+df
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+df_meta = pd.read_csv("/home/tony/workspace/projects/AMB_2025/data/inputs/metagenome_metadata.txt", sep="\t")
+print(df_meta.shape)
+df_meta.head(2)
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+out_dir = Path("/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon")
+
+mtx = np.zeros(shape=(len(gene2i), len(todo)), dtype=np.int32) # genes x samples
+for i, srr in tqdm(enumerate(df_meta["sample_name"]), total=len(df_meta)):
+    df = pd.read_csv(out_dir/f"{srr}/quant.sf", sep="\t")
+
+    gene_indexes = [gene2i[row["Name"]] for _, row in df.iterrows()]
+    counts = df["NumReads"]
+    mtx[gene_indexes, i] = counts
+mtx.shape
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+gene_ids = list(gene2i.keys())
+sample_ids = list(df_meta["sample_name"])
+
+df = pd.DataFrame(mtx[:, :, 0], columns=sample_ids)
+df["gene_id"] = gene_ids
+df = df.set_index("gene_id")
+print(df.shape)
+df.to_csv(WORKSPACE_ROOT/"salmon/counts.mtx")
+df.head(2)
+```
+
+Transistion to an R notebook.
+http://localhost:48888/lab
+
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+library(DESeq2)
+library(readr)
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+cts <- as.matrix(read.csv(
+    "/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/salmon/counts.mtx",
+    row.names = "gene_id"
+))
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+coldata <- read.csv(
+    "/home/tony/workspace/projects/AMB_2025/data/inputs/metagenome_metadata.txt",
+    sep = "\t",
+)
+```
+
+We will compare Bacteroides vs Non-Bacteroides
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+coldata$grouping
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+dds <- DESeqDataSetFromMatrix(
+  countData = cts,
+  colData = coldata,
+  design = ~ grouping
+)
+dds
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+dds <- DESeq(dds)
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+deseq_save <- "/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/deseq2.rds"
+if (!file.exists(deseq_save)) {
+  dds <- DESeq(dds)
+  saveRDS(dds, deseq_save)
+} else {
+  dds <- readRDS(deseq_save)
+}
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+res <- results(dds, contrast = c("grouping", "Bacteroides", "Non-Bacteroides"))
+results_table <- as.data.frame(res)
+write.csv(results_table, "/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/deseq2_results.csv", row.names = TRUE)
+```
+
+Next, we will compute a null distribution for Gene set enrichment analysis (GSEA).
+GSEA randomly assigns conditions to samples to compute the null distribution.
+When the number of samples is low, genes can be randomly assigned to gene sets instead, but this fails to take into account gene-gene correlations.
+
+<details>
+    <summary>
+        What is the minimum number of samples to simulate a null distribution with a precision of at least 0.05?
+    </summary>
+4! = 24. 1/24 is about 0.04. This will be explored further in the next section.
+</details>
+
+normalized counts
+```{R, eval=FALSE, attr.source='.numberLines'}
+vst <- vst(dds, blind = FALSE)
+vst_counts <- assay(vst)
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+coldata$grouping
+class_labels_numeric <- 1 - (as.numeric(factor(coldata$grouping)) - 1)
+class_labels_numeric
+```
+
+The point biserial correlation is a special case of the Pearson correlation designed to compare a continuous variable with a binary variable.
+Alternatively the biserial correlation compares the same, but assumes that the binary variable is the result of thresholding a continuous variable.
+For example, it would be appropriate to use the point biserial correlation for a coin toss, while the biserial correlation would be more appropriate for pass/fails from percentage grades.
+Practically, the biserial correlation also requires the relative propotions of each class.
+
+We will compute the point biserial correlation between genes and conditions for GSEA. While there likely is a genetic spectrum of bacteria spanning
+from Bacteroides to Non-Bacteroides, the chicken gut microbiome likely doesn't have sufficient diversity to realize this spectrum.
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+point_biserial <- function(expression, classes) {
+  if (sd(expression) == 0) return(NA)
+  return(cor(expression, classes, method = "pearson"))
+}
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+gene_correlations <- apply(vst_counts, 1, point_biserial, classes = class_labels_numeric)
+gene_correlations <- as.data.frame(gene_correlations)
+write.csv(gene_correlations, "/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/gene_correlations.csv", row.names = TRUE)
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+library(pbapply)
+```
+
+```{R, eval=FALSE, attr.source='.numberLines'}
+bootstrap_save <- "/home/tony/workspace/projects/AMB_2025/main/amb_lab4/scratch/mock/null_distr.csv"
+
+# about 1 minute
+if (!file.exists(bootstrap_save)) {
+  tryCatch(
+    {
+      cl <- makeCluster(8) # N cpus
+      clusterExport(cl, c("vst_counts", "point_biserial", "class_labels_numeric"))
+
+      n_permutations <- 200
+      permutation_results <- pbsapply(
+        1:n_permutations,
+        function(i) {
+          # Shuffle labels
+          n <- length(class_labels_numeric)
+          shuffled_labels <- sample(class_labels_numeric, size = n, replace = FALSE)
+
+          # Calculate correlations for all genes
+          return(apply(vst_counts, 1, point_biserial, classes = shuffled_labels))
+        },
+        cl = cl  # This enables parallel processing
+      )
+    },
+    finally = {
+      stopCluster(cl)
+    }
+  )
+
+  null_distr <- data.frame(
+    sample = permutation_results,
+    stringsAsFactors = FALSE
+  )
+  write.csv(
+    null_distr,
+    bootstrap_save,
+    row.names = TRUE
+  )
+} else {
+  null_distr <- read.csv(bootstrap_save)
+}
+
+dim(null_distr)
+```
+## Gene set enrichment analysis (GSEA)
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+from local.models.kegg_orthology import ParseKofamScanResults
+
+model = ParseKofamScanResults(
+    Path("/home/tony/workspace/projects/AMB_2025/main/amb_lab3/scratch/mock/outputs/kofamscan/chicken.out"),
+    Path("/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/api_kegg.db"),
+    Path("/home/tony/workspace/projects/AMB_2025/data/lib/kofamscan_db/brite.json"),
+)
+```
+
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+function2genes = {}
+for _, r in model.df.iterrows():
+    ko = r["ko"]
+    orf = r["orf"]
+    function2genes[ko] = function2genes.get(ko, set())|{orf}
+
+reactions2functions = {}
+for ko in function2genes:
+    meta = model.Functions[ko]
+    for r in meta.reactions:
+        reactions2functions[r] = reactions2functions.get(r, set())|{ko}
+
+pathway2reactions = {}
+for r in reactions2functions:
+    meta = model.Reactions[r]
+    for p in meta.pathways:
+        pathway2reactions[p] = pathway2reactions.get(p, set())|{r}
+
+gene_sets = {}
+for p, reactions in pathway2reactions.items():
+    genes = set()
+    for r in reactions:
+        functions = reactions2functions[r]
+        for f in functions:
+            genes |= function2genes[f]
+    gene_sets[p] = genes
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+from dataclasses import dataclass
+
+@dataclass
+class GseaResult:
+    set_name: str
+    set_size: int
+    score: float
+    pvalue: float
+    hits: np.ndarray
+    running_sum_statistic: np.ndarray
+
+class Gsea:
+    def __init__(self, labels: np.ndarray, corr: np.ndarray, permuted: np.ndarray) -> None:
+        self.labels = labels
+        mat = np.hstack([corr, permuted])
+        self.mat_index = np.argsort(-mat.T, stable=True)
+        self.mat_sorted = np.zeros_like(mat)
+        for i, order in enumerate(self.mat_index):
+            self.mat_sorted[:, i] = mat[:, i][order]
+
+    def run(self, name: str, gene_set: set, p=1):
+        S = np.array([k in s for k in self.labels], dtype=int)
+        S = S[self.mat_index.T]
+
+        corr = np.pow(np.abs(self.mat_sorted), p)
+        N_R = np.sum(corr*S, axis=0)
+
+        P_hit = corr/N_R
+        P_hit = P_hit*S # g_j in S
+        P_hit = np.cumsum(P_hit, axis=0)
+
+        miss = 1/(len(self.labels) - len(s))
+        miss = np.ones_like(self.labels)*(1-S.T)*miss
+        P_miss = np.cumsum(miss.T, axis=0)
+
+        S_distr = (P_hit - P_miss).T
+
+        ES_pos = S_distr.max(axis=1)
+        ES_neg = S_distr.min(axis=1)
+        ES_candidates = np.vstack([ES_pos, ES_neg]).T
+        to_take = np.argmax(np.abs(ES_candidates), axis=1)
+        ES = (ES_neg*to_take) + (ES_pos*(1-to_take))
+        score, boot = ES[0], ES[1:]
+        pvalue = np.sum(boot >= score) / boot.shape[0]
+        if pvalue == 0:
+            pvalue = 1 / boot.shape[0]
+
+        return GseaResult(
+            set_name=name,
+            set_size=len(gene_set),
+            score=score,
+            pvalue=pvalue,
+            hits=S.T[0],
+            running_sum_statistic=S_distr[0],
+        )
+    
+def _only_enzymes(df: pd.DataFrame):
+    return df.loc[df.index.isin(enzymes)]
+_df_corr_e = _only_enzymes(df_corr)
+gsea = Gsea(
+    labels=_df_corr_e.index.to_numpy(),
+    corr=_df_corr_e.to_numpy(),
+    permuted=_only_enzymes(df_bootstrap).to_numpy(),
+)
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+results: list[GseaResult] = []
+for k, s in tqdm(gene_sets.items(), total=len(gene_sets)):
+    res = gsea.run(k, s)
+    results.append(res)
+results_map = {r.set_name: r for r in results}
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+def draw_gsea(res: GseaResult, gsea: Gsea):
+    k = res.set_name
+    fig = BaseFigure(
+        shape=(1, 3),
+        row_heights=[0.2, 0.2, 0.6],
+        vertical_spacing=0.05,
+    )
+
+    _f = res.hits.astype(bool)
+    fig.add_trace(
+        go.Scatter(
+            x = np.arange(gsea.labels.shape[0])[_f],
+            y = np.zeros_like(gsea.labels)[_f],
+            mode = "markers",
+            marker=dict(
+                size=25,
+                color=COLORS.TRANSPARENT,
+                symbol="line-ns",
+                line=dict(width=1),
+            ),
+            showlegend=False,
+        ),
+        col=1, row=1,
+    )
+
+    fig.add_trace(
+        go.Bar(
+            x = np.arange(gsea.labels.shape[0]),
+            y = gsea.mat_sorted.T[0],
+            showlegend=False,
+            marker=dict(
+                color=COLORS.BLACK,
+                line=dict(width=0),
+            ),
+        ),
+        col=1, row=2,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x = np.arange(gsea.labels.shape[0]),
+            y = res.running_sum_statistic,
+            mode = "lines",
+            showlegend=False,
+            line=dict(
+                color = COLORS.BLACK,
+            ),
+        ),
+        col=1, row=3,
+    )
+
+    hidden = dict(ticks=None, linecolor=COLORS.TRANSPARENT, showticklabels=False)
+    fig = ApplyTemplate(
+        fig,
+        default_xaxis=hidden,
+        default_yaxis=hidden,
+        layout=dict(
+            width=600, height=400,
+            margin=dict(l=15, r=15, t=50, b=15),
+            title=dict(text=f"(p={res.pvalue}) {k}:{model.Pathways[k].name}", font_size=18, x=0.5),
+        ),
+    )
+    fig.show()
+
+draw_gsea(results_map["rn00600"], gsea)
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+results = sorted(results, key=lambda x: x.pvalue)
+for r in results[15:35]:
+    meta = model.Pathways[r.set_name]
+    print(f"{r.pvalue:.2} {r.score:.2} {r.set_name}:{meta.name}")
+```
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+draw_gsea(results_map["rn00260"], gsea)
+``` 
