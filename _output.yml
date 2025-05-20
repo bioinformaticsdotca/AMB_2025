@@ -8,10 +8,14 @@ bookdown::gitbook:
         </a>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <li><a href="./"><strong>Advanced Microbiome Analysis</strong></a></li>
 =======
         <li><a href="./">Advanced Microbiome Analysis 2025</a></li>
 >>>>>>> refs/remotes/origin/main
+=======
+        <li><a href="./">[YOUR WORKSHOP NAME]</a></li>
+>>>>>>> parent of 45f38b4 (bookdown test)
       after: |
        <h1 id="sponsors">Sponsors</h1>
         <center>
