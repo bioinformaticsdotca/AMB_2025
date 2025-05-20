@@ -19,3 +19,7 @@ favicon: img/favicon.ico
 <!-- NOTE: Go to the README.md to help understand what to fill in for this workshop template! -->
 
 Welcome to CBW’s Advanced Microbiome Analysis 2025 Workshop!
+
+## AWS/UNIX primer
+
+[You can find the schedule and materials for the AWS/UNIX primer here.](https://bioinformaticsdotca.github.io/AWS_2025)
