@@ -1,13 +1,10 @@
 --- 
 title: "Advanced Microbiome Analysis 2025"
-author: NULL
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 url: https://cbw-dev.github.io/bookdown-template/ # [CHANGE THIS LINK TO YOUR LANDING PAGE LINK]
 cover-image: img/bioinformatics_logo.png # change this to the CBW icon for your workshop
-description: |
-  CBW's Bookdown Template for Workshops
 link-citations: yes
 github-repo: cbw-dev/AMB_2025 # change this to your own repo
 favicon: img/favicon.ico

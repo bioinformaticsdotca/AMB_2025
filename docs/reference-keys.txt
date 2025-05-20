@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 welcome
 awsunix-primer
 course-schedule
 meet-your-faculty
 module-1
-=======
->>>>>>> refs/remotes/origin/main
-=======
-welcome
-course-schedule
-meet-your-faculty
-module-1
->>>>>>> parent of 45f38b4 (bookdown test)
