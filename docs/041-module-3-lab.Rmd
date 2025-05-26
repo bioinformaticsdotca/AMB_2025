@@ -1,4 +1,4 @@
-# Module 3 Lab: Assigning Functions
+# Module 3 - Lab practical
 
 In this lab, we will predict and briefly examine the functions encoded in the assembled metagenome from the previous labs.
 Optional context and questions are provided as collapsible sections like so:
@@ -47,7 +47,7 @@ We will use SSH port forwarding to open the additional port.
 
 Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. For example:
 ```{bash, eval=FALSE, attr.source='.numberLines'}
-ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_key}
+ssh -L 48888:localhost:48888 ubuntu@main.uhn-hpc.ca -i ${path_to_your_key}
 ```
 This means port `48888` on the remote server will be forwarded to your machine at `localhost:48888`.
 
@@ -99,7 +99,7 @@ apptainer exec ./lib/amb_lab3.sif unpack
 The following will dedicate the current terminal to running the juptyer notebook on port 48888.
 You may want to connect another terminal to maintain terminal access.
 ```{bash, eval=FALSE}
-./start_lab
+start_lab
 ```
 
 ### Jupyter
@@ -1557,6 +1557,5 @@ reactions = [f"{r} {color}" for row in reactions for r in row]
 q = "\n".join(reactions)
 url = f"https://www.kegg.jp/kegg-bin/show_pathway?map={pathway}&multi_query={quote(q)}"
 url
+""")
 ```
-
-This concludes the lab!
