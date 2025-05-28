@@ -1710,8 +1710,7 @@ anvi-rename-bins -c anvio/anvio_databases/CONTIGS.db \
                      --report-file ${DRIVER}_renaming_bins.txt
 \end{verbatim}
 
-You can see that here we're defining a new collection called ``FINAL\_\({DRIVER}" (`MAXBIN2` for me), and we're saying that to rename these bins as MAGs, they should be >50% completion and <10% redundancy. You can look at the file that's created with the renamed bins if you like, to check that this did what you expected: `
-\)\{DRIVER\}\_renaming\_bins.txt`.
+You can see that here we're defining a new collection called \texttt{FINAL\_\$\{DRIVER\}} (\texttt{MAXBIN2} for me), and we're saying that to rename these bins as MAGs, they should be \textgreater50\% completion and \textless10\% redundancy. You can look at the file that's created with the renamed bins if you like, to check that this did what you expected: \texttt{\$\{DRIVER\}\_renaming\_bins.txt}.
 
 Now we'll summarise this new collection that we've made:
 

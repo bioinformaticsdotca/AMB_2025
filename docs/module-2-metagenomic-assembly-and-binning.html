@@ -641,7 +641,7 @@ anvi-rename-bins -c anvio/anvio_databases/CONTIGS.db \
                      --max-redundancy-for-MAG 10 \
                      --prefix CHKN \
                      --report-file ${DRIVER}_renaming_bins.txt</code></pre>
-<p>You can see that here we’re defining a new collection called “FINAL_<span class="math inline">\({DRIVER}&quot; (`MAXBIN2` for me), and we&#39;re saying that to rename these bins as MAGs, they should be &gt;50% completion and &lt;10% redundancy. You can look at the file that&#39;s created with the renamed bins if you like, to check that this did what you expected: `\)</span>{DRIVER}_renaming_bins.txt`.</p>
+<p>You can see that here we’re defining a new collection called <code>FINAL_${DRIVER}</code> (<code>MAXBIN2</code> for me), and we’re saying that to rename these bins as MAGs, they should be &gt;50% completion and &lt;10% redundancy. You can look at the file that’s created with the renamed bins if you like, to check that this did what you expected: <code>${DRIVER}_renaming_bins.txt</code>.</p>
 <p>Now we’ll summarise this new collection that we’ve made:</p>
 <pre><code>anvi-summarize -c anvio/anvio_databases/CONTIGS.db \
                    -p anvio/anvio_databases/merged_profiles/PROFILE.db \
@@ -754,20 +754,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
