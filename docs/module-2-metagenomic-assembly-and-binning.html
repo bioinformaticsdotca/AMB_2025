@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025</title>
   <meta name="description" content="Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"/>
-
+<link rel="next" href="module-3-lab-assigning-functions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,71 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -89,7 +154,6 @@
 <li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><i class="fa fa-check"></i>Module 1 Lab: Introduction to metagenomics and read‐based profiling</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#overview"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#table-of-contents"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#initial-setup-and-pre-processing-of-metagenomic-reads"><i class="fa fa-check"></i>1. Initial setup and pre-processing of metagenomic reads</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#log-into-your-instance"><i class="fa fa-check"></i>Log into your instance</a></li>
@@ -121,7 +185,7 @@
 <li class="part"><span><b>III Modules</b></span></li>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html"><i class="fa fa-check"></i>Module 2: Metagenomic Assembly and Binning</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents-1"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#introduction"><i class="fa fa-check"></i>Introduction</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#anvio"><i class="fa fa-check"></i>Anvi’o</a></li>
@@ -140,6 +204,47 @@
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#export-the-final-bins-into-mags"><i class="fa fa-check"></i>2.8 Export the final bins into MAGs</a></li>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#run-checkm2"><i class="fa fa-check"></i>2.9 Run CheckM2</a></li>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#other-things-that-we-frequently-do-with-mags"><i class="fa fa-check"></i>Other things that we frequently do with MAGs</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html"><i class="fa fa-check"></i>Module 3 Lab: Assigning Functions</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#setting-up-the-workspace"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#ssh-port-forwarding"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#workspace"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#start-container"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#jupyter"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#overview-1"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#prodigal"><i class="fa fa-check"></i>Prodigal</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#sequence-similarity"><i class="fa fa-check"></i>Sequence similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#diamond"><i class="fa fa-check"></i>Diamond</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#bakta"><i class="fa fa-check"></i>Bakta</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#resistance-gene-identifier-rgi"><i class="fa fa-check"></i>Resistance Gene Identifier (RGI)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#machine-learning"><i class="fa fa-check"></i>Machine learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#kofamscan"><i class="fa fa-check"></i>Kofamscan</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#deepec"><i class="fa fa-check"></i>deepEC</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#deepfri"><i class="fa fa-check"></i>deepFRI</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#proteinbert"><i class="fa fa-check"></i>proteinBERT</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#gapseq"><i class="fa fa-check"></i>gapseq</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html"><i class="fa fa-check"></i>Module 4 Lab: Visualization and Finding Functional Significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#setting-up-the-workspace-1"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#ssh-port-forwarding-1"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#workspace-1"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#start-container-1"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#jupyter-1"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#overview-2"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#salmon"><i class="fa fa-check"></i>Salmon</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#deseq2"><i class="fa fa-check"></i>DESeq2</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#gene-set-enrichment-analysis-gsea"><i class="fa fa-check"></i>Gene set enrichment analysis (GSEA)</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#cytoscape"><i class="fa fa-check"></i>Cytoscape</a></li>
 </ul></li>
 <li class="divider"></li>
 <h1 id="sponsors">Sponsors</h1>
@@ -175,8 +280,8 @@
 <h1>Module 2: Metagenomic Assembly and Binning<a href="module-2-metagenomic-assembly-and-binning.html#module-2-metagenomic-assembly-and-binning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This tutorial is part of the 2025 CBW <a href="https://bioinformaticsdotca.github.io/AMB_2025/">Advanced Microbiome Analysis</a> (held in Vancouver, BC, May 29-30). It is based on a version written for the <a href="https://bioinformaticsdotca.github.io/AMB_2024_module1">2024 CBW Advanced Microbiome Analysis workshop by Ben Fisher</a>.</p>
 <p>Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)</p>
-<div id="table-of-contents-1" class="section level2 hasAnchor">
-<h2>Table of Contents<a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="table-of-contents" class="section level2 hasAnchor">
+<h2>Table of Contents<a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><a href="module-2-metagenomic-assembly-and-binning.html#introduction">Introduction</a><br />
 <a href="#id_21-initial-setup">2.1 Initial setup</a><br />
 <a href="#id_22-assembly-of-raw-reads-with-megahit">2.2 Assembly of raw reads with MEGAHIT</a><br />
@@ -370,7 +475,10 @@ ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio/bam_files
 <p><strong>⚠️ NOTE: We’re going to copy over the profiles this time, not a soft-link because we need to manipulate them.</strong></p>
 </div>
 <pre><code>mkdir anvio/anvio_databases/profiles
-cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles
+cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles
+
+# also need to overwrite the CONTIG.DB so they match
+cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db 
 
 #for SAMPLE in `awk &#39;{print $1}&#39; sample_ids.txt`
 #do
@@ -591,8 +699,8 @@ ls MAG_fasta/</code></pre>
           </div>
         </div>
       </div>
-<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-3-lab-assigning-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -606,42 +714,42 @@ ls MAG_fasta/</code></pre>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": "https://github.com/bioinformaticsdotca/AMB_2025/blob/main/030-module-2.Rmd",
-    "text": "Edit"
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": ["_main.pdf", "_main.epub"],
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/bioinformaticsdotca/AMB_2025/blob/main/030-module-2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
 });
 });
 </script>

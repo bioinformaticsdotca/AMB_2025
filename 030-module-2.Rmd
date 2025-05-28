@@ -279,7 +279,10 @@ Now that we've created information on the coverage and detection of our contigs 
 </div>
 ```
 mkdir anvio/anvio_databases/profiles
-cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles
+cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles
+
+# also need to overwrite the CONTIG.DB so they match
+cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db 
 
 #for SAMPLE in `awk '{print $1}' sample_ids.txt`
 #do
