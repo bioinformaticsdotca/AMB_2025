@@ -1,3 +1,5 @@
+# (PART) Modules {-}
+
 # Module 4 Lab: Visualization and Finding Functional Significance
 
 In this lab, we will work through typical transcriptiomic analyses to find significantly expressed genes
@@ -33,9 +35,9 @@ ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_
 Create a new workspace in your home directory.
 
 ```{bash, eval=FALSE}
-cd ~
-mkdir amb_lab4
-cd amb_lab4
+cd ~/workspace
+mkdir amb_module4
+cd amb_module4
 ```
 
 Link the resource folder for easy access.
@@ -48,7 +50,7 @@ ln -s ~/CourseData/MIC_data/amb_module4/ ./lib
 
 Unpack the main container for this lab.
 ```{bash, eval=FALSE}
-apptainer exec ./lib/amb_lab4.sif unpack
+apptainer exec -B /media:/media ./lib/amb_lab4.sif unpack
 ```
 
 The following will dedicate the current terminal to running the juptyer notebook on port 48888.
@@ -71,7 +73,7 @@ CPUS = 4 # your workshop instance has been alloted 4 cores
 
 All software tools are packaged in the main container, so we can use `os.system("...")` instead of `Shell`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-os.system(f""""
+os.system(f"""
 pwd -P
 echo {LIB}
 """)
@@ -97,7 +99,8 @@ We also have a set of predicted genes.
 from Bio import SeqIO
 
 count = 0
-for i, sequence in enumerate(SeqIO.parse(GENES, "fasta")):
+genes_fasta = LIB/"inputs/lab3_orfs.fna"
+for i, sequence in enumerate(SeqIO.parse(genes_fasta, "fasta")):
     count += 1
 count
 ```
@@ -134,12 +137,12 @@ os.system(f"salmon quant --help")
 We will need to index the reference genes before performing quantification.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 salmon_dir = Path("./salmon")
-GENES = LIB/"inputs/lab3_orfs.fna"
+genes_fasta = LIB/"inputs/lab3_orfs.fna"
 salmon_index = salmon_dir/"index"
-os.system(f"salmon index -t {GENES} -i {salmon_index}")
+os.system(f"salmon index -t {genes_fasta} -i {salmon_index}")
 ```
 
-Quantification will take about 6 minutes. `tqdm` is a used to display a progress bar.
+**Quantification will take about 20 minutes. Do not run.** `tqdm` is a used to display a progress bar.
 Precomputed outputs are at `./lib/outputs/salmon/`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from tqdm import tqdm
@@ -166,6 +169,7 @@ from the first 1000 reads. [More information is here.](https://salmon.readthedoc
 
 Let's have a look at one of the results. The file we want is `quant.sf`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+salmon_dir = LIB/"outputs/salmon/" # divert
 for srr in salmon_dir.iterdir():
     if not srr.name.startswith("SRR"): continue
     df = pd.read_csv(srr/"quant.sf", sep="\t")
@@ -177,7 +181,7 @@ The `TPM` (transcipts per million) column is useful on its own, but deseq2 prefe
 Let's create the count matrix of genes by samples. First, create an index of genes.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 gene2i = {}
-for i, sequence in enumerate(SeqIO.parse(GENES, "fasta")):
+for i, sequence in enumerate(SeqIO.parse(genes_fasta, "fasta")):
     gene2i[sequence.id] = i
 len(gene2i)
 ```
@@ -194,6 +198,8 @@ Genes x Samples, so 3298 x 33.
 </details>
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
+import numpy as np
+
 mtx = np.zeros(shape=(len(gene2i), len(samples)), dtype=np.int32) # genes x samples
 for i, srr in tqdm(enumerate(df_meta["sample_name"]), total=len(df_meta)):
     df = pd.read_csv(salmon_dir/f"{srr}/quant.sf", sep="\t")
@@ -213,7 +219,7 @@ df = pd.DataFrame(mtx, columns=sample_ids)
 df["gene_id"] = gene_ids
 df = df.set_index("gene_id")
 print(df.shape)
-df.to_csv(salmon_dir/"counts.mtx")
+df.to_csv("./salmon/counts.mtx")
 df.head(2)
 ```
 
@@ -230,8 +236,8 @@ GSEA by permuting the sample labels.
 
 1. Patro R, Duggal G, Love MI, Irizarry RA, Kingsford C. Salmon provides fast and bias-aware quantification of transcript expression. Nat Methods. 2017;14(4):417–9. https://doi.org/10.1038/nmeth.4197
 
-**Transistion to an R notebook.**
-http://localhost:48888/lab
+**Transistion to an R notebook.** Click on the `+` and select "R" under Notebook.
+![](img/lab4/new_tab.png)
 
 
 ```{R, eval=FALSE, attr.source='.numberLines'}
@@ -245,6 +251,7 @@ cts <- as.matrix(read.csv(
     "./salmon/counts.mtx",
     row.names = "gene_id"
 ))
+cts
 ```
 
 load the sample metadata
@@ -276,6 +283,7 @@ We can cache the results to an "R data serialized" (RDS) to prevent having to re
 deseq_save <- "./deseq2/dds.rds"
 if (!file.exists(deseq_save)) {
   dds <- DESeq(dds)
+  dir.create("./deseq2", showWarnings = TRUE) # create the directory if it doesn't exist
   saveRDS(dds, deseq_save)
 } else {
   dds <- readRDS(deseq_save)
@@ -287,21 +295,24 @@ Extract the results and save to a dataframe. This will contain log2 fold changes
 res <- results(dds, contrast = c("grouping", "Bacteroides", "Non-Bacteroides"))
 results_table <- as.data.frame(res)
 write.csv(results_table, "./deseq2/results.csv", row.names = TRUE)
+results_table
 ```
 
 Next, we will compute the correlation between gene expression and the experimental groups and generate a null distribution for GSEA
 by permuting the sample labels. This effectively randomizes the assignemnt of samples
 to each experimental condition, but preserves any relationships between genes within a single sample.
 When the number of samples is low, genes can be randomly assigned to gene sets instead, but this fails to take into account gene-gene relationships.
+The p-value is estimated as the fraction of null samples that have a GSEA score greater than or equal to the observed GSEA score.
 
 <details>
     <summary>What is the minimum number of samples to simulate a null distribution with a precision of at least 0.05?</summary>
 
-4 samples (4! = 24, 1/24 is about 0.04) This will be explored further in the next section on GSEA.
+4 samples (4! = 24, 1/24 is about 0.04).
 
 ---
 
 </details>
+<br>
 
 We will use the suggested variance stablized transform (VST) to obtain normalized counts. VST removes the dependence of variance on the mean,
 which limits the high variance of the logarithm of counts when the mean is low.
@@ -309,6 +320,7 @@ which limits the high variance of the logarithm of counts when the mean is low.
 ```{R, eval=FALSE, attr.source='.numberLines'}
 vst <- vst(dds, blind = FALSE)
 vst_counts <- assay(vst)
+vst_counts
 ```
 
 The human-readable class labels need to be converted to more machine-friendly ordinal labels.
@@ -408,7 +420,6 @@ Fortunately, the technique itself is rather straightforward to implement.
 
 1. Patro R, Duggal G, Love MI, Irizarry RA, Kingsford C. Salmon provides fast and bias-aware quantification of transcript expression. Nat Methods. 2017;14(4):417–9. https://doi.org/10.1038/nmeth.4197
 
-
 We will use KEGG pathways as our gene sets. These were predicted using Kofamscan from the previous lab.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from local.models.kegg_orthology import ParseKofamScanResults
@@ -452,6 +463,7 @@ for p, reactions in pathway2reactions.items():
 
 Load correlations from DESeq2.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+deseq_dir = Path("./deseq2")
 df_null = pd.read_csv(deseq_dir/"null_distr.csv", index_col=0)
 print(df_null.shape)
 df_null.head(2)
@@ -490,11 +502,19 @@ for i, order in enumerate(mat_index):
 mat_sorted.shape
 ```
 
-To calculate the ES, a running sum is calculated by scanning down the ranked list of genes, increasing the score for genes that
-are in the gene set and decreasing it otherwise. Genes in the gene set are called "hits" and
-those not in the gene set are called "misses". The formulation for the running sum of hits (P_hit) at position _i_
-for gene set _S_ is given in the paper. Don't look at all of it at once, we will break it down.
+We can now perform GSEA and create this plot from figure 1 of the GSEA paper [1]. 
 
+![](img/lab4/gsea.png){width=50%}
+
+To calculate the ES, a running sum is calculated by scanning down the ranked list of genes, increasing the score for genes that
+are in the gene set and decreasing it otherwise. Genes in the gene set are called "hits" and those not in the gene set are called "misses".
+The magnitude of the increase is dependent on the correlation between the gene
+expression and the experimental grouping. The ES is the maximum deviation from 0 of this running sum statistic, caused by the commulative effect
+of the genes ranked before the maximum deviation is reached ("leading edge subset").
+
+The running sum statistic is calculated as the difference between the effect of hits and misses.
+The equation for the running sum of hits (P_hit) at rank _i_
+for gene set _S_ is given in the paper. Don't look at all of it at once, we will break it down.
 First, note that the summations only consider genes in the gene set _S_.
 
 ![](img/lab4/gsea_phit.png)
@@ -502,7 +522,7 @@ First, note that the summations only consider genes in the gene set _S_.
 Let's create a mask to select only genes in _S_.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 labels = _only_enzymes(df_corr).index.to_numpy()
-S = np.array([k in gene_set for k in self.labels], dtype=int) # g in S
+S = np.array([k in gene_set for k in labels], dtype=int) # g in S
 S = S[mat_index.T] # same order as mat
 ```
 
@@ -510,7 +530,7 @@ Next, have a look at N<sub>R</sub>. r<sub>j</sub> is simply the correlation valu
 Let's calculate N<sub>R</sub>.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 p = 1
-corr = np.pow(np.abs(self.mat_sorted), p)
+corr = np.pow(np.abs(mat_sorted), p)
 N_R = np.sum(corr*S, axis=0)
 ```
 
@@ -534,7 +554,6 @@ fig = ApplyTemplate(fig)
 fig.show()
 ```
 
-
 For P_miss, we cumulatively sum the fraction of misses.
 
 ![](img/lab4/gsea_pmiss.png)
@@ -557,11 +576,10 @@ fig = ApplyTemplate(fig)
 fig.show()
 ```
 
-The running statistic is the difference between P_hit and P_miss.
-Finally, the ES is the maximum magnitude of the running statistic.
+Now we combine P_hit and P_miss to get the running sum statistic
+and find the maximum magnitude to report the enrichment score (ES).
 ```{python, eval=FALSE, attr.source='.numberLines'}
 S_distr = (P_hit - P_miss).T # running statistic
-
 ES_pos = S_distr.max(axis=1)
 ES_neg = S_distr.min(axis=1)
 ES_candidates = np.vstack([ES_pos, ES_neg]).T       # candidate is either the positive or negative
@@ -586,11 +604,22 @@ score, null = ES[0], ES[1:]
 pvalue = np.sum(null >= score) / null.shape[0]
 if pvalue == 0:
     pvalue = 1 / null.shape[0]
-pvalue
+score, pvalue
 ```
 
-Let's clean things up a bit. We will return a `dataclass`, which is just a convient way to group many variables together.
-The procedure above is also attached to the class object `Gsea`, but otherwise unchanged.
+<details>
+    <summary>Why do we change the pvalue if it is equal to 0?</summary>
+
+If the p-value is 0, then the resolution of the null distribution was insufficient. To be conservative, we set it to the
+smallest pvalue that is resolvable, which is 1/(the sample size of the null distribution).
+
+</details>
+<br>
+
+Let's clean things up a bit. We will encapsulate the procedure in a function and 
+return a `dataclass`, which is just a convient way to organize a collection of variables.
+We will use this function to run GSEA for each pathway. Try completing the `gsea()` function below.
+
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from dataclasses import dataclass
 
@@ -602,69 +631,93 @@ class GseaResult:
     pvalue: float
     hits: np.ndarray
     running_sum_statistic: np.ndarray
-
-class Gsea:
-    def __init__(self, labels: np.ndarray, corr: np.ndarray, permuted: np.ndarray) -> None:
-        self.labels = labels
-        mat = np.hstack([corr, permuted])
-        self.mat_index = np.argsort(-mat.T, stable=True)
-        self.mat_sorted = np.zeros_like(mat)
-        for i, order in enumerate(self.mat_index):
-            self.mat_sorted[:, i] = mat[:, i][order]
-
-    def run(self, name: str, gene_set: set, p=1):
-        S = np.array([k in gene_set for k in self.labels], dtype=int)
-        if S.sum() == 0: return
-        S = S[self.mat_index.T]
-
-        corr = np.pow(np.abs(self.mat_sorted), p)
-        N_R = np.sum(corr*S, axis=0)
-
-        P_hit = corr/N_R
-        P_hit = P_hit*S # g_j in S
-        P_hit = np.cumsum(P_hit, axis=0)
-
-        P_miss = 1/(len(self.labels) - len(gene_set))
-        _mask = 1-S.T # invert hits for misses
-        P_miss = np.ones_like(self.labels)*_mask*P_miss
-        P_miss = np.cumsum(P_miss.T, axis=0)
-
-        S_distr = (P_hit - P_miss).T
-
-        ES_pos = S_distr.max(axis=1)
-        ES_neg = S_distr.min(axis=1)
-        ES_candidates = np.vstack([ES_pos, ES_neg]).T
-        to_take = np.argmax(np.abs(ES_candidates), axis=1)
-        ES = (ES_neg*to_take) + (ES_pos*(1-to_take))
-        score, null = ES[0], ES[1:]
-        pvalue = np.sum(null >= score) / null.shape[0]
-        if pvalue == 0:
-            pvalue = 1 / null.shape[0]
-
-        return GseaResult(
-            set_name=name,
-            set_size=len(gene_set),
-            score=score,
-            pvalue=pvalue,
-            hits=S.T[0],
-            running_sum_statistic=S_distr[0],
-        )
     
-def _only_enzymes(df: pd.DataFrame):
-    return df.loc[df.index.isin(enzymes)]
-_df_corr_e = _only_enzymes(df_corr)
-gsea = Gsea(
-    labels=_df_corr_e.index.to_numpy(),
-    corr=_df_corr_e.to_numpy(),
-    permuted=_only_enzymes(df_null).to_numpy(),
-)
+def gsea(name):
+    gene_set = gene_sets[name]
+    
+    # ...
+
+    return GseaResult(
+        set_name=name,
+        set_size=len(gene_set),
+        score=score,
+        pvalue=pvalue,
+        hits=S.T[0],
+        running_sum_statistic=S_distr[0],
+    )
+
+res = gsea("rn00983")
+res.score, res.pvalue
 ```
+
+<details>
+    <summary>Solution</summary>
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+from dataclasses import dataclass
+
+@dataclass
+class GseaResult:
+    set_name: str
+    set_size: int
+    score: float
+    pvalue: float
+    hits: np.ndarray
+    running_sum_statistic: np.ndarray
+    
+def gsea(name):
+    gene_set = gene_sets[name]
+    S = np.array([k in gene_set for k in labels], dtype=int) # g in S
+    S = S[mat_index.T] # same order as mat
+
+    p = 1
+    corr = np.pow(np.abs(mat_sorted), p)
+    N_R = np.sum(corr*S, axis=0)
+
+    P_hit = corr/N_R
+    P_hit = P_hit*S # g_j in S
+    P_hit = np.cumsum(P_hit, axis=0)
+
+    P_miss = 1/(len(labels) - len(gene_set))
+    _mask = 1-S.T # invert hits for misses
+    P_miss = np.ones_like(labels)*_mask*P_miss
+    P_miss = np.cumsum(P_miss.T, axis=0)
+
+    S_distr = (P_hit - P_miss).T # running statistic
+    ES_pos = S_distr.max(axis=1)
+    ES_neg = S_distr.min(axis=1)
+    ES_candidates = np.vstack([ES_pos, ES_neg]).T       # candidate is either the positive or negative
+    to_take = np.argmax(np.abs(ES_candidates), axis=1)  # we must select for each permutation
+    ES = (ES_neg*to_take) + (ES_pos*(1-to_take))
+
+    score, null = ES[0], ES[1:]
+    pvalue = np.sum(null >= score) / null.shape[0]
+    if pvalue == 0:
+        pvalue = 1 / null.shape[0]
+
+    return GseaResult(
+        set_name=name,
+        set_size=len(gene_set),
+        score=score,
+        pvalue=pvalue,
+        hits=S.T[0],
+        running_sum_statistic=S_distr[0],
+    )
+
+res = gsea("rn00983")
+res.score, res.pvalue
+```
+
+---
+
+</details>
+<br>
 
 We can now run GSEA for all pathways.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 results: list[GseaResult] = []
-for k, s in tqdm(gene_sets.items(), total=len(gene_sets)):
-    res = gsea.run(k, s)
+for k in tqdm(gene_sets, total=len(gene_sets)):
+    res = gsea(k)
     results.append(res)
 results_map = {r.set_name: r for r in results}
 ```
@@ -691,18 +744,22 @@ for res in results:
 df_gsea = pd.DataFrame(rows, columns=["set_name", "pvalue", "score"])
 Path("./gsea").mkdir(exist_ok=True, parents=True)
 df_gsea.to_csv("./gsea/results.csv", index=False)
+df_gsea
 ```
 
-The nice GSEA plot is composed of 3 elements. First, we indicate the rank of genes within the selected gene set.
+The nice GSEA plots shown in the paper are omposed of 3 elements.
+First, we indicate the rank of genes within the selected gene set.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+from local.figures.colors import COLORS
+
 res = results_map["rn00983"]
 
 fig = BaseFigure()
 _f = res.hits.astype(bool)
 fig.add_trace(
     go.Scatter(
-        x = np.arange(gsea.labels.shape[0])[_f],
-        y = np.zeros_like(gsea.labels)[_f],
+        x = np.arange(labels.shape[0])[_f],
+        y = np.zeros_like(labels)[_f],
         mode = "markers",
         marker=dict(
             size=25,
@@ -722,8 +779,8 @@ Next, we draw out the magnitudes of the correlations.
 fig = BaseFigure()
 fig.add_trace(
     go.Bar(
-        x = np.arange(gsea.labels.shape[0]),
-        y = gsea.mat_sorted.T[0],
+        x = np.arange(labels.shape[0]),
+        y = mat_sorted.T[0],
         showlegend=False,
         marker=dict(
             color=COLORS.BLACK,
@@ -740,7 +797,7 @@ And draw out the running sum statistic for the ES.
 fig = BaseFigure()
 fig.add_trace(
     go.Scatter(
-        x = np.arange(gsea.labels.shape[0]),
+        x = np.arange(labels.shape[0]),
         y = res.running_sum_statistic,
         mode = "lines",
         showlegend=False,
@@ -755,7 +812,7 @@ fig.show()
 
 Finally, we stack the 3 together to replicate the figures used in the GSEA paper.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-def draw_gsea(res: GseaResult, gsea: Gsea):
+def draw_gsea(res: GseaResult):
     k = res.set_name
     fig = BaseFigure(
         shape=(1, 3),                   # 3 subplots, vertically stacked
@@ -766,8 +823,8 @@ def draw_gsea(res: GseaResult, gsea: Gsea):
     _f = res.hits.astype(bool)
     fig.add_trace(
         go.Scatter(
-            x = np.arange(gsea.labels.shape[0])[_f],
-            y = np.zeros_like(gsea.labels)[_f],
+            x = np.arange(labels.shape[0])[_f],
+            y = np.zeros_like(labels)[_f],
             mode = "markers",
             marker=dict(
                 size=25,
@@ -782,8 +839,8 @@ def draw_gsea(res: GseaResult, gsea: Gsea):
 
     fig.add_trace(
         go.Bar(
-            x = np.arange(gsea.labels.shape[0]),
-            y = gsea.mat_sorted.T[0],
+            x = np.arange(labels.shape[0]),
+            y = mat_sorted.T[0],
             showlegend=False,
             marker=dict(
                 color=COLORS.BLACK,
@@ -795,7 +852,7 @@ def draw_gsea(res: GseaResult, gsea: Gsea):
 
     fig.add_trace(
         go.Scatter(
-            x = np.arange(gsea.labels.shape[0]),
+            x = np.arange(labels.shape[0]),
             y = res.running_sum_statistic,
             mode = "lines",
             showlegend=False,
@@ -819,10 +876,13 @@ def draw_gsea(res: GseaResult, gsea: Gsea):
     )
     fig.show()
 
-draw_gsea(results_map["rn00983"], gsea)
+draw_gsea(results_map["rn00983"])
 ```
 
-If you have time, use the `draw_gsea` function to explore other pathways.
+Use the `draw_gsea` function to explore other pathways.
+```{python, eval=FALSE, attr.source='.numberLines'}
+df_gsea
+```
 
 ## Cytoscape
 
@@ -894,7 +954,6 @@ Certain compounds, such as H<sup>+</sup>, ATP, NADH, are ubiquitous and reaction
 We can generate weights for edges to filter out low-information connections using the "promiscuity" of each compound.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 compound_promiscuity = {k: len(v) for k, v in c2r.items()}
-
 names["M_cpd00011_c0"], compound_promiscuity["M_cpd00011_c0"]
 ```
 
@@ -919,7 +978,7 @@ def adjacent_reactions(rxn):
 # the more promiscuous a compound is, the less weight it has in the similarity calculation
 _promiscuity_values = np.array([compound_promiscuity[c] for c in c2r.keys()])
 b = 5
-_scaled_promiscuity = 0.5*np.e/(1+np.exp((_cproms-b-1)/b)) # sigmoid, dist=0.5 at 8, near 0 at 20
+_scaled_promiscuity = 0.5*np.e/(1+np.exp((_promiscuity_values-b-1)/b)) # sigmoid, dist=0.5 at 8, near 0 at 20
 compound_scaled_weights = {c: w for c, w in zip(c2r.keys(), _scaled_promiscuity)}
 
 # calculate the weighted jaccard similarity between reactions
@@ -962,7 +1021,7 @@ from umap import UMAP
 
 pdist = np.ones((len(r2c), len(r2c)))*1e6
 r2i = {r: i for i, r in enumerate(r2c)}
-for (r1, r2), w in edges.items():
+for (r1, r2), w in reaction_similarity.items():
     i, j = r2i[r1], r2i[r2]
     w = 1/w-1
     pdist[i, j] = w
@@ -1071,7 +1130,9 @@ for g in groups:
 len(r2pathways)
 ```
 
-Let's start to construct the cytoscape save file, starting with the nodes.
+Let's start to construct the cytoscape save file, starting with the nodes. A dictionary object for each node
+will be created to represent reactions and compounds. The pathway, gsea results, expression, and gene information
+wil be added to the object for each node so that they can be used in Cytoscape. 
 ```{python, eval=FALSE, attr.source='.numberLines'}
 i = 0       # a counter to assign unique ids to nodes. increment for each node
 nodes = []  # we will store the nodes here
@@ -1091,8 +1152,12 @@ for _n, _pos, _type in [    # add reactions and compounds
             
             gsea_meta = gsea_lookup.get(relavent_pathway, None)
             gsea_score = gsea_meta["score"] if gsea_meta is not None else None
+            if gsea_score is not None and np.isnan(gsea_score):
+                gsea_score = None
             gsea_pvalue = gsea_meta["pvalue"] if gsea_meta is not None else None
-            
+            if gsea_pvalue is not None and np.isnan(gsea_pvalue):
+                gsea_pvalue = None
+
             genes = r2genes.get(k, [])
             genes = [g[2:] for g in genes]
             genes = sorted(genes, key=lambda g: gene2rank.get(g, 1e6))
@@ -1128,7 +1193,7 @@ for _n, _pos, _type in [    # add reactions and compounds
         i += 1
 ```
 
-Create a collection of edges, indicating the links for nodes. The only attribute added is the edge weight.
+A collection of edges indicate the links between nodes. The only attribute added is the edge weight from the metabolic proximity between reactions.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 edges = []
 for j, (r, c, w) in enumerate(eweights):
@@ -1138,8 +1203,8 @@ for j, (r, c, w) in enumerate(eweights):
     ))
 ```
 
-Additional parameters are obtained from creating a simple network with Cytoscape and saving it.
-The only modification is registering the node and edge attributes we created above.
+A template for the save file was obtained from creating a simple network with Cytoscape and saving it.
+The only modification is registering the node and edge attributes from above to the metadata section.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 META = [
     {
