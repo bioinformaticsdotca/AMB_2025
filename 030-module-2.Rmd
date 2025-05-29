@@ -47,11 +47,13 @@ cp ~/CourseData/MIC_data/AMB_data/sample_ids.txt .
 ls
 ```
 
-Finally, we'll activate the conda environment that we're going to be using:
+Finally, we'll activate the conda/mamba environment that we're going to be using:
 ```
 mamba activate anvio-8
 anvi-interactive --version
 ```
+
+**Conda** is a package and environment manager for installing software and managing dependencies, and **Mamba** is a faster drop-in replacement for Conda that performs the same tasks more efficiently.
 
 <div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
 **⚠️ NOTE: This lab has several steps that are quite time consuming and resource intensive!!!**
@@ -162,7 +164,7 @@ anvi-script-reformat-fasta anvio/megahit_out/final.contigs.fa \
                                -o anvio/megahit_out/final.contigs.fixed.fa
 ```
 
-Take a quick look at both `anvio/megahit_out/final.contigs.fa` and `anvio/megahit_out/final.contigs.fixed.fa` using the less or head commands to see what was changed! You can read more about the `anvi-script-reformat-fasta` command on this page. You should be able to see that we're giving this command a few options (aside from obviously giving it the `final.contigs.fa` file from the previous step:
+Take a quick look at both `anvio/megahit_out/final.contigs.fa` and `anvio/megahit_out/final.contigs.fixed.fa` using the less or head commands to see what was changed! You can read more about the `anvi-script-reformat-fasta` command on [this page](https://anvio.org/help/main/programs/anvi-script-reformat-fasta/). You should be able to see that we're giving this command a few options (aside from obviously giving it the `final.contigs.fa` file from the previous step:
 
 - `--simplify-names` - this is simply telling the program to simplify the names of the contigs in the file - you should have seen that in the original `anvio/megahit_out/final.contigs.fa` file, they had a description as well as a name, and this included information that `Anvi'o` doesn't need and may confuse it.
 - `--min-len` - although we already used a minimum contig length of 1000 in the previous step, we're further filtering here to ensure that we include only the best contigs, as well as reducing the computational time for the next steps.
@@ -175,7 +177,7 @@ anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \
                               -n CHKN -T 4
 ```
 
-You can read more about what `anvi-gen-contigs-database` is doing here, but the key parts of this are:
+You can read more about what `anvi-gen-contigs-database` is doing [here](https://anvio.org/help/main/programs/anvi-gen-contigs-database/), but the key parts of this are:
 
 - `-f` - the input file of fixed contigs
 - `-o` - what the output should be saved as
@@ -190,7 +192,7 @@ anvi-run-hmms -c anvio/anvio_databases/CONTIGS.db \
                               --num-threads 4
 ```
 
-Because the only arguments we've given this are the contigs database (`-c`) and the number of threads to use (`--num-threads`), it will run the default Hidden Markov Models (HMMs) within `Anvi'o`. You can read more about HMMs in this paper if you're interested, but in short, they are "statistical models that can be describe the evolution of observable events that depend on internal factors, which are not directly observable". HMMs are often used in computational biology for predicting the function of a gene or protein; we can build HMMs using multiple sequence alignments of genes or proteins known to carry out the same function, and then we can run these HMMs against our protein (amino acid) or gene (DNA) sequences to find other proteins/genes that are likely to carry out this function. You can read about the default HMMs in `Anvi'o` here, but they include `Bacteria_71` (71 single-copy core genes for the bacterial domain), `Archaea_76` (76 single-copy core genes for the archaeal domain), and `Protista_83` (83 single-copy core genes for the protists, within the eukaryotic domain).
+Because the only arguments we've given this are the contigs database (`-c`) and the number of threads to use (`--num-threads`), it will run the default Hidden Markov Models (HMMs) within `Anvi'o`. You can read more about HMMs in [this paper](http://eddylab.org/software/hmmer/Userguide.pdf) if you're interested, but in short, they are "statistical models that can be describe the evolution of observable events that depend on internal factors, which are not directly observable". HMMs are often used in computational biology for predicting the function of a gene or protein; we can build HMMs using multiple sequence alignments of genes or proteins known to carry out the same function, and then we can run these HMMs against our protein (amino acid) or gene (DNA) sequences to find other proteins/genes that are likely to carry out this function. You can read about the default HMMs in `Anvi'o` here, but they include `Bacteria_71` (71 single-copy core genes for the bacterial domain), `Archaea_76` (76 single-copy core genes for the archaeal domain), and `Protista_83` (83 single-copy core genes for the protists, within the eukaryotic domain).
 
 If we had our own set of HMMs, or HMMs for specific genes of interest, we could also use these here.
 
@@ -266,8 +268,8 @@ For loops are an incredibly useful thing that we do in programming - to my knowl
 
 In each of the steps within the for loop, we are giving several options:
 
-1. We are running `bowtie2` using the contigs index that we created `-x`, reads for this sample, `-U`, and the `--no-unal` options means it won't output unaligned reads. We'll then get `-S` as the output SAM file. SAM (Sequence Alignment MAP) files are used to store information about sequences aligned to a reference and they have 11 mandatory fields corresponding to various metrics about how well the sequence aligns to the reference. You can read more about them here.
-2. `samtools` is being used to convert the SAM file to a BAM file. You can see that this uses the view module of `samtools`, which would by default print the output to the terminal, but as we've added `> anvio/bam_files/${SAMPLE}-RAW.bam`, this tells it to save the output to a file. A BAM (Binary Alignment MAP) file is a compressed, binary version of a SAM file (see more here).
+1. We are running `bowtie2` using the contigs index that we created `-x`, reads for this sample, `-U`, and the `--no-unal` options means it won't output unaligned reads. We'll then get `-S` as the output SAM file. SAM (Sequence Alignment MAP) files are used to store information about sequences aligned to a reference and they have 11 mandatory fields corresponding to various metrics about how well the sequence aligns to the reference. You can read more about them [here](https://samtools.github.io/hts-specs/SAMv1.pdf).
+2. `samtools` is being used to convert the SAM file to a BAM file. You can see that this uses the view module of `samtools`, which would by default print the output to the terminal, but as we've added `> anvio/bam_files/${SAMPLE}-RAW.bam`, this tells it to save the output to a file. A BAM (Binary Alignment MAP) file is a compressed, binary version of a SAM file (see more [here](https://samtools.github.io/hts-specs/SAMv1.pdf)).
 3. The running of `anvi-init-bam` is fairly straight-forward, we are just giving it the raw BAM file and it is outputting a sorted, re-indexed version.
 4. Then we just remove the intermediate BAM file.
 

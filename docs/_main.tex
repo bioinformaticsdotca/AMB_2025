@@ -1167,12 +1167,14 @@ cp ~/CourseData/MIC_data/AMB_data/sample_ids.txt .
 ls
 \end{verbatim}
 
-Finally, we'll activate the conda environment that we're going to be using:
+Finally, we'll activate the conda/mamba environment that we're going to be using:
 
 \begin{verbatim}
 mamba activate anvio-8
 anvi-interactive --version
 \end{verbatim}
+
+\textbf{Conda} is a package and environment manager for installing software and managing dependencies, and \textbf{Mamba} is a faster drop-in replacement for Conda that performs the same tasks more efficiently.
 
 \textbf{⚠️ NOTE: This lab has several steps that are quite time consuming and resource intensive!!!}
 We have included the commands for your knowledge, but they is will commented out and alternative linking or copying commands will be provided. Read carefully and copy-paste only after you understand what the step you are performing should be doing.
@@ -1302,7 +1304,7 @@ anvi-script-reformat-fasta anvio/megahit_out/final.contigs.fa \
                                -o anvio/megahit_out/final.contigs.fixed.fa
 \end{verbatim}
 
-Take a quick look at both \texttt{anvio/megahit\_out/final.contigs.fa} and \texttt{anvio/megahit\_out/final.contigs.fixed.fa} using the less or head commands to see what was changed! You can read more about the \texttt{anvi-script-reformat-fasta} command on this page. You should be able to see that we're giving this command a few options (aside from obviously giving it the \texttt{final.contigs.fa} file from the previous step:
+Take a quick look at both \texttt{anvio/megahit\_out/final.contigs.fa} and \texttt{anvio/megahit\_out/final.contigs.fixed.fa} using the less or head commands to see what was changed! You can read more about the \texttt{anvi-script-reformat-fasta} command on \href{https://anvio.org/help/main/programs/anvi-script-reformat-fasta/}{this page}. You should be able to see that we're giving this command a few options (aside from obviously giving it the \texttt{final.contigs.fa} file from the previous step:
 
 \begin{itemize}
 \tightlist
@@ -1322,7 +1324,7 @@ anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \
                               -n CHKN -T 4
 \end{verbatim}
 
-You can read more about what \texttt{anvi-gen-contigs-database} is doing here, but the key parts of this are:
+You can read more about what \texttt{anvi-gen-contigs-database} is doing \href{https://anvio.org/help/main/programs/anvi-gen-contigs-database/}{here}, but the key parts of this are:
 
 \begin{itemize}
 \tightlist
@@ -1345,7 +1347,7 @@ anvi-run-hmms -c anvio/anvio_databases/CONTIGS.db \
                               --num-threads 4
 \end{verbatim}
 
-Because the only arguments we've given this are the contigs database (\texttt{-c}) and the number of threads to use (\texttt{-\/-num-threads}), it will run the default Hidden Markov Models (HMMs) within \texttt{Anvi\textquotesingle{}o}. You can read more about HMMs in this paper if you're interested, but in short, they are ``statistical models that can be describe the evolution of observable events that depend on internal factors, which are not directly observable''. HMMs are often used in computational biology for predicting the function of a gene or protein; we can build HMMs using multiple sequence alignments of genes or proteins known to carry out the same function, and then we can run these HMMs against our protein (amino acid) or gene (DNA) sequences to find other proteins/genes that are likely to carry out this function. You can read about the default HMMs in \texttt{Anvi\textquotesingle{}o} here, but they include \texttt{Bacteria\_71} (71 single-copy core genes for the bacterial domain), \texttt{Archaea\_76} (76 single-copy core genes for the archaeal domain), and \texttt{Protista\_83} (83 single-copy core genes for the protists, within the eukaryotic domain).
+Because the only arguments we've given this are the contigs database (\texttt{-c}) and the number of threads to use (\texttt{-\/-num-threads}), it will run the default Hidden Markov Models (HMMs) within \texttt{Anvi\textquotesingle{}o}. You can read more about HMMs in \href{http://eddylab.org/software/hmmer/Userguide.pdf}{this paper} if you're interested, but in short, they are ``statistical models that can be describe the evolution of observable events that depend on internal factors, which are not directly observable''. HMMs are often used in computational biology for predicting the function of a gene or protein; we can build HMMs using multiple sequence alignments of genes or proteins known to carry out the same function, and then we can run these HMMs against our protein (amino acid) or gene (DNA) sequences to find other proteins/genes that are likely to carry out this function. You can read about the default HMMs in \texttt{Anvi\textquotesingle{}o} here, but they include \texttt{Bacteria\_71} (71 single-copy core genes for the bacterial domain), \texttt{Archaea\_76} (76 single-copy core genes for the archaeal domain), and \texttt{Protista\_83} (83 single-copy core genes for the protists, within the eukaryotic domain).
 
 If we had our own set of HMMs, or HMMs for specific genes of interest, we could also use these here.
 
@@ -1429,9 +1431,9 @@ In each of the steps within the for loop, we are giving several options:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  We are running \texttt{bowtie2} using the contigs index that we created \texttt{-x}, reads for this sample, \texttt{-U}, and the \texttt{-\/-no-unal} options means it won't output unaligned reads. We'll then get \texttt{-S} as the output SAM file. SAM (Sequence Alignment MAP) files are used to store information about sequences aligned to a reference and they have 11 mandatory fields corresponding to various metrics about how well the sequence aligns to the reference. You can read more about them here.
+  We are running \texttt{bowtie2} using the contigs index that we created \texttt{-x}, reads for this sample, \texttt{-U}, and the \texttt{-\/-no-unal} options means it won't output unaligned reads. We'll then get \texttt{-S} as the output SAM file. SAM (Sequence Alignment MAP) files are used to store information about sequences aligned to a reference and they have 11 mandatory fields corresponding to various metrics about how well the sequence aligns to the reference. You can read more about them \href{https://samtools.github.io/hts-specs/SAMv1.pdf}{here}.
 \item
-  \texttt{samtools} is being used to convert the SAM file to a BAM file. You can see that this uses the view module of \texttt{samtools}, which would by default print the output to the terminal, but as we've added \texttt{\textgreater{}\ anvio/bam\_files/\$\{SAMPLE\}-RAW.bam}, this tells it to save the output to a file. A BAM (Binary Alignment MAP) file is a compressed, binary version of a SAM file (see more here).
+  \texttt{samtools} is being used to convert the SAM file to a BAM file. You can see that this uses the view module of \texttt{samtools}, which would by default print the output to the terminal, but as we've added \texttt{\textgreater{}\ anvio/bam\_files/\$\{SAMPLE\}-RAW.bam}, this tells it to save the output to a file. A BAM (Binary Alignment MAP) file is a compressed, binary version of a SAM file (see more \href{https://samtools.github.io/hts-specs/SAMv1.pdf}{here}).
 \item
   The running of \texttt{anvi-init-bam} is fairly straight-forward, we are just giving it the raw BAM file and it is outputting a sorted, re-indexed version.
 \item
