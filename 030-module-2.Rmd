@@ -1,5 +1,3 @@
-# (PART) Modules {-}
-
 # Module 2: Metagenomic Assembly and Binning
 
 ## Lecture
@@ -11,7 +9,7 @@ This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bio
 
 Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)
 
-## Table of Contents
+### Table of Contents
 
 [Introduction](#introduction)  
 [2.1 Initial setup](#21-initial-setup)  
@@ -26,16 +24,16 @@ Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)
 [Other things that we do with MAGs](#other-things-that-we-frequently-do-with-mags)  
 [Answers](#answers)  
 
-## Introduction
+### Introduction
 
 The main goal of this tutorial is to introduce students to the assembly of genomes from metagenomic reads (Metagenome Assembled Genomes/MAGs). There is not a one-size-fits-all pipeline for assembling MAGs. MAG assembly is incredibly computationally intensive, and the approach that we are taking here is therefore a very "bare bones" approach designed to demonstrate the main steps involved and give you some familiarity with the methods used. At the end of this tutorial we've provided a few other pipelines for MAG assembly that you may wish to look into if you are looking to assemble MAGs with your own metagenome data.
 
 Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You'll find the answers at the bottom of this page, but no one will be marking them.
 
-### Anvi'o
+#### Anvi'o
 Anvi'o is an open-source, community-driven analysis and visualization platform for microbial 'omics. It packages together many different tools used for genomics, metagenomics, metatranscriptomics, phylogenomics, etc. and has great interactive visualisations that can be used to help this. We are just touching the surface of what Anvi'o can do today, but the website has great tutorials and learning resources for all of its capabilities - I recommend browsing through to get some inspiration!
 
-## 2.1 Initial setup
+### 2.1 Initial setup
 
 First of all, we need to create the directory that we'll be working from and change into it:
 ```
@@ -65,7 +63,7 @@ anvi-interactive --version
 We have included the commands for your knowledge, but they is will commented out and alternative linking or copying commands will be provided. Read carefully and copy-paste only after you understand what the step you are performing should be doing.
 </div>
 
-## 2.2 Assembly of raw reads with MEGAHIT
+### 2.2 Assembly of raw reads with MEGAHIT
 
 The first step in the assembly of MAGs is the assembly of the shorter reads from sequencing into contigs. A contig is a contiguous sequence assembled from a set of sequence fragments, and there are different bioinformatic methods for assembling our reads into contigs. For this part of the tutorial, we are continuing to use reads from the same samples that we used for taxonomic annotation, but we have sub-sampled these to contain reads from only a few species, to ensure that we have the read depth required for MAG assembly while keeping the files small enough to be able to run on these small AWS instances. These are all still short reads of approximately 150 base pairs each.
 
@@ -159,7 +157,7 @@ seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F'\t' 'NR==1 { for (
 
 **Question 3**: What is the N50?
 
-## 2.3 Make an Anvi'o contigs databases
+### 2.3 Make an Anvi'o contigs databases
 
 First of all, we'll run a script to reformat our final contigs file from `MEGAHIT`. This ensures that they're in the right format for reading into `Anvi'o` in the next step:
 ```
@@ -190,7 +188,7 @@ You can read more about what `anvi-gen-contigs-database` is doing [here](https:/
 
 Throughout the next steps, we're going to be adding information to this contigs database.
 
-## 2.4 Run HMMs to identify single copy genes
+### 2.4 Run HMMs to identify single copy genes
 The first thing that we're going to add to the contigs database is information on the genes within the contigs:
 ```
 anvi-run-hmms -c anvio/anvio_databases/CONTIGS.db \
@@ -214,7 +212,7 @@ anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \
 
 **Question 4**: How many genes were identified?
 
-## 2.5 Map samples onto contigs with Bowtie2
+### 2.5 Map samples onto contigs with Bowtie2
 The next steps are going to generate abundance profiles of our contigs within the samples - these will help us to bin the contigs together into groups that have similar abundance profiles and are therefore likely to come from the same genome.
 
 The first step here is to build a `bowtie2` database/index of our fixed contigs:
@@ -278,7 +276,7 @@ In each of the steps within the for loop, we are giving several options:
 3. The running of `anvi-init-bam` is fairly straight-forward, we are just giving it the raw BAM file and it is outputting a sorted, re-indexed version.
 4. Then we just remove the intermediate BAM file.
 
-### Add coverage and detection statistics to the `Anvi'o` profile
+#### Add coverage and detection statistics to the `Anvi'o` profile
 Now that we've created information on the coverage and detection of our contigs within our samples (how abundant they are and whether they appear in every sample or not), we can make `Anvi'o` profiles with this information:
 
 <div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
@@ -303,7 +301,7 @@ cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anv
 
 We're again using a for loop to carry this out on each of our samples. The `anvi-profile` program quantifies coverage per nucleotide position within the contigs, and averages them per contig. It also calculates single-nucleotide, single-codon, and single-amino acid variants, as well as structural variants such as insertion and deletions and stores these data into appropriate tables.
 
-### Merge sample profiles
+#### Merge sample profiles
 The command above created contig profiles for each sample individually, so now we need to merge these profiles into one single profile that we can use for clustering the contigs into bins. We'll do this with the anvi-merge program:
 ```
 anvi-merge -c anvio/anvio_databases/CONTIGS.db \
@@ -336,7 +334,7 @@ As long as we're satisfied with all of this, then we can carry on to the cluster
 **Question 5**: How many contigs are there? Is this the same as what we started with? Why or why not?
 **Question 6**: What are the longest and shortest contigs? What do you think of this?
 
-## 2.6 Cluster contigs into bins
+### 2.6 Cluster contigs into bins
 Next we will bin - or cluster - the contigs to create genome "bins", or MAGs. To do this, we typically use information on the coverage, or abundance, of contigs within samples (that we generated in step two) and the binning algorithms will usually identify patterns in nucleotide composition or k-mer frequencies in order to group together contigs that they think are likely to have originated from the same genome. We are using `CONCOCT` for this, but as with every step of this pipeline, there are multiple tools that are capable of carrying this out and may be better or worse in different circumstances. Drivers of choice include: `CONCOCT`, `MAXBIN2`, and `METABAT2`, but be mindful that each driver may have different flags that need to be set so the command below may vary.
 
 Now we'll run the clustering:
@@ -406,7 +404,7 @@ BONUS: Try running the `MAXBIN2` and `METABAT2` drivers through this process the
 **Question 8**: How many bins >50% completion are there?
 **Question 9**: What is the redundancy in these bins?
 
-## 2.7 Interactive refinement of bins
+### 2.7 Interactive refinement of bins
 Now we're going to be doing the interactive refinement, and first of all we'll have a look at the bin that's `100%` complete and `<10%` redundant - for me, this is called `Bin_13`, but this naming is NOT consistent, so if that's a different bin for you then don't worry! Additionally, be sure you are using the correct `${DRIVER}` variable for the bin you're trying to view below, for me it is `CONCOCT`.
 
 To do this, we'll run the `Anvi'o` `anvi-refine` command:
@@ -430,7 +428,7 @@ Both of these parts are to do with `Anvi'o` being run on the Amazon instances ra
 
 Now the instructions are different depending on whether we're on Mac/Linux or Windows.
 
-#### Mac
+##### Mac
 Open a second terminal window or tab and run:
 ```
 ssh -L 8081:localhost:8081 -i BMB.pem ubuntu@##.uhn-hpc.ca
@@ -438,7 +436,7 @@ ssh -L 8081:localhost:8081 -i BMB.pem ubuntu@##.uhn-hpc.ca
 
 Where `##` is your number. It should just look like you logged into the server in a new window. Now go to `http://localhost:8081/` in your browser. This should have an `Anvi'o` page loaded up.
 
-#### Windows
+##### Windows
 Open a new Putty window.
 
 Click on "Session" and under "Saved Sessions", click on the "Amazon node" and then click "Load".
@@ -447,7 +445,7 @@ Now go to "Connection" > "SSH" > "Tunnels". In "Source port" type in `8081`. In 
 
 Click "Add" and then click "Open". You should see a new Putty window open. Now go to `http://localhost:8081/` in your browser. This should have an `Anvi'o` page loaded up.
 
-#### Back to both
+##### Back to both
 `Anvi'o` opens in the `main` tab (look at the top left).
 
 Now press the "Draw" button. You should see something that looks like a phylogenetic tree get drawn. Each branch of this is for one of the contigs that makes up the bin, and you can see information about their abundance in different samples in the rings.
@@ -487,7 +485,7 @@ When you are happy with what you've selected, click on "Store refined bins in th
 
 The other two bins that are >50% completion are already <10% redundancy, so it's not necessary to do anything to these, but you can have a look at them in the same way as we did with these two if you like.
 
-## 2.8 Export the final bins into MAGs
+### 2.8 Export the final bins into MAGs
 
 Now that we've refined our bins into MAGs for our specified `driver`, we can rename them:
 ```
@@ -535,7 +533,7 @@ You can also move all the bins/MAGs for all drivers if you would like to use the
 
 Now that we have our refined MAGs, we can do anything that we like with them!
 
-## 2.9 Run CheckM2
+### 2.9 Run CheckM2
 Next, we're going to run `checkm2`. `checkm2` can give us information on the quality of genomes.
 
 First, we'll activate the conda environment:
@@ -558,13 +556,13 @@ Once it's finished running, you can take a look at the output from it, `MAGs_che
 
 **Question 10**: What are the purity, redundancy, completeness, and contamination of your favorite MAG from today?
 
-## Other things that we frequently do with MAGs
+### Other things that we frequently do with MAGs
 
 While I hope that you now have a reasonable idea of the steps that go into assembling MAGs, how to assess their quality, and some of the ways in which we might annotate their functions, this has really only scratched the surface of what they might be used for.
 
 If you still have time in the workshop and want to have a look, I've added some papers that I think are nice uses of MAGs as well as some other things that can be done with MAGs that you might want to explore.
 
-#### Papers:
+##### Papers:
 
 [Bacterial ecology and evolution converge on seasonal and decadal scales](https://www.biorxiv.org/content/10.1101/2024.02.06.579087v1)
 
@@ -574,7 +572,7 @@ If you still have time in the workshop and want to have a look, I've added some 
 
 [A genomic catalog of Earth’s microbiomes](https://www.nature.com/articles/s41587-020-0718-6)
 
-#### Other tools:
+##### Other tools:
 
 [GTDB-toolkit](https://github.com/Ecogenomics/GTDBTk) - this can be used for assigning taxonomy to MAGs and has a much larger reference database than CheckM, which is designed for generating quality metrics of MAGs
 

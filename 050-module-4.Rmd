@@ -1,6 +1,9 @@
-# (PART) Modules {-}
+# Module 4: Visualization and Finding Functional Significance
 
-# Module 4 Lab: Visualization and Finding Functional Significance
+## Lecture
+Coming soon
+
+## Lab
 
 This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bioinformaticsdotca.github.io/AMB_2025/) (held in Vancouver, BC, May 29-30).
 
@@ -13,7 +16,7 @@ and gene sets. Metagenomic reads will be used in place of transcriptomic data, s
 abundance instead of expression, but the analyses shown will remain unchanged.
 For the sake of consistency, the abundance data will be referred to "expression" for the rest of the lab.
 
-## Setting up the workspace
+### Setting up the workspace
 
 The following procedure is near identical to that of lab3.
 [Please refer to the setup sectiom of lab3 for justifications and context.](module-3---lab-practical.html#setting-up-the-workspace)
@@ -24,19 +27,19 @@ We will need to perform the following steps:
 1. Unpack and start the container
 1. Open the jupyter notebook in your browser
 
-### SSH port forwarding
+#### SSH port forwarding
 
-#### Terminal (Unix/MacOS)
+##### Terminal (Unix/MacOS)
 
 Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. For example:
 ```{bash, eval=FALSE, attr.source='.numberLines'}
 ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_key}
 ```
-#### Putty (Windows)
+##### Putty (Windows)
 
 ![](img/lab3/putty_port_forward.png)
 
-### Workspace
+#### Workspace
 
 Create a new workspace in your home directory.
 
@@ -52,7 +55,7 @@ Link the resource folder for easy access.
 ln -s ~/CourseData/MIC_data/amb_module4/ ./lib
 ```
 
-### Start container
+#### Start container
 
 Unpack the main container for this lab.
 ```{bash, eval=FALSE}
@@ -65,7 +68,7 @@ You may want to connect another terminal to maintain terminal access.
 ./start_lab
 ```
 
-### Jupyter
+#### Jupyter
 
 JupyterLab should now be accessible at http://localhost:48888/lab. Create a new python notebook and import dependencies.
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -85,7 +88,7 @@ echo {LIB}
 """)
 ```
 
-## Overview
+### Overview
 
 To understand the objective of this lab, let's first have a look at the metadata.
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -119,7 +122,7 @@ To do this we will:
 1. Perform [Gene set enrichment analysis (GSEA)](gene-set-enrichment-analysis-gsea) to identify significantly enriched pathways.
 1. Visualize the metabolic network in [cytoscape](Cytoscape) with expression information.
 
-## Salmon
+### Salmon
 
 The alignment of transcriptomic reads to genes is often ambiguous. A single read can map to multiple genes and the length of genes compared to reads
 means that multiple reads will map to different regions of the same gene. Salmon uses probabilistic and statistical models to quantify the expression of
@@ -231,7 +234,7 @@ df.head(2)
 
 We are now ready for deseq2.
 
-## DESeq2
+### DESeq2
 
 DESeq2 is a statistical package for R that is used to analyze count data from RNA-Seq experiments [1].
 It uses a negative binomial distribution to model count data, taking into account large biological diversity and technical noise
@@ -410,7 +413,7 @@ if (!file.exists(null_save)) {
 dim(null_distr)
 ```
 
-## Gene set enrichment analysis (GSEA)
+### Gene set enrichment analysis (GSEA)
 
 **Back to python.**
 
@@ -890,7 +893,7 @@ Use the `draw_gsea` function to explore other pathways.
 df_gsea
 ```
 
-## Cytoscape
+### Cytoscape
 
 Cytoscape is a powerful visualization environment for biological networks [1, 2]. We will combine the previously generated gapseq metabolic model  
 with the gene expression data from this lab for visualization.

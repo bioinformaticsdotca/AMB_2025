@@ -12,19 +12,19 @@ This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bio
 
 Author: Robyn Wright
 
-## Overview
+### Overview
 
 The goal of this tutorial is to familiarise students with processes by which we analyse metagenomic data and classify taxa within our samples. Shotgun Metagenomic Sequencing, sometimes called MGS or WGS, is capable of capturing any DNA extracted from a given sample (however, this does not necessarily mean it captures ALL of the DNA). With MGS reads, we must consider that there could be significant host contamination, so - depending on our sample type - we must filter against host sequences in our pipeline. We will then classify the taxa in our samples using two popular approaches - an all reads approach (Kraken2 + Bracken) and a marker-gene approach (MetaPhlAn). In all steps of bioinformatics, there are many tools that can work to produce similar results, and there is never a one-size-fits-all solution. It is up to us to learn about the options that are available and choose which one is most appropriate for our application - people often have different opinions, so sometimes we need to educate ourselves, make a decision, and be able to justify this decision to others. This lab is therefore a foray into some popular tools and processes, and how to appropriately use them for our analyses.
 
 Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You'll find the answers at the bottom of this page, but no one will be marking them. *You may wish to keep them open in another tab*. 
 
-## 1. Initial setup and pre-processing of metagenomic reads
+### 1. Initial setup and pre-processing of metagenomic reads
 
-### Log into your instance
+#### Log into your instance
 
 If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in [Beginner Module 1](https://bioinformaticsdotca.github.io/BMB_2025/module-1.html#log-into-your-aws-instance).
 
-### Working on the Command Line
+#### Working on the Command Line
 
 Make a new folder in your workspace to work from:
 ```
@@ -42,7 +42,7 @@ ln -s ~/CourseData/MIC_data/AMB_data/raw_data_subsampled_subset/ raw_data
 cp ~/CourseData/MIC_data/AMB_data/metagenome_metadata_subset.txt metagenome_metadata.txt
 ```
 
-### About the samples 
+#### About the samples 
 
 These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:\
 - [Week-Old Chicks with High Bacteroides Abundance Have Increased Short-Chain Fatty Acids and Reduced Markers of Gut Inflammation](https://journals.asm.org/doi/full/10.1128/spectrum.03616-22)
@@ -50,7 +50,7 @@ These samples are from a study that investigated gut microbiome functional capac
 Or in the additional analysis done by John's lab here:\
 - [Metabolic modeling of microbial communities in the chicken ceca reveals a landscape of competition and co-operation](https://www.biorxiv.org/content/10.1101/2024.10.14.618310v1.full)
 
-### A Crash Course in GNU Parallel
+#### A Crash Course in GNU Parallel
 
 First, activate our conda environment for this tutorial:
 
@@ -102,11 +102,11 @@ Take a look inside ```test.txt``` with the ```less``` command if you like. Remem
 
 And with that, you're ready to use parallel for all of your bioinformatic needs! We will continue to use it throughout this tutorial and show some additional features along the way. There is also a cheat-sheet [here](https://www.gnu.org/software/parallel/parallel_cheat.pdf) for quick reference.
 
-## Quality Control
+### Quality Control
 
 Quality control is an important step in any pipeline. For this tutorial, we will use FastQC to inspect the quality of our samples.
 
-### Visualization with FastQC
+#### Visualization with FastQC
 
 First, make your desired output directory ```fastqc_out```. Then, run FastQC as follows:
 
@@ -136,7 +136,7 @@ multiqc fastqc_out --filename multiqc.html
 Then open up the ```multiqc.html``` file and see what else you can see in this report vs the individual ones. 
 
 
-### Filtering with KneadData
+#### Filtering with KneadData
 
 KneadData is a tool which "wraps" several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:\
 * Run Trimmomatic to remove adapter sequences\
@@ -210,7 +210,7 @@ ln -s ~/CourseData/MIC_data/amb_module1/bowtie2_db/ .
 ```
 </details>
 
-#### Back to KneadData
+##### Back to KneadData
 
 Now we are ready to run KneadData using parallel:
 ```
@@ -244,9 +244,9 @@ mkdir kneaddata_out/contam_seq
 mv kneaddata_out/*_contam*.fastq kneaddata_out/contam_seq
 ```
 
-## 2. Generating Taxonomic Profiles
+### 2. Generating Taxonomic Profiles
 
-### Annotation with Kraken2/Bracken
+#### Annotation with Kraken2/Bracken
 
 Now that we have our reads of interest, we want to understand _what_ these reads are. To accomplish this, we use tools which **annotate** the reads based on different methods and databases. There are many tools which are capable of this, with varying degrees of speed and precision. For this tutorial, we will be using Kraken2 for fast exact k-mer matching against a database. 
 
@@ -312,7 +312,7 @@ Finally, let's merge our bracken outputs:
 combine_bracken_outputs.py --files bracken_out/*.species.bracken -o merged_output.species.bracken
 ```
 
-### Annotation with MetaPhlAn
+#### Annotation with MetaPhlAn
 
 Another tool that is commonly used for taxonomic annotation of metagenomic sequences is MetaPhlAn. This tool is different from Kraken2 in that it uses a database of marker genes, instead of a collection of genomes, and it identifies only these marker genes within our reads, rather than trying to classify all reads. It then attempts to estimate the abundance of the taxa it identified within our whole samples, but it's important to remember that this is an **estimation**, and not the actual number of reads classified. We will use MetaPhlAn 3 for this tutorial due to the constraints of the AWS instances, but a newer version (MetaPhlAn4) utilizing a larger database is available.
 
@@ -333,11 +333,11 @@ parallel -j 1 --eta 'metaphlan --bowtie2db CHOCOPhlAn_201901 --input_type fastq 
 
 This might take a while to run, so move on to the next step while this runs and then come back to this after. 
 
-## 3. Visualisation of results in R
+### 3. Visualisation of results in R
 
 Now we'll go to RStudio server: `http://##.uhn-hpc.ca:8080` (remember to replace ## with your own instance number). If you weren't in the beginner microbiome workshop, you may be prompted to enter your username and password. It will also take a little while to log in the first time, but will be quicker afterwards. 
 
-### Create the R Notebook
+#### Create the R Notebook
 Using the menus, click `File > New File > R Notebook`, which will open an Untitled R markdown (Rmd) document. R notebooks are helpful in that you can run several lines, or **_chunks_** of code at the same time, and the results will appear within the document itself _(in the whitespace following the chunk)_.
 
 The default R Notebook contains a header and some information you may find helpful. Try running the chunk containing `plot(cars)` to see what happens!
@@ -346,13 +346,13 @@ You do not need to preserve most of the information in the new, untitled documen
 
 The **chunks** are distinguished by the grey shading. Everything between the first ` ```{r} ` and subsequent` ``` ` belongs to the chunk. Anything written in the white space surrounding the chunk is meant to be annotation. _Although you can run lines of code outside of the chunks, the chunks are useful for running multiple lines in series with one click._
 
-#### Adding new chunks
+##### Adding new chunks
 To add a new chunk into your R notebook by navigating to `Code > Insert Chunk` from the toolbar, or clicking on the little green C and selecting R.
 
 And then save the document - it doesn't really matter what you call it, but something like `amb_module1.rmd` would be sensible.
 
 
-### Setup, Importing and Formatting Data
+#### Setup, Importing and Formatting Data
 
 Now we'll start building our R markdown notebook. Paste the following into a chunk, and then click the little green "play" button on the top right of the chunk to run it. 
 
@@ -434,7 +434,7 @@ Have a look at it:
 View(physeq_bracken_genus)
 ```
 
-### Filtering and rarefying
+#### Filtering and rarefying
 
 Now we can take a look at how many reads have been classified within our samples:
 ```
@@ -516,7 +516,7 @@ We are only going to use this rarefied object for the alpha diversity analyses!
 
 ::::
 
-### Alpha and beta diversity analyses
+#### Alpha and beta diversity analyses
 
 We're not going to go into explaining all of these again as we did that in the beginner workshop, but we'll take a look at the samples with a few different methods.
 
@@ -592,7 +592,7 @@ Note that this has just clustered our taxa together, and the tree that we see fo
 
 ::::
 
-### Now lets do the same with the MetaPhlAn3 output
+#### Now lets do the same with the MetaPhlAn3 output
 
 MetaPhlAn 3 should have finished running by now! So go back to your terminal window.
 
@@ -706,7 +706,7 @@ heatmap(otu_table(physeq_metaphlan_genus))
 
 ::::
 
-### Combine Kraken and MetaPhlAn output
+#### Combine Kraken and MetaPhlAn output
 
 First we'll rename both of the Bracken and MetaPhlAn phyloseq objects so that we don't have duplicated sample names in them:
 ```
@@ -775,7 +775,7 @@ heatmap(otu_table(physeq_combined))
 ::::
 
 
-## Answers
+### Answers
 
 **Question 1**: This one isn't really a question, but you can see the code needed for these steps in the answers section if you need to!
 ```

@@ -1,12 +1,16 @@
-# (PART) Modules {-}
+# Module 3: Assigning Functions
 
-# Module 3 Lab: Assigning Functions
+## Lecture
+
+Coming soon
+
+## Lab
 
 This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bioinformaticsdotca.github.io/AMB_2025/) (held in Vancouver, BC, May 29-30).
 
 Author: Tony Liu
 
-## Setting up the workspace
+### Setting up the workspace
 
 Before we begin, this section will guide you through the set up of your workspace and compute environment.
 The software tools used in this lab all have dependencies that must be installed separately.
@@ -20,7 +24,7 @@ One of these containers will enable the use of jupyter notebooks along with a co
 1.	Mangul S, Martin LS, Eskin E, Blekhman R. Improving the usability and archival stability of bioinformatics software. Genome Biol. 2019;20(1):47. https://doi.org/10.1186/s13059-019-1649-8
 2.	Kurtzer GM, Sochat V, Bauer MW. Singularity: Scientific containers for mobility of compute. PLOS ONE. 2017;12(5):e0177459. https://doi.org/10.1371/journal.pone.0177459
 
-#### Steps for setup:
+##### Steps for setup:
 
 ![](img/lab3/compute_env.png)
 
@@ -29,11 +33,11 @@ One of these containers will enable the use of jupyter notebooks along with a co
 1. Unpack and start the container
 1. Open the jupyter notebook in your browser
 
-### SSH port forwarding
+#### SSH port forwarding
 
 We will use SSH port forwarding to open the additional port.
 
-#### Terminal (Unix/MacOS)
+##### Terminal (Unix/MacOS)
 
 Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. For example:
 ```{bash, eval=FALSE, attr.source='.numberLines'}
@@ -41,13 +45,13 @@ ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_
 ```
 This means port `48888` on the remote server will be forwarded to your machine at `localhost:48888`.
 
-#### Putty (Windows)
+##### Putty (Windows)
 
 Modern versions of Windows should have `ssh` available through Powershell. Putty is available as a backup.
 
 ![](img/lab3/putty_port_forward.png)
 
-### Workspace
+#### Workspace
 
 Create a new workspace in your home directory.
 
@@ -63,7 +67,7 @@ Link the resource folder for easy access. This will contain all the required sof
 ln -s ~/CourseData/MIC_data/amb_module3/ ./lib
 ```
 
-### Start container
+#### Start container
 
 Most containers for this lab were obtained from the biocontainers project, which provides a large collection of bioinformatics software in a standard format.
 For each tool, we will provide URIs for the the specific container image used and where to get future versions.
@@ -107,7 +111,7 @@ You may want to connect another terminal to maintain terminal access.
 ./start_lab
 ```
 
-### Jupyter
+#### Jupyter
 
 JupyterLab should now be accessible at http://localhost:48888/lab. Create a new python notebook and import dependencies.
 
@@ -219,7 +223,7 @@ This is a convient way to simplify commands by saving repeated sections to varia
         
 </details>
 
-## Overview
+### Overview
 
 This lab will guide you through finding and identifying the functional units encoded in the assembled metagenome from the previous labs
 (represented by the red and orange features below), with a focus on proteins and enzymes.
@@ -245,7 +249,7 @@ Finally, we will use gapseq to construct metabolic models from the given MAGs.
 
 * [gapseq]
 
-## Prodigal
+### Prodigal
 
 The container image for prodigal:
 
@@ -459,7 +463,7 @@ non_mag_orfs.shape
 1060 of 7176, or about 15%
 </details>
 
-## Sequence similarity
+### Sequence similarity
 
 In this section, we will use tools to find proteins with known sequences similar to that of the predicted ORFs.
 By assuming similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
@@ -468,7 +472,7 @@ While not perfect [1, 2], this is a common first-pass approach to assign functio
 1. Omelchenko MV, Galperin MY, Wolf YI, Koonin EV. Non-homologous isofunctional enzymes: A systematic analysis of alternative solutions in enzyme evolution. Biol Direct. 2010;5(1):31. https://doi.org/10.1186/1745-6150-5-31
 1. Seffernick JL, de Souza ML, Sadowsky MJ, Wackett LP. Melamine deaminase and atrazine chlorohydrolase: 98 percent identical but functionally different. J Bacteriol. 2001;183(8):2405–10. https://doi.org/10.1128/JB.183.8.2405-2410.2001
 
-### Diamond
+#### Diamond
 
 https://quay.io/repository/biocontainers/diamond?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -833,7 +837,7 @@ TOP_K = 3
 
 </details>
 
-### Bakta
+#### Bakta
 
 https://quay.io/repository/biocontainers/bakta?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -934,7 +938,7 @@ df
 
 </details>
 
-### Resistance Gene Identifier (RGI)
+#### Resistance Gene Identifier (RGI)
 
 https://quay.io/repository/biocontainers/rgi?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1027,13 +1031,13 @@ _df
 Just 10!
 </details>
 
-## Machine learning
+### Machine learning
 
 Alignment-based approaches that assign functional annotations based on sequence similarity rely on databases of known sequnces
 to transfer their known functions to the ORFs of a given sample. Machine learning may be able to discover more general patterns
 that can extend annotations to previously unseen sequences. 
 
-### Kofamscan
+#### Kofamscan
 
 https://quay.io/repository/hallamlab/external_kofamscan?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1197,7 +1201,7 @@ fig = ApplyTemplate(
 fig.show()
 ```
 
-### deepEC
+#### deepEC
 
 https://quay.io/repository/hallamlab/external_deepec?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1238,7 +1242,7 @@ dfec.head(2)
 
 </details>
 
-### deepFRI
+#### deepFRI
 
 https://quay.io/repository/hallamlab/external_deepfri?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1332,7 +1336,7 @@ The model itself is not even confident, assigning scores as low as 0.1 in some c
 
 </details>
 
-### proteinBERT
+#### proteinBERT
 
 https://quay.io/repository/hallamlab/external_proteinbert?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1563,7 +1567,7 @@ be transferred to the hypothetical protein's annotation.
 
 </details>
 
-## gapseq
+### gapseq
 
 https://quay.io/repository/biocontainers/gapseq?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
