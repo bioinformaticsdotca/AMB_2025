@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025</title>
+  <meta name="description" content="Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+  
+  <meta name="github-repo" content="cbw-dev/AMB_2025" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 2: Metagenomic Assembly and Binning | Advanced Microbiome Analysis 2025" />
+  
+  
+  <meta name="twitter:image" content="https://cbw-dev.github.io/bookdown-template/img/bioinformatics_logo.png" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"/>
+<link rel="next" href="module-3-lab-assigning-functions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+
+ <li><a href="./"><strong>Advanced Microbiome Analysis</strong></a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#awsunix-primer"><i class="fa fa-check"></i>AWS/UNIX primer</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#meet-your-faculty"><i class="fa fa-check"></i>Meet Your Faculty</a></li>
+</ul></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><i class="fa fa-check"></i>Module 1 Lab: Introduction to metagenomics and read‐based profiling</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#overview"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#initial-setup-and-pre-processing-of-metagenomic-reads"><i class="fa fa-check"></i>1. Initial setup and pre-processing of metagenomic reads</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#log-into-your-instance"><i class="fa fa-check"></i>Log into your instance</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#working-on-the-command-line"><i class="fa fa-check"></i>Working on the Command Line</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#about-the-samples"><i class="fa fa-check"></i>About the samples</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#a-crash-course-in-gnu-parallel"><i class="fa fa-check"></i>A Crash Course in GNU Parallel</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#quality-control"><i class="fa fa-check"></i>Quality Control</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#visualization-with-fastqc"><i class="fa fa-check"></i>Visualization with FastQC</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#filtering-with-kneaddata"><i class="fa fa-check"></i>Filtering with KneadData</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#generating-taxonomic-profiles"><i class="fa fa-check"></i>2. Generating Taxonomic Profiles</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#annotation-with-kraken2bracken"><i class="fa fa-check"></i>Annotation with Kraken2/Bracken</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#annotation-with-metaphlan"><i class="fa fa-check"></i>Annotation with MetaPhlAn</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#visualisation-of-results-in-r"><i class="fa fa-check"></i>3. Visualisation of results in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#create-the-r-notebook"><i class="fa fa-check"></i>Create the R Notebook</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#setup-importing-and-formatting-data"><i class="fa fa-check"></i>Setup, Importing and Formatting Data</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#filtering-and-rarefying"><i class="fa fa-check"></i>Filtering and rarefying</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#alpha-and-beta-diversity-analyses"><i class="fa fa-check"></i>Alpha and beta diversity analyses</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#now-lets-do-the-same-with-the-metaphlan3-output"><i class="fa fa-check"></i>Now lets do the same with the MetaPhlAn3 output</a></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#combine-kraken-and-metaphlan-output"><i class="fa fa-check"></i>Combine Kraken and MetaPhlAn output</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html"><a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#answers"><i class="fa fa-check"></i>Answers</a></li>
+</ul></li>
+<li class="part"><span><b>III Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html"><i class="fa fa-check"></i>Module 2: Metagenomic Assembly and Binning</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#introduction"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#anvio"><i class="fa fa-check"></i>Anvi’o</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#initial-setup"><i class="fa fa-check"></i>2.1 Initial setup</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#assembly-of-raw-reads-with-megahit"><i class="fa fa-check"></i>2.2 Assembly of raw reads with MEGAHIT</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#make-an-anvio-contigs-databases"><i class="fa fa-check"></i>2.3 Make an Anvi’o contigs databases</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#run-hmms-to-identify-single-copy-genes"><i class="fa fa-check"></i>2.4 Run HMMs to identify single copy genes</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#map-samples-onto-contigs-with-bowtie2"><i class="fa fa-check"></i>2.5 Map samples onto contigs with Bowtie2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#add-coverage-and-detection-statistics-to-the-anvio-profile"><i class="fa fa-check"></i>Add coverage and detection statistics to the <code>Anvi'o</code> profile</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#merge-sample-profiles"><i class="fa fa-check"></i>Merge sample profiles</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#cluster-contigs-into-bins"><i class="fa fa-check"></i>2.6 Cluster contigs into bins</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#interactive-refinement-of-bins"><i class="fa fa-check"></i>2.7 Interactive refinement of bins</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#export-the-final-bins-into-mags"><i class="fa fa-check"></i>2.8 Export the final bins into MAGs</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#run-checkm2"><i class="fa fa-check"></i>2.9 Run CheckM2</a></li>
+<li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#other-things-that-we-frequently-do-with-mags"><i class="fa fa-check"></i>Other things that we frequently do with MAGs</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html"><i class="fa fa-check"></i>Module 3 Lab: Assigning Functions</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#setting-up-the-workspace"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#ssh-port-forwarding"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#workspace"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#start-container"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#jupyter"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#overview-1"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#prodigal"><i class="fa fa-check"></i>Prodigal</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#sequence-similarity"><i class="fa fa-check"></i>Sequence similarity</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#diamond"><i class="fa fa-check"></i>Diamond</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#bakta"><i class="fa fa-check"></i>Bakta</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#resistance-gene-identifier-rgi"><i class="fa fa-check"></i>Resistance Gene Identifier (RGI)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#machine-learning"><i class="fa fa-check"></i>Machine learning</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#kofamscan"><i class="fa fa-check"></i>Kofamscan</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#deepec"><i class="fa fa-check"></i>deepEC</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#deepfri"><i class="fa fa-check"></i>deepFRI</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#proteinbert"><i class="fa fa-check"></i>proteinBERT</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#gapseq"><i class="fa fa-check"></i>gapseq</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html"><i class="fa fa-check"></i>Module 4 Lab: Visualization and Finding Functional Significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#setting-up-the-workspace-1"><i class="fa fa-check"></i>Setting up the workspace</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#ssh-port-forwarding-1"><i class="fa fa-check"></i>SSH port forwarding</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#workspace-1"><i class="fa fa-check"></i>Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#start-container-1"><i class="fa fa-check"></i>Start container</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#jupyter-1"><i class="fa fa-check"></i>Jupyter</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#overview-2"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#salmon"><i class="fa fa-check"></i>Salmon</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#deseq2"><i class="fa fa-check"></i>DESeq2</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#gene-set-enrichment-analysis-gsea"><i class="fa fa-check"></i>Gene set enrichment analysis (GSEA)</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#cytoscape"><i class="fa fa-check"></i>Cytoscape</a></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+ <center>
+ <a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+ <a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.webp" width=40% style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+ <a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" width=40% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Genomics logo.">
+ <br><br>
+ <a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=25% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+ <a href="https://www.hpcforhealth.ca/"><img src="img/sponsors/hpc4health.png" width=60% style="display:inline-block;" style="padding-bottom: 20px "alt="HPC4Health logo.">
+ <br><br>
+ <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advanced Microbiome Analysis 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-2-metagenomic-assembly-and-binning" class="section level1 hasAnchor">
+<h1>Module 2: Metagenomic Assembly and Binning<a href="module-2-metagenomic-assembly-and-binning.html#module-2-metagenomic-assembly-and-binning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This tutorial is part of the 2025 CBW <a href="https://bioinformaticsdotca.github.io/AMB_2025/">Advanced Microbiome Analysis</a> (held in Vancouver, BC, May 29-30). It is based on a version written for the <a href="https://bioinformaticsdotca.github.io/AMB_2024_module1">2024 CBW Advanced Microbiome Analysis workshop by Ben Fisher</a>.</p>
+<p>Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)</p>
+<div id="table-of-contents" class="section level2 hasAnchor">
+<h2>Table of Contents<a href="module-2-metagenomic-assembly-and-binning.html#table-of-contents" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="module-2-metagenomic-assembly-and-binning.html#introduction">Introduction</a><br />
+<a href="#id_21-initial-setup">2.1 Initial setup</a><br />
+<a href="#id_22-assembly-of-raw-reads-with-megahit">2.2 Assembly of raw reads with MEGAHIT</a><br />
+<a href="#id_23-make-an-anvio-contigs-databases">2.3 Make an Anvi’o contigs databases</a><br />
+<a href="#id_24-run-hmms-to-identify-single-copy-genes">2.4 Run HMMs to identify genes</a><br />
+<a href="#id_25-map-samples-onto-contigs-with-bowtie2">2.5 Map samples onto contigs with Bowtie2</a><br />
+<a href="#id_26-cluster-contigs-into-bins">2.6 Cluster contigs into bins</a><br />
+<a href="#id_27-interactive-refinement-of-bins">2.7 Interactive refinement of bins</a><br />
+<a href="#id_28-export-the-final-bins-into-mags">2.8 Export the final bins into MAGs</a><br />
+<a href="#id_29-run-checkm">2.9 Run CheckM</a><br />
+<a href="module-2-metagenomic-assembly-and-binning.html#other-things-that-we-frequently-do-with-mags">Other things that we do with MAGs</a><br />
+<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#answers">Answers</a></p>
+</div>
+<div id="introduction" class="section level2 hasAnchor">
+<h2>Introduction<a href="module-2-metagenomic-assembly-and-binning.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main goal of this tutorial is to introduce students to the assembly of genomes from metagenomic reads (Metagenome Assembled Genomes/MAGs). There is not a one-size-fits-all pipeline for assembling MAGs. MAG assembly is incredibly computationally intensive, and the approach that we are taking here is therefore a very “bare bones” approach designed to demonstrate the main steps involved and give you some familiarity with the methods used. At the end of this tutorial we’ve provided a few other pipelines for MAG assembly that you may wish to look into if you are looking to assemble MAGs with your own metagenome data.</p>
+<p>Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You’ll find the answers at the bottom of this page, but no one will be marking them.</p>
+<div id="anvio" class="section level3 hasAnchor">
+<h3>Anvi’o<a href="module-2-metagenomic-assembly-and-binning.html#anvio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Anvi’o is an open-source, community-driven analysis and visualization platform for microbial ’omics. It packages together many different tools used for genomics, metagenomics, metatranscriptomics, phylogenomics, etc. and has great interactive visualisations that can be used to help this. We are just touching the surface of what Anvi’o can do today, but the website has great tutorials and learning resources for all of its capabilities - I recommend browsing through to get some inspiration!</p>
+</div>
+</div>
+<div id="initial-setup" class="section level2 hasAnchor">
+<h2>2.1 Initial setup<a href="module-2-metagenomic-assembly-and-binning.html#initial-setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First of all, we need to create the directory that we’ll be working from and change into it:</p>
+<pre><code>cd ~/workspace/
+mkdir amb_module2
+cd amb_module2</code></pre>
+<p>Then we’ll create a symlink to the data that we’re going to be using, and copy in the sample names and metadata:</p>
+<pre><code>ln -s ~/CourseData/MIC_data/AMB_data/reads_for_assembly/ .
+ln -s ~/CourseData/MIC_data/AMB_data/fastqs_for_assembly .
+cp ~/CourseData/MIC_data/AMB_data/sample_ids.txt .
+ls</code></pre>
+<p>Finally, we’ll activate the conda environment that we’re going to be using:</p>
+<pre><code>mamba activate anvio-8
+anvi-interactive --version</code></pre>
+<div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
+<p><strong>⚠️ NOTE: This lab has several steps that are quite time consuming and resource intensive!!!</strong>
+We have included the commands for your knowledge, but they is will commented out and alternative linking or copying commands will be provided. Read carefully and copy-paste only after you understand what the step you are performing should be doing.</p>
+</div>
+</div>
+<div id="assembly-of-raw-reads-with-megahit" class="section level2 hasAnchor">
+<h2>2.2 Assembly of raw reads with MEGAHIT<a href="module-2-metagenomic-assembly-and-binning.html#assembly-of-raw-reads-with-megahit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first step in the assembly of MAGs is the assembly of the shorter reads from sequencing into contigs. A contig is a contiguous sequence assembled from a set of sequence fragments, and there are different bioinformatic methods for assembling our reads into contigs. For this part of the tutorial, we are continuing to use reads from the same samples that we used for taxonomic annotation, but we have sub-sampled these to contain reads from only a few species, to ensure that we have the read depth required for MAG assembly while keeping the files small enough to be able to run on these small AWS instances. These are all still short reads of approximately 150 base pairs each.</p>
+<p>We are using a tool called <code>MEGAHIT</code> for this assembly because it allows co-assembly of the reads from multiple samples. This means that rather than the assembly being performed separately for each sample, it is performed on all of the reads from all of the samples at the same time. In this tutorial, we will co-assemble all of the samples together, but in your own analyses you should think about what makes the most sense. Are you expecting microbial taxa to overlap between different samples? Would it make sense to find similar genomes in multiple samples? If you answered “yes” to those questions, then it might be worth thinking about co-assembly. If not, then it is probably worth assembling each sample separately. You may also want to consider assembling the samples from different treatments separately.</p>
+<p>Prior to assembling your samples you would usually run quality checks and remove potentially contaminating sequences, but seeing as we already did that during the Taxonomic annotation tutorial, we don’t need to repeat this step here.</p>
+<p>First, we’ll make a directory for the output to go into:</p>
+<pre><code>mkdir anvio</code></pre>
+<p>Now we’ll run <code>MEGAHIT</code> on our samples. You may already know about a program called tmux (and if you were in the beginner workshop then you definitely should), but it’s really useful for running programs that may take a while, or just keeping track of where you are. There are several tools that are pre-installed on most Linux systems that we can use to make sure that our program carries on running even if we get disconnected from the server. <code>tmux</code> is one of the most frequently used. To activate it, just type in <code>tmux</code> and press enter. It should take a second to start up, and then load up with a similar looking command prompt to previously, but with a coloured bar at the bottom of the screen.</p>
+<pre><code>tmux</code></pre>
+<p>To get out of this window again, press <code>ctrl</code>+<code>b</code> at the same time, and then <code>d</code>. You should see your original command prompt and something like:</p>
+<pre><code>[detached (from session 0)]</code></pre>
+<p>We can actually use <code>tmux</code> to have multiple sessions, so to see a list of the active sessions, use:</p>
+<pre><code>tmux ls</code></pre>
+<p>We can rename the <code>tmux</code> session that we just created with this:</p>
+<pre><code>tmux rename-session -t 0 anvio</code></pre>
+<p>Note that we know it was session <code>0</code> because it said that we detached from session <code>0</code> when we exited it.</p>
+<p>If we want to re-enter this window, we use:</p>
+<pre><code>tmux attach-session -t anvio</code></pre>
+<p>Now, we can run <code>MEGAHIT</code> inside this <code>tmux</code> session, but we will need to activate the conda environment again inside here:</p>
+<pre><code>mamba activate anvio-8</code></pre>
+<div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
+<p><strong>⚠️ NOTE: I commented out the below because you DON’T want to run it today, keep reading below!</strong></p>
+</div>
+<p>Run <code>MEGAHIT</code>:</p>
+<pre><code>#SE=$( ls reads_for_assembly/*.fastq.gz | tr &#39;\n&#39; &#39;,&#39; | sed &#39;s/,$//&#39; )
+#megahit -r ${SE} \
+#         --min-contig-len 1000 \
+#         --num-cpu-threads 4 \
+#         --presets meta-large \
+#         --memory 0.8 \
+#         -o anvio/megahit_out \
+#        --verbose</code></pre>
+<p>The arguments here are:</p>
+<ul>
+<li><code>-r</code> - The single-end reads</li>
+<li><code>--min-contig-len</code> - The minimum length in base pairs for contigs that we want to use. NOTE: 1000 is about the minimum length that you will ever want to use, but sometimes people might increase this to e.g. 2500 or 5000</li>
+<li><code>--num-cpu-threads</code> - The number of threads to use</li>
+<li><code>--presets</code> - This is for a set of parameters needed within <code>MEGAHIT</code>, and meta-large is suggested for large and complex metagenomes</li>
+<li><code>--memory</code> - The amount of available memory that we want to allow <code>MEGAHIT</code> to use - this means it will use up to 80% of the memory available. Keeping this below 100% just means that we would still be able to use the Amazon instance for other things, and could be important if you’re sharing a server with other people that might also need to be carrying out some work!</li>
+<li><code>-o</code> - The output folder name</li>
+<li><code>--verbose</code> - <code>MEGAHIT</code> will print out what it is doing</li>
+</ul>
+<p><code>MEGAHIT</code> can take quite a long time to run, so it’s up to you if you want to wait for it to run. If not, press <code>ctrl</code>+<code>c</code> to stop the run and you can copy across the output that we already ran:</p>
+<pre><code>mkdir -p anvio/megahit_out
+cp ~/CourseData/MIC_data/AMB_data/final.contigs.fa anvio/megahit_out/</code></pre>
+<p>If you ran it yourself, a step that we’ll often do is removing the intermediate contigs to save space:</p>
+<pre><code>rm -r anvio/megahit_out/*/intermediate_contigs</code></pre>
+<p>The main output at this point is a fasta file containing the contigs <code>anvio/megahit_out/final.contigs.fa</code>. You can inspect the file with the less command if you like (remember to press <code>q</code> to exit this view).</p>
+<p>Let’s take a look at some basic stats for the assembly using a software tool called <code>seqkit</code>, but we’ll add a little code after it so it’s terminal friendly to view:</p>
+<pre><code>seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F&#39;\t&#39; &#39;NR==1 { for (i=1; i&lt;=NF; i++) keys[i]=$i; next } { for (i=1; i&lt;=NF; i++) printf &quot;%-12s %s\n&quot;, keys[i], $i }&#39;</code></pre>
+<p><strong>Question 1</strong>: How many contigs are there in the <code>anvio/megahit_out/final.contigs.fa</code> file?</p>
+<p><strong>Question 2</strong>: What is the total number of basepairs?</p>
+<p><strong>Question 3</strong>: What is the N50?</p>
+</div>
+<div id="make-an-anvio-contigs-databases" class="section level2 hasAnchor">
+<h2>2.3 Make an Anvi’o contigs databases<a href="module-2-metagenomic-assembly-and-binning.html#make-an-anvio-contigs-databases" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First of all, we’ll run a script to reformat our final contigs file from <code>MEGAHIT</code>. This ensures that they’re in the right format for reading into <code>Anvi'o</code> in the next step:</p>
+<pre><code>anvi-script-reformat-fasta anvio/megahit_out/final.contigs.fa \
+                               --simplify-names \
+                               --min-len 2500 \
+                               -o anvio/megahit_out/final.contigs.fixed.fa</code></pre>
+<p>Take a quick look at both <code>anvio/megahit_out/final.contigs.fa</code> and <code>anvio/megahit_out/final.contigs.fixed.fa</code> using the less or head commands to see what was changed! You can read more about the <code>anvi-script-reformat-fasta</code> command on this page. You should be able to see that we’re giving this command a few options (aside from obviously giving it the <code>final.contigs.fa</code> file from the previous step:</p>
+<ul>
+<li><code>--simplify-names</code> - this is simply telling the program to simplify the names of the contigs in the file - you should have seen that in the original <code>anvio/megahit_out/final.contigs.fa</code> file, they had a description as well as a name, and this included information that <code>Anvi'o</code> doesn’t need and may confuse it.</li>
+<li><code>--min-len</code> - although we already used a minimum contig length of 1000 in the previous step, we’re further filtering here to ensure that we include only the best contigs, as well as reducing the computational time for the next steps.</li>
+<li><code>-o</code> - the name of the output file.
+Now that we’ve prepared the file, we can read this into <code>Anvi'o</code>:</li>
+</ul>
+<pre><code>mkdir anvio/anvio_databases
+anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \
+                              -o anvio/anvio_databases/CONTIGS.db \
+                              -n CHKN -T 4</code></pre>
+<p>You can read more about what <code>anvi-gen-contigs-database</code> is doing here, but the key parts of this are:</p>
+<ul>
+<li><code>-f</code> - the input file of fixed contigs</li>
+<li><code>-o</code> - what the output should be saved as</li>
+<li><code>-n</code> - the name we’re giving this contigs database</li>
+</ul>
+<p>Throughout the next steps, we’re going to be adding information to this contigs database.</p>
+</div>
+<div id="run-hmms-to-identify-single-copy-genes" class="section level2 hasAnchor">
+<h2>2.4 Run HMMs to identify single copy genes<a href="module-2-metagenomic-assembly-and-binning.html#run-hmms-to-identify-single-copy-genes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first thing that we’re going to add to the contigs database is information on the genes within the contigs:</p>
+<pre><code>anvi-run-hmms -c anvio/anvio_databases/CONTIGS.db \
+                              --num-threads 4</code></pre>
+<p>Because the only arguments we’ve given this are the contigs database (<code>-c</code>) and the number of threads to use (<code>--num-threads</code>), it will run the default Hidden Markov Models (HMMs) within <code>Anvi'o</code>. You can read more about HMMs in this paper if you’re interested, but in short, they are “statistical models that can be describe the evolution of observable events that depend on internal factors, which are not directly observable”. HMMs are often used in computational biology for predicting the function of a gene or protein; we can build HMMs using multiple sequence alignments of genes or proteins known to carry out the same function, and then we can run these HMMs against our protein (amino acid) or gene (DNA) sequences to find other proteins/genes that are likely to carry out this function. You can read about the default HMMs in <code>Anvi'o</code> here, but they include <code>Bacteria_71</code> (71 single-copy core genes for the bacterial domain), <code>Archaea_76</code> (76 single-copy core genes for the archaeal domain), and <code>Protista_83</code> (83 single-copy core genes for the protists, within the eukaryotic domain).</p>
+<p>If we had our own set of HMMs, or HMMs for specific genes of interest, we could also use these here.</p>
+<p>As an added bonus, we can also infer taxonomy from these SCGs using:</p>
+<pre><code>anvi-run-scg-taxonomy -c anvio/anvio_databases/CONTIGS.db -T 4 -P 4</code></pre>
+<p>This next step exports the sequences for all of the genes that we’ve identified using the HMMs to a file called <code>anvio/anvio_databases/gene_calls.fa</code>:</p>
+<pre><code>anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \
+                              -o anvio/anvio_databases/gene_calls.fa</code></pre>
+<p><strong>Question 4</strong>: How many genes were identified?</p>
+</div>
+<div id="map-samples-onto-contigs-with-bowtie2" class="section level2 hasAnchor">
+<h2>2.5 Map samples onto contigs with Bowtie2<a href="module-2-metagenomic-assembly-and-binning.html#map-samples-onto-contigs-with-bowtie2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The next steps are going to generate abundance profiles of our contigs within the samples - these will help us to bin the contigs together into groups that have similar abundance profiles and are therefore likely to come from the same genome.</p>
+<p>The first step here is to build a <code>bowtie2</code> database/index of our fixed contigs:</p>
+<pre><code>bowtie2-build anvio/megahit_out/final.contigs.fixed.fa \
+                 anvio/megahit_out/final.contigs.fixed</code></pre>
+<p>You can see that here we just have two positional arguments - the file name for the fasta file that we want to use, and the prefix to use for the <code>bowtie2 index</code>. If you look at the files in <code>anvio/megahit_out/</code> now, you should see six files with this prefix and the file extension <code>.bt2</code>. These files are what <code>bowtie2</code> will use in the next steps for mapping the samples to the contigs index.</p>
+<p>For the next step, we’ve already made a file that contains the names of all of the samples that we’ll be using (<code>sample_ids.txt</code>). We can use this to loop through each of the samples using a for loop, performing the same actions on the files for each sample.</p>
+<div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
+<p><strong>⚠️ NOTE: The loop is commented out and replaced with a soft-link.</strong></p>
+</div>
+<pre><code>
+# We add a soft-link here instead of running bowtie because it takes a long time to run :)
+ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio/bam_files
+
+#mkdir anvio/bam_files # because soft-link instead for today
+
+#for SAMPLE in `awk &#39;{print $1}&#39; sample_ids.txt`
+#do
+#    # 1. do the bowtie mapping to get the SAM file:
+#    bowtie2 --threads 4 \
+#            -x anvio/megahit_out/final.contigs.fixed \
+#            -U fastqs_for_assembly/${SAMPLE}.fastq.gz \
+#            --no-unal \
+#            -S anvio/bam_files/${SAMPLE}.sam
+#
+#    # 2. convert the resulting SAM file to a BAM file:
+#    samtools view -F 4 \
+#                  -bS anvio/bam_files/${SAMPLE}.sam \
+#                  &gt; anvio/bam_files/${SAMPLE}-RAW.bam
+#    
+#    # 3. sort and index the BAM file:
+#    anvi-init-bam anvio/bam_files/${SAMPLE}-RAW.bam \
+#                  -o anvio/bam_files/${SAMPLE}.bam
+#    
+#    # 4. remove the intermediate BAM file that is no longer needed:
+#    rm anvio/bam_files/${SAMPLE}-RAW.bam
+#done</code></pre>
+<p>Let’s confirm the soft-link worked from above:</p>
+<pre><code>ls anvio/bam_files
+</code></pre>
+<p>What do you see? There should be some <code>.bam</code> files, among other things.</p>
+<p>Hopefully you either remember about for loops from Beginner Module 4 or you already have some experience with them! Otherwise, I’ll explain them briefly here.</p>
+<p>For loops are an incredibly useful thing that we do in programming - to my knowledge, they exist in every programming language, and they allow us to repeat a section of code many times, with a different input each time. To explain what we are doing above, we can go through this step-by-step. The code is essentially saying that for each of the rows in the sample_ids.txt file, we want to: (1) run <code>bowtie2</code>, (2) convert the output SAM file from <code>bowtie2</code> to a BAM file, (3) sort and index the BAM file, and (4) remove the intermediate BAM file. You can see that we give <code>${SAMPLE}</code> in several places, as these parts will change for each of the sample names.</p>
+<p>In each of the steps within the for loop, we are giving several options:</p>
+<ol style="list-style-type: decimal">
+<li>We are running <code>bowtie2</code> using the contigs index that we created <code>-x</code>, reads for this sample, <code>-U</code>, and the <code>--no-unal</code> options means it won’t output unaligned reads. We’ll then get <code>-S</code> as the output SAM file. SAM (Sequence Alignment MAP) files are used to store information about sequences aligned to a reference and they have 11 mandatory fields corresponding to various metrics about how well the sequence aligns to the reference. You can read more about them here.</li>
+<li><code>samtools</code> is being used to convert the SAM file to a BAM file. You can see that this uses the view module of <code>samtools</code>, which would by default print the output to the terminal, but as we’ve added <code>&gt; anvio/bam_files/${SAMPLE}-RAW.bam</code>, this tells it to save the output to a file. A BAM (Binary Alignment MAP) file is a compressed, binary version of a SAM file (see more here).</li>
+<li>The running of <code>anvi-init-bam</code> is fairly straight-forward, we are just giving it the raw BAM file and it is outputting a sorted, re-indexed version.</li>
+<li>Then we just remove the intermediate BAM file.</li>
+</ol>
+<div id="add-coverage-and-detection-statistics-to-the-anvio-profile" class="section level3 hasAnchor">
+<h3>Add coverage and detection statistics to the <code>Anvi'o</code> profile<a href="module-2-metagenomic-assembly-and-binning.html#add-coverage-and-detection-statistics-to-the-anvio-profile" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that we’ve created information on the coverage and detection of our contigs within our samples (how abundant they are and whether they appear in every sample or not), we can make <code>Anvi'o</code> profiles with this information:</p>
+<div style="background-color: #ffe6e6; padding: 1em; border-left: 4px solid #ff4d4d;">
+<p><strong>⚠️ NOTE: We’re going to copy over the profiles this time, not a soft-link because we need to manipulate them.</strong></p>
+</div>
+<pre><code>mkdir anvio/anvio_databases/profiles
+cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles
+
+# also need to overwrite the CONTIG.DB so they match
+cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db 
+
+#for SAMPLE in `awk &#39;{print $1}&#39; sample_ids.txt`
+#do
+#
+#    anvi-profile -c anvio/anvio_databases/CONTIGS.db \
+#                 -i anvio/bam_files/${SAMPLE}.bam \
+#                 --num-threads 4 \
+#                 -o anvio/anvio_databases/profiles/${SAMPLE}
+#done</code></pre>
+<p>We’re again using a for loop to carry this out on each of our samples. The <code>anvi-profile</code> program quantifies coverage per nucleotide position within the contigs, and averages them per contig. It also calculates single-nucleotide, single-codon, and single-amino acid variants, as well as structural variants such as insertion and deletions and stores these data into appropriate tables.</p>
+</div>
+<div id="merge-sample-profiles" class="section level3 hasAnchor">
+<h3>Merge sample profiles<a href="module-2-metagenomic-assembly-and-binning.html#merge-sample-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The command above created contig profiles for each sample individually, so now we need to merge these profiles into one single profile that we can use for clustering the contigs into bins. We’ll do this with the anvi-merge program:</p>
+<pre><code>anvi-merge -c anvio/anvio_databases/CONTIGS.db \
+           -o anvio/anvio_databases/merged_profiles \
+           anvio/anvio_databases/profiles/*/PROFILE.db</code></pre>
+<p>And then it’s always a good idea to have a look at some basic stats about the contigs before we go further:</p>
+<pre><code>anvi-display-contigs-stats --report-as-text \
+                           --output-file contigs_stats.txt \
+                           anvio/anvio_databases/CONTIGS.db</code></pre>
+<p>If you take a look at the <code>contigs_stats.txt</code> file, you’ll see (you can also see these explanations here:</p>
+<ul>
+<li><code>Total Length</code> - the total number of nucleotides in your contigs</li>
+<li><code>Num Contigs</code> - the number of contigs in your database</li>
+<li><code>Num Contigs &gt; X kb</code> - the number of contigs that are longer than X</li>
+<li><code>Longest Contig</code> - the longest contig in your databases (in nucleotides)</li>
+<li><code>Shortest Contig</code> - the shortest contig in your databases (in nucleotides), hopefully this is longer than the 2500 that we set earlier!</li>
+<li><code>Num Genes (prodigal)</code> - the number of genes that Prodigal predicts are in your contigs</li>
+<li><code>L50, L75, L90</code> - if you ordered the contigs in your database from longest to shortest, these stats describe the number of contigs you would need to go through before you had looked at a certain percent of a genome. For example, L50 describes the number of contigs you would have to go through before you reached 50 percent of the entire dataset</li>
+<li><code>N50, N75, N90</code> - if you ordered the contigs in your database from longest to shortest, these stats describe the length of the contig you would be looking when you had looked at a certain percent of a genome. For example, N50 describes the length of contig you would be on when you reached 50 percent of the entire genome length</li>
+<li>The number of HMM hits in your database</li>
+<li>The number of genomes that Anvi’o predicts are in your samples, based on how many hits the single-copy core genes got in your database</li>
+</ul>
+<p>As long as we’re satisfied with all of this, then we can carry on to the clustering.</p>
+<p><strong>Question 5</strong>: How many contigs are there? Is this the same as what we started with? Why or why not?
+<strong>Question 6</strong>: What are the longest and shortest contigs? What do you think of this?</p>
+</div>
+</div>
+<div id="cluster-contigs-into-bins" class="section level2 hasAnchor">
+<h2>2.6 Cluster contigs into bins<a href="module-2-metagenomic-assembly-and-binning.html#cluster-contigs-into-bins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next we will bin - or cluster - the contigs to create genome “bins”, or MAGs. To do this, we typically use information on the coverage, or abundance, of contigs within samples (that we generated in step two) and the binning algorithms will usually identify patterns in nucleotide composition or k-mer frequencies in order to group together contigs that they think are likely to have originated from the same genome. We are using <code>CONCOCT</code> for this, but as with every step of this pipeline, there are multiple tools that are capable of carrying this out and may be better or worse in different circumstances. Drivers of choice include: <code>CONCOCT</code>, <code>MAXBIN2</code>, and <code>METABAT2</code>, but be mindful that each driver may have different flags that need to be set so the command below may vary.</p>
+<p>Now we’ll run the clustering:</p>
+<pre><code>DRIVER=CONCOCT # or MAXBIN2 or METABAT2
+anvi-cluster-contigs -c anvio/anvio_databases/CONTIGS.db \
+                         -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+                         -C &quot;merged_${DRIVER}_2500&quot; \
+                         --driver ${DRIVER} \
+                         --length-threshold 2500 \
+                         --num-threads 4 \
+                         --just-do-it</code></pre>
+<p>Here you can see that we’re giving a few options:</p>
+<ul>
+<li><code>-c</code> - the contigs database</li>
+<li><code>-p</code> - the profile database</li>
+<li><code>-C</code> - the name for the resulting collection of bins to be given</li>
+<li><code>--driver</code> - the clustering algorithm to be used. We could also have used metabat2, maxbin2, dastool, or binsanity. If you’re running this pipeline on your own data then you will probably want to think about which of these algorithms you should use; dastool has the advantage that it can take the input of multiple binning algorithms to calculate an optimised set of bins. It’s also worth noting that no binning algorithm is perfect, and you will likely need to check the bins and refine them manually after any of these are run</li>
+<li><code>--num-threads</code> - the number of threads to use</li>
+<li><code>--just-do-it</code> - ignore any warnings (like <code>CONCOCT</code> being implemented experimentally into Anvi’o) and just run it anyway</li>
+</ul>
+<p>Next, we’ll summarise the bins that <code>CONCOCT</code> has given us:</p>
+<pre><code>mkdir anvio/${DRIVER}_summary_2500
+anvi-summarize -c anvio/anvio_databases/CONTIGS.db \
+                   -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+                   -C &quot;merged_${DRIVER}_2500&quot; \
+                   -o anvio/${DRIVER}_summary_2500/summary/</code></pre>
+<p>We can also now use the previously annotated contigs to infer taxonomy based on the SCGs from section 2.5:</p>
+<pre><code>anvi-estimate-scg-taxonomy -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+                           -c anvio/anvio_databases/CONTIGS.db \
+                           -C merged_${DRIVER}_2500 \
+                           -o anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt \
+                           --simplify-taxonomy-information --compute-scg-coverages</code></pre>
+<p>And we’ll take a look at the bin summaries in the terminal quickly just to check that everything looks OK:</p>
+<pre><code>less -S anvio/${DRIVER}_summary_2500/summary/bins_summary.txt
+less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/abundance.txt
+less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/mean_coverage.txt
+less -S anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt</code></pre>
+<p>Notice we used the <code>-S</code> flag for less which chops long lines, making big tables easier to view.
+Remember that you can exit the less view by pressing <code>q</code>!</p>
+<p>We can also look at this in a more interactive way in our workspace: <code>http://##.uhn-hpc.ca/</code> (remember to replace the <code>##</code> with your number!) Go to <code>amb_module2/anvio/CONCOCT_summary_2500/</code>. Right click on <code>summary</code> &gt; open in new tab. You can scroll through and explore what this says about our bins so far, and then go back to the other tab with <code>amb_module2/anvio/CONCOCT_summary_2500/</code>. Add <code>/summary/bins_summary.txt</code> to the URL bar and copy and paste the resulting page into a new Excel (or whatever you usually use for viewing spreadsheets) document - it will be useful to refer back to. If you’re in Excel, you can easily get this into columns by going to the “Data” tab &gt; click on “Text to columns” &gt; check “Delimited” &gt; Next &gt; Check “Space” &gt; Finish.</p>
+<p>Looking through the bins (the rows), you should see that there are a number of columns giving some stats on each of the bins (clusters of contigs), including:</p>
+<ul>
+<li><code>total_length</code> - the total number of nucleotides in this bin</li>
+<li><code>num_contigs</code> - the total number of contigs in this bin</li>
+<li><code>N50</code> - N50 is a metric widely used to assess the contiguity of an assembly, and it is defined as the sequence length of the shortest contig that covers at least 50% of the total assembly length</li>
+<li><code>GC_content</code> - GC content (%) is the percentage of bases in the contigs that make up this bin that are either guanine (G) or cytosine (C)</li>
+<li><code>percent_completion</code> and <code>percent_redundancy</code> - <code>completeness</code> and <code>redundancy</code> (also called contamination by some tools) are both important when we’re assessing the quality of the MAGs that we’ve assembled. Both scores are calculated based on the presence of the ubiquitous, single-copy marker genes - ones that all bacteria are known to possess - and the completion is a prediction of how complete the genome is likely to be, so whether it possesses a copy of all of the marker genes that are expected. The contamination/redundancy is a measure of whether those marker genes that are expected to be present in only a single copy are duplicated. Typically speaking, a MAG that has &gt;50% completeness and &lt;10% redundancy/contamination is considered to be reasonable, although &gt;90% completeness is desirable. There is a good explanation on completeness and redundancy here.
+You’ll see that we have quite a lot of bins that are 0% completion (also 0% redundancy), and typically these are made up of a single contig. Now, we’ll just be focusing on the bins that have completion &gt;50% and we’ll be trying to refine them so that their redundancy is &lt;10%.</li>
+</ul>
+<p>BONUS: Try running the <code>MAXBIN2</code> and <code>METABAT2</code> drivers through this process then compare all the bins from all the methods and see what you get!</p>
+<p><strong>Question 7</strong>: How many bins are there?
+<strong>Question 8</strong>: How many bins &gt;50% completion are there?
+<strong>Question 9</strong>: What is the redundancy in these bins?</p>
+</div>
+<div id="interactive-refinement-of-bins" class="section level2 hasAnchor">
+<h2>2.7 Interactive refinement of bins<a href="module-2-metagenomic-assembly-and-binning.html#interactive-refinement-of-bins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we’re going to be doing the interactive refinement, and first of all we’ll have a look at the bin that’s <code>100%</code> complete and <code>&lt;10%</code> redundant - for me, this is called <code>Bin_13</code>, but this naming is NOT consistent, so if that’s a different bin for you then don’t worry! Additionally, be sure you are using the correct <code>${DRIVER}</code> variable for the bin you’re trying to view below, for me it is <code>CONCOCT</code>.</p>
+<p>To do this, we’ll run the <code>Anvi'o</code> <code>anvi-refine</code> command:</p>
+<pre><code>DRIVER=CONCOCT
+anvi-refine -c anvio/anvio_databases/CONTIGS.db \
+            -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+            -C &quot;merged_${DRIVER}_2500&quot; \
+            -b Bin_13 \
+            --server-only \
+            -P 8081</code></pre>
+<p>You’ll see that we’re telling <code>Anvi'o</code> the contigs database, profile and collection name, as well as the name of the bin we want to look at and:</p>
+<pre><code>--server-only
+-P 8081</code></pre>
+<p>Both of these parts are to do with <code>Anvi'o</code> being run on the Amazon instances rather than on our local computers. The <code>--server-only</code> part is telling it that we will want to create an SSH tunnel to the server, and then the -P port is telling it which port to use. This could be one of many ports, just like we are using port <code>8080</code> for accessing <code>RStudio</code>.</p>
+<p>Now the instructions are different depending on whether we’re on Mac/Linux or Windows.</p>
+<div id="mac" class="section level4 hasAnchor">
+<h4>Mac<a href="module-2-metagenomic-assembly-and-binning.html#mac" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Open a second terminal window or tab and run:</p>
+<pre><code>ssh -L 8081:localhost:8081 -i BMB.pem ubuntu@##.uhn-hpc.ca</code></pre>
+<p>Where <code>##</code> is your number. It should just look like you logged into the server in a new window. Now go to <code>http://localhost:8081/</code> in your browser. This should have an <code>Anvi'o</code> page loaded up.</p>
+</div>
+<div id="windows" class="section level4 hasAnchor">
+<h4>Windows<a href="module-2-metagenomic-assembly-and-binning.html#windows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Open a new Putty window.</p>
+<p>Click on “Session” and under “Saved Sessions”, click on the “Amazon node” and then click “Load”.</p>
+<p>Now go to “Connection” &gt; “SSH” &gt; “Tunnels”. In “Source port” type in <code>8081</code>. In “Destination” type in <code>90.uhn-hpc.ca:8081</code>.</p>
+<p>Click “Add” and then click “Open”. You should see a new Putty window open. Now go to <code>http://localhost:8081/</code> in your browser. This should have an <code>Anvi'o</code> page loaded up.</p>
+</div>
+<div id="back-to-both" class="section level4 hasAnchor">
+<h4>Back to both<a href="module-2-metagenomic-assembly-and-binning.html#back-to-both" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>Anvi'o</code> opens in the <code>main</code> tab (look at the top left).</p>
+<p>Now press the “Draw” button. You should see something that looks like a phylogenetic tree get drawn. Each branch of this is for one of the contigs that makes up the bin, and you can see information about their abundance in different samples in the rings.</p>
+<p>Because there are so many samples (the track lines around the center tree), the tree in the middle is quite small. You can fix this by setting the radius to be larger for the tree. To do this find the <code>Show Additional Settings</code> button under the <code>Display</code> section (right under the top tabs). If you <code>click</code> that button it will open a menu of more advanced settings. The <code>Dendrogram</code> section is where you can modify certain aspects of the center tree. Setting the <code>Radius</code> so a larger number will expand the tree size and make it easier to view and manipulate. Try setting this value to <code>8000</code> and then click <code>Draw</code> again. Notice how the visual changes.</p>
+<p>Now click on the “Bins” tab.</p>
+<p>If we select the whole tree (click on it), we can see that this is <code>100%</code> complete and <code>5.63%</code> redundant. If we un-select (right click) some of the tree branches, this makes the completion and the length of the genome go down slightly, but it doesn’t affect the redundancy.</p>
+<p>Now that we’ve seen how this looks for a bin with <code>100%</code> completion and <code>5.63%</code> redundancy, we can leave this and try another.</p>
+<p>Go back to the first Terminal window (where we ran <code>anvi-refine</code>) and press <code>ctrl</code>+<code>c</code> to stop.</p>
+<p>Now run this with another bin. I want to find one that has higher <code>redundancy</code> but is also the same taxa as the previous bin, so I review my tables again and find that in there is a bin in the <code>MAXBIN2</code> set that is <code>97.18%</code> completion and <code>30.98%</code> redundancy, bin <code>MAXBIN__002</code> for me but yours will vary.</p>
+<pre><code>DRIVER=MAXBIN2
+anvi-refine -c anvio/anvio_databases/CONTIGS.db \
+            -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+            -C &quot;merged_${DRIVER}_2500&quot; \
+            -b MAXBIN__002 \
+            --server-only \
+            -P 8081</code></pre>
+<p>Refresh your <code>Anvi'o</code> browser window and you should see a different page now.</p>
+<p>Again, click “Draw” and then go to the “Bins” tab. We ideally want to get the redundancy below 10% while keeping the completion above 50%.</p>
+<p>Start by selecting the whole tree, and then begin by deselecting (right clicking) branches that appear to have a different abundance profile than others. For example, there is one that seems to only be present in sample <code>CSM7K0MH</code> - deselecting this one only reduces the completion a little (to <code>56.3%</code>), but reduces the redundancy to <code>15.5%</code>.</p>
+<p>You can deselect large areas to determine whether they’ll have an impact on the redundancy, and then go through in more detail and deselect/reselect individual parts of this. Make sure you use the zoom +/- and zoom in and out to see the tree in more detail, as well as checking the abundance/GC content profiles of the parts that you’ve deselected.</p>
+<p>Sometimes you might want to add another bin to keep some of the contigs that you don’t think belong in the first one (this particularly might be the case if you had really high completion initially).</p>
+<p>When you are happy with what you’ve selected, click on “Store refined bins in the database”. You can now go back to the first console window and press ctrl+c.</p>
+<p>The other two bins that are &gt;50% completion are already &lt;10% redundancy, so it’s not necessary to do anything to these, but you can have a look at them in the same way as we did with these two if you like.</p>
+</div>
+</div>
+<div id="export-the-final-bins-into-mags" class="section level2 hasAnchor">
+<h2>2.8 Export the final bins into MAGs<a href="module-2-metagenomic-assembly-and-binning.html#export-the-final-bins-into-mags" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that we’ve refined our bins into MAGs for our specified <code>driver</code>, we can rename them:</p>
+<pre><code>DRIVER=MAXBIN2
+anvi-rename-bins -c anvio/anvio_databases/CONTIGS.db \
+                     -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+                     --collection-to-read merged_${DRIVER}_2500 \
+                     --collection-to-write FINAL_${DRIVER} \
+                     --call-MAGs \
+                     --min-completion-for-MAG 50 \
+                     --max-redundancy-for-MAG 10 \
+                     --prefix CHKN \
+                     --report-file ${DRIVER}_renaming_bins.txt</code></pre>
+<p>You can see that here we’re defining a new collection called <code>FINAL_${DRIVER}</code> (<code>MAXBIN2</code> for me), and we’re saying that to rename these bins as MAGs, they should be &gt;50% completion and &lt;10% redundancy. You can look at the file that’s created with the renamed bins if you like, to check that this did what you expected: <code>${DRIVER}_renaming_bins.txt</code>.</p>
+<p>Now we’ll summarise this new collection that we’ve made:</p>
+<pre><code>anvi-summarize -c anvio/anvio_databases/CONTIGS.db \
+                   -p anvio/anvio_databases/merged_profiles/PROFILE.db \
+                   -C &quot;FINAL_${DRIVER}&quot; \
+                   -o anvio/FINAL_${DRIVER}_summary/</code></pre>
+<p>And we can have a look at the bins that we’ve created. Take a look at the <code>FASTA</code> files for each bin in the folder <code>anvio/FINAL_${DRIVER}_summary/bin_by_bin/</code> using the ls command. You should see that some of these are called <em>MAG</em> while some are called <em>Bin</em> - this is because in the command above, we’re only calling things a MAG if they’re &gt;50% completion and &lt;10% redundancy.</p>
+<pre><code>ls anvio/FINAL_${DRIVER}_summary/bin_by_bin/*/*.fa</code></pre>
+<p>Have a look at the summary file <code>anvio/FINAL_${DRIVER}_summary/bins_summary.txt</code>. You can see that most of them are the same as before, but the refined <code>MAG</code> is now present in place of the original <code>bin</code>.</p>
+<p>Now have a look in one of those MAG folders (<code>anvio/FINAL_summary/bin_by_bin/</code>) - you’ll see a lot of statistics, as well as a <code>*-contigs.fa</code>. This is a fasta file of the contigs used for each MAG, and we can use it as their genome for further analyses.</p>
+<p>Now we’ll create a copy of these in a new folder:</p>
+<pre><code>mkdir MAG_fasta
+cp anvio/FINAL_*_summary/bin_by_bin/*/*contigs.fa MAG_fasta/
+ls MAG_fasta/</code></pre>
+<p>You can also move all the bins/MAGs for all drivers if you would like to use them for downstream analysis!!!</p>
+<p>Now that we have our refined MAGs, we can do anything that we like with them!</p>
+</div>
+<div id="run-checkm2" class="section level2 hasAnchor">
+<h2>2.9 Run CheckM2<a href="module-2-metagenomic-assembly-and-binning.html#run-checkm2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next, we’re going to run <code>checkm2</code>. <code>checkm2</code> can give us information on the quality of genomes.</p>
+<p>First, we’ll activate the conda environment:</p>
+<pre><code>mamba activate checkm2</code></pre>
+<p>Now we’ll use the <code>predict</code> submodule of <code>checkm2</code>. This will take a little while to run, so you could do it in a <code>tmux</code> session if you like:</p>
+<pre><code>checkm2 predict -i MAG_fasta/ --output_directory MAGs_checkm2_output --allmodels -x .fa -t 4 --remove_intermediates</code></pre>
+<p>Using these models, <code>checkm2</code> predicts completeness and contamination scores, and assigns a taxonomic domain where possible. The results are saved in a summary file called <code>quality_report.tsv</code> inside the specified output directory, <code>MAGs_checkm2_output/</code>. This report includes genome names along with quality metrics such as <code>completeness</code>, <code>contamination (redundancy)</code>, <code>N50</code>, <code>genome size</code>, <code>GC content</code>, and <code>number of contigs</code>. By specifying <code>--remove_intermediates</code>, the pipeline deletes temporary processing files after prediction to reduce disk usage. The <code>-t 4</code> flag ensures the analysis runs using four CPU threads, speeding up processing for multiple genomes. This approach provides a fast, scalable, and model-driven alternative to traditional marker gene-based quality checks.</p>
+<p>In this command, we’re telling <code>checkm2</code> to run it’s predict quality assessment submodule on all of the <code>.fa</code> files within the <code>MAG_fasta</code> folder. It begins by scanning the <code>MAG_fasta/</code> directory for input files with the <code>.fa</code> extension, each representing a MAG. For each genome, <code>checkm2</code> extracts features such as<code>GC content</code> and <code>k-mer composition</code>, which are then passed into a set of pre-trained deep learning models. These models—general-purpose, bacteria-specific, and archaea-specific — are all applied, and the best-performing model is selected for each MAG.</p>
+<p>Once it’s finished running, you can take a look at the output from it, <code>MAGs_checkm2_output/qualtity_report.tsv</code> (either with <code>less -S</code> or in the file viewer).</p>
+<p><strong>NOTE: This is an estimate! Not a fact! Compare this to the purity and redundancy values from <code>Anvi'o</code>. There are many ways to assess your MAGs, you need to understand which are best for your purpose.</strong></p>
+<p><strong>Question 10</strong>: What are the purity, redundancy, completeness, and contamination of your favorite MAG from today?</p>
+</div>
+<div id="other-things-that-we-frequently-do-with-mags" class="section level2 hasAnchor">
+<h2>Other things that we frequently do with MAGs<a href="module-2-metagenomic-assembly-and-binning.html#other-things-that-we-frequently-do-with-mags" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While I hope that you now have a reasonable idea of the steps that go into assembling MAGs, how to assess their quality, and some of the ways in which we might annotate their functions, this has really only scratched the surface of what they might be used for.</p>
+<p>If you still have time in the workshop and want to have a look, I’ve added some papers that I think are nice uses of MAGs as well as some other things that can be done with MAGs that you might want to explore.</p>
+<div id="papers" class="section level4 hasAnchor">
+<h4>Papers:<a href="module-2-metagenomic-assembly-and-binning.html#papers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><a href="https://www.biorxiv.org/content/10.1101/2024.02.06.579087v1">Bacterial ecology and evolution converge on seasonal and decadal scales</a></p>
+<p><a href="https://www.nature.com/articles/s41564-018-0176-9">Nitrogen-fixing populations of Planctomycetes and Proteobacteria are abundant in surface ocean metagenomes</a></p>
+<p><a href="https://www.nature.com/articles/s41564-017-0012-7">Recovery of nearly 8,000 metagenome-assembled genomes substantially expands the tree of life</a></p>
+<p><a href="https://www.nature.com/articles/s41587-020-0718-6">A genomic catalog of Earth’s microbiomes</a></p>
+</div>
+<div id="other-tools" class="section level4 hasAnchor">
+<h4>Other tools:<a href="module-2-metagenomic-assembly-and-binning.html#other-tools" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><a href="https://github.com/Ecogenomics/GTDBTk">GTDB-toolkit</a> - this can be used for assigning taxonomy to MAGs and has a much larger reference database than CheckM, which is designed for generating quality metrics of MAGs</p>
+<p><a href="https://anvio.org/learn/">Other Anvi’o workflows and tutorials</a></p>
+<p><a href="https://anvio.org/help/main/">Programs available within Anvi’o</a></p>
+<p><a href="http://kegg.jp/ghostkoala/">BlastKOALA and GhostKOALA</a></p>
+<p><a href="https://www.pathogenomics.sfu.ca/islandviewer">IslandViewer</a></p>
+<p><a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01213-8">METABOLIC</a></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-3-lab-assigning-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/bioinformaticsdotca/AMB_2025/blob/main/030-module-2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

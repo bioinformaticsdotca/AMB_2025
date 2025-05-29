@@ -12,24 +12,6 @@ The goal of this tutorial is to familiarise students with processes by which we 
 
 Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You'll find the answers at the bottom of this page, but no one will be marking them. *You may wish to keep them open in another tab*. 
 
-## Table of Contents
-
-* [1. Initial setup and pre-processing of metagenomic reads](#1-initial-setup-and-pre-processing-of-metagenomic-reads)
-  * [Working on the Command line](#working-on-the-command-line)
-  * [A Crash Course in GNU Parallel](#a-crash-course-in-gnu-parallel)
-  * [Visualization with FastQC](#visualization-with-fastqc)
-  * [Filtering with Kneaddata](#filtering-with-kneaddata)
-* [2. Generating Taxonomic Profiles](#2-generating-taxonomic-profiles)
-  * [Annotation with Kraken2/Bracken](#annotation-with-kraken2bracken)
-  * [Annotation with MetaPhlAn](#annotation-with-metaphlan)
-* [3. Visualisation of results in R](#3-visualisation-of-results-in-R)
-  * [Create the R Notebook](#create-the-R-notebook)
-  * [Setup, importing and formatting data](#Setup-Importing-and-Formatting-Data)
-  * [Filtering and rarefying](#Filtering-and-rarefying)
-  * [Alpha and beta diversity analyses](#Alpha-and-beta-diversity-analyses)
-  * [Repeating this with the MetaPhlAn 3 output](#Now-lets-do-the-same-with-the-MetaPhlAn3-output)
-  * [Combine Kraken and MetaPhlAn output](#Combine-Kraken-and-MetaPhlAn-output)
-
 ## 1. Initial setup and pre-processing of metagenomic reads
 
 ### Log into your instance
@@ -157,7 +139,16 @@ We don't have paired-end data here, but if we did, it would also:
 * Check whether both pairs of a read exist
 * Check whether they both map to the reference genome
 
-Bowtie2 needs a reference genome/index file for its mapping step. There are some pre-made indexes on [this page](https://benlangmead.github.io/aws-indexes/bowtie). You can now choose to use the database that we have already made (quicker option) or you can see the steps involved in building this for yourself (slower option). 
+Bowtie2 needs a reference genome/index file for its mapping step. There are some pre-made indexes on [this page](https://benlangmead.github.io/aws-indexes/bowtie). 
+
+:::: {.greenbox data-latex=""}
+::: {.center data-latex=""}
+**MAKE A CHOICE!**
+:::
+
+You can now choose to use the database that we have already made (quicker option) or you can see the steps involved in building this for yourself (slower option). 
+
+::::
 
 <details>
   <summary><h4>Quicker option - use pre-made database</h4></summary>
@@ -186,7 +177,14 @@ Now we're going to do the same with PhiX. PhiX is added as a sequencing control 
 - Go to the link that you find
 - Download the `_genomic.fna.gz` file using `wget`
 
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 1**: This one isn't really a question, but you can see the code needed for these steps in the answers section if you need to!
+
+::::
 
 Now we'll combine these two files into one:
 ```
@@ -223,9 +221,15 @@ We'll also run the following to get counts of how many reads we had in each file
 kneaddata_read_count_table --input kneaddata_out --output kneaddata_read_counts.txt
 ```
 
-**Question 2:** Take a look at this file. Are there any surprises? Which of the output files in `kneaddata_out` will you use for analysis?
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
 
+**Question 2:** Take a look at this file. Are there any surprises? Which of the output files in 'kneaddata_out' will you use for analysis?\
 **Question 3:** How many reads are in each sample before and after KneadData?
+
+::::
 
 We'll move the other output files that we're not interested into a new folder:
 ```
@@ -252,7 +256,14 @@ Then we can clean-up by removing the original file:
 rm k2_pluspf_08gb_20250402.tar.gz
 ```
 
-**First, you must create the appropriate output directories, or Kraken2 will not write any files.** Use the ```mkdir``` command to make the directories to match what we're using below. Using `parallel`, we will then run Kraken2 for our concatenated reads.
+:::: {.greenbox data-latex=""}
+::: {.center data-latex=""}
+**NOTE!**
+:::
+
+**First, you must create the appropriate output directories, or Kraken2 will not write any files.** Use the 'mkdir' command to make the directories to match what we're using below. Using 'parallel', we will then run Kraken2 for our concatenated reads.
+
+::::
 
 Note that it's always a good idea to first try out a ```--dry-run``` of parallel before you run any long jobs. If you're satisfied with what it's going to be running, remove the `--dry-run` flag.
 
@@ -423,14 +434,30 @@ Now we can take a look at how many reads have been classified within our samples
 sample_sums(physeq_bracken_genus)
 print(c("Minimum sample size:",min(sample_sums(physeq_bracken_genus)), "Maximum sample size:", max(sample_sums(physeq_bracken_genus))))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 4**: Roughly what proportion of the reads you have in the samples after KneadData have been classified? Is this surprising to you? 
-**Remember that you can look in the `kneaddata_read_counts.txt` file to see how many reads the files all ended up with!**
+**Remember that you can look in the 'kneaddata_read_counts.txt' file to see how many reads the files all ended up with!**
+
+::::
 
 It's also always good to have a look at a rarefaction curve. This tells us about whether we've sequenced our samples sufficiently to capture all of the diversity within them:
 ```
 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,800))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 5**: How do these look to you? If these were your samples, would you be happy with these?
+
+::::
 
 Let's also take a look at the number of reads assigned to each taxon within our samples:
 ```
@@ -452,7 +479,15 @@ Let's take a look at the rarefaction curves again:
 ```
 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,150))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 6**: How do you feel about the samples now?
+
+::::
 
 Next we'll rarefy the samples prior to our diversity calculations - the number of classified reads varies a lot between our different samples!
 ```
@@ -465,7 +500,14 @@ See that the samples are all the same size now:
 sample_sums(rarefied_bracken_genus)
 ```
 
-**Note that we are only going to use this rarefied object for the alpha diversity analyses!**
+:::: {.greenbox data-latex=""}
+::: {.center data-latex=""}
+**NOTE!**
+:::
+
+We are only going to use this rarefied object for the alpha diversity analyses!
+
+::::
 
 ### Alpha and beta diversity analyses
 
@@ -475,7 +517,15 @@ First, we'll look at the alpha diversity:
 ```
 plot_richness(physeq = rarefied_bracken_genus, x="group", color = "group", measures = c("Observed", "Shannon", "Fisher", "Simpson")) + geom_boxplot() +theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 7**: What do you notice about the alpha diversity differences between the samples?
+
+::::
 
 Now we'll convert the non-rarefied phyloseq object to relative abundance:
 ```
@@ -488,7 +538,15 @@ ordination<-ordinate(relabun_bracken_genus, "PCoA", "bray")
 plot_ordination(relabun_bracken_genus, ordination, color = "group") +
   geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 8**: do the samples group how you expected them to based on their alpha diversity?
+
+::::
 
 Next we'll make a bar plot. Plotting all 112 of the taxa on a barplot is a bit useless, so first we'll filter to include only the 20 most abundant genera:
 ```
@@ -496,7 +554,15 @@ relabun_bracken_genus_top<-prune_taxa(names(sort(taxa_sums(relabun_bracken_genus
 
 plot_bar(relabun_bracken_genus_top, fill="ta1") + facet_wrap(c(~group), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 9**: What do you notice about the composition of these samples? What are the samples from the Non-Bacteroides group dominated by?
+
+::::
 
 Often heatmaps are a little easier to look at than a stacked barplot, and it's easier to see differences between samples:
 ```
@@ -509,7 +575,15 @@ That was the plotting inside phyloseq, but sometimes we also want a dendrogram t
 heatmap(otu_table(relabun_bracken_genus_top))
 ```
 Note that this has just clustered our taxa together, and the tree that we see for the genera is not a phylogenetic tree!
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 10**: What can you notice about our samples now? Particularly the taxonomic composition of the Non-Bacteroides samples?
+
+::::
 
 ### Now lets do the same with the MetaPhlAn3 output
 
@@ -590,7 +664,15 @@ ordination<-ordinate(physeq_metaphlan_genus, "PCoA", "bray")
 plot_ordination(physeq_metaphlan_genus, ordination, color = "group") +
   geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 11**: Are these results for alpha and beta diversity as you expect them to be from the Kraken/Bracken results?
+
+::::
 
 We don't have very many taxa in our MetaPhlAn3 output, so we won't bother filtering this before plotting the stacked barplot:
 ```
@@ -607,7 +689,15 @@ And the second one:
 ```
 heatmap(otu_table(physeq_metaphlan_genus))
 ```
+
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 12**: What do you notice here compared with the Kraken/Bracken results?
+
+::::
 
 ### Combine Kraken and MetaPhlAn output
 
@@ -635,7 +725,14 @@ grid.arrange(plot1, plot2, ncol=2)
 ```
 Does this look weird? Click the little button on the right between the code and the plot to "Show in new window". 
 
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 13**: Anything surprising here? What do you notice about the two plots? 
+
+::::
 
 We had included all of the taxa previously, but Bracken has a lot more genera identified than MetaPhlAn. So we'll filter the Bracken output to be a little more similar: 
 ```
@@ -661,7 +758,14 @@ And look at the heatmap:
 heatmap(otu_table(physeq_combined))
 ```
 
+:::: {.bluebox data-latex=""}
+::: {.center data-latex=""}
+**QUESTION!**
+:::
+
 **Question 14**: What differences do you notice between the two classifiers?
+
+::::
 
 
 ## Answers
