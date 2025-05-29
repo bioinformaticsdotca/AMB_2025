@@ -2,6 +2,11 @@
 
 # Module 2: Metagenomic Assembly and Binning
 
+## Lecture
+<iframe src="https://docs.google.com/presentation/d/1r4aJMyt7dbZJwEWgI-Mk8ltf2ECm2BK1/preview" width="640" height="480" allow="autoplay"></iframe>  
+
+## Lab
+
 This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bioinformaticsdotca.github.io/AMB_2025/) (held in Vancouver, BC, May 29-30). It is based on a version written for the [2024 CBW Advanced Microbiome Analysis workshop by Ben Fisher](https://bioinformaticsdotca.github.io/AMB_2024_module1).
 
 Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.5.28)  29 MAY 2025 11:38
-=======
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.20)  29 MAY 2025 10:09
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.20)  29 MAY 2025 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1223,335 +1219,134 @@ Underfull \hbox (badness 4108) in paragraph at lines 1090--1092
 
 ]
 
-<<<<<<< HEAD
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1247--1247
-[]\TU/lmtt/m/n/10 #SE=$( ls reads_for_assembly/*.fastq.gz | tr []\n[] [],[] | s
-ed []s/,$//[] )[] 
- []
-
-[36]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1274--1274
-[]\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/AMB_data/final.contigs.fa anvio/mega
-hit_out/[] 
- []
-
-
-Underfull \hbox (badness 2005) in paragraph at lines 1282--1283
-[]\TU/lmr/m/n/10 The main output at this point is a fasta file containing the c
-ontigs
- []
-
-
-Underfull \hbox (badness 1571) in paragraph at lines 1282--1283
-\TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa\TU/lmr/m/n/10 . You can insp
-ect the file with
- []
-
-
-Overfull \hbox (573.75pt too wide) in paragraph at lines 1288--1288
-[]\TU/lmtt/m/n/10 seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F
-[]\t[] []NR==1 { for (i=1; i<=NF; i++) keys[i]=$i; next } { for (i=1; i<=NF; i+
-+) printf "%-12s %s\n", keys[i], $i }[][] 
- []
-
-
-Overfull \hbox (40.14836pt too wide) in paragraph at lines 1290--1291
-[]\TU/lmr/bx/n/10 Question 1\TU/lmr/m/n/10 : How many contigs are there in the 
-\TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa
- []
-
-
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1305--1305
-[]                               \TU/lmtt/m/n/10 -o anvio/megahit_out/final.con
-tigs.fixed.fa[] 
- []
-
-
-Underfull \hbox (badness 1881) in paragraph at lines 1307--1308
-[]\TU/lmr/m/n/10 Take a quick look at both \TU/lmtt/m/n/10 anvio/megahit_out/fi
-nal.contigs.fa \TU/lmr/m/n/10 and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1307--1308
-\TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fixed.fa \TU/lmr/m/n/10 using t
-he less or head
- []
-
-
-Underfull \hbox (badness 1365) in paragraph at lines 1307--1308
-=======
 [35]
 
 [36]
 Chapter 3.
 
-LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1134.
+LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1138.
 
 
-LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1135.
+LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1139.
 
 
-LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1136.
+LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1140.
 
 
-LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1137.
+LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1141.
 
 
-LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1138.
+LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1142.
 
 
-LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1139.
+LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1143.
 
 
-LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1140.
+LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1144.
 
 
-LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1141.
+LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1145.
 
 
-LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1142.
+LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1146.
 
 
 
 [37
 
 ]
+
+[38]
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-
-[38]
 
 [39]
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1250--1250
+Overfull \hbox (22.5pt too wide) in paragraph at lines 1256--1256
 []\TU/lmtt/m/n/10 #SE=$( ls reads_for_assembly/*.fastq.gz | tr '\n' ',' | sed 's/,$//' )[] 
  []
 
 
 
 [40]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1277--1277
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1283--1283
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/AMB_data/final.contigs.fa anvio/megahit_out/[] 
  []
 
 
-Underfull \hbox (badness 1960) in paragraph at lines 1285--1286
+Underfull \hbox (badness 1960) in paragraph at lines 1291--1292
 []\TU/lmr/m/n/10 The main output at this point is a fasta file containing the contigs
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 1285--1286
+Underfull \hbox (badness 1571) in paragraph at lines 1291--1292
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa\TU/lmr/m/n/10 . You can inspect the file with
  []
 
 
-Overfull \hbox (573.75pt too wide) in paragraph at lines 1291--1291
+Overfull \hbox (573.75pt too wide) in paragraph at lines 1297--1297
 []\TU/lmtt/m/n/10 seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F'\t' 'NR==1 { for (i=1; i<=NF; i++) keys[i]=$i; next } { for (i=1; i<=NF; i++) printf "%-12s %s\n", keys[i], $i }'[] 
- []
-
-
-Overfull \hbox (40.14836pt too wide) in paragraph at lines 1293--1294
-[]\TU/lmr/bx/n/10 Question 1\TU/lmr/m/n/10 : How many contigs are there in the \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa
  []
 
 
 
 [41]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1308--1308
+Overfull \hbox (40.14836pt too wide) in paragraph at lines 1299--1300
+[]\TU/lmr/bx/n/10 Question 1\TU/lmr/m/n/10 : How many contigs are there in the \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1314--1314
 []                               \TU/lmtt/m/n/10 -o anvio/megahit_out/final.contigs.fixed.fa[] 
  []
 
 
-Underfull \hbox (badness 1817) in paragraph at lines 1310--1311
+Underfull \hbox (badness 1817) in paragraph at lines 1316--1317
 []\TU/lmr/m/n/10 Take a quick look at both \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa \TU/lmr/m/n/10 and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1310--1311
+Underfull \hbox (badness 10000) in paragraph at lines 1316--1317
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fixed.fa \TU/lmr/m/n/10 using the less or head
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 1310--1311
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Underfull \hbox (badness 1365) in paragraph at lines 1316--1317
 \TU/lmr/m/n/10 commands to see what was changed! You can read more about the
  []
 
 
-<<<<<<< HEAD
-Underfull \hbox (badness 1436) in paragraph at lines 1307--1308
-\TU/lmtt/m/n/10 anvi-script-reformat-fasta \TU/lmr/m/n/10 command on []this pag
-e[]. You should be
- []
-
-[37]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1325--1325
-[]\TU/lmtt/m/n/10 anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.
-fixed.fa \[] 
+Underfull \hbox (badness 1436) in paragraph at lines 1316--1317
+\TU/lmtt/m/n/10 anvi-script-reformat-fasta \TU/lmr/m/n/10 command on []this page[]. You should be
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1325--1325
-[]                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/CONTIG
-S.db \[] 
- []
-
-[38]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1358--1358
-[]\TU/lmtt/m/n/10 anvi-run-scg-taxonomy -c anvio/anvio_databases/CONTIGS.db -T 
-4 -P 4[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1365--1365
-[]\TU/lmtt/m/n/10 anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CO
-NTIGS.db \[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1365--1365
-[]                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/gene_c
-alls.fa[] 
- []
-
-Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-
-text;!
-Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-
-text;!
-
-Overfull \hbox (127.5pt too wide) in paragraph at lines 1414--1414
-[]\TU/lmtt/m/n/10 # We add a soft-link here instead of running bowtie because i
-t takes a long time to run :)[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1414--1414
-[]\TU/lmtt/m/n/10 ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio
-/bam_files[] 
- []
-
-[39]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1414--1414
-[]\TU/lmtt/m/n/10 #    # 4. remove the intermediate BAM file that is no longer 
-needed:[] 
- []
-
-[40]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1443.
-Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-
-text;!
-Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-
-text;!
-
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
-[]\TU/lmtt/m/n/10 cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases
-/profiles/* anvio/anvio_databases/profiles[] 
- []
-
-
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
-[]\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CO
-NTIGS.db  anvio/anvio_databases/CONTIGS.db[] 
- []
-
-[41] [42]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1532--1532
-[]                         \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_prof
-iles/PROFILE.db \[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1560--1560
-[]                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/P
-ROFILE.db \[] 
- []
-
-
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1570--1570
-[]\TU/lmtt/m/n/10 anvi-estimate-scg-taxonomy -p anvio/anvio_databases/merged_pr
-ofiles/PROFILE.db \[] 
- []
-
-
-Overfull \hbox (106.5pt too wide) in paragraph at lines 1570--1570
-[]                           \TU/lmtt/m/n/10 -o anvio/${DRIVER}_summary_2500/su
-mmary/bins_taxonomy.txt \[] 
- []
-
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1570--1570
-[]                           \TU/lmtt/m/n/10 --simplify-taxonomy-information --
-compute-scg-coverages[] 
- []
-
-[43]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1579--1579
-[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samp
-les/abundance.txt[] 
- []
-
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1579--1579
-[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samp
-les/mean_coverage.txt[] 
- []
-
-
-Underfull \hbox (badness 2173) in paragraph at lines 1584--1585
-\TU/lmtt/m/n/10 http://##.uhn-hpc.ca/ \TU/lmr/m/n/10 (remember to replace the \
-TU/lmtt/m/n/10 ## \TU/lmr/m/n/10 with your num-
- []
-
-
-Underfull \hbox (badness 1019) in paragraph at lines 1584--1585
-\TU/lmr/m/n/10 ber!) Go to \TU/lmtt/m/n/10 amb_module2/anvio/CONCOCT_summary_25
-00/\TU/lmr/m/n/10 . Right click
- []
-
-
-Overfull \hbox (18.41pt too wide) in paragraph at lines 1584--1585
-\TU/lmtt/m/n/10 amb_module2/anvio/CONCOCT_summary_2500/\TU/lmr/m/n/10 . Add \TU
-/lmtt/m/n/10 /summary/bins_summary.txt
- []
-
-[44] [45] [46]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1713--1713
-[]                     \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles
-/PROFILE.db \[] 
-=======
-Underfull \hbox (badness 1436) in paragraph at lines 1310--1311
-\TU/lmtt/m/n/10 anvi-script-reformat-fasta \TU/lmr/m/n/10 command on this page. You should be
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1328--1328
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1334--1334
 []\TU/lmtt/m/n/10 anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1328--1328
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1334--1334
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
 
 [42]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1361--1361
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1367--1367
 []\TU/lmtt/m/n/10 anvi-run-scg-taxonomy -c anvio/anvio_databases/CONTIGS.db -T 4 -P 4[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1368--1368
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1374--1374
 []\TU/lmtt/m/n/10 anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1368--1368
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1374--1374
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/gene_calls.fa[] 
  []
 
@@ -1561,127 +1356,102 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1368--1368
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (127.5pt too wide) in paragraph at lines 1417--1417
+Overfull \hbox (127.5pt too wide) in paragraph at lines 1423--1423
 []\TU/lmtt/m/n/10 # We add a soft-link here instead of running bowtie because it takes a long time to run :)[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1417--1417
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1423--1423
 []\TU/lmtt/m/n/10 ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio/bam_files[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1417--1417
-[]\TU/lmtt/m/n/10 #    # 4. remove the intermediate BAM file that is no longer needed:[] 
  []
 
 
 
 [44]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1446.
-Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
-Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1423--1423
+[]\TU/lmtt/m/n/10 #    # 4. remove the intermediate BAM file that is no longer needed:[] 
+ []
+
 
 
 [45]
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1467--1467
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1452.
+Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
+Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
+
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1473--1473
 []\TU/lmtt/m/n/10 cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles[] 
  []
 
 
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1467--1467
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1473--1473
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db[] 
  []
 
 
 
 [46]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1535--1535
-[]                         \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
- []
-
-
 
 [47]
-<<<<<<< HEAD
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1724--1724
-[]                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/P
-ROFILE.db \[] 
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1541--1541
+[]                         \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (33.79001pt too wide) in paragraph at lines 1732--1733
-[]\TU/lmr/m/n/10 Have a look at the summary file \TU/lmtt/m/n/10 anvio/FINAL_${
-DRIVER}_summary/bins_summary.txt\TU/lmr/m/n/10 .
- []
-
-
-Overfull \hbox (16.22891pt too wide) in paragraph at lines 1734--1735
-[]\TU/lmr/m/n/10 Now have a look in one of those MAG folders (\TU/lmtt/m/n/10 a
-nvio/FINAL_summary/bin_by_bin/\TU/lmr/m/n/10 )
-=======
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1563--1563
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1569--1569
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1573--1573
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1579--1579
 []\TU/lmtt/m/n/10 anvi-estimate-scg-taxonomy -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
- []
-
-
-Overfull \hbox (106.5pt too wide) in paragraph at lines 1573--1573
-[]                           \TU/lmtt/m/n/10 -o anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt \[] 
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
- []
-
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1573--1573
-[]                           \TU/lmtt/m/n/10 --simplify-taxonomy-information --compute-scg-coverages[] 
- []
-
-
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1582--1582
-[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/abundance.txt[] 
- []
-
-
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1582--1582
-[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/mean_coverage.txt[] 
  []
 
 
 
 [48]
-<<<<<<< HEAD
-Overfull \hbox (258.75pt too wide) in paragraph at lines 1762--1762
-[]\TU/lmtt/m/n/10 checkm2 predict -i MAG_fasta/ --output_directory MAGs_checkm2
-_output --allmodels -x .fa -t 4 --remove_intermediates[] 
-=======
-Underfull \hbox (badness 1895) in paragraph at lines 1587--1588
-\TU/lmtt/m/n/10 http://##.uhn-hpc.ca/ \TU/lmr/m/n/10 (remember to replace the \TU/lmtt/m/n/10 ## \TU/lmr/m/n/10 with your num-
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Overfull \hbox (106.5pt too wide) in paragraph at lines 1579--1579
+[]                           \TU/lmtt/m/n/10 -o anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt \[] 
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 1587--1588
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1579--1579
+[]                           \TU/lmtt/m/n/10 --simplify-taxonomy-information --compute-scg-coverages[] 
+ []
+
+
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1588--1588
+[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/abundance.txt[] 
+ []
+
+
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1588--1588
+[]\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/mean_coverage.txt[] 
+ []
+
+
+Underfull \hbox (badness 1895) in paragraph at lines 1593--1594
+\TU/lmtt/m/n/10 http://##.uhn-hpc.ca/ \TU/lmr/m/n/10 (remember to replace the \TU/lmtt/m/n/10 ## \TU/lmr/m/n/10 with your num-
+ []
+
+
+Underfull \hbox (badness 2310) in paragraph at lines 1593--1594
 \TU/lmr/m/n/10 on \TU/lmtt/m/n/10 summary \TU/lmr/m/n/10 > open in new tab. You can scroll through and ex-
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 1587--1588
+Underfull \hbox (badness 1009) in paragraph at lines 1593--1594
 \TU/lmr/m/n/10 plore what this says about our bins so far, and then go back to the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1587--1588
+Underfull \hbox (badness 10000) in paragraph at lines 1593--1594
 \TU/lmr/m/n/10 other tab with \TU/lmtt/m/n/10 amb_module2/anvio/CONCOCT_summary_2500/\TU/lmr/m/n/10 . Add
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 1587--1588
+Underfull \hbox (badness 1436) in paragraph at lines 1593--1594
 \TU/lmtt/m/n/10 /summary/bins_summary.txt \TU/lmr/m/n/10 to the URL bar and copy and paste the
  []
 
@@ -1694,29 +1464,29 @@ Underfull \hbox (badness 1436) in paragraph at lines 1587--1588
 [51]
 
 [52]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1716--1716
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1722--1722
 []                     \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1727--1727
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1733--1733
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
- []
-
-
-Overfull \hbox (35.74pt too wide) in paragraph at lines 1735--1736
-[]\TU/lmr/m/n/10 Have a look at the summary file \TU/lmtt/m/n/10 anvio/FINAL_${DRIVER}_summary/bins_summary.txt\TU/lmr/m/n/10 .
- []
-
-
-Overfull \hbox (17.39891pt too wide) in paragraph at lines 1737--1738
-[]\TU/lmr/m/n/10 Now have a look in one of those MAG folders (\TU/lmtt/m/n/10 anvio/FINAL_summary/bin_by_bin/\TU/lmr/m/n/10 )
  []
 
 
 
 [53]
-Overfull \hbox (258.75pt too wide) in paragraph at lines 1765--1765
+Overfull \hbox (35.74pt too wide) in paragraph at lines 1741--1742
+[]\TU/lmr/m/n/10 Have a look at the summary file \TU/lmtt/m/n/10 anvio/FINAL_${DRIVER}_summary/bins_summary.txt\TU/lmr/m/n/10 .
+ []
+
+
+Overfull \hbox (17.39891pt too wide) in paragraph at lines 1743--1744
+[]\TU/lmr/m/n/10 Now have a look in one of those MAG folders (\TU/lmtt/m/n/10 anvio/FINAL_summary/bin_by_bin/\TU/lmr/m/n/10 )
+ []
+
+
+Overfull \hbox (258.75pt too wide) in paragraph at lines 1771--1771
 []\TU/lmtt/m/n/10 checkm2 predict -i MAG_fasta/ --output_directory MAGs_checkm2_output --allmodels -x .fa -t 4 --remove_intermediates[] 
  []
 
@@ -1726,11 +1496,11 @@ Overfull \hbox (258.75pt too wide) in paragraph at lines 1765--1765
 
 [55]
 
-[56
+[56]
+
+[57
 
 ]
-
-[57]
 
 [58]
 Chapter 4.
@@ -1743,31 +1513,18 @@ File: img/lab3/compute_env.png Graphic file (type bmp)
 ]
 File: img/lab3/putty_port_forward.png Graphic file (type bmp)
 <img/lab3/putty_port_forward.png>
-<<<<<<< HEAD
-[52] [53]
-Underfull \hbox (badness 1092) in paragraph at lines 1904--1906
-[]\TU/lmr/m/n/10 Here is an example which downloads \TU/lmtt/m/n/10 prodigal \T
-U/lmr/m/n/10 as the container image
- []
-
-
-Overfull \hbox (42.83pt too wide) in paragraph at lines 1904--1906
-\TU/lmtt/m/n/10 example.sif \TU/lmr/m/n/10 from \TU/lmtt/m/n/10 docker://quay.i
-o/biocontainers/prodigal:2.6.3--h7b50bb2_10\TU/lmr/m/n/10 .
-=======
 
 
 [60]
 
 [61]
-Underfull \hbox (badness 1092) in paragraph at lines 1900--1902
+Underfull \hbox (badness 1092) in paragraph at lines 1906--1908
 []\TU/lmr/m/n/10 Here is an example which downloads \TU/lmtt/m/n/10 prodigal \TU/lmr/m/n/10 as the container image
  []
 
 
-Overfull \hbox (44.78pt too wide) in paragraph at lines 1900--1902
+Overfull \hbox (44.78pt too wide) in paragraph at lines 1906--1908
 \TU/lmtt/m/n/10 example.sif \TU/lmr/m/n/10 from \TU/lmtt/m/n/10 docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10\TU/lmr/m/n/10 .
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
  []
 
 
@@ -1782,64 +1539,41 @@ File: img/lab3/jupyter.png Graphic file (type bmp)
 [64]
 File: img/lab3/data_layout.png Graphic file (type bmp)
 <img/lab3/data_layout.png>
-<<<<<<< HEAD
-[56]
-Underfull \hbox (badness 10000) in paragraph at lines 2152--2153
-[]\TU/lmtt/m/n/10 -i:  Specify FASTA/Genbank input file (default reads from
- []
-
-[57]
-Underfull \hbox (badness 10000) in paragraph at lines 2162--2164
-=======
 
 
 [65]
-Overfull \hbox (131.5pt too wide) in paragraph at lines 2148--2149
+Overfull \hbox (131.5pt too wide) in paragraph at lines 2154--2155
 []\TU/lmtt/m/n/10 apptainer pull prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10 
  []
 
 
-Underfull \hbox (badness 4108) in paragraph at lines 2162--2163
+Underfull \hbox (badness 4108) in paragraph at lines 2168--2169
 \TU/lmr/m/n/10 LJ. Prodigal: prokaryotic gene recognition and translation ini-
  []
 
 
-Underfull \hbox (badness 2119) in paragraph at lines 2162--2163
+Underfull \hbox (badness 2119) in paragraph at lines 2168--2169
 \TU/lmr/m/n/10 tiation site identification. BMC Bioinformatics. 2010;11(1):119.
  []
 
 
 
 [66]
-Underfull \hbox (badness 10000) in paragraph at lines 2188--2189
+Underfull \hbox (badness 10000) in paragraph at lines 2194--2195
 []\TU/lmtt/m/n/10 -i:  Specify FASTA/Genbank input file (default reads from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2198--2200
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Underfull \hbox (badness 10000) in paragraph at lines 2204--2206
 []\TU/lmtt/m/n/10 -d:  Write nucleotide sequences of genes to the selected
  []
 
 
-<<<<<<< HEAD
-Underfull \hbox (badness 10000) in paragraph at lines 2164--2166
-=======
-Underfull \hbox (badness 10000) in paragraph at lines 2200--2202
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Underfull \hbox (badness 10000) in paragraph at lines 2206--2208
 []\TU/lmtt/m/n/10 -f:  Select output format (gbk, gff, or sco).  Default is
  []
 
 
-<<<<<<< HEAD
-[60] [61]
-Underfull \hbox (badness 10000) in paragraph at lines 2459--2460
-[]\TU/lmtt/m/n/10 --in                     input reference file in FASTA
- []
-
-[62]
-Overfull \hbox (0.25pt too wide) in paragraph at lines 2527--2528
-=======
 
 [67]
 
@@ -1850,78 +1584,31 @@ Overfull \hbox (0.25pt too wide) in paragraph at lines 2527--2528
 [70]
 
 [71]
-Underfull \hbox (badness 7116) in paragraph at lines 2483--2485
+Underfull \hbox (badness 7116) in paragraph at lines 2489--2491
 []\TU/lmr/m/n/10 sequences are grouped into families: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2485--2486
+Underfull \hbox (badness 10000) in paragraph at lines 2491--2492
 []\TU/lmr/m/n/10 transporter substrates: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][] [][][] [] [][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2508--2509
+Underfull \hbox (badness 10000) in paragraph at lines 2514--2515
 []\TU/lmtt/m/n/10 --in                     input reference file in FASTA
  []
 
 
 
 [72]
-Overfull \hbox (0.25pt too wide) in paragraph at lines 2576--2577
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Overfull \hbox (0.25pt too wide) in paragraph at lines 2582--2583
 []\TU/lmtt/m/n/10 --evalue                 maximum e-value to report alignments
  []
 
 
-<<<<<<< HEAD
-Overfull \vbox (0.2701pt too high) detected at line 2576
- []
-=======
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
 
 [73]
 
-<<<<<<< HEAD
-[65] [66] [67]
-Underfull \hbox (badness 2012) in paragraph at lines 2841--2842
-\TU/lmr/m/n/10 mann A. Bakta: rapid and standardized annotation of bacterial
- []
-
-[68] [69]
-Overfull \hbox (26.75002pt too wide) in paragraph at lines 2973--2975
-[]\TU/lmr/m/n/10 We indicated an output path within a new folder \TU/lmtt/m/n/1
-0 rgi_out = Path("./rgi/chicken")\TU/lmr/m/n/10 .
- []
-
-[70] [71]
-Overfull \hbox (109.28001pt too wide) in paragraph at lines 3077--3079
-\TU/lmr/m/n/10 hypothetical ORFs from the bakta output at \TU/lmtt/m/n/10 LIB/"
-outputs/bakta.full/assembly.hypotheticals.faa
- []
-
-
-Overfull \hbox (21.58002pt too wide) in paragraph at lines 3077--3079
-\TU/lmr/m/n/10 instead. Pre-computed outputs are available at \TU/lmtt/m/n/10 L
-IB/"outputs/kofamscan/kos.out" 
- []
-
-[72] [73] [74] [75] [76]
-Underfull \hbox (badness 1924) in paragraph at lines 3319--3323
-\TU/lmr/m/n/10 (\TU/lmtt/m/n/10 {LIB}/"outputs/bakta.full/assembly.hypothetical
-s.faa"\TU/lmr/m/n/10 ) or use the
- []
-
-[77] [78] [79] [80]
-Underfull \vbox (badness 10000) detected at line 3607
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3607
- []
-
-[81] [82]
-Underfull \hbox (badness 10000) in paragraph at lines 3691--3693
-=======
 [74]
 
 [75]
@@ -1933,14 +1620,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 3691--3693
 [78]
 
 [79]
-Underfull \hbox (badness 2012) in paragraph at lines 2918--2919
+Underfull \hbox (badness 2012) in paragraph at lines 2924--2925
 \TU/lmr/m/n/10 mann A. Bakta: rapid and standardized annotation of bacterial
  []
 
 
 
 [80]
-Overfull \hbox (145.68001pt too wide) in paragraph at lines 2997--2998
+Overfull \hbox (145.68001pt too wide) in paragraph at lines 3003--3004
 []\TU/lmr/m/n/10 Have a look at the reported hypothetical proteins at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"
  []
 
@@ -1949,7 +1636,7 @@ Overfull \hbox (145.68001pt too wide) in paragraph at lines 2997--2998
 [81]
 
 [82]
-Overfull \hbox (29.21pt too wide) in paragraph at lines 3090--3092
+Overfull \hbox (29.21pt too wide) in paragraph at lines 3096--3098
 []\TU/lmr/m/n/10 We indicated an output path within a new folder \TU/lmtt/m/n/10 rgi_out = Path("./rgi/chicken")\TU/lmr/m/n/10 .
  []
 
@@ -1958,7 +1645,7 @@ Overfull \hbox (29.21pt too wide) in paragraph at lines 3090--3092
 [83]
 
 [84]
-Overfull \hbox (101.51pt too wide) in paragraph at lines 3196--3198
+Overfull \hbox (101.51pt too wide) in paragraph at lines 3202--3204
 \TU/lmr/m/n/10 shorter list of hypotheticals from Bakta at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.faa\TU/lmr/m/n/10 . 
  []
 
@@ -1971,22 +1658,22 @@ Overfull \hbox (101.51pt too wide) in paragraph at lines 3196--3198
 [87]
 
 [88]
-Underfull \hbox (badness 2302) in paragraph at lines 3430--3435
+Underfull \hbox (badness 2302) in paragraph at lines 3436--3441
 \TU/lmr/m/n/10 dicating stop codons from the prodigal output. We must also cre-
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 3430--3435
+Underfull \hbox (badness 1292) in paragraph at lines 3436--3441
 \TU/lmr/m/n/10 ate and run it within a dedicated output folder, while using absolute
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 3430--3435
+Underfull \hbox (badness 1496) in paragraph at lines 3436--3441
 \TU/lmr/m/n/10 paths. As it runs, it will dump files into the current directory de-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3430--3435
+Underfull \hbox (badness 10000) in paragraph at lines 3436--3441
 \TU/lmr/m/n/10 (\TU/lmtt/m/n/10 {LIB}/"outputs/bakta.full/assembly.hypotheticals.faa"\TU/lmr/m/n/10 ). Pre-
  []
 
@@ -1997,7 +1684,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3430--3435
 [90]
 
 [91]
-Overfull \hbox (30.39001pt too wide) in paragraph at lines 3545--3546
+Overfull \hbox (30.39001pt too wide) in paragraph at lines 3551--3552
 []\TU/lmr/m/n/10 This will take a few minutes. Feel free to skip and use (\TU/lmtt/m/n/10 LIB/"outputs/protein_bert"\TU/lmr/m/n/10 ). 
  []
 
@@ -2008,11 +1695,11 @@ Overfull \hbox (30.39001pt too wide) in paragraph at lines 3545--3546
 [93]
 
 [94]
-Underfull \vbox (badness 10000) detected at line 3758
+Underfull \vbox (badness 10000) detected at line 3764
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3758
+Underfull \vbox (badness 10000) detected at line 3764
  []
 
 
@@ -2022,17 +1709,12 @@ Underfull \vbox (badness 10000) detected at line 3758
 [96]
 
 [97]
-Underfull \hbox (badness 10000) in paragraph at lines 3858--3860
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Underfull \hbox (badness 10000) in paragraph at lines 3864--3866
 []\TU/lmtt/m/n/10 -p keywords such as pathways or subsystems (for example
  []
 
 
-<<<<<<< HEAD
-Underfull \hbox (badness 10000) in paragraph at lines 3693--3695
-=======
-Underfull \hbox (badness 10000) in paragraph at lines 3860--3862
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
+Underfull \hbox (badness 10000) in paragraph at lines 3866--3868
 []\TU/lmtt/m/n/10 -l Select the pathway database (MetaCyc, KEGG, SEED, all;
  []
 
@@ -2060,126 +1742,18 @@ File: img/lab3/putty_port_forward.png Graphic file (type bmp)
 
 
 
-<<<<<<< HEAD
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 88 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[88]
-Underfull \hbox (badness 1142) in paragraph at lines 3899--3900
-[]\TU/lmr/m/n/10 All software tools are packaged in the main container, so we c
-an use
- []
-
-[89]
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 90 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[90]
-Overfull \vbox (0.49019pt too high) detected at line 4049
- []
-
-[91]
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 92 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[92] [93]
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 94 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[94] [95]
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 96 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[96] [97]
-File: img/lab4/gsea_phit.png Graphic file (type bmp)
-<img/lab4/gsea_phit.png>
-
-Underfull \vbox (badness 8056) has occurred while \output is active []
-
-
-Overfull \hbox (111.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 98 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND F
-INDING FUNCTIONAL SIGNIFICANCE
- []
-
-[98]
-File: img/lab4/gsea_pmiss.png Graphic file (type bmp)
-<img/lab4/gsea_pmiss.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[99]
-Overfull \hbox (116.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 100 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND 
-FINDING FUNCTIONAL SIGNIFICANCE
- []
-
-[100]
-Underfull \vbox (badness 3701) detected at line 4624
- []
-
-
-Underfull \vbox (badness 1048) has occurred while \output is active []
-
-[101]
-Overfull \hbox (116.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 102 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND 
-FINDING FUNCTIONAL SIGNIFICANCE
- []
-
-[102]
-Underfull \vbox (badness 4634) has occurred while \output is active []
-
-[103]
-Overfull \hbox (116.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 104 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND 
-FINDING FUNCTIONAL SIGNIFICANCE
- []
-
-[104]
-Underfull \vbox (badness 10000) detected at line 4807
- []
-
-
-Underfull \vbox (badness 10000) detected at line 4807
- []
-
-[105]
-Overfull \hbox (116.43454pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 106 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND 
-FINDING FUNCTIONAL SIGNIFICANCE
- []
-
-[106] [107]
-Underfull \vbox (badness 3803) detected at line 4945
- []
-
-
-Underfull \vbox (badness 1092) has occurred while \output is active []
-=======
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 104 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND FINDING FUNCTIONAL SIGNIFICANCE
  []
 
 [104]
-Underfull \hbox (badness 1112) in paragraph at lines 4076--4077
+Underfull \hbox (badness 1112) in paragraph at lines 4082--4083
 []\TU/lmr/m/n/10 All software tools are packaged in the main container, so we can use
  []
 
 
 
 [105]
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
 
 
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
@@ -2188,17 +1762,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 
 [106]
 
-<<<<<<< HEAD
-[110] [111]
-Underfull \vbox (badness 10000) detected at line 5163
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5163
- []
-=======
 [107]
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
 
 
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
@@ -2209,7 +1773,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 File: img/lab4/new_tab.png Graphic file (type bmp)
 <img/lab4/new_tab.png>
 
-Overfull \hbox (28.26518pt too wide) in paragraph at lines 4287--4289
+Overfull \hbox (28.26518pt too wide) in paragraph at lines 4293--4295
 \TU/lmr/m/n/10 book. [] 
  []
 
@@ -2232,24 +1796,11 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [112]
-<<<<<<< HEAD
-Underfull \vbox (badness 1168) detected at line 5318
- []
-
-[113]
-Underfull \vbox (badness 10000) detected at line 5318
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5318
- []
-=======
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [113]
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
 
 
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
@@ -2257,15 +1808,6 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [114]
-<<<<<<< HEAD
-Underfull \vbox (badness 10000) detected at line 5318
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5318
- []
-=======
->>>>>>> 45bb221240bb4dd3f12fe47c053d50a39dc0880f
 
 [115]
 File: img/lab4/gsea.png Graphic file (type bmp)
@@ -2312,11 +1854,11 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [122]
 
 [123]
-Underfull \vbox (badness 10000) detected at line 5033
+Underfull \vbox (badness 10000) detected at line 5039
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5033
+Underfull \vbox (badness 10000) detected at line 5039
  []
 
 
@@ -2365,11 +1907,11 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [132]
 
 [133]
-Underfull \vbox (badness 10000) detected at line 5555
+Underfull \vbox (badness 10000) detected at line 5561
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5555
+Underfull \vbox (badness 10000) detected at line 5561
  []
 
 
@@ -2380,11 +1922,11 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [134]
-Underfull \vbox (badness 10000) detected at line 5555
+Underfull \vbox (badness 10000) detected at line 5561
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5555
+Underfull \vbox (badness 10000) detected at line 5561
  []
 
 
@@ -2433,10 +1975,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 17650 strings out of 472247
- 322095 string characters out of 5528703
- 865144 words of memory out of 5000000
- 43941 multiletter control sequences out of 15000+600000
+ 17654 strings out of 472247
+ 322123 string characters out of 5528703
+ 865220 words of memory out of 5000000
+ 43945 multiletter control sequences out of 15000+600000
  633324 words of font info for 99 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,7n,114p,1351b,485s stack positions out of 10000i,1000n,20000p,200000b,200000s

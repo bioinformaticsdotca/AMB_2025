@@ -28,6 +28,8 @@ now-lets-do-the-same-with-the-metaphlan3-output
 combine-kraken-and-metaphlan-output
 answers
 module-2-metagenomic-assembly-and-binning
+lecture-1
+lab
 table-of-contents
 introduction
 anvio
