@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.22)  29 MAY 2025 08:01
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.20)  29 MAY 2025 10:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,9 +6,9 @@ entering extended mode
 (./_main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/bk10.clo
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/bk10.clo
 File: bk10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count268
@@ -23,20 +23,20 @@ File: bk10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen146
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen147
-)) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen148
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count277
@@ -86,35 +86,35 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+)) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2025-04-29 L3 programming layer (loader) 
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2025-04-14 L3 backend support: XeTeX
 \g__graphics_track_int=\count289
 \g__pdfannot_backend_int=\count290
 \g__pdfannot_backend_link_int=\count291
 ))
 Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
 Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2024-08-16 L3 Experimental document command parser
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2024-08-16 LaTeX2e option processing using LaTeX3 keys
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_script_int=\count292
 \l__fontspec_language_int=\count293
@@ -130,11 +130,11 @@ Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_tmpa_dim=\dimen156
 \l__fontspec_tmpb_dim=\dimen157
 \l__fontspec_tmpc_dim=\dimen158
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 ))
@@ -142,7 +142,7 @@ LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 \g__um_fonts_used_int=\count304
 \l__um_primecount_int=\count305
 \g__um_primekern_muskip=\muskip18
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -176,15 +176,15 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: xetex.def on input line 274.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `RGB' extended on input line 1365.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
@@ -193,9 +193,9 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks22
 )
@@ -205,14 +205,14 @@ Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \c@FancyVerbLine=\count307
 \FV@StepNumber=\count308
 \FV@OutFile=\write3
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip54
 \fb@frw=\dimen159
 \fb@frh=\dimen160
 \FrameRule=\dimen161
 \FrameSep=\dimen162
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
 \LTleft=\skip55
 \LTright=\skip56
@@ -230,7 +230,7 @@ Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
 \c@LT@tables=\count312
 \c@LT@chunks=\count313
 \LT@p@ftn=\toks23
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen164
 \lightrulewidth=\dimen165
@@ -249,7 +249,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count316
 \@lastruleclass=\count317
 \@thisrulewidth=\dimen176
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \col@sep=\dimen177
 \ar@mcellbox=\box61
@@ -258,7 +258,7 @@ Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
 \extratabsurround=\skip59
 \backup@length=\skip60
 \ar@cellbox=\box62
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count318
 \calc@Bcount=\count319
@@ -270,77 +270,79 @@ LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count320
 \calc@Cskip=\skip63
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count321
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 \fn@notes=\box63
 \fn@width=\dimen181
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 106.
 )
 \Gin@req@height=\dimen182
 \Gin@req@width=\dimen183
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
+)
+\pandoc@box=\box64
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip64
 \bibsep=\skip65
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count322
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2025-05-20 v7.01m Hypertext links for LaTeX
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode not found.
-)) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+)) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count323
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen184
 \Hy@linkcounter=\count324
 \Hy@pagecounter=\count325
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2025-05-20 v7.01m Hyperref: PDFDocEncoding definition (HO)
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count326
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2025-05-20 v7.01m Hyperref: PDF Unicode definition (HO)
 )
 Package hyperref Info: Option `unicode' set `true' on input line 4040.
@@ -352,15 +354,15 @@ Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
 \c@Hy@tempcnt=\count327
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip19
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4763.
 \XeTeXLinkMargin=\dimen185
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count328
@@ -373,7 +375,7 @@ Package hyperref Info: backreferencing OFF on input line 6057.
 Package hyperref Info: Link coloring OFF on input line 6062.
 Package hyperref Info: Link coloring with OCG OFF on input line 6067.
 Package hyperref Info: PDF/A mode OFF on input line 6072.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
@@ -382,64 +384,64 @@ package with kernel methods
 \c@Hfootnote=\count331
 )
 Package hyperref Info: Driver (autodetected): hxetex.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
 File: hxetex.def 2025-05-20 v7.01m Hyperref driver for XeTeX
-\pdfm@box=\box64
+\pdfm@box=\box65
 \c@Hy@AnnotLevel=\count332
 \HyField@AnnotCount=\count333
 \Fld@listcount=\count334
 \c@bookmark@seq@number=\count335
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip66
-) (/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
+) (/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
 File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
 \BKM@id=\count336
 )) (./_main.aux)
 \openout1 = `_main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 148.
-LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 148.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 148.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 148.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 148.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 148.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 148.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 148.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 147.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 0.9999964596882403.
@@ -467,7 +469,7 @@ Package fontspec Info:
 (fontspec)             <->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 148.
+(Font)              scaled to size 10.0pt on input line 147.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 0.9999964596882403.
@@ -503,15 +505,15 @@ Package fontspec Info:
 (fontspec)             <->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 148.
+(Font)              scaled to size 10.0pt on input line 147.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 148.
+(Font)              `operators' in the math version `normal' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 148.
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 147.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 148.
+(Font)              `operators' in the math version `bold' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 148.
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 147.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 0.9999964596882403.
@@ -577,13 +579,13 @@ Package fontspec Info:
 (fontspec)             <->s*[1.000096459334209]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 148.
+(Font)              `symbols' in the math version `normal' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 148.
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 147.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 148.
+(Font)              `symbols' in the math version `bold' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 148.
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 147.
 
 Package fontspec Info: 
 (fontspec)             latinmodern-math scale = 0.9999964596882403.
@@ -643,42 +645,42 @@ Package fontspec Info:
 (fontspec)             <->s*[0.9998964600422715]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 148.
+(Font)              `largesymbols' in the math version `normal' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 148.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 147.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 148.
+(Font)              `largesymbols' in the math version `bold' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 148.
-Package hyperref Info: Link coloring OFF on input line 148.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 147.
+Package hyperref Info: Link coloring OFF on input line 147.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 150.
+(Font)              scaled to size 12.0pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 150.
+(Font)              scaled to size 8.0pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 150.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 150.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+(Font)              scaled to size 6.0pt on input line 149.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 149.
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.0011pt on input line 150.
+(Font)              scaled to size 12.0011pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 150.
+(Font)              scaled to size 8.00073pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 150.
+(Font)              scaled to size 6.00055pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 150.
+(Font)              scaled to size 11.99872pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 150.
+(Font)              scaled to size 7.99915pt on input line 149.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 150.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 150.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(Font)              scaled to size 5.99936pt on input line 149.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 149.
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 150.
-(/Users/robynwright/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 149.
+(/Users/nhughes/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
@@ -741,29 +743,24 @@ Chapter 2.
 [11
 
 ]
-Underfull \hbox (badness 1546) in paragraph at lines 217--217
+Underfull \hbox (badness 1546) in paragraph at lines 220--220
 []\TU/lmr/bx/n/14.4 1. Initial setup and pre-processing of
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 240--240
+Overfull \hbox (38.25pt too wide) in paragraph at lines 243--243
 []\TU/lmtt/m/n/10 ln -s ~/CourseData/MIC_data/AMB_data/raw_data_subsampled_subset/ raw_data[] 
  []
 
 
-Overfull \hbox (117.0pt too wide) in paragraph at lines 240--240
+Overfull \hbox (117.0pt too wide) in paragraph at lines 243--243
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/AMB_data/metagenome_metadata_subset.txt metagenome_metadata.txt[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 12 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [12]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 290--290
+Overfull \hbox (64.5pt too wide) in paragraph at lines 293--293
 []\TU/lmtt/m/n/10 parallel --link 'echo {1} {3}; echo {2} {3}' ::: one red ::: two blue ::: fish[] 
  []
 
@@ -771,487 +768,442 @@ Overfull \hbox (64.5pt too wide) in paragraph at lines 290--290
 
 
 Overfull \hbox (26.65343pt too wide) has occurred while \output is active
-\TU/lmr/m/sl/10 2.2.  1. INITIAL SETUP AND PRE-PROCESSING OF METAGENOMIC READS \TU/lmr/m/n/10 13
+\TU/lmr/m/sl/10 2.4.  1. INITIAL SETUP AND PRE-PROCESSING OF METAGENOMIC READS \TU/lmr/m/n/10 13
  []
 
 [13]
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 14 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 337--340
+Underfull \hbox (badness 10000) in paragraph at lines 340--343
 
  []
 
 
 
 [15]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 370--370
+Overfull \hbox (43.5pt too wide) in paragraph at lines 373--373
 []\TU/lmtt/m/n/10 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt[] 
  []
 
 
-Overfull \hbox (421.5pt too wide) in paragraph at lines 400--400
+Overfull \hbox (421.5pt too wide) in paragraph at lines 403--403
 []\TU/lmtt/m/n/10 cat GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.fna.gz GCF_000819615.1_ViralProj14015_genomic.fna.gz > chicken_Gallusgallus_phiX174.fna.gz[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 16 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [16]
-Overfull \hbox (185.25pt too wide) in paragraph at lines 407--407
+Overfull \hbox (185.25pt too wide) in paragraph at lines 410--410
 []\TU/lmtt/m/n/10 bowtie2-build chicken_Gallusgallus_phiX174.fna.gz bowtie2_db/chicken_Gallusgallus_phiX174 --threads 4[] 
  []
 
 
-Overfull \hbox (437.25pt too wide) in paragraph at lines 421--421
+Overfull \hbox (437.25pt too wide) in paragraph at lines 424--424
 []\TU/lmtt/m/n/10 parallel -j 1 --eta 'kneaddata -un {1} -o kneaddata_out -db bowtie2_db/chicken_Gallusgallus_phiX174 --remove-intermediate-output -t 4' ::: raw_data/*[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 433--433
+Overfull \hbox (90.75pt too wide) in paragraph at lines 436--436
 []\TU/lmtt/m/n/10 kneaddata_read_count_table --input kneaddata_out --output kneaddata_read_counts.txt[] 
  []
 
 
 
 [17]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 468--468
+Overfull \hbox (64.5pt too wide) in paragraph at lines 471--471
 []\TU/lmtt/m/n/10 wget https://genome-idx.s3.amazonaws.com/kraken/k2_pluspf_08gb_20250402.tar.gz[] 
  []
 
 
-Overfull \hbox (647.25pt too wide) in paragraph at lines 491--491
+Overfull \hbox (647.25pt too wide) in paragraph at lines 494--494
 []\TU/lmtt/m/n/10 parallel -j 1 --eta --dry-run 'kraken2 --db k2_pluspf_08gb --output kraken2_outraw/{/.}.kraken --report kraken2_kreport/{/.}.kreport --confidence 0 {} --threads 4' ::: kneaddata_out/*.fastq[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 18 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [18]
-Overfull \hbox (369.0pt too wide) in paragraph at lines 514--514
+Overfull \hbox (369.0pt too wide) in paragraph at lines 517--517
 []\TU/lmtt/m/n/10 parallel -j 2 --eta 'bracken -d k2_pluspf_08gb -i {} -o bracken_out/{/.}.species.bracken -r 150 -l S -t 1' ::: kraken2_kreport/*.kreport[] 
  []
 
 
-Overfull \hbox (164.25pt too wide) in paragraph at lines 528--528
+Overfull \hbox (164.25pt too wide) in paragraph at lines 531--531
 []\TU/lmtt/m/n/10 combine_bracken_outputs.py --files bracken_out/*.species.bracken -o merged_output.species.bracken[] 
  []
 
 
 
 [19]
-Overfull \hbox (416.25pt too wide) in paragraph at lines 550--550
+Overfull \hbox (416.25pt too wide) in paragraph at lines 553--553
 []\TU/lmtt/m/n/10 parallel -j 1 --eta 'metaphlan --bowtie2db CHOCOPhlAn_201901 --input_type fastq -o metaphlan_out/{/.}.mpa {} --nproc 2' ::: kneaddata_out/*.fastq[] 
  []
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 564.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 567.
 
-
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 20 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
 
 [20]
-Overfull \hbox (153.75pt too wide) in paragraph at lines 602--602
+Overfull \hbox (153.75pt too wide) in paragraph at lines 605--605
 []\TU/lmtt/m/n/10 bracken <- read.csv("merged_output.species.bracken", sep="\t") #read in the file as a dataframe[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 602--602
+Overfull \hbox (69.75pt too wide) in paragraph at lines 605--605
 []\TU/lmtt/m/n/10 rownames(bracken) = bracken[,1] #set the row names to those in the first column[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 602--602
+Overfull \hbox (33.0pt too wide) in paragraph at lines 605--605
 []\TU/lmtt/m/n/10 for (colname in colnames(bracken)) { #for each of the columns in bracken[] 
  []
 
 
-Overfull \hbox (138.0pt too wide) in paragraph at lines 602--602
+Overfull \hbox (138.0pt too wide) in paragraph at lines 605--605
 []  \TU/lmtt/m/n/10 if (grepl("bracken_num", colname, fixed = TRUE)) { #if "bracken_num" is in the column name[] 
  []
 
 
-Overfull \hbox (248.25pt too wide) in paragraph at lines 602--602
+Overfull \hbox (248.25pt too wide) in paragraph at lines 605--605
 []    \TU/lmtt/m/n/10 cols <- c(cols, colname) #add it to the columns list - we're going to use this to filter/subset the dataframe[] 
  []
 
 
-Overfull \hbox (374.25pt too wide) in paragraph at lines 602--602
+Overfull \hbox (374.25pt too wide) in paragraph at lines 605--605
 []\TU/lmtt/m/n/10 bracken = bracken[,cols] #subset the dataframe to only the columns in the cols list (i.e. only those with bracken_num in the column name)[] 
  []
 
 
-Overfull \hbox (815.25pt too wide) in paragraph at lines 602--602
+Overfull \hbox (815.25pt too wide) in paragraph at lines 605--605
 []\TU/lmtt/m/n/10 colnames(bracken) = sapply(strsplit(colnames(bracken),"_"), `[`, 1) #rename the column names by splitting them on the first occurrence of an underscore, so this means we are left with only the sample name for each of them[] 
  []
 
 
 
 [21]
-Overfull \hbox (143.25pt too wide) in paragraph at lines 630--630
+Overfull \hbox (143.25pt too wide) in paragraph at lines 633--633
 []\TU/lmtt/m/n/10 for (species in rownames(bracken)) { #for each of the rows (species) in the bracken dataframe[] 
  []
 
 
-Overfull \hbox (117.0pt too wide) in paragraph at lines 630--630
+Overfull \hbox (117.0pt too wide) in paragraph at lines 633--633
 []  \TU/lmtt/m/n/10 if (grepl("uncultured", this_species, fixed = TRUE)) { #if "uncultured" is in the name[] 
  []
 
 
-Overfull \hbox (516.0pt too wide) in paragraph at lines 630--630
+Overfull \hbox (516.0pt too wide) in paragraph at lines 633--633
 []     \TU/lmtt/m/n/10 this_species = gsub("uncultured ", "", this_species) #rename the species by removing the "uncultured" and replacing it with nothing (the empty quotation marks)[] 
  []
 
 
-Overfull \hbox (216.75pt too wide) in paragraph at lines 630--630
+Overfull \hbox (216.75pt too wide) in paragraph at lines 633--633
 []  \TU/lmtt/m/n/10 this_genus = strsplit(this_species, " ")[[1]][1] #get the first word of the species name (the genus name)[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 630--630
+Overfull \hbox (27.75pt too wide) in paragraph at lines 633--633
 []  \TU/lmtt/m/n/10 all_genus = c(all_genus, this_genus) #add this genus name to our list[] 
  []
 
 
-Overfull \hbox (269.25pt too wide) in paragraph at lines 630--630
+Overfull \hbox (269.25pt too wide) in paragraph at lines 633--633
 []\TU/lmtt/m/n/10 tax_table = data.frame(genus=all_genus, species=rownames(bracken)) #make a new table with the genus and species names[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 630--630
+Overfull \hbox (6.75pt too wide) in paragraph at lines 633--633
 []\TU/lmtt/m/n/10 rownames(tax_table) = rownames(bracken) #and add the rownames to it[] 
  []
 
 
-Overfull \hbox (122.25pt too wide) in paragraph at lines 640--640
+Overfull \hbox (122.25pt too wide) in paragraph at lines 643--643
 []\TU/lmtt/m/n/10 metadata = read.csv("metagenome_metadata.txt", sep="\t") #read in the file as a dataframe[] 
  []
 
 
-Overfull \hbox (117.0pt too wide) in paragraph at lines 640--640
+Overfull \hbox (117.0pt too wide) in paragraph at lines 643--643
 []\TU/lmtt/m/n/10 samples = data.frame(metadata[,2], stringsAsFactors = FALSE) #get only the second column[] 
  []
 
 
-Overfull \hbox (227.25pt too wide) in paragraph at lines 640--640
+Overfull \hbox (227.25pt too wide) in paragraph at lines 643--643
 []\TU/lmtt/m/n/10 samples['classifier'] = 'kraken' #add a new column that shows us that these samples were classified by Kraken[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 650--650
+Overfull \hbox (90.75pt too wide) in paragraph at lines 653--653
 []\TU/lmtt/m/n/10 BRACKEN = otu_table(bracken, taxa_are_rows = TRUE) #convert bracken to an otu_table[] 
  []
 
 
-Overfull \hbox (143.25pt too wide) in paragraph at lines 650--650
+Overfull \hbox (143.25pt too wide) in paragraph at lines 653--653
 []\TU/lmtt/m/n/10 SAMPLE = sample_data(samples) #convert the samples dataframe to a phyloseq sample_data format[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 22 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [22]
-Overfull \hbox (127.5pt too wide) in paragraph at lines 650--650
+Overfull \hbox (127.5pt too wide) in paragraph at lines 653--653
 []\TU/lmtt/m/n/10 TAX = tax_table(tax_table) #convert the tax_table dataframe to a phyloseq tax_table format[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 650--650
+Overfull \hbox (90.75pt too wide) in paragraph at lines 653--653
 []\TU/lmtt/m/n/10 taxa_names(TAX) <- rownames(bracken) #get the taxa names from the bracken row names[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 650--650
+Overfull \hbox (38.25pt too wide) in paragraph at lines 653--653
 []\TU/lmtt/m/n/10 physeq_bracken = phyloseq(BRACKEN, TAX, SAMPLE) #make the phyloseq object[] 
  []
 
 
-Overfull \hbox (458.25pt too wide) in paragraph at lines 659--659
+Overfull \hbox (458.25pt too wide) in paragraph at lines 662--662
 []\TU/lmtt/m/n/10 physeq_bracken_genus = tax_glom(physeq_bracken) #collapse at the genus level (the default is the first level in the tax_table, which for us is the genus)[] 
  []
 
 
-Overfull \hbox (237.75pt too wide) in paragraph at lines 659--659
+Overfull \hbox (237.75pt too wide) in paragraph at lines 662--662
 []\TU/lmtt/m/n/10 taxa_names(physeq_bracken_genus) = data.frame(tax_table(physeq_bracken_genus))$ta1 #add the genus names to this[] 
  []
 
 
-Overfull \hbox (363.75pt too wide) in paragraph at lines 674--674
+Overfull \hbox (363.75pt too wide) in paragraph at lines 677--677
 []\TU/lmtt/m/n/10 print(c("Minimum sample size:",min(sample_sums(physeq_bracken_genus)), "Maximum sample size:", max(sample_sums(physeq_bracken_genus))))[] 
  []
 
 
-Overfull \hbox (206.25pt too wide) in paragraph at lines 692--692
+Overfull \hbox (206.25pt too wide) in paragraph at lines 695--695
 []\TU/lmtt/m/n/10 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,800))[] 
  []
 
 
 
 [23]
-Overfull \hbox (279.75pt too wide) in paragraph at lines 711--711
+Overfull \hbox (279.75pt too wide) in paragraph at lines 714--714
 []\TU/lmtt/m/n/10 print(c("Minimum reads:",min(taxa_sums(physeq_bracken_genus)), "Maximum reads:", max(taxa_sums(physeq_bracken_genus))))[] 
  []
 
 
-Overfull \hbox (127.5pt too wide) in paragraph at lines 717--717
+Overfull \hbox (127.5pt too wide) in paragraph at lines 720--720
 []\TU/lmtt/m/n/10 physeq_bracken_genus<-prune_taxa(taxa_sums(physeq_bracken_genus)>=10,physeq_bracken_genus)[] 
  []
 
 
-Overfull \hbox (132.75pt too wide) in paragraph at lines 723--723
+Overfull \hbox (132.75pt too wide) in paragraph at lines 726--726
 []\TU/lmtt/m/n/10 physeq_bracken_genus<-prune_taxa(taxa_sums(physeq_bracken_genus)>=100,physeq_bracken_genus)[] 
  []
 
 
-Overfull \hbox (206.25pt too wide) in paragraph at lines 731--731
+Overfull \hbox (206.25pt too wide) in paragraph at lines 734--734
 []\TU/lmtt/m/n/10 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,150))[] 
  []
 
 
-Overfull \hbox (447.75pt too wide) in paragraph at lines 749--749
+Overfull \hbox (447.75pt too wide) in paragraph at lines 752--752
 []\TU/lmtt/m/n/10 rarefied_bracken_genus<-rarefy_even_depth(physeq_bracken_genus, rngseed = FALSE, sample.size = min(sample_sums(physeq_bracken_genus)), trimOTUs = TRUE)[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 24 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [24]
-Overfull \hbox (789.0pt too wide) in paragraph at lines 776--776
+Overfull \hbox (789.0pt too wide) in paragraph at lines 779--779
 []\TU/lmtt/m/n/10 plot_richness(physeq = rarefied_bracken_genus, x="group", color = "group", measures = c("Observed", "Shannon", "Fisher", "Simpson")) + geom_boxplot() +theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))[] 
  []
 
 
-Overfull \hbox (169.5pt too wide) in paragraph at lines 793--793
+Overfull \hbox (169.5pt too wide) in paragraph at lines 796--796
 []\TU/lmtt/m/n/10 relabun_bracken_genus <- transform_sample_counts(physeq_bracken_genus, function(x) x*100 / sum(x))[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 801--801
+Overfull \hbox (17.25pt too wide) in paragraph at lines 804--804
 []\TU/lmtt/m/n/10 plot_ordination(relabun_bracken_genus, ordination, color = "group") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 801--801
+Overfull \hbox (720.75pt too wide) in paragraph at lines 804--804
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
 
 [25]
-Overfull \hbox (332.25pt too wide) in paragraph at lines 820--820
+Overfull \hbox (332.25pt too wide) in paragraph at lines 823--823
 []\TU/lmtt/m/n/10 relabun_bracken_genus_top<-prune_taxa(names(sort(taxa_sums(relabun_bracken_genus),decreasing=TRUE)[1:20]), relabun_bracken_genus)[] 
  []
 
 
-Overfull \hbox (752.25pt too wide) in paragraph at lines 820--820
+Overfull \hbox (752.25pt too wide) in paragraph at lines 823--823
 []\TU/lmtt/m/n/10 plot_bar(relabun_bracken_genus_top, fill="ta1") + facet_wrap(c(~group), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
 
-Overfull \hbox (416.25pt too wide) in paragraph at lines 837--837
+Overfull \hbox (416.25pt too wide) in paragraph at lines 840--840
 []\TU/lmtt/m/n/10 plot_heatmap(relabun_bracken_genus_top, method = "PCoA", distance = "bray", low = "white", high = "red", na.value = "grey", sample.label="group")[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 26 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [26]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 870--870
+Overfull \hbox (33.0pt too wide) in paragraph at lines 873--873
 []\TU/lmtt/m/n/10 merge_metaphlan_tables.py metaphlan_out/*.mpa > metaphlan_merged_out.txt[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 902--902
+Overfull \hbox (6.75pt too wide) in paragraph at lines 905--905
 []\TU/lmtt/m/n/10 metaphlan <- read.csv("metaphlan_merged_out.txt", sep="\t", skip=1)[] 
  []
 
 
 
 [27]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 902--902
+Overfull \hbox (27.75pt too wide) in paragraph at lines 905--905
 []\TU/lmtt/m/n/10 colnames(metaphlan) = sapply(strsplit(colnames(metaphlan),"_"), `[`, 1)[] 
  []
 
 
-Overfull \hbox (143.25pt too wide) in paragraph at lines 929--929
+Overfull \hbox (143.25pt too wide) in paragraph at lines 932--932
 []\TU/lmtt/m/n/10 METAPHLAN = otu_table(metaphlan, taxa_are_rows = TRUE) #convert asv_table_num to an otu_table[] 
  []
 
 
-Overfull \hbox (673.5pt too wide) in paragraph at lines 937--937
+Overfull \hbox (673.5pt too wide) in paragraph at lines 940--940
 []\TU/lmtt/m/n/10 plot_richness(physeq = physeq_metaphlan_genus, x="group", color = "group", measures = c("Shannon", "Simpson")) + geom_boxplot() +theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 945--945
+Overfull \hbox (22.5pt too wide) in paragraph at lines 948--948
 []\TU/lmtt/m/n/10 plot_ordination(physeq_metaphlan_genus, ordination, color = "group") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 945--945
+Overfull \hbox (720.75pt too wide) in paragraph at lines 948--948
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 28 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [28]
-Overfull \hbox (736.5pt too wide) in paragraph at lines 962--962
+Overfull \hbox (736.5pt too wide) in paragraph at lines 965--965
 []\TU/lmtt/m/n/10 plot_bar(physeq_metaphlan_genus, fill="ta1") + facet_wrap(c(~group), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
 
-Overfull \hbox (400.5pt too wide) in paragraph at lines 968--968
+Overfull \hbox (400.5pt too wide) in paragraph at lines 971--971
 []\TU/lmtt/m/n/10 plot_heatmap(physeq_metaphlan_genus, method = "PCoA", distance = "bray", low = "white", high = "red", na.value = "grey", sample.label="group")[] 
  []
 
 
-Overfull \hbox (180.0pt too wide) in paragraph at lines 996--996
+Overfull \hbox (180.0pt too wide) in paragraph at lines 999--999
 []\TU/lmtt/m/n/10 sample_names(relabun_bracken_genus) = paste(sample_names(relabun_bracken_genus), "_bracken", sep="")[] 
  []
 
 
-Overfull \hbox (201.0pt too wide) in paragraph at lines 996--996
+Overfull \hbox (201.0pt too wide) in paragraph at lines 999--999
 []\TU/lmtt/m/n/10 sample_names(physeq_metaphlan_genus) = paste(sample_names(physeq_metaphlan_genus), "_metaphlan", sep="")[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1004--1004
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1007--1007
 []\TU/lmtt/m/n/10 physeq_combined = merge_phyloseq(relabun_bracken_genus, physeq_metaphlan_genus)[] 
  []
 
 
 
 [29]
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1016--1016
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1019--1019
 []\TU/lmtt/m/n/10 plot1 <- plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (810.0pt too wide) in paragraph at lines 1016--1016
+Overfull \hbox (810.0pt too wide) in paragraph at lines 1019--1019
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20), legend.position = "none") +  ggtitle("Beta Diversity", subtitle = "Jaccard distance")[] 
  []
 
 
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1016--1016
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1019--1019
 []\TU/lmtt/m/n/10 plot2 <- plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 1016--1016
+Overfull \hbox (720.75pt too wide) in paragraph at lines 1019--1019
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
-Overfull \hbox (337.5pt too wide) in paragraph at lines 1036--1036
+Overfull \hbox (337.5pt too wide) in paragraph at lines 1039--1039
 []\TU/lmtt/m/n/10 relabun_bracken_genus_top<-prune_taxa(names(sort(taxa_sums(relabun_bracken_genus),decreasing=TRUE)[1:100]), relabun_bracken_genus)[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 1036--1036
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1039--1039
 []\TU/lmtt/m/n/10 physeq_combined = merge_phyloseq(relabun_bracken_genus_top, physeq_metaphlan_genus)[] 
  []
 
 
-Overfull \hbox (101.25pt too wide) in paragraph at lines 1044--1044
+Overfull \hbox (101.25pt too wide) in paragraph at lines 1047--1047
 []\TU/lmtt/m/n/10 plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 1044--1044
+Overfull \hbox (720.75pt too wide) in paragraph at lines 1047--1047
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
-Overfull \hbox (783.75pt too wide) in paragraph at lines 1050--1050
+Overfull \hbox (783.75pt too wide) in paragraph at lines 1053--1053
 []\TU/lmtt/m/n/10 plot_bar(physeq_combined, fill="ta1") + facet_wrap(c(~"group", "classifier"), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
 
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 30 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [30]
-Overfull \hbox (153.75pt too wide) in paragraph at lines 1079--1079
+Overfull \hbox (153.75pt too wide) in paragraph at lines 1082--1082
 []\TU/lmtt/m/n/10 #go to https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/819/615/GCF_000819615.1_ViralProj14015/[] 
  []
 
 
-Overfull \hbox (379.5pt too wide) in paragraph at lines 1079--1079
+Overfull \hbox (379.5pt too wide) in paragraph at lines 1082--1082
 []\TU/lmtt/m/n/10 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/819/615/GCF_000819615.1_ViralProj14015/GCF_000819615.1_ViralProj14015_genomic.fna.gz[] 
  []
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 1081--1083
+Underfull \hbox (badness 2142) in paragraph at lines 1084--1086
 \TU/lmr/m/n/10 There are no samples where we seem to lost a really large number
  []
 
 
-Underfull \hbox (badness 2564) in paragraph at lines 1081--1083
+Underfull \hbox (badness 2564) in paragraph at lines 1084--1086
 \TU/lmr/m/n/10 of reads at any step - we don’t lose many reads that couldn’t be
  []
 
 
-Underfull \hbox (badness 1325) in paragraph at lines 1081--1083
+Underfull \hbox (badness 1325) in paragraph at lines 1084--1086
 \TU/lmr/m/n/10 too many of the reads are host-associated (difference between \TU/lmtt/m/n/10 trimmed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1081--1083
+Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
 \TU/lmtt/m/n/10 single \TU/lmr/m/n/10 and \TU/lmtt/m/n/10 decontaminated chicken_Gallusgallus_phiX174 single\TU/lmr/m/n/10 ).
  []
 
 
-Underfull \hbox (badness 1635) in paragraph at lines 1081--1083
+Underfull \hbox (badness 1635) in paragraph at lines 1084--1086
 \TU/lmr/m/n/10 We’ll use the \TU/lmtt/m/n/10 sample_kneaddata.fastq \TU/lmr/m/n/10 files for analysis, and not the
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 1081--1083
+Overfull \hbox (1.5pt too wide) in paragraph at lines 1084--1086
 \TU/lmtt/m/n/10 sample_kneaddata_chicken_Gallusgallus_phiX174_bowtie2_contam.fastq
  []
 
 
-Underfull \hbox (badness 5607) in paragraph at lines 1087--1089
+Underfull \hbox (badness 5607) in paragraph at lines 1090--1092
 \TU/lmr/m/n/10 have between 52,405 (\TU/lmtt/m/n/10 min(sample_sums(physeq_bracken_genus))\TU/lmr/m/n/10 ) and
  []
 
 
-Underfull \hbox (badness 4108) in paragraph at lines 1087--1089
+Underfull \hbox (badness 4108) in paragraph at lines 1090--1092
 \TU/lmr/m/n/10 446,368 (\TU/lmtt/m/n/10 max(sample_sums(physeq_bracken_genus))\TU/lmr/m/n/10 ) - average 221,440
  []
 
@@ -1259,19 +1211,9 @@ Underfull \hbox (badness 4108) in paragraph at lines 1087--1089
 
 [31]
 
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 32 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
-
 [32]
 
 [33]
-
-
-Overfull \hbox (151.86345pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 34 \TU/lmr/m/sl/10 CHAPTER 2.  MODULE 1 LAB: INTRODUCTION TO METAGENOMICS AND READ‐BASED PROFILING
- []
 
 [34
 
@@ -1282,31 +1224,31 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
 [36]
 Chapter 3.
 
-LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1131.
+LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1134.
 
 
-LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1132.
+LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1135.
 
 
-LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1133.
+LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1136.
 
 
-LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1134.
+LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1137.
 
 
-LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1135.
+LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1138.
 
 
-LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1136.
+LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1139.
 
 
-LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1137.
+LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1140.
 
 
-LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1138.
+LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1141.
 
 
-LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1139.
+LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1142.
 
 
 
@@ -1323,88 +1265,88 @@ Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1247--1247
+Overfull \hbox (22.5pt too wide) in paragraph at lines 1250--1250
 []\TU/lmtt/m/n/10 #SE=$( ls reads_for_assembly/*.fastq.gz | tr '\n' ',' | sed 's/,$//' )[] 
  []
 
 
 
 [40]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1274--1274
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1277--1277
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/AMB_data/final.contigs.fa anvio/megahit_out/[] 
  []
 
 
-Underfull \hbox (badness 1960) in paragraph at lines 1282--1283
+Underfull \hbox (badness 1960) in paragraph at lines 1285--1286
 []\TU/lmr/m/n/10 The main output at this point is a fasta file containing the contigs
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 1282--1283
+Underfull \hbox (badness 1571) in paragraph at lines 1285--1286
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa\TU/lmr/m/n/10 . You can inspect the file with
  []
 
 
-Overfull \hbox (573.75pt too wide) in paragraph at lines 1288--1288
+Overfull \hbox (573.75pt too wide) in paragraph at lines 1291--1291
 []\TU/lmtt/m/n/10 seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F'\t' 'NR==1 { for (i=1; i<=NF; i++) keys[i]=$i; next } { for (i=1; i<=NF; i++) printf "%-12s %s\n", keys[i], $i }'[] 
  []
 
 
-Overfull \hbox (40.14836pt too wide) in paragraph at lines 1290--1291
+Overfull \hbox (40.14836pt too wide) in paragraph at lines 1293--1294
 []\TU/lmr/bx/n/10 Question 1\TU/lmr/m/n/10 : How many contigs are there in the \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa
  []
 
 
 
 [41]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1305--1305
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1308--1308
 []                               \TU/lmtt/m/n/10 -o anvio/megahit_out/final.contigs.fixed.fa[] 
  []
 
 
-Underfull \hbox (badness 1817) in paragraph at lines 1307--1308
+Underfull \hbox (badness 1817) in paragraph at lines 1310--1311
 []\TU/lmr/m/n/10 Take a quick look at both \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa \TU/lmr/m/n/10 and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1307--1308
+Underfull \hbox (badness 10000) in paragraph at lines 1310--1311
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fixed.fa \TU/lmr/m/n/10 using the less or head
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 1307--1308
+Underfull \hbox (badness 1365) in paragraph at lines 1310--1311
 \TU/lmr/m/n/10 commands to see what was changed! You can read more about the
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 1307--1308
+Underfull \hbox (badness 1436) in paragraph at lines 1310--1311
 \TU/lmtt/m/n/10 anvi-script-reformat-fasta \TU/lmr/m/n/10 command on this page. You should be
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1325--1325
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1328--1328
 []\TU/lmtt/m/n/10 anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1325--1325
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1328--1328
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
 
 [42]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1358--1358
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1361--1361
 []\TU/lmtt/m/n/10 anvi-run-scg-taxonomy -c anvio/anvio_databases/CONTIGS.db -T 4 -P 4[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1365--1365
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1368--1368
 []\TU/lmtt/m/n/10 anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1365--1365
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1368--1368
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/gene_calls.fa[] 
  []
 
@@ -1414,17 +1356,17 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1365--1365
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (127.5pt too wide) in paragraph at lines 1414--1414
+Overfull \hbox (127.5pt too wide) in paragraph at lines 1417--1417
 []\TU/lmtt/m/n/10 # We add a soft-link here instead of running bowtie because it takes a long time to run :)[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1414--1414
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1417--1417
 []\TU/lmtt/m/n/10 ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio/bam_files[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1414--1414
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1417--1417
 []\TU/lmtt/m/n/10 #    # 4. remove the intermediate BAM file that is no longer needed:[] 
  []
 
@@ -1432,84 +1374,84 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1414--1414
 
 [44]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1443.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1446.
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
 
 [45]
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1467--1467
 []\TU/lmtt/m/n/10 cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles[] 
  []
 
 
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1467--1467
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db[] 
  []
 
 
 
 [46]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1532--1532
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1535--1535
 []                         \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
 
 [47]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1560--1560
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1563--1563
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1570--1570
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1573--1573
 []\TU/lmtt/m/n/10 anvi-estimate-scg-taxonomy -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (106.5pt too wide) in paragraph at lines 1570--1570
+Overfull \hbox (106.5pt too wide) in paragraph at lines 1573--1573
 []                           \TU/lmtt/m/n/10 -o anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt \[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1570--1570
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1573--1573
 []                           \TU/lmtt/m/n/10 --simplify-taxonomy-information --compute-scg-coverages[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1579--1579
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1582--1582
 []\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/abundance.txt[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1579--1579
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1582--1582
 []\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/mean_coverage.txt[] 
  []
 
 
 
 [48]
-Underfull \hbox (badness 1895) in paragraph at lines 1584--1585
+Underfull \hbox (badness 1895) in paragraph at lines 1587--1588
 \TU/lmtt/m/n/10 http://##.uhn-hpc.ca/ \TU/lmr/m/n/10 (remember to replace the \TU/lmtt/m/n/10 ## \TU/lmr/m/n/10 with your num-
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 1584--1585
+Underfull \hbox (badness 2310) in paragraph at lines 1587--1588
 \TU/lmr/m/n/10 on \TU/lmtt/m/n/10 summary \TU/lmr/m/n/10 > open in new tab. You can scroll through and ex-
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 1584--1585
+Underfull \hbox (badness 1009) in paragraph at lines 1587--1588
 \TU/lmr/m/n/10 plore what this says about our bins so far, and then go back to the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1584--1585
+Underfull \hbox (badness 10000) in paragraph at lines 1587--1588
 \TU/lmr/m/n/10 other tab with \TU/lmtt/m/n/10 amb_module2/anvio/CONCOCT_summary_2500/\TU/lmr/m/n/10 . Add
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 1584--1585
+Underfull \hbox (badness 1436) in paragraph at lines 1587--1588
 \TU/lmtt/m/n/10 /summary/bins_summary.txt \TU/lmr/m/n/10 to the URL bar and copy and paste the
  []
 
@@ -1522,29 +1464,29 @@ Underfull \hbox (badness 1436) in paragraph at lines 1584--1585
 [51]
 
 [52]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1713--1713
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1716--1716
 []                     \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1724--1724
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1727--1727
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (35.74pt too wide) in paragraph at lines 1732--1733
+Overfull \hbox (35.74pt too wide) in paragraph at lines 1735--1736
 []\TU/lmr/m/n/10 Have a look at the summary file \TU/lmtt/m/n/10 anvio/FINAL_${DRIVER}_summary/bins_summary.txt\TU/lmr/m/n/10 .
  []
 
 
-Overfull \hbox (17.39891pt too wide) in paragraph at lines 1734--1735
+Overfull \hbox (17.39891pt too wide) in paragraph at lines 1737--1738
 []\TU/lmr/m/n/10 Now have a look in one of those MAG folders (\TU/lmtt/m/n/10 anvio/FINAL_summary/bin_by_bin/\TU/lmr/m/n/10 )
  []
 
 
 
 [53]
-Overfull \hbox (258.75pt too wide) in paragraph at lines 1762--1762
+Overfull \hbox (258.75pt too wide) in paragraph at lines 1765--1765
 []\TU/lmtt/m/n/10 checkm2 predict -i MAG_fasta/ --output_directory MAGs_checkm2_output --allmodels -x .fa -t 4 --remove_intermediates[] 
  []
 
@@ -1576,12 +1518,12 @@ File: img/lab3/putty_port_forward.png Graphic file (type bmp)
 [60]
 
 [61]
-Underfull \hbox (badness 1092) in paragraph at lines 1897--1899
+Underfull \hbox (badness 1092) in paragraph at lines 1900--1902
 []\TU/lmr/m/n/10 Here is an example which downloads \TU/lmtt/m/n/10 prodigal \TU/lmr/m/n/10 as the container image
  []
 
 
-Overfull \hbox (44.78pt too wide) in paragraph at lines 1897--1899
+Overfull \hbox (44.78pt too wide) in paragraph at lines 1900--1902
 \TU/lmtt/m/n/10 example.sif \TU/lmr/m/n/10 from \TU/lmtt/m/n/10 docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10\TU/lmr/m/n/10 .
  []
 
@@ -1600,34 +1542,34 @@ File: img/lab3/data_layout.png Graphic file (type bmp)
 
 
 [65]
-Overfull \hbox (131.5pt too wide) in paragraph at lines 2145--2146
+Overfull \hbox (131.5pt too wide) in paragraph at lines 2148--2149
 []\TU/lmtt/m/n/10 apptainer pull prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10 
  []
 
 
-Underfull \hbox (badness 4108) in paragraph at lines 2159--2160
+Underfull \hbox (badness 4108) in paragraph at lines 2162--2163
 \TU/lmr/m/n/10 LJ. Prodigal: prokaryotic gene recognition and translation ini-
  []
 
 
-Underfull \hbox (badness 2119) in paragraph at lines 2159--2160
+Underfull \hbox (badness 2119) in paragraph at lines 2162--2163
 \TU/lmr/m/n/10 tiation site identification. BMC Bioinformatics. 2010;11(1):119.
  []
 
 
 
 [66]
-Underfull \hbox (badness 10000) in paragraph at lines 2185--2186
+Underfull \hbox (badness 10000) in paragraph at lines 2188--2189
 []\TU/lmtt/m/n/10 -i:  Specify FASTA/Genbank input file (default reads from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2195--2197
+Underfull \hbox (badness 10000) in paragraph at lines 2198--2200
 []\TU/lmtt/m/n/10 -d:  Write nucleotide sequences of genes to the selected
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2197--2199
+Underfull \hbox (badness 10000) in paragraph at lines 2200--2202
 []\TU/lmtt/m/n/10 -f:  Select output format (gbk, gff, or sco).  Default is
  []
 
@@ -1642,24 +1584,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 2197--2199
 [70]
 
 [71]
-Underfull \hbox (badness 7116) in paragraph at lines 2480--2482
+Underfull \hbox (badness 7116) in paragraph at lines 2483--2485
 []\TU/lmr/m/n/10 sequences are grouped into families: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2482--2483
+Underfull \hbox (badness 10000) in paragraph at lines 2485--2486
 []\TU/lmr/m/n/10 transporter substrates: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][] [][][] [] [][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2505--2506
+Underfull \hbox (badness 10000) in paragraph at lines 2508--2509
 []\TU/lmtt/m/n/10 --in                     input reference file in FASTA
  []
 
 
 
 [72]
-Overfull \hbox (0.25pt too wide) in paragraph at lines 2573--2574
+Overfull \hbox (0.25pt too wide) in paragraph at lines 2576--2577
 []\TU/lmtt/m/n/10 --evalue                 maximum e-value to report alignments
  []
 
@@ -1678,14 +1620,14 @@ Overfull \hbox (0.25pt too wide) in paragraph at lines 2573--2574
 [78]
 
 [79]
-Underfull \hbox (badness 2012) in paragraph at lines 2915--2916
+Underfull \hbox (badness 2012) in paragraph at lines 2918--2919
 \TU/lmr/m/n/10 mann A. Bakta: rapid and standardized annotation of bacterial
  []
 
 
 
 [80]
-Overfull \hbox (145.68001pt too wide) in paragraph at lines 2994--2995
+Overfull \hbox (145.68001pt too wide) in paragraph at lines 2997--2998
 []\TU/lmr/m/n/10 Have a look at the reported hypothetical proteins at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"
  []
 
@@ -1694,7 +1636,7 @@ Overfull \hbox (145.68001pt too wide) in paragraph at lines 2994--2995
 [81]
 
 [82]
-Overfull \hbox (29.21pt too wide) in paragraph at lines 3087--3089
+Overfull \hbox (29.21pt too wide) in paragraph at lines 3090--3092
 []\TU/lmr/m/n/10 We indicated an output path within a new folder \TU/lmtt/m/n/10 rgi_out = Path("./rgi/chicken")\TU/lmr/m/n/10 .
  []
 
@@ -1703,7 +1645,7 @@ Overfull \hbox (29.21pt too wide) in paragraph at lines 3087--3089
 [83]
 
 [84]
-Overfull \hbox (101.51pt too wide) in paragraph at lines 3193--3195
+Overfull \hbox (101.51pt too wide) in paragraph at lines 3196--3198
 \TU/lmr/m/n/10 shorter list of hypotheticals from Bakta at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.faa\TU/lmr/m/n/10 . 
  []
 
@@ -1716,22 +1658,22 @@ Overfull \hbox (101.51pt too wide) in paragraph at lines 3193--3195
 [87]
 
 [88]
-Underfull \hbox (badness 2302) in paragraph at lines 3427--3432
+Underfull \hbox (badness 2302) in paragraph at lines 3430--3435
 \TU/lmr/m/n/10 dicating stop codons from the prodigal output. We must also cre-
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 3427--3432
+Underfull \hbox (badness 1292) in paragraph at lines 3430--3435
 \TU/lmr/m/n/10 ate and run it within a dedicated output folder, while using absolute
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 3427--3432
+Underfull \hbox (badness 1496) in paragraph at lines 3430--3435
 \TU/lmr/m/n/10 paths. As it runs, it will dump files into the current directory de-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3427--3432
+Underfull \hbox (badness 10000) in paragraph at lines 3430--3435
 \TU/lmr/m/n/10 (\TU/lmtt/m/n/10 {LIB}/"outputs/bakta.full/assembly.hypotheticals.faa"\TU/lmr/m/n/10 ). Pre-
  []
 
@@ -1742,7 +1684,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3427--3432
 [90]
 
 [91]
-Overfull \hbox (30.39001pt too wide) in paragraph at lines 3542--3543
+Overfull \hbox (30.39001pt too wide) in paragraph at lines 3545--3546
 []\TU/lmr/m/n/10 This will take a few minutes. Feel free to skip and use (\TU/lmtt/m/n/10 LIB/"outputs/protein_bert"\TU/lmr/m/n/10 ). 
  []
 
@@ -1753,11 +1695,11 @@ Overfull \hbox (30.39001pt too wide) in paragraph at lines 3542--3543
 [93]
 
 [94]
-Underfull \vbox (badness 10000) detected at line 3755
+Underfull \vbox (badness 10000) detected at line 3758
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3755
+Underfull \vbox (badness 10000) detected at line 3758
  []
 
 
@@ -1767,12 +1709,12 @@ Underfull \vbox (badness 10000) detected at line 3755
 [96]
 
 [97]
-Underfull \hbox (badness 10000) in paragraph at lines 3855--3857
+Underfull \hbox (badness 10000) in paragraph at lines 3858--3860
 []\TU/lmtt/m/n/10 -p keywords such as pathways or subsystems (for example
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3857--3859
+Underfull \hbox (badness 10000) in paragraph at lines 3860--3862
 []\TU/lmtt/m/n/10 -l Select the pathway database (MetaCyc, KEGG, SEED, all;
  []
 
@@ -1805,7 +1747,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [104]
-Underfull \hbox (badness 1112) in paragraph at lines 4067--4068
+Underfull \hbox (badness 1112) in paragraph at lines 4076--4077
 []\TU/lmr/m/n/10 All software tools are packaged in the main container, so we can use
  []
 
@@ -1831,7 +1773,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 File: img/lab4/new_tab.png Graphic file (type bmp)
 <img/lab4/new_tab.png>
 
-Overfull \hbox (28.26518pt too wide) in paragraph at lines 4278--4280
+Overfull \hbox (28.26518pt too wide) in paragraph at lines 4287--4289
 \TU/lmr/m/n/10 book. [] 
  []
 
@@ -1854,6 +1796,9 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [112]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [113]
 
@@ -1867,8 +1812,6 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [115]
 File: img/lab4/gsea.png Graphic file (type bmp)
 <img/lab4/gsea.png>
-File: img/lab4/gsea_phit.png Graphic file (type bmp)
-<img/lab4/gsea_phit.png>
 
 
 
@@ -1877,6 +1820,8 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [116]
+File: img/lab4/gsea_phit.png Graphic file (type bmp)
+<img/lab4/gsea_phit.png>
 File: img/lab4/gsea_pmiss.png Graphic file (type bmp)
 <img/lab4/gsea_pmiss.png>
 
@@ -1891,14 +1836,6 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [118]
 
 [119]
-Underfull \vbox (badness 10000) detected at line 4835
- []
-
-
-Underfull \vbox (badness 10000) detected at line 4835
- []
-
-
 
 
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
@@ -1917,7 +1854,12 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [122]
 
 [123]
-Underfull \vbox (badness 1292) has occurred while \output is active []
+Underfull \vbox (badness 10000) detected at line 5033
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5033
+ []
 
 
 
@@ -1936,9 +1878,6 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [126]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [127]
 
@@ -1966,21 +1905,13 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [132]
-Underfull \vbox (badness 10000) detected at line 5546
- []
-
-
-Underfull \vbox (badness 10000) detected at line 5546
- []
-
-
 
 [133]
-Underfull \vbox (badness 10000) detected at line 5546
+Underfull \vbox (badness 10000) detected at line 5555
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5546
+Underfull \vbox (badness 10000) detected at line 5555
  []
 
 
@@ -1991,13 +1922,18 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [134]
-File: img/lab4/cytoscape_load.png Graphic file (type bmp)
-<img/lab4/cytoscape_load.png>
+Underfull \vbox (badness 10000) detected at line 5555
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 5555
+ []
+
 
 
 [135]
-File: img/lab4/cytoscape_edge1.png Graphic file (type bmp)
-<img/lab4/cytoscape_edge1.png>
+File: img/lab4/cytoscape_load.png Graphic file (type bmp)
+<img/lab4/cytoscape_load.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -2009,19 +1945,27 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [136]
-
-[137]
+File: img/lab4/cytoscape_edge1.png Graphic file (type bmp)
+<img/lab4/cytoscape_edge1.png>
 File: img/lab4/cytoscape_edge2.png Graphic file (type bmp)
 <img/lab4/cytoscape_edge2.png>
-No file _main.bbl.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[137]
 
 
 Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 138 \TU/lmr/m/sl/10 CHAPTER 5.  MODULE 4 LAB: VISUALIZATION AND FINDING FUNCTIONAL SIGNIFICANCE
  []
 
-[138] (./_main.aux)
+[138]
+No file _main.bbl.
+
+
+[139] (./_main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
@@ -2031,12 +1975,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 17649 strings out of 472247
- 322972 string characters out of 5528794
- 868048 words of memory out of 5000000
- 43937 multiletter control sequences out of 15000+600000
+ 17650 strings out of 472247
+ 322095 string characters out of 5528703
+ 865144 words of memory out of 5000000
+ 43941 multiletter control sequences out of 15000+600000
  633324 words of font info for 99 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,7n,114p,1351b,485s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on _main.pdf (138 pages).
+Output written on _main.pdf (139 pages).

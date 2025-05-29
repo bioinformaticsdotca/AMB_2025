@@ -88,15 +88,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -128,9 +130,6 @@
   \color{white}
   \begin{shaded}}
  {\end{shaded}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 \usepackage{bookmark}
@@ -165,10 +164,10 @@ Welcome to CBW's Advanced Microbiome Analysis 2025 Workshop!
 \section{Course Schedule}\label{course-schedule}
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
-  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3067}}
-  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
-  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3733}}@{}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1600}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3067}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1600}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3733}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Time (PST)
@@ -202,7 +201,11 @@ Coming soon!
 
 \part{Modules}\label{part-modules}
 
-\chapter{Module 1 Lab: Introduction to metagenomics and read‐based profiling}\label{module-1-lab-introduction-to-metagenomics-and-readbased-profiling}
+\chapter{Module 1}\label{module-1}
+
+\section{Lecture}\label{lecture}
+
+\section{Lab: Introduction to metagenomics and read‐based profiling}\label{lab-introduction-to-metagenomics-and-readbased-profiling}
 
 This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.io/AMB_2025/}{Advanced Microbiome Analysis} (held in Vancouver, BC, May 29-30). It is based on a version written for the \href{https://bioinformaticsdotca.github.io/AMB_2024_module1}{2024 CBW Advanced Microbiome Analysis workshop by Ben Fisher}.
 
@@ -1831,7 +1834,7 @@ One of these containers will enable the use of jupyter notebooks along with a co
 
 \subsubsection{Steps for setup:}\label{steps-for-setup}
 
-\includegraphics{img/lab3/compute_env.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/compute_env.png}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1866,7 +1869,7 @@ This means port \texttt{48888} on the remote server will be forwarded to your ma
 
 Modern versions of Windows should have \texttt{ssh} available through Powershell. Putty is available as a backup.
 
-\includegraphics{img/lab3/putty_port_forward.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
 
 \subsection{Workspace}\label{workspace}
 
@@ -1942,7 +1945,7 @@ You may want to connect another terminal to maintain terminal access.
 
 JupyterLab should now be accessible at \url{http://localhost:48888/lab}. Create a new python notebook and import dependencies.
 
-\includegraphics{img/lab3/jupyter.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/jupyter.png}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2082,7 +2085,7 @@ This is a convient way to simplify commands by saving repeated sections to varia
 This lab will guide you through finding and identifying the functional units encoded in the assembled metagenome from the previous labs
 (represented by the red and orange features below), with a focus on proteins and enzymes.
 
-\includegraphics{img/lab3/data_layout.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/data_layout.png}}
 
 We will begin by exploring techniques related to sequence similarity, which seeks to identify known genes through comparison with reference databases.
 
@@ -3970,6 +3973,12 @@ This concludes the lab!
 
 \chapter{Module 4 Lab: Visualization and Finding Functional Significance}\label{module-4-lab-visualization-and-finding-functional-significance}
 
+This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.io/AMB_2025/}{Advanced Microbiome Analysis} (held in Vancouver, BC, May 29-30).
+
+Author: Tony Liu
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 In this lab, we will work through typical transcriptiomic analyses to find significantly expressed genes
 and gene sets. Metagenomic reads will be used in place of transcriptomic data, so we will be examining
 abundance instead of expression, but the analyses shown will remain unchanged.
@@ -4008,7 +4017,7 @@ Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to 
 
 \subsubsection{Putty (Windows)}\label{putty-windows-1}
 
-\includegraphics{img/lab3/putty_port_forward.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
 
 \subsection{Workspace}\label{workspace-1}
 
@@ -4276,7 +4285,7 @@ GSEA by permuting the sample labels.
 \end{enumerate}
 
 \textbf{Transistion to an R notebook.} Click on the \texttt{+} and select ``R'' under Notebook.
-\includegraphics{img/lab4/new_tab.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/new_tab.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -4605,7 +4614,7 @@ Rank order the genes in each permutation by their correlation.
 
 We can now perform GSEA and create this plot from figure 1 of the GSEA paper {[}1{]}.
 
-\includegraphics[width=0.5\textwidth,height=\textheight]{img/lab4/gsea.png}
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{img/lab4/gsea.png}
 
 To calculate the ES, a running sum is calculated by scanning down the ranked list of genes, increasing the score for genes that
 are in the gene set and decreasing it otherwise. Genes in the gene set are called ``hits'' and those not in the gene set are called ``misses''.
@@ -4618,7 +4627,7 @@ The equation for the running sum of hits (P\_hit) at rank \emph{i}
 for gene set \emph{S} is given in the paper. Don't look at all of it at once, we will break it down.
 First, note that the summations only consider genes in the gene set \emph{S}.
 
-\includegraphics{img/lab4/gsea_phit.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/gsea_phit.png}}
 
 Let's create a mask to select only genes in \emph{S}.
 
@@ -4669,7 +4678,7 @@ Have a look.
 
 For P\_miss, we cumulatively sum the fraction of misses.
 
-\includegraphics{img/lab4/gsea_pmiss.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/gsea_pmiss.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -5559,13 +5568,13 @@ We can now create the Cytoscape save file and load it into Cytoscape.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{img/lab4/cytoscape_load.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_load.png}}
 
 Let's use the edge weights to fade the less important edges.
 
-\includegraphics{img/lab4/cytoscape_edge1.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_edge1.png}}
 
-\includegraphics{img/lab4/cytoscape_edge2.png}
+\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_edge2.png}}
 
 Some useful navigational tips:
 
