@@ -2,6 +2,12 @@
 
 # Module 4 Lab: Visualization and Finding Functional Significance
 
+This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bioinformaticsdotca.github.io/AMB_2025/) (held in Vancouver, BC, May 29-30).
+
+Author: Tony Liu
+
+---
+
 In this lab, we will work through typical transcriptiomic analyses to find significantly expressed genes
 and gene sets. Metagenomic reads will be used in place of transcriptomic data, so we will be examining
 abundance instead of expression, but the analyses shown will remain unchanged.
