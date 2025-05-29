@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 1 Lab: Introduction to metagenomics and read‐based profiling | Advanced Microbiome Analysis 2025</title>
   <meta name="description" content="Module 1 Lab: Introduction to metagenomics and read‐based profiling | Advanced Microbiome Analysis 2025" />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 1 Lab: Introduction to metagenomics and read‐based profiling | Advanced Microbiome Analysis 2025" />
   <meta property="og:type" content="book" />
@@ -205,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#run-checkm2"><i class="fa fa-check"></i>2.9 Run CheckM2</a></li>
 <li class="chapter" data-level="" data-path="module-2-metagenomic-assembly-and-binning.html"><a href="module-2-metagenomic-assembly-and-binning.html#other-things-that-we-frequently-do-with-mags"><i class="fa fa-check"></i>Other things that we frequently do with MAGs</a></li>
 </ul></li>
+<li class="part"><span><b>IV Modules</b></span></li>
 <li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html"><i class="fa fa-check"></i>Module 3 Lab: Assigning Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#setting-up-the-workspace"><i class="fa fa-check"></i>Setting up the workspace</a>
@@ -231,6 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="module-3-lab-assigning-functions.html"><a href="module-3-lab-assigning-functions.html#gapseq"><i class="fa fa-check"></i>gapseq</a></li>
 </ul></li>
+<li class="part"><span><b>V Modules</b></span></li>
 <li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html"><i class="fa fa-check"></i>Module 4 Lab: Visualization and Finding Functional Significance</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-4-lab-visualization-and-finding-functional-significance.html"><a href="module-4-lab-visualization-and-finding-functional-significance.html#setting-up-the-workspace-1"><i class="fa fa-check"></i>Setting up the workspace</a>
@@ -289,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>1. Initial setup and pre-processing of metagenomic reads<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#initial-setup-and-pre-processing-of-metagenomic-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="log-into-your-instance" class="section level3 hasAnchor">
 <h3>Log into your instance<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#log-into-your-instance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If you weren’t in the beginner microbiome analysis workshop and need a refresher, check the notes in <a href="https://github.com/LangilleLab/microbiome_helper/wiki/CBW%E2%80%902025%E2%80%90BMB%E2%80%90Module1#11-log-into-your-aws-instance">Beginner Module 1</a>.</p>
+<p>If you weren’t in the beginner microbiome analysis workshop and need a refresher, check the notes in <a href="https://bioinformaticsdotca.github.io/BMB_2025/module-1.html#log-into-your-aws-instance">Beginner Module 1</a>.</p>
 </div>
 <div id="working-on-the-command-line" class="section level3 hasAnchor">
 <h3>Working on the Command Line<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#working-on-the-command-line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -304,26 +306,26 @@ cp ~/CourseData/MIC_data/AMB_data/metagenome_metadata_subset.txt metagenome_meta
 </div>
 <div id="about-the-samples" class="section level3 hasAnchor">
 <h3>About the samples<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#about-the-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:
+<p>These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:<br />
 - <a href="https://journals.asm.org/doi/full/10.1128/spectrum.03616-22">Week-Old Chicks with High Bacteroides Abundance Have Increased Short-Chain Fatty Acids and Reduced Markers of Gut Inflammation</a></p>
-<p>Or in the additional analysis done by John’s lab here:
+<p>Or in the additional analysis done by John’s lab here:<br />
 - <a href="https://www.biorxiv.org/content/10.1101/2024.10.14.618310v1.full">Metabolic modeling of microbial communities in the chicken ceca reveals a landscape of competition and co-operation</a></p>
 </div>
 <div id="a-crash-course-in-gnu-parallel" class="section level3 hasAnchor">
 <h3>A Crash Course in GNU Parallel<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#a-crash-course-in-gnu-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, activate our conda environment for this tutorial:</p>
 <pre><code>conda activate amb_module1</code></pre>
-<p>Sometimes in bioinformatics, the number of tasks you have to complete can get VERY large (e.g. when we have thousands of samples). Fortunately, there are several tools that can help us with this. One such tool is <a href="https://www.gnu.org/software/parallel/parallel_tutorial.html">GNU Parallel</a>. This tool can simplify the way in which we approach large tasks, and as the name suggests, it can iterate though many tasks in <em>parallel</em>, i.e. at the same time. If you aren’t familiar with using <code>top</code> or <code>htop</code> to look at the number of processes that you have available to you, take a look at <a href="https://github.com/LangilleLab/microbiome_helper/wiki/CBW%E2%80%902025%E2%80%90BMB%E2%80%90Module1#113-htop---looking-at-the-number-of-processes-we-have-available-or-running">this section of the beginner workshop</a>.</p>
+<p>Sometimes in bioinformatics, the number of tasks you have to complete can get VERY large (e.g. when we have thousands of samples). Fortunately, there are several tools that can help us with this. One such tool is <a href="https://www.gnu.org/software/parallel/parallel_tutorial.html">GNU Parallel</a>. This tool can simplify the way in which we approach large tasks, and as the name suggests, it can iterate though many tasks in <em>parallel</em>, i.e. at the same time. If you aren’t familiar with using <code>top</code> or <code>htop</code> to look at the number of processes that you have available to you, take a look at <a href="https://bioinformaticsdotca.github.io/BMB_2025/module-1.html#htop---looking-at-the-number-of-processes-we-have-available-or-running">this section of the beginner workshop</a>.</p>
 <p>We can use a simple command to demonstrate how to use <code>parallel</code>:</p>
 <pre><code>parallel &#39;echo {}&#39; ::: a b c</code></pre>
 <p>With the command above, the program contained within the quotation marks <code>' '</code> is <code>echo</code>. This program is run 3 times, as there are 3 inputs listed after the <code>:::</code> characters. What happens if there are multiple lists of inputs? Try the following:</p>
 <pre><code>parallel &#39;echo {}&#39; ::: a b c ::: 1 2 3</code></pre>
 <p>Here, we have demonstrated how <code>parallel</code> treats multiple inputs. It uses all combinations of one of each from <code>a b c</code> and <code>1 2 3</code>. But, what if we wanted to use 2 inputs that were sorted in a specific order? This is where the <code>--link</code> flag becomes particularly useful. Try the following:</p>
 <pre><code>parallel --link &#39;echo {}&#39; ::: a b c ::: 1 2 3</code></pre>
-<p>In this case, the inputs are “linked”, such that only one of each is used. If the lists are different lengths, <code>parallel</code> will go back to the beginning of the shortest list and continue to use it until the longest list is completed. You do not have to run the following command, as the output is provided to demonstrate this.</p>
+<p>In this case, the inputs are “linked”, such that only one of each is used. If the lists are different lengths, <code>parallel</code> will go back to the beginning of the shortest list and continue to use it until the longest list is completed.</p>
 <pre><code>parallel --link &#39;echo {}&#39; ::: light dark ::: red blue green</code></pre>
 <p>Notice how <code>light</code> appears a second time (on the third line of the output) to satisfy the length of the second list.</p>
-<p>Another useful feature is specifying <em>which</em> inputs we give parallel are to go <em>where</em>. This can be done intuitively by using multiple brackets <code>{ }</code> containing numbers corresponding to the list we are interested in. Again, you do not have to run the following command, as the output is provided to demonstrate this.</p>
+<p>Another useful feature is specifying <em>which</em> inputs we give parallel are to go <em>where</em>. This can be done intuitively by using multiple brackets <code>{ }</code> containing numbers corresponding to the list we are interested in.</p>
 <pre><code>parallel --link &#39;echo {1} {3}; echo {2} {3}&#39; ::: one red ::: two blue ::: fish</code></pre>
 <p>Finally, a handy feature is that <code>parallel</code> accepts files as inputs. This is done slightly differently than before, as we need to use four colon characters <code>::::</code> instead of three. Parallel will then read each line of the file and treat its contents as a list. You can also mix this with the three-colon character lists <code>:::</code> you are already familiar with. Using the following code, create a test file and use <code>parallel</code> to run the <code>echo</code> program:</p>
 <pre><code>echo -e &quot;A\nB\nC&quot; &gt; test.txt
@@ -339,24 +341,25 @@ parallel --link &#39;echo {2} {1}&#39; :::: test.txt ::: 1 2 3</code></pre>
 <h3>Visualization with FastQC<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#visualization-with-fastqc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, make your desired output directory <code>fastqc_out</code>. Then, run FastQC as follows:</p>
 <pre><code>fastqc -t 4 raw_data/*fastq.gz -o fastqc_out</code></pre>
-<p>Run MultiQC on the FastQC results:</p>
-<pre><code>multiqc fastqc_out --filename multiqc.html</code></pre>
 <p>Remember that you can go to <code>http://##.uhn-hpc.ca/</code> (where ## is your personal number) to find all of the files that we’re creating.</p>
-<p>Copy across the <code>multiqc.html</code> file to your computer.</p>
-<p>Click on the <strong>.html</strong> files to view the results for each sample. Let’s look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer. However, you may notice that for our samples this is not the case! This is because for the purpose of this tutorial, your raw data has already been trimmed.</p>
+<p>Click on the <strong>.html</strong> files to view the results for each sample. Let’s look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer.</p>
 <p>More often, per base sequence quality will look like the following. The FastQC documentation provides examples of “<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html#M1">good</a>” and “<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html">bad</a>” data. These examples are also shown below:</p>
 <p><img src="https://github.com/LangilleLab/microbiome_helper/assets/106988687/1ceec41e-f7ae-4763-889d-a24e95384d57" width="800"></p>
-<p>Now, you may have also noticed that most of the samples fail the “Per Base Sequence Content” module of FastQC.</p>
 <p>This specific module plots out the proportion of each base position in a file, and raises a warning/error if there are large discrepancies in base proportions. In a given sequence, the lines for each base should run in parallel, indicating that the base calling represents proper nucleotide pairing. Additionally, the A and T lines may appear separate from the G and C lines, which is a consequence of the GC content of the sample. The relative amount of each base reflects the overall amount of the bases in the genome, and should not be imbalanced. When this is not the case, the sequence composition is <strong>biased</strong>. A common cause of this is the use of primers, which throws off our sequence content at the beginning of the read. Fortunately, although the module error stems from this bias, according to the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/4%20Per%20Base%20Sequence%20Content.html#:~:text=Whilst%20this%20is%20a%20true%20technical%20bias%2C%20it%20isn%27t%20something%20which%20can%20be%20corrected%20by%20trimming%20and%20in%20most%20cases%20doesn%27t%20seem%20to%20adversely%20affect%20the%20downstream%20analysis.">FastQC documentation for this module</a> it will not largely impact our downstream analysis.</p>
 <p>The other modules are explained in depth in the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/">FastQC Module Help Documentation</a></p>
+<p><a href="https://github.com/MultiQC/MultiQC">MultiQC</a> is a handy tool for combining the FastQC output files.</p>
+<p>Run it on our FastQC results:</p>
+<pre><code>multiqc fastqc_out --filename multiqc.html</code></pre>
+<p>Then open up the <code>multiqc.html</code> file and see what else you can see in this report vs the individual ones.</p>
 </div>
 <div id="filtering-with-kneaddata" class="section level3 hasAnchor">
 <h3>Filtering with KneadData<a href="module-1-lab-introduction-to-metagenomics-and-readbased-profiling.html#filtering-with-kneaddata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>KneadData is a tool which “wraps” several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:
-* Run Trimmomatic to remove adapter sequences
-* Run Bowtie2 to remove reads mapping to the reference genome and the PhiX genome (commonly used as a sequencing control)</p>
-<p>We don’t have paired-end data here, but if we did, it would also:
-* Check whether both pairs of a read exist
+<p>KneadData is a tool which “wraps” several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:<br />
+* Run Trimmomatic to remove adapter sequences<br />
+* Run Bowtie2 to remove reads mapping to the reference genome and the PhiX genome (commonly used as a sequencing control)<br />
+</p>
+<p>We don’t have paired-end data here, but if we did, it would also:<br />
+* Check whether both pairs of a read exist<br />
 * Check whether they both map to the reference genome</p>
 <p>Bowtie2 needs a reference genome/index file for its mapping step. There are some pre-made indexes on <a href="https://benlangmead.github.io/aws-indexes/bowtie">this page</a>.</p>
 <div class="greenbox">
@@ -825,42 +828,42 @@ The Bacteroides samples look very similar between the two methods, but the Non-B
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/bioinformaticsdotca/AMB_2025/blob/main/020-module-1.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/AMB_2025/blob/main/020-module-1.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

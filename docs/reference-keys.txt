@@ -2,7 +2,9 @@ welcome
 awsunix-primer
 course-schedule
 meet-your-faculty
-module-1-lab-introduction-to-metagenomics-and-readbased-profiling
+module-1
+lecture
+lab-introduction-to-metagenomics-and-readbased-profiling
 overview
 initial-setup-and-pre-processing-of-metagenomic-reads
 log-into-your-instance

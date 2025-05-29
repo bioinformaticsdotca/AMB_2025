@@ -1,20 +1,10 @@
+# (PART) Modules {-}
+
 # Module 3 Lab: Assigning Functions
 
-In this lab, we will predict and briefly examine the functions encoded in the assembled metagenome from the previous labs.
-Optional context and questions are provided as collapsible sections like so:
+This tutorial is part of the 2025 CBW [Advanced Microbiome Analysis](https://bioinformaticsdotca.github.io/AMB_2025/) (held in Vancouver, BC, May 29-30).
 
-<details>
-    <summary>Click me</summary>
-
-Optional context is provided to make this workshop as inclusive as possible. Feel free to skip
-any topics that you are already familiar with. Questions and answers will also use this collapsible format.
-
----
-
-</details>
-
-All instructions required to completed this lab are provided below, so you are free to work asynchronously at your own pace.
-Active discussions with both peers and instructors are encouraged. Say hi to the person next to you!
+Author: Tony Liu
 
 ## Setting up the workspace
 
@@ -62,12 +52,12 @@ Modern versions of Windows should have `ssh` available through Powershell. Putty
 Create a new workspace in your home directory.
 
 ```{bash, eval=FALSE}
-cd ~
-mkdir amb_lab3
-cd amb_lab3
+cd ~/workspace
+mkdir amb_module3
+cd amb_module3
 ```
 
-Link the resource folder for easy access.
+Link the resource folder for easy access. This will contain all the required software and data.
 
 ```{bash, eval=FALSE}
 ln -s ~/CourseData/MIC_data/amb_module3/ ./lib
@@ -85,6 +75,13 @@ The image URI takes the form of `<protocol>://<address>:<tag>`. Tags are used to
 apptainer pull example.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10
 ```
 
+<details>
+    <summary>What is the version of prodigal and the prodigal container image?</summary>
+
+Prodigal: 2.6.3. Image: 2.6.3--h7b50bb2_10
+
+</details>
+
 We can now run the prodigal executable inside the container using `exec` (execute) like so.
 ```{bash, eval=FALSE}
 apptainer exec ./example.sif prodigal -h
@@ -93,8 +90,16 @@ apptainer exec ./example.sif prodigal -h
 All containers for this lab were pre-downloaded in the resource folder now linked as `./lib`, including a main container with Jupyter and miscellaneous utilities.
 The main container provides an automated setup script named `unpack`. Let's run it.
 ```{bash, eval=FALSE}
-apptainer exec ./lib/amb_lab3.sif unpack
+apptainer exec -B /media:/media ./lib/amb_lab3.sif unpack
 ```
+
+<details>
+    <summary>Container binds (`-B`)</summary>
+
+We need to make the container aware of the original folder linked to `./lib` so that its contents become available inside the container.
+Specifically, `/media` from outside the container is bound to `/media` inside the container.
+
+</details>
 
 The following will dedicate the current terminal to running the juptyer notebook on port 48888.
 You may want to connect another terminal to maintain terminal access.
@@ -105,6 +110,16 @@ You may want to connect another terminal to maintain terminal access.
 ### Jupyter
 
 JupyterLab should now be accessible at http://localhost:48888/lab. Create a new python notebook and import dependencies.
+
+![](img/lab3/jupyter.png)
+
+1. Files are on the left
+1. Cells contain executable code
+1. Outputs are below each cell
+1. Clicking beside the output collapses it
+1. Useful functions are available in the tool bar. The `+` create additional cells
+
+With a cell selected, you can also run it with `Shift+Enter`.
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
 import pandas as pd
@@ -206,8 +221,8 @@ This is a convient way to simplify commands by saving repeated sections to varia
 
 ## Overview
 
-This lab will guide you through finding and identifying the functional units
-(represented by the red and orange features below) of a metagenomic assembly, with a focus on proteins and enzymes.
+This lab will guide you through finding and identifying the functional units encoded in the assembled metagenome from the previous labs
+(represented by the red and orange features below), with a focus on proteins and enzymes.
 
 ![](img/lab3/data_layout.png)
 
@@ -218,14 +233,15 @@ We will begin by exploring techniques related to sequence similarity, which seek
 * [Bakta]
 * [Resistance Gene Identifier (RGI)]
 
-Then we will transition to machine-learning tools, which move away from the "lookup table" approach of sequence similarity.
+Then we will transition to machine-learning tools, which move away from the "lookup table" approach of sequence similarity and towards
+having an internal model that "understands" biology.
 
 * [Kofamscan]
 * [deepFRI]
 * [deepEC]
 * [proteinBERT]
 
-Finally, we will use gapseq to construct toy metabolic models using techniques to predict the existence of enzymes.
+Finally, we will use gapseq to construct metabolic models from the given MAGs.
 
 * [gapseq]
 
@@ -239,6 +255,17 @@ https://quay.io/repository/biocontainers/prodigal?tab=tags
 prodigal_sif = LIB/"prodigal.sif"
 ```
 
+<details>
+    <summary>How could you get prodigal for yourself?</summary>
+
+1. Acquire apptainer (https://apptainer.org/docs/user/main/index.html)
+1. `apptainer pull prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10`
+
+---
+
+</details>
+<br>
+
 The goal of prodigal is to predict the protein coding features (open reading frames; ORFs) in a given nucleotide sequence.
 Recall that this corresponds to the red features in the overview diagram, neglecting the orange features for now.
 It does this by optimizing predictions based on a set of tuned rules (heuristics) which take into account
@@ -251,11 +278,9 @@ Based on this, we would expect prodigal to:
 - accept a nucleotide sequence as input
 - output an itemized list of predicted open reading frames
 
-The input sequence will be the metagenomic assembly since we would otherwise neglect some contigs that were not assigned to MAGs,
-thereby causing information loss.
 Let's have a look at prodigal's help message to get an idea of specific inputs and outputs.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {prodigal_sif} prodigal -h")
+Shell(f"apptainer exec -B /media:/media {prodigal_sif} prodigal -h")
 ```
 
 This looks like the input:
@@ -269,7 +294,7 @@ These look like they are useful for the output:
 - `-f:  Select output format (gbk, gff, or sco).  Default is gbk.` We will choose `gff` since the genbank output of prodigal is not in a standard formatted.
 - `-o:  Specify output file (default writes to stdout).`
 
-After a bit of investigation, it also looks like we should specify that the input is a metagenomic assembly.
+After a bit of investigation, it also looks like we should specify that the input is a mixed population (metagenomic).
 
 - `-p:  Select procedure (single or meta).  Default is single.`
 
@@ -278,7 +303,7 @@ Have a go at compiling the final command.
 out_dir = "./prodigal"
 Shell(f"""
 mkdir -p {out_dir}/
-apptainer exec {prodigal_sif} \
+apptainer exec -B /media:/media {prodigal_sif} \
     prodigal \
         -i {LIB}/inputs/assembly.fa \
         ...
@@ -294,6 +319,15 @@ This let's us write break up a long command into multiple lines for readability.
 </details>
 
 <details>
+    <summary>Why wouldn't we want to use the MAGs as input?</summary>
+
+Not all contigs of the metagenomic assembly are in MAGs.
+
+---
+
+</details>
+
+<details>
     <summary>Suggested answer</summary>
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -302,7 +336,7 @@ prodigal_aa = out_dir/"orfs.faa"
 prodigal_gff = out_dir/"orfs.gff"
 Shell(f"""\
 mkdir -p {out_dir}/
-apptainer exec {prodigal_sif} \
+apptainer exec -B /media:/media {prodigal_sif} \
     prodigal \
         -p meta \
         -i {LIB}/inputs/assembly.fa \
@@ -317,7 +351,7 @@ apptainer exec {prodigal_sif} \
 
 </details>
 
-Let's take a peek at the `gff`.
+Let's take a peek at the gene feature format (`gff`) file.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 gff = pd.read_csv(out_dir/"orfs.gff", sep="\t", header=None, comment="#")
 print(gff.shape)
@@ -372,9 +406,13 @@ mat[[False, False, False, True, True]] # [4, 5]
 ---
 
 </details>
+<br>
 
-Let's investigate how many ORFs were not on MAGs. To do this, we will first create a blacklist for mag contig IDs.
+Let's investigate how many ORFs were not in MAGs. To do this, we will first create a blacklist for mag contig IDs.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+from Bio import SeqIO # SeqIO from Biopython enables us to read fasta files, among other formats
+# https://biopython.org/wiki/SeqIO#:~:text=Peter-,File%20Formats,-The%20authorative%20list
+
 mag_ids = set()
 # loop through the paths to each of the MAG files
 for mag_file in [
@@ -412,14 +450,19 @@ non_mag_orfs.shape
 ```
 
 <details>
+    <summary>How many contigs were in MAGs?</summary>
+803
+</details>
+
+<details>
     <summary>How many ORFs were not from MAGs?</summary>
 1060 of 7176, or about 15%
 </details>
 
 ## Sequence similarity
 
-In this section, we will use tools to find proteins with known sequences that are similar to that of the predicted ORFs.
-By assuming that similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
+In this section, we will use tools to find proteins with known sequences similar to that of the predicted ORFs.
+By assuming similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
 While not perfect [1, 2], this is a common first-pass approach to assign functions to genes in metagenomic assemblies.
 
 1. Omelchenko MV, Galperin MY, Wolf YI, Koonin EV. Non-homologous isofunctional enzymes: A systematic analysis of alternative solutions in enzyme evolution. Biol Direct. 2010;5(1):31. https://doi.org/10.1186/1745-6150-5-31
@@ -449,7 +492,7 @@ We expect to run diamond in two steps:
     - outputs: a list of hits
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {diamond_sif} diamond --help")
+Shell(f"apptainer exec -B /media:/media {diamond_sif} diamond --help")
 ```
 
 We will build a database for transporters using the transporter classification database (TCDB) [1].
@@ -462,7 +505,7 @@ TCDB has been predownloaded from these URLs.
 1. Saier MH Jr, Tran CV, Barabote RD. TCDB: the Transporter Classification Database for membrane transport protein analyses and information. Nucleic Acids Res. 2006;34(suppl_1):D181–6. https://doi.org/10.1093/nar/gkj001
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {diamond_sif} diamond makedb")
+Shell(f"apptainer exec -B /media:/media {diamond_sif} diamond makedb")
 ```
 
 The important arguments appear to be:
@@ -476,7 +519,7 @@ Running a your command is a good way to check for correctness and resulting erro
 tcdb_fasta = LIB/"transporter_classification_db/tcdb.faa"
 tcdb_db = Path("./diamond/tcdb.dmnd")
 Shell(f"""
-apptainer exec {diamond_sif} diamond makedb \
+apptainer exec -B /media:/media {diamond_sif} diamond makedb \
     ...
 """)
 ```
@@ -488,7 +531,7 @@ tcdb_fasta = LIB/"transporter_classification_db/tcdb.faa"
 tcdb_db = Path("./diamond/tcdb.dmnd")
 Shell(f"""
 mkdir -p {tcdb_db.parent} # parent folder of given path
-apptainer exec {diamond_sif} diamond makedb \
+apptainer exec -B /media:/media {diamond_sif} diamond makedb \
     --threads {CPUS} \
     --in {tcdb_fasta} \
     --db {tcdb_db}
@@ -498,7 +541,7 @@ apptainer exec {diamond_sif} diamond makedb \
 
 Now we can search our predicted ORFs for transporters catalogued in TCDB.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {diamond_sif} diamond blastp")
+Shell(f"apptainer exec -B /media:/media {diamond_sif} diamond blastp")
 ```
 
 That produced a lot of output, but these are the essential arguments:
@@ -521,7 +564,7 @@ I find that this works well for general cases.
 columns = "qseqid sseqid score pident evalue"
 diamond_out = Path("./diamond/orfs.tsv")
 Shell(f"""
-apptainer exec {diamond_sif} \
+apptainer exec -B /media:/media {diamond_sif} \
     diamond blastp \
         --query ./prodigal/orfs.faa \
         --db {tcdb_db} \
@@ -541,7 +584,7 @@ Perform a self blast. We can skip making a database since the number of sequence
 ```{python, eval=FALSE, attr.source='.numberLines'}
 diamond_self = Path("./diamond/self.raw")
 Shell(f"""
-apptainer exec {diamond_sif} \
+apptainer exec -B /media:/media {diamond_sif} \
     diamond blastp \
         --query {prodigal_aa} \
         --db {prodigal_aa} \
@@ -592,7 +635,7 @@ df_self["qseqid"]
 
 Calculate BSR
 ```{python, eval=FALSE, attr.source='.numberLines'}
-df_raw = pd.read_csv(diamond_raw, sep="\t", header=None, names=columns.split(" "))
+df_raw = pd.read_csv(diamond_out, sep="\t", header=None, names=columns.split(" "))
 # merge in self scores by matching the qseqid
 # "left" refers to a "left join" where
 # each row in the left dataframe (df_raw) is found a match in the right (df_self)
@@ -636,10 +679,10 @@ len(MAG1), len(MAG2)
     <summary>Python `set`</summary> 
 Sets enable easy checking of membership using `in`. For example:
 ```{python, eval=FALSE, attr.source='.numberLines'}
+empty_set = set()
 X = {1, 2, 3}
 1 in X # True
 0 in X # False
-empty_set = set()
 ```
 
 ---
@@ -699,6 +742,8 @@ value2i["a"] # 0
 
 To visualize the results, we will first organize the data into a matrix of counts for each transporter family and MAG.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+import numpy as np # numpy is a comprehensive math library for python
+
 mat = np.zeros(shape=(2, df_fam["family"].nunique())) # MAGs x families
 mag2i = {mag: i for i, mag in enumerate([1, 2])}
 fam2j = {fam: i for i, fam in enumerate(df_fam["family"].unique())}
@@ -709,8 +754,17 @@ for _, row in df_fam.groupby(["family", "mag"])[["qseqid"]].count().reset_index(
 order = np.argsort(-mat.sum(axis=0)) # produces a sorted list of indexes
 ```
 
-Some utility functions are provided to make simple figures with `Ploty`.
+Let's also load in the human-readable names of the transporter families from the TCDB metadata table.
+```{python, eval=FALSE, attr.source='.numberLines'}
+df_tcdb = pd.read_csv(LIB/"transporter_classification_db/families.tsv", sep="\t", header=None, names=["key", "name"])
+tcdb_families = {row["key"]: row["name"] for _, row in df_tcdb.iterrows()}
+print(df_tcdb.shape)
+df_tcdb.head(2)
+```
+
+`BaseFigure` and `ApplyTemplate` are utility functions that we have provided to make simple figures with `Ploty`.
 Let's use them to compare the abundance of transporter families in each MAG with a diverging bar plot.
+(https://plotly.com/python/bar-charts/). Heatmaps may be suitable for a larger number of MAGs (https://plotly.com/python/heatmaps/).
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from local.figures.template import BaseFigure, ApplyTemplate, go
 
@@ -740,6 +794,24 @@ fig = ApplyTemplate(
 )
 fig.show()
 ```
+
+<details>
+    <summary>What family of transporters was most prevalent overall vs in each MAG?</summary>
+Overall: ABC transporters
+MAG1 (blue): sugar transporters
+MAG2 (red): susD, RND, MFS, and OMR
+
+---
+
+</details>
+
+<details>
+    <summary>Are the results normalized?</summary>
+No. We could divide by the total number of ORFs in each MAG to prevent larger MAGs from having more transporters in a category by virtue of overall size.
+
+---
+
+</details>
 
 <details>
     <summary>How to change the figure to show the top 3 instead?</summary>
@@ -776,12 +848,13 @@ Many additional tools and consolidated reference databases are used to search fo
 1. Schwengers O, Jelonek L, Dieckmann MA, Beyvers S, Blom J, Goesmann A. Bakta: rapid and standardized annotation of bacterial genomes via alignment-free sequence identification. Microb Genomics. 2021;7(11):000685. https://doi.org/10.1099/mgen.0.000685
 
 To run Bakta, we expect to first set up reference databases before it will:
+
 - accept contigs, for which it will first run Prodigal for us
 - or accept a list of regions + contigs, for which Prodigal will be skipped
 - and produce many files containing useful annotations
 
 <details>
-    <summary>Why is a protein sequence fasta insufficient to full utilize Bakta?</summary>
+    <summary>Why is a protein sequence fasta insufficient to fully utilize Bakta?</summary>
 Non-coding features would not be represented.
 
 ---
@@ -791,7 +864,7 @@ Non-coding features would not be represented.
 The database was pre-installed, but here is some code to guide you if you decide to revisit in the future.
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {bakta_sif} bakta_db list")
+Shell(f"apptainer exec -B /media:/media {bakta_sif} bakta_db list")
 ```
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -802,7 +875,7 @@ if not bakta_db.exists():
         _type = "light"
     else:
         _type = "full"
-    Shell(f"apptainer exec {bakta_sif} bakta_db download --output {bakta_db} --type {_type}")
+    Shell(f"apptainer exec -B /media:/media {bakta_sif} bakta_db download --output {bakta_db} --type {_type}")
 ```
 
 There may be other annotation tools that we wish to run in addition to Bakta, which depend on predicted ORFs.
@@ -824,10 +897,10 @@ gff_complete = "./prodigal/orfs.complete.gff"
 gff[complete_orfs].to_csv(gff_complete, sep="\t", header=False, index=False)
 ```
 
-Running Bakta, even on this reduced dataset, may take **15 minutes or more**. Precomputed outputs are available at `{LIB}/outputs/bakta`.
+Running Bakta, even on this reduced dataset, may take **15+ minutes**. Precomputed outputs are available at `{LIB}/outputs/bakta.full`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 Shell(f"""
-apptainer exec {bakta_sif} \
+apptainer exec -B /media:/media {bakta_sif} \
     bakta --meta --threads {CPUS} --force --skip-plot \
         --db {bakta_db} \
         --keep-contig-headers \
@@ -836,6 +909,30 @@ apptainer exec {bakta_sif} \
         {LIB}/inputs/assembly.fa
 """)
 ```
+
+Have a look at the reported hypothetical proteins at `LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"` and read the results into a dataframe.
+
+```{python, eval=FALSE, attr.source='.numberLines'}
+bakta_hyp = LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"
+with open(bakta_hyp) as file:
+    print(file.read())
+```
+
+- use `pd.read_csv(...)`
+- use the argument `sep="..."` to change the separator for columns
+- use the argument `skiprows=...` to skip the initial comments
+
+<details>
+    <summary>How many hypotheticals did Bakta report?</summary>
+828
+```{python, eval=FALSE, attr.source='.numberLines'}
+df = pd.read_csv(bakta_hyp, sep="\t", skiprows=2)
+df
+```
+
+---
+
+</details>
 
 ### Resistance Gene Identifier (RGI)
 
@@ -852,11 +949,11 @@ RGI is a tool for searching the Comprehensive Antibiotic Resistance Database (CA
 1.	Alcock BP, Huynh W, Chalil R, Smith KW, Raphenya AR, Wlodarski MA, et al. CARD 2023: expanded curation, support for machine learning, and resistome prediction at the Comprehensive Antibiotic Resistance Database. Nucleic Acids Res. 2023;51(D1):D690–9. https://doi.org/10.1093/nar/gkac920
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {rgi_sif} rgi --help")
+Shell(f"apptainer exec -B /media:/media {rgi_sif} rgi --help")
 ```
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {rgi_sif} rgi main --help")
+Shell(f"apptainer exec -B /media:/media {rgi_sif} rgi main --help")
 ```
 
 Errors are a common occurrence for bioinformatics tools. The following is a command which appears to be correct,
@@ -866,7 +963,7 @@ so checking the output folder will be necessary.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 rgi_out = Path("./rgi/chicken")
 Shell(f"""
-apptainer exec {rgi_sif} \
+apptainer exec -B /media:/media {rgi_sif} \
     rgi main \
         --num_threads {CPUS} \
         --clean \
@@ -902,7 +999,7 @@ We can use the argument `-t protein` to indicate that the input is a protein seq
 rgi_out = Path("./rgi/chicken")
 Shell(f"""
 mkdir -p {rgi_out.parent}
-apptainer exec {rgi_sif} \
+apptainer exec -B /media:/media {rgi_sif} \
     rgi main \
         --num_threads {CPUS} \
         --clean \
@@ -921,11 +1018,14 @@ rgi_out = rgi_out.with_suffix(".txt") # RGI adds the .txt suffix
 
 Let's take a quick peak at the results.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"""
 _df = pd.read_csv(rgi_out, sep="\t", header=0)
 _df
-""")
 ```
+
+<details>
+    <summary>How many resistance genes did we find?</summary>
+Just 10!
+</details>
 
 ## Machine learning
 
@@ -949,7 +1049,7 @@ between alignment-based and machine learning-based annotation methods.
 1. Kanehisa M, Goto S. KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res. 2000;28(1):27–30. https://doi.org/10.1093/nar/28.1.27
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {kofamscan_sif} kofamscan --help") # expect crash
+Shell(f"apptainer exec -B /media:/media {kofamscan_sif} kofamscan --help") # expect crash
 ```
 It looks like we can't even get a help message with a naiive call to the tool.
 Let's check the documentation for some clues. Specifically, there is short section marked `## Usage` that will be helpful.
@@ -958,7 +1058,7 @@ https://www.genome.jp/ftp/tools/kofam_scan/README.md
 
 Ah, so the executable is `exec_annotation`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"apptainer exec {kofamscan_sif} exec_annotation --help")
+Shell(f"apptainer exec -B /media:/media {kofamscan_sif} exec_annotation --help")
 ```
 
 Kofamscan needs pre-trained HMM models, which have been downloaded from these links.
@@ -966,13 +1066,13 @@ Kofamscan needs pre-trained HMM models, which have been downloaded from these li
 - `ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz`
 - `ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz`
 
-Kofamscan will take a long time to run. You may want to try running it on the hypothetical ORFs from the bakta output at
-`LIB/"outputs/bakta.full/assembly.hypotheticals.faa` instead. Pre-computed outputs are available at `LIB/"outputs/kofamscan/kos.out"`
+**Kofamscan will take a long time to run.** Use the pre-computed outputs at `LIB/"outputs/kofamscan/kos.out"`.
+To try running kofamscan, use the shorter list of hypotheticals from Bakta at `LIB/"outputs/bakta.full/assembly.hypotheticals.faa`. 
 ```{python, eval=FALSE, attr.source='.numberLines'}
 kofamscan_raw = Path("./kofamscan/kos.out")
 Shell(f"""
 mkdir -p ./kofamscan
-apptainer exec {kofamscan_sif} \
+apptainer exec -B /media:/media {kofamscan_sif} \
     exec_annotation \
         --cpu={CPUS} --format=detail --no-report-unannotated \
         --profile={LIB}/kofamscan_db/profiles/prokaryote.hal \
@@ -982,13 +1082,14 @@ apptainer exec {kofamscan_sif} \
 """)
 ```
 
-Kofamscan attempts to assigns KEGG orthology (KO) numbers to each ORF, linking them to rich KEGG databases
+Kofamscan attempts to assign KEGG orthology (KO) numbers to each ORF, linking them to rich KEGG databases
 which provide hierachical organization and metabolic context. We can use the provided utility to parse the
 results into a partial model of KEGG for local use.
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from local.models.kegg_orthology import ParseKofamScanResults
 
+kofamscan_raw = LIB/"outputs/kofamscan/kos.out"
 model = ParseKofamScanResults(
     kofamscan_raw,
     LIB/"kofamscan_db/api_kegg.db",
@@ -996,11 +1097,12 @@ model = ParseKofamScanResults(
 )
 ```
 
-
+Have a look at the number of predicted functions in each category.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 model.Summary()
 ```
 
+And the actual table of results. Kofamscan reports the confidence score, as well as the recommended threshold for each assignment.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 df = model.df
 df = df[df.score > df.hmm_threshold] # retrieve only assignments that pass the model's adaptive confidence threshold
@@ -1046,7 +1148,7 @@ for _, row in df.iterrows():
 df_temp = pd.DataFrame(rows, columns=["mag", "category"])
 ```
 
-Then, we can format it as a matrix for plotting.
+Then, we can organize the information in a matrix for easy plotting.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 # create some index lookup dictionaries for the matrix
 c2i = {c: i for i, c in enumerate(df_temp["category"].unique())}    # category to index
@@ -1107,14 +1209,14 @@ The DeepEC model uses convolutional neural networks, a deep learning architectur
 It too scans the protein sequence and attempts to predict function based on the "topology" or motif structure of the amino acid sequences.
 However, the model is able to make additional abstract decisions after the results of the initial scan in the form of additional model layers,
 further differentiating it from the sequence similarity approach [1]. As the name suggests, deepEC predicts enzyme commission (EC) numbers,
-which can be linked into the KEGG database, among others. It is straightforward to run.
+which are unique IDs that link to various metabolic reference databases, including KEGG. It is straightforward to run.
 
 1. Ryu JY, Kim HU, Lee SY. Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. Proc Natl Acad Sci. 2019;116(28):13996–4001. https://doi.org/10.1073/pnas.1821905116
 
 
 ```{python, eval=FALSE, attr.source='.numberLines'}
 Shell(f"""
-apptainer exec {deepec_sif} \
+apptainer exec -B /media:/media {deepec_sif} \
     deepec \
         -p {CPUS} \
         -i {prodigal_aa} \
@@ -1144,41 +1246,42 @@ https://quay.io/repository/hallamlab/external_deepfri?tab=tags
 deepfri_sif = LIB/"deepfri.sif"
 ```
 
-So deep learning models are able to consider the protein sequence at a higher-level of abstraction, but what is it abstracting to?
+Deep learning models are able to consider the protein sequence at a higher-level of abstraction, but what is it abstracting to?
 We often don't know the mental model of protein function that these approaches have constucted for themselves, but deepFRI provides
-and example that can ease us into the deep learning world. DeepFRI predicts function by first examining the potential structure
+an example that can ease us into the deep learning world. DeepFRI predicts function by first examining the potential structure
 of a protein sequence by predicting the pairwise distances between all amino acids in the form of a "contact map" [1]. The final output
 are Gene ontology (GO) numbers, which are an alternative to KEGG more common in medical settings. 
 
 1. Gligorijević V, Renfrew PD, Kosciolek T, Leman JK, Berenberg D, Vatanen T, et al. Structure-based protein function prediction using graph convolutional networks. Nat Commun. 2021;12(1):3168. https://doi.org/10.1038/s41467-021-23303-9
 
-
 DeepFRI is quite tempermental. We must remove the `*` character indicating stop codons from the prodigal output.
+We must also create and run it within a dedicated output folder, while using absolute paths.
+As it runs, it will dump files into the current directory despite us telling it otherwise.
+Try with the reduced set of hypotheticals (`{LIB}/"outputs/bakta.full/assembly.hypotheticals.faa"`).
+Pre-computed results are at (`{LIB}/"outputs/deepfri/`).
+
 ```{python, eval=FALSE, attr.source='.numberLines'}
-prodigal_aa_no_stop = Path("./prodigal/orfs.no_stop.faa")
-with open(prodigal_aa_no_stop, "w") as f:
-    for e in SeqIO.parse(prodigal_aa, "fasta"):
+deepfri_out = Path("./deepfri")
+if not deepfri_out.exists():
+    deepfri_out.mkdir(parents=True)
+aa_no_stop = deepfri_out/"orfs.no_stop.faa"
+_orfs = LIB/"outputs/bakta.full/assembly.hypotheticals.faa"
+# _orfs = prodigal_aa # this would take too long
+with open(aa_no_stop, "w") as f:
+    for e in SeqIO.parse(_orfs, "fasta"):
         if e.seq[-1] == "*":
             e.seq = e.seq[:-1]
         SeqIO.write(e, f, "fasta")
 ```
 
-We must also create and run it within a dedicated output folder, while using absolute paths.
-As it runs, it will dump files into the current directory despite us telling it otherwise.
-Try with the reduced set of hypotheticals (`{LIB}/"outputs/bakta.full/assembly.hypotheticals.faa"`)
-or use the pre-computed results at (`{LIB}/"outputs/deepfri/`).
 ```{python, eval=FALSE, attr.source='.numberLines'}
-prodigal_aa_no_stop = Path("./prodigal/orfs.no_stop.faa")
-deepfri_out = Path("./deepfri")
 Shell(f"""
-mkdir -p {deepfri_out}
-cp {prodigal_aa_no_stop} {deepfri_out}/
 cd {deepfri_out}
 apptainer exec -B ./:/ws -W /ws ../{deepfri_sif} \
     deepfri \
         --ont mf bp ec \
         --fasta_fn /ws/{prodigal_aa_no_stop.name} \
-        --output_fn_prefix /ws/chicken
+        --output_fn_prefix /ws/hypotheticals
 """)
 ```
 
@@ -1203,6 +1306,32 @@ print(df.shape)
 df.head(2)
 ```
 
+Have a look at the predicted functions for Bakta's 828 hypothetical proteins. Since multiple predictions are given per protein,
+use `df["Protein"].nunique()` to get the number of proteins with at least 1 prediction. Use the argument `comment="#"` to skip comments in the file.
+
+<details>
+    <summary>How many hypothetical proteins were assigned functions?</summary>
+
+679
+```{python, eval=FALSE, attr.source='.numberLines'}
+df = pd.read_csv("./deepfri/hypotheticals_EC_predictions.csv", comment="#")
+print(df.shape, df["Protein"].nunique())
+df.head(2)
+```
+
+---
+
+</details>
+
+<details>
+    <summary>Do you trust these predictions?</summary>
+
+The model itself is not even confident, assigning scores as low as 0.1 in some cases.
+
+---
+
+</details>
+
 ### proteinBERT
 
 https://quay.io/repository/hallamlab/external_proteinbert?tab=tags
@@ -1211,27 +1340,29 @@ https://quay.io/repository/hallamlab/external_proteinbert?tab=tags
 proteinbert_sif = LIB/"proteinbert.sif"
 ```
 
-ProteinBERT "reads" protein sequences like reading text. The core of its architecture is an attention mechanism that is 
-part of what's called a "transformer", often used in natural language processing [1, 2]. Residue context is considered and pairwise
-importance is predicted to enable the model to "focus" on what it thinks are important motifs. The pairwise attention could be
-spatial distance, as in deepFRI, but is not strictly limited to this interpretation, hence increasing the abstraction capabilities
-of the model. The core transformer architecture is used in current large language models like ChatGPT. The only difference is that
-ChatGPT is much, much larger.
+ProteinBERT "reads" protein sequences like how we read text. The core of its architecture is an attention mechanism that is 
+part of what's called a "transformer", often used in natural language processing [1, 2]. Amino acid sequence context is considered by
+predicting the importance of pair-wise relationships between all residues, enabling the model to "focus" on what it thinks are important motifs.
+The pairwise attention could be spatial distance, as in deepFRI, but is not strictly limited to this interpretation,
+hence further abstracting the model. The core transformer architecture is used in current large language models like ChatGPT.
+The only difference is that ChatGPT is much, much larger.
 
 1. Vaswani A, Shazeer N, Parmar N, Uszkoreit J, Jones L, Gomez AN, et al. Attention is all you need. Curran Associates Inc.; 2017. (NIPS’17).
 1. Brandes N, Ofer D, Peleg Y, Rappoport N, Linial M. ProteinBERT: a universal deep-learning model of protein sequence and function. Bioinformatics. 2022;38(8):2102–10. https://doi.org/10.1093/bioinformatics/btac020
 
-Since the model did not have friendly interface, a CLI was constructed courtesy of the Hallam Lab.
+This will take a few minutes. Feel free to skip and use (`LIB/"outputs/protein_bert"`).
 ```{python, eval=FALSE, attr.source='.numberLines'}
-apptainer exec {proteinbert_sif} \
+Shell(f"""
+apptainer exec -B /media:/media {proteinbert_sif} \
     pbert run \
         --threads {CPUS} \
         -i {prodigal_aa} \
         -o protein_bert
+""")
 ```
 
 The output of proteinBERT is an array of numbers for each ORF, representing their predicted function.
-These numbers can be used as coordinates in proteinBERT's mental model.
+These numbers can be interpreted as coordinates in proteinBERT's mental model.
 We say each ORF is embedded in proteinBERT's functional space. The euclidean distance between each ORF's
 embedding represents predicted functional similarity.
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1240,7 +1371,7 @@ print(df_index.shape)
 df_index.head(2)
 ```
 
-ProteinBERT has 6 transformer layers, each of which reads then paraphrases the aminoacid sequence for the next.
+ProteinBERT has 6 transformer layers, each of which reads and paraphrases the amino acid sequence for the next layer.
 This information is stored in a 512-dimensional vector for each ORF, so the total embedding matrix is
 `N_orfs x (6x512)`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1295,6 +1426,8 @@ print(df_kofam.shape)
 df_kofam.head(2)
 ```
 
+Let's aggregate the functions to the second level of the BRITE hierarchy. Since ORFs can be in multiple categories,
+we will sort the list of categories by size to assign ORFs to their largest parent category.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 categories = {}
 for _, row in df_kofam.iterrows():
@@ -1307,7 +1440,6 @@ categories = sorted(categories.items(), key=lambda x: len(x[1]), reverse=True)
 len(categories)
 ```
 
-This assigns each ORF a category based on the BRITE hierarchy.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 orf2cat = {}
 for brite2, orfs in categories:
@@ -1325,10 +1457,11 @@ for _, row in df_index.iterrows():
 ```
 
 We can use UMAP to reduce the 512 dimensional embeddings to 2 dimensions for visualization
-and use the BRITE categories as a guide.
+and use the BRITE categories as a guide. This will give a few warnings, but that's ok.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from umap import UMAP
 
+# https://umap-learn.readthedocs.io/en/latest/parameters.html
 model = UMAP(
     n_components=2, # reduce to x, y
     spread=5,       # spread out the points
@@ -1408,12 +1541,34 @@ These are ORFs not in the top K categories, including ORFs of unknown function.
 
 </details>
 
+<details>
+    <summary>What functions seem to be well mapped or not well mapped?</summary>
+Transporters (blue) and DNA repair (yellow) seem to be well mapped with distinct regions.
+Carbohydrate metabolism (red) exhibits a bit of a spread and overlaps with other categories, 
+Likely reflecting the greater sequence diversity of enzymes in this category. 
+
+---
+
+</details>
+
+<details>
+    <summary>
+Suppose a hypothetical protein was placed near other proteins labelled as "membrane transport".
+What can we say about the hypothetical protein's function?
+    </summary>
+ProteinBERT has predicted that the hypothetical protein is functionally similar to transporters, suggestig that "membrane transport"
+be transferred to the hypothetical protein's annotation.
+
+---
+
+</details>
+
 ## gapseq
 
 https://quay.io/repository/biocontainers/gapseq?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
 # docker://quay.io/biocontainers/gapseq:1.4.0--h9ee0642_1
-gapseqt_sif = LIB/"gapseq.sif"
+gapseq_sif = LIB/"gapseq.sif"
 ```
 
 So far, we have used various tools to predict the locations of genes and their functions in our metagenomic assembly.
@@ -1480,8 +1635,8 @@ gapseq_p = "glycolysis"
 # gapseq_p = "all" # takes about 4 hours!!
 Shell(f"""
 mkdir -p {out_dir}
-apptainer exec {gapseq_sif} \
-    gapseq find -p {gapseq_p} -l KEGG -K {CPU} -O -f {out_dir} {aa_fasta} \
+apptainer exec -B /media:/media {gapseq_sif} \
+    gapseq find -p {gapseq_p} -l KEGG -K {CPUS} -O -f {out_dir} {aa_fasta} \
         > {out_dir}/find.out 2> {out_dir}/find.err
 """)
 ```
@@ -1494,20 +1649,21 @@ apptainer exec {gapseq_sif} \
 
 </details>
 
-Transporters are faster, but still takes several minutes. Please use pre-computed results.
+Transporters are faster, but still takes several minutes. Please don't run and use pre-computed results.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 Shell(f"""
 mkdir -p {out_dir}
-apptainer exec {gapseq_sif} \
-    gapseq find-transport -K {CPU} -f {out_dir} {aa_fasta} \
+apptainer exec -B /media:/media {gapseq_sif} \
+    gapseq find-transport -K {CPUS} -f {out_dir} {aa_fasta} \
         > {out_dir}/findtr.out 2> {out_dir}/findtr.err
 """)
 ```
 
-Construct a draft model using candidate reactions, transporters, and pathways.
+Construct a draft model using the candidate reactions, transporters, and pathways generated above.
 ```{python, eval=FALSE, attr.source='.numberLines'}
+out_dir = LIB/f"outputs/gapseq/{gapseq_mag}" # divert to using the pre-computed outputs
 Shell(f"""
-apptainer exec {gapseq_sif} \
+apptainer exec -B /media:/media {gapseq_sif} \
     gapseq draft \
         -r {out_dir}/{gapseq_mag}-{gapseq_p}-Reactions.tbl \
         -p {out_dir}/{gapseq_mag}-{gapseq_p}-Pathways.tbl \
@@ -1521,7 +1677,7 @@ apptainer exec {gapseq_sif} \
 Add additional reactions to enable growth on M9 minimal media.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 Shell(f"""
-apptainer exec {gapseq_sif} \
+apptainer exec -B /media:/media {gapseq_sif} \
     gapseq fill --quick.gf \
         -m {out_dir}/{gapseq_mag}-draft.RDS \
         -c {out_dir}/{gapseq_mag}-rxnWeights.RDS \
@@ -1535,15 +1691,16 @@ apptainer exec {gapseq_sif} \
 We can take a peek at the observed completion of each pathway.
 The model will be examined further in the next lab.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-Shell(f"""
 mag = 1
-dfp = pd.read_csv(f"./gapseq/mag{mag}/mag{mag}-all-Pathways.tbl", sep="\t", comment="#")
+# divert to using the pre-computed outputs
+dfp = pd.read_csv(f"./lib/outputs/gapseq/mag{mag}/mag{mag}-all-Pathways.tbl", sep="\t", comment="#")
+# the newly genertated results would be here:
+# dfp = pd.read_csv(f"./gapseq/mag{mag}/mag{mag}-glycolysis-Pathways.tbl", sep="\t", comment="#")
 dfp.sort_values("Completeness", ascending=False, inplace=True)
 dfp
-""")
 ```
 
-The following code will generate a link to the KEGG pathway viewer with found reactions coloured.
+The following code will generate a link to the KEGG pathway viewer with found reactions coloured green.
 Pick a few and have a look.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 from urllib.parse import quote
