@@ -1,11 +1,10 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
 ]{book}
-\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -36,6 +35,7 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -88,24 +88,21 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 % Set default figure placement to htbp
+\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\usepackage[]{natbib}
-\bibliographystyle{plainnat}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 
 \usepackage{color}
@@ -131,6 +128,11 @@
   \color{white}
   \begin{shaded}}
  {\end{shaded}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -163,10 +165,10 @@ Welcome to CBW's Advanced Microbiome Analysis 2025 Workshop!
 \section{Course Schedule}\label{course-schedule}
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1600}}
-  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3067}}
-  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1600}}
-  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3733}}@{}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3067}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3733}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Time (PST)
@@ -216,7 +218,7 @@ Throughout this module, there are some questions aimed to help your understandin
 
 \subsection{Log into your instance}\label{log-into-your-instance}
 
-If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in \href{https://github.com/LangilleLab/microbiome_helper/wiki/CBW\%E2\%80\%902025\%E2\%80\%90BMB\%E2\%80\%90Module1\#11-log-into-your-aws-instance}{Beginner Module 1}.
+If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in \href{https://bioinformaticsdotca.github.io/BMB_2025/module-1.html\#log-into-your-aws-instance}{Beginner Module 1}.
 
 \subsection{Working on the Command Line}\label{working-on-the-command-line}
 
@@ -273,7 +275,7 @@ Here, we have demonstrated how \texttt{parallel} treats multiple inputs. It uses
 parallel --link 'echo {}' ::: a b c ::: 1 2 3
 \end{verbatim}
 
-In this case, the inputs are ``linked'', such that only one of each is used. If the lists are different lengths, \texttt{parallel} will go back to the beginning of the shortest list and continue to use it until the longest list is completed. You do not have to run the following command, as the output is provided to demonstrate this.
+In this case, the inputs are ``linked'', such that only one of each is used. If the lists are different lengths, \texttt{parallel} will go back to the beginning of the shortest list and continue to use it until the longest list is completed.
 
 \begin{verbatim}
 parallel --link 'echo {}' ::: light dark ::: red blue green
@@ -281,7 +283,7 @@ parallel --link 'echo {}' ::: light dark ::: red blue green
 
 Notice how \texttt{light} appears a second time (on the third line of the output) to satisfy the length of the second list.
 
-Another useful feature is specifying \emph{which} inputs we give parallel are to go \emph{where}. This can be done intuitively by using multiple brackets \texttt{\{\ \}} containing numbers corresponding to the list we are interested in. Again, you do not have to run the following command, as the output is provided to demonstrate this.
+Another useful feature is specifying \emph{which} inputs we give parallel are to go \emph{where}. This can be done intuitively by using multiple brackets \texttt{\{\ \}} containing numbers corresponding to the list we are interested in.
 
 \begin{verbatim}
 parallel --link 'echo {1} {3}; echo {2} {3}' ::: one red ::: two blue ::: fish
@@ -320,11 +322,9 @@ Remember that you can go to \texttt{http://\#\#.uhn-hpc.ca/} (where \#\# is your
 
 Copy across the \texttt{multiqc.html} file to your computer.
 
-Click on the \textbf{.html} files to view the results for each sample. Let's look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer. However, you may notice that for our samples this is not the case! This is because for the purpose of this tutorial, your raw data has already been trimmed.
+Click on the \textbf{.html} files to view the results for each sample. Let's look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer.
 
 More often, per base sequence quality will look like the following. The FastQC documentation provides examples of ``\href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html\#M1}{good}'' and ``\href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html}{bad}'' data. These examples are also shown below:
-
-Now, you may have also noticed that most of the samples fail the ``Per Base Sequence Content'' module of FastQC.
 
 This specific module plots out the proportion of each base position in a file, and raises a warning/error if there are large discrepancies in base proportions. In a given sequence, the lines for each base should run in parallel, indicating that the base calling represents proper nucleotide pairing. Additionally, the A and T lines may appear separate from the G and C lines, which is a consequence of the GC content of the sample. The relative amount of each base reflects the overall amount of the bases in the genome, and should not be imbalanced. When this is not the case, the sequence composition is \textbf{biased}. A common cause of this is the use of primers, which throws off our sequence content at the beginning of the read. Fortunately, although the module error stems from this bias, according to the \href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3\%20Analysis\%20Modules/4\%20Per\%20Base\%20Sequence\%20Content.html\#:~:text=Whilst\%20this\%20is\%20a\%20true\%20technical\%20bias\%2C\%20it\%20isn\%27t\%20something\%20which\%20can\%20be\%20corrected\%20by\%20trimming\%20and\%20in\%20most\%20cases\%20doesn\%27t\%20seem\%20to\%20adversely\%20affect\%20the\%20downstream\%20analysis.}{FastQC documentation for this module} it will not largely impact our downstream analysis.
 
@@ -1799,20 +1799,13 @@ If you still have time in the workshop and want to have a look, I've added some 
 
 \href{https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01213-8}{METABOLIC}
 
+\part{Modules}\label{part-modules-2}
+
 \chapter{Module 3 Lab: Assigning Functions}\label{module-3-lab-assigning-functions}
 
-In this lab, we will predict and briefly examine the functions encoded in the assembled metagenome from the previous labs.
-Optional context and questions are provided as collapsible sections like so:
+This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.io/AMB_2025/}{Advanced Microbiome Analysis} (held in Vancouver, BC, May 29-30).
 
-Click me
-
-Optional context is provided to make this workshop as inclusive as possible. Feel free to skip
-any topics that you are already familiar with. Questions and answers will also use this collapsible format.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-All instructions required to completed this lab are provided below, so you are free to work asynchronously at your own pace.
-Active discussions with both peers and instructors are encouraged. Say hi to the person next to you!
+Author: Tony Liu
 
 \section{Setting up the workspace}\label{setting-up-the-workspace}
 
@@ -1836,7 +1829,7 @@ One of these containers will enable the use of jupyter notebooks along with a co
 
 \subsubsection{Steps for setup:}\label{steps-for-setup}
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/compute_env.png}}
+\includegraphics{img/lab3/compute_env.png}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1871,7 +1864,7 @@ This means port \texttt{48888} on the remote server will be forwarded to your ma
 
 Modern versions of Windows should have \texttt{ssh} available through Powershell. Putty is available as a backup.
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
+\includegraphics{img/lab3/putty_port_forward.png}
 
 \subsection{Workspace}\label{workspace}
 
@@ -1879,13 +1872,13 @@ Create a new workspace in your home directory.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\BuiltInTok{cd}\NormalTok{ \textasciitilde{}}
-\FunctionTok{mkdir}\NormalTok{ amb\_lab3}
-\BuiltInTok{cd}\NormalTok{ amb\_lab3}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/workspace}
+\FunctionTok{mkdir}\NormalTok{ amb\_module3}
+\BuiltInTok{cd}\NormalTok{ amb\_module3}
 \end{Highlighting}
 \end{Shaded}
 
-Link the resource folder for easy access.
+Link the resource folder for easy access. This will contain all the required software and data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1908,6 +1901,10 @@ The image URI takes the form of \texttt{\textless{}protocol\textgreater{}://\tex
 \end{Highlighting}
 \end{Shaded}
 
+What is the version of prodigal and the prodigal container image?
+
+Prodigal: 2.6.3. Image: 2.6.3--h7b50bb2\_10
+
 We can now run the prodigal executable inside the container using \texttt{exec} (execute) like so.
 
 \begin{Shaded}
@@ -1921,9 +1918,14 @@ The main container provides an automated setup script named \texttt{unpack}. Let
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{apptainer}\NormalTok{ exec ./lib/amb\_lab3.sif unpack}
+\ExtensionTok{apptainer}\NormalTok{ exec }\AttributeTok{{-}B}\NormalTok{ /media:/media ./lib/amb\_lab3.sif unpack}
 \end{Highlighting}
 \end{Shaded}
+
+Container binds (\texttt{-B})
+
+We need to make the container aware of the original folder linked to \texttt{./lib} so that its contents become available inside the container.
+Specifically, \texttt{/media} from outside the container is bound to \texttt{/media} inside the container.
 
 The following will dedicate the current terminal to running the juptyer notebook on port 48888.
 You may want to connect another terminal to maintain terminal access.
@@ -1937,6 +1939,25 @@ You may want to connect another terminal to maintain terminal access.
 \subsection{Jupyter}\label{jupyter}
 
 JupyterLab should now be accessible at \url{http://localhost:48888/lab}. Create a new python notebook and import dependencies.
+
+\includegraphics{img/lab3/jupyter.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Files are on the left
+\item
+  Cells contain executable code
+\item
+  Outputs are below each cell
+\item
+  Clicking beside the output collapses it
+\item
+  Useful functions are available in the tool bar. The \texttt{+} create additional cells
+\end{enumerate}
+
+With a cell selected, you can also run it with \texttt{Shift+Enter}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -2056,10 +2077,10 @@ This is a convient way to simplify commands by saving repeated sections to varia
 
 \section{Overview}\label{overview-1}
 
-This lab will guide you through finding and identifying the functional units
-(represented by the red and orange features below) of a metagenomic assembly, with a focus on proteins and enzymes.
+This lab will guide you through finding and identifying the functional units encoded in the assembled metagenome from the previous labs
+(represented by the red and orange features below), with a focus on proteins and enzymes.
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/data_layout.png}}
+\includegraphics{img/lab3/data_layout.png}
 
 We will begin by exploring techniques related to sequence similarity, which seeks to identify known genes through comparison with reference databases.
 
@@ -2075,7 +2096,8 @@ We will begin by exploring techniques related to sequence similarity, which seek
   \hyperref[resistance-gene-identifier-rgi]{Resistance Gene Identifier (RGI)}
 \end{itemize}
 
-Then we will transition to machine-learning tools, which move away from the ``lookup table'' approach of sequence similarity.
+Then we will transition to machine-learning tools, which move away from the ``lookup table'' approach of sequence similarity and towards
+having an internal model that ``understands'' biology.
 
 \begin{itemize}
 \tightlist
@@ -2089,7 +2111,7 @@ Then we will transition to machine-learning tools, which move away from the ``lo
   \hyperref[proteinbert]{proteinBERT}
 \end{itemize}
 
-Finally, we will use gapseq to construct toy metabolic models using techniques to predict the existence of enzymes.
+Finally, we will use gapseq to construct metabolic models from the given MAGs.
 
 \begin{itemize}
 \tightlist
@@ -2109,6 +2131,19 @@ The container image for prodigal:
 \NormalTok{prodigal\_sif }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"prodigal.sif"}
 \end{Highlighting}
 \end{Shaded}
+
+How could you get prodigal for yourself?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Acquire apptainer (\url{https://apptainer.org/docs/user/main/index.html})
+\item
+  \texttt{apptainer\ pull\ prodigal.sif\ docker://quay.io/biocontainers/prodigal:2.6.3-\/-h7b50bb2\_10}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 The goal of prodigal is to predict the protein coding features (open reading frames; ORFs) in a given nucleotide sequence.
 Recall that this corresponds to the red features in the overview diagram, neglecting the orange features for now.
@@ -2132,13 +2167,11 @@ Based on this, we would expect prodigal to:
   output an itemized list of predicted open reading frames
 \end{itemize}
 
-The input sequence will be the metagenomic assembly since we would otherwise neglect some contigs that were not assigned to MAGs,
-thereby causing information loss.
 Let's have a look at prodigal's help message to get an idea of specific inputs and outputs.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ prodigal {-}h"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ prodigal {-}h"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2164,7 +2197,7 @@ These look like they are useful for the output:
   \texttt{-o:\ \ Specify\ output\ file\ (default\ writes\ to\ stdout).}
 \end{itemize}
 
-After a bit of investigation, it also looks like we should specify that the input is a metagenomic assembly.
+After a bit of investigation, it also looks like we should specify that the input is a mixed population (metagenomic).
 
 \begin{itemize}
 \tightlist
@@ -2179,9 +2212,9 @@ Have a go at compiling the final command.
 \NormalTok{out\_dir }\OperatorTok{=} \StringTok{"./prodigal"}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    prodigal }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/inputs/assembly.fa }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    prodigal }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/inputs/assembly.fa }\CharTok{\textbackslash{}}
 \SpecialStringTok{        ...}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2194,6 +2227,12 @@ The backslash \texttt{\textbackslash{}} is used to ignore the newline character 
 This let's us write break up a long command into multiple lines for readability.
 ---
 
+Why wouldn't we want to use the MAGs as input?
+
+Not all contigs of the metagenomic assembly are in MAGs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 Suggested answer
 
 \begin{Shaded}
@@ -2201,23 +2240,23 @@ Suggested answer
 \NormalTok{out\_dir }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./prodigal"}\NormalTok{)}
 \NormalTok{prodigal\_aa }\OperatorTok{=}\NormalTok{ out\_dir}\OperatorTok{/}\StringTok{"orfs.faa"}
 \NormalTok{prodigal\_gff }\OperatorTok{=}\NormalTok{ out\_dir}\OperatorTok{/}\StringTok{"orfs.gff"}
-\NormalTok{Shell(}\SpecialStringTok{f"""}\OperatorTok{\textbackslash{}}
+\NormalTok{Shell(}\SpecialStringTok{f"""}\CharTok{\textbackslash{}}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    prodigal }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}p meta }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/inputs/assembly.fa }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}a }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}d }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{.}\NormalTok{with\_suffix(}\StringTok{\textquotesingle{}.fna\textquotesingle{}}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}f gff }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{prodigal\_gff}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{prodigal\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    prodigal }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}p meta }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/inputs/assembly.fa }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}a }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}d }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{.}\NormalTok{with\_suffix(}\StringTok{\textquotesingle{}.fna\textquotesingle{}}\NormalTok{)}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}f gff }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{prodigal\_gff}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Let's take a peek at the \texttt{gff}.
+Let's take a peek at the gene feature format (\texttt{gff}) file.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -2303,10 +2342,13 @@ a boolean mask:
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Let's investigate how many ORFs were not on MAGs. To do this, we will first create a blacklist for mag contig IDs.
+Let's investigate how many ORFs were not in MAGs. To do this, we will first create a blacklist for mag contig IDs.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\ImportTok{from}\NormalTok{ Bio }\ImportTok{import}\NormalTok{ SeqIO }\CommentTok{\# SeqIO from Biopython enables us to read fasta files, among other formats}
+\CommentTok{\# https://biopython.org/wiki/SeqIO\#:\textasciitilde{}:text=Peter{-},File\%20Formats,{-}The\%20authorative\%20list}
+
 \NormalTok{mag\_ids }\OperatorTok{=} \BuiltInTok{set}\NormalTok{()}
 \CommentTok{\# loop through the paths to each of the MAG files}
 \ControlFlowTok{for}\NormalTok{ mag\_file }\KeywordTok{in}\NormalTok{ [}
@@ -2347,14 +2389,18 @@ Then filter the gff based on the MAG blacklist.
 \end{Highlighting}
 \end{Shaded}
 
+How many contigs were in MAGs?
+
+803
+
 How many ORFs were not from MAGs?
 
 1060 of 7176, or about 15\%
 
 \section{Sequence similarity}\label{sequence-similarity}
 
-In this section, we will use tools to find proteins with known sequences that are similar to that of the predicted ORFs.
-By assuming that similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
+In this section, we will use tools to find proteins with known sequences similar to that of the predicted ORFs.
+By assuming similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
 While not perfect {[}1, 2{]}, this is a common first-pass approach to assign functions to genes in metagenomic assemblies.
 
 \begin{enumerate}
@@ -2417,7 +2463,7 @@ We expect to run diamond in two steps:
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond {-}{-}help"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond {-}{-}help"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2443,7 +2489,7 @@ TCDB has been predownloaded from these URLs.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2465,7 +2511,7 @@ Running a your command is a good way to check for correctness and resulting erro
 \NormalTok{tcdb\_fasta }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"transporter\_classification\_db/tcdb.faa"}
 \NormalTok{tcdb\_db }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./diamond/tcdb.dmnd"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb }\CharTok{\textbackslash{}}
 \SpecialStringTok{    ...}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2479,9 +2525,9 @@ Possible solution
 \NormalTok{tcdb\_db }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./diamond/tcdb.dmnd"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{tcdb\_db}\SpecialCharTok{.}\NormalTok{parent}\SpecialCharTok{\}}\SpecialStringTok{ \# parent folder of given path}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    {-}{-}in }\SpecialCharTok{\{}\NormalTok{tcdb\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond makedb }\CharTok{\textbackslash{}}
+\SpecialStringTok{    {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    {-}{-}in }\SpecialCharTok{\{}\NormalTok{tcdb\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{    {-}{-}db }\SpecialCharTok{\{}\NormalTok{tcdb\_db}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2491,7 +2537,7 @@ Now we can search our predicted ORFs for transporters catalogued in TCDB.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond blastp"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ diamond blastp"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2532,12 +2578,12 @@ I find that this works well for general cases.
 \NormalTok{columns }\OperatorTok{=} \StringTok{"qseqid sseqid score pident evalue"}
 \NormalTok{diamond\_out }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./diamond/orfs.tsv"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    diamond blastp }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}query ./prodigal/orfs.faa }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{tcdb\_db}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}out }\SpecialCharTok{\{}\NormalTok{diamond\_out}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}outfmt 6 }\SpecialCharTok{\{}\NormalTok{columns}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    diamond blastp }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}query ./prodigal/orfs.faa }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{tcdb\_db}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}out }\SpecialCharTok{\{}\NormalTok{diamond\_out}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}outfmt 6 }\SpecialCharTok{\{}\NormalTok{columns}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2560,14 +2606,14 @@ Perform a self blast. We can skip making a database since the number of sequence
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{diamond\_self }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./diamond/self.raw"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    diamond blastp }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}query }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}out }\SpecialCharTok{\{}\NormalTok{diamond\_self}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}outfmt 6 }\SpecialCharTok{\{}\NormalTok{columns}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}max{-}target{-}seqs 1 }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}faster }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{diamond\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    diamond blastp }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}query }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}out }\SpecialCharTok{\{}\NormalTok{diamond\_self}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}outfmt 6 }\SpecialCharTok{\{}\NormalTok{columns}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}max{-}target{-}seqs 1 }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}faster }\CharTok{\textbackslash{}}
 \SpecialStringTok{        {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2625,7 +2671,7 @@ Calculate BSR
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{df\_raw }\OperatorTok{=}\NormalTok{ pd.read\_csv(diamond\_raw, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, header}\OperatorTok{=}\VariableTok{None}\NormalTok{, names}\OperatorTok{=}\NormalTok{columns.split(}\StringTok{" "}\NormalTok{))}
+\NormalTok{df\_raw }\OperatorTok{=}\NormalTok{ pd.read\_csv(diamond\_out, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, header}\OperatorTok{=}\VariableTok{None}\NormalTok{, names}\OperatorTok{=}\NormalTok{columns.split(}\StringTok{" "}\NormalTok{))}
 \CommentTok{\# merge in self scores by matching the qseqid}
 \CommentTok{\# "left" refers to a "left join" where}
 \CommentTok{\# each row in the left dataframe (df\_raw) is found a match in the right (df\_self)}
@@ -2681,10 +2727,10 @@ Sets enable easy checking of membership using \texttt{in}. For example:
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\NormalTok{empty\_set }\OperatorTok{=} \BuiltInTok{set}\NormalTok{()}
 \NormalTok{X }\OperatorTok{=}\NormalTok{ \{}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{\}}
 \DecValTok{1} \KeywordTok{in}\NormalTok{ X }\CommentTok{\# True}
 \DecValTok{0} \KeywordTok{in}\NormalTok{ X }\CommentTok{\# False}
-\NormalTok{empty\_set }\OperatorTok{=} \BuiltInTok{set}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2751,6 +2797,8 @@ To visualize the results, we will first organize the data into a matrix of count
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }\CommentTok{\# numpy is a comprehensive math library for python}
+
 \NormalTok{mat }\OperatorTok{=}\NormalTok{ np.zeros(shape}\OperatorTok{=}\NormalTok{(}\DecValTok{2}\NormalTok{, df\_fam[}\StringTok{"family"}\NormalTok{].nunique())) }\CommentTok{\# MAGs x families}
 \NormalTok{mag2i }\OperatorTok{=}\NormalTok{ \{mag: i }\ControlFlowTok{for}\NormalTok{ i, mag }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{])\}}
 \NormalTok{fam2j }\OperatorTok{=}\NormalTok{ \{fam: i }\ControlFlowTok{for}\NormalTok{ i, fam }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(df\_fam[}\StringTok{"family"}\NormalTok{].unique())\}}
@@ -2762,8 +2810,20 @@ To visualize the results, we will first organize the data into a matrix of count
 \end{Highlighting}
 \end{Shaded}
 
-Some utility functions are provided to make simple figures with \texttt{Ploty}.
+Let's also load in the human-readable names of the transporter families from the TCDB metadata table.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{df\_tcdb }\OperatorTok{=}\NormalTok{ pd.read\_csv(LIB}\OperatorTok{/}\StringTok{"transporter\_classification\_db/families.tsv"}\NormalTok{, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, header}\OperatorTok{=}\VariableTok{None}\NormalTok{, names}\OperatorTok{=}\NormalTok{[}\StringTok{"key"}\NormalTok{, }\StringTok{"name"}\NormalTok{])}
+\NormalTok{tcdb\_families }\OperatorTok{=}\NormalTok{ \{row[}\StringTok{"key"}\NormalTok{]: row[}\StringTok{"name"}\NormalTok{] }\ControlFlowTok{for}\NormalTok{ \_, row }\KeywordTok{in}\NormalTok{ df\_tcdb.iterrows()\}}
+\BuiltInTok{print}\NormalTok{(df\_tcdb.shape)}
+\NormalTok{df\_tcdb.head(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{BaseFigure} and \texttt{ApplyTemplate} are utility functions that we have provided to make simple figures with \texttt{Ploty}.
 Let's use them to compare the abundance of transporter families in each MAG with a diverging bar plot.
+(\url{https://plotly.com/python/bar-charts/}). Heatmaps may be suitable for a larger number of MAGs (\url{https://plotly.com/python/heatmaps/}).
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -2796,6 +2856,20 @@ Let's use them to compare the abundance of transporter families in each MAG with
 \NormalTok{fig.show()}
 \end{Highlighting}
 \end{Shaded}
+
+What family of transporters was most prevalent overall vs in each MAG?
+
+Overall: ABC transporters
+MAG1 (blue): sugar transporters
+MAG2 (red): susD, RND, MFS, and OMR
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Are the results normalized?
+
+No.~We could divide by the total number of ORFs in each MAG to prevent larger MAGs from having more transporters in a category by virtue of overall size.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 How to change the figure to show the top 3 instead?
 
@@ -2840,11 +2914,18 @@ Many additional tools and consolidated reference databases are used to search fo
 \end{enumerate}
 
 To run Bakta, we expect to first set up reference databases before it will:
-- accept contigs, for which it will first run Prodigal for us
-- or accept a list of regions + contigs, for which Prodigal will be skipped
-- and produce many files containing useful annotations
 
-Why is a protein sequence fasta insufficient to full utilize Bakta?
+\begin{itemize}
+\tightlist
+\item
+  accept contigs, for which it will first run Prodigal for us
+\item
+  or accept a list of regions + contigs, for which Prodigal will be skipped
+\item
+  and produce many files containing useful annotations
+\end{itemize}
+
+Why is a protein sequence fasta insufficient to fully utilize Bakta?
 
 Non-coding features would not be represented.
 
@@ -2854,7 +2935,7 @@ The database was pre-installed, but here is some code to guide you if you decide
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ bakta\_db list"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ bakta\_db list"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2867,7 +2948,7 @@ The database was pre-installed, but here is some code to guide you if you decide
 \NormalTok{        \_type }\OperatorTok{=} \StringTok{"light"}
     \ControlFlowTok{else}\NormalTok{:}
 \NormalTok{        \_type }\OperatorTok{=} \StringTok{"full"}
-\NormalTok{    Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ bakta\_db download {-}{-}output }\SpecialCharTok{\{}\NormalTok{bakta\_db}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}type }\SpecialCharTok{\{}\NormalTok{\_type}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{    Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ bakta\_db download {-}{-}output }\SpecialCharTok{\{}\NormalTok{bakta\_db}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}type }\SpecialCharTok{\{}\NormalTok{\_type}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2892,21 +2973,54 @@ that run off the edge of contigs, so we will need to filter these out.
 \end{Highlighting}
 \end{Shaded}
 
-Running Bakta, even on this reduced dataset, may take \textbf{15 minutes or more}. Precomputed outputs are available at \texttt{\{LIB\}/outputs/bakta}.
+Running Bakta, even on this reduced dataset, may take \textbf{15+ minutes}. Precomputed outputs are available at \texttt{\{LIB\}/outputs/bakta.full}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    bakta {-}{-}meta {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}force {-}{-}skip{-}plot }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{bakta\_db}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}keep{-}contig{-}headers }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}output ./bakta/ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}regions }\SpecialCharTok{\{}\NormalTok{gff\_complete}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{bakta\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    bakta {-}{-}meta {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}force {-}{-}skip{-}plot }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}db }\SpecialCharTok{\{}\NormalTok{bakta\_db}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}keep{-}contig{-}headers }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}output ./bakta/ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}regions }\SpecialCharTok{\{}\NormalTok{gff\_complete}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/inputs/assembly.fa}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+Have a look at the reported hypothetical proteins at \texttt{LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"} and read the results into a dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{bakta\_hyp }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"outputs/bakta.full/assembly.hypotheticals.tsv"}
+\ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(bakta\_hyp) }\ImportTok{as} \BuiltInTok{file}\NormalTok{:}
+    \BuiltInTok{print}\NormalTok{(}\BuiltInTok{file}\NormalTok{.read())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  use \texttt{pd.read\_csv(...)}
+\item
+  use the argument \texttt{sep="..."} to change the separator for columns
+\item
+  use the argument \texttt{skiprows=...} to skip the initial comments
+\end{itemize}
+
+How many hypotheticals did Bakta report?
+
+828
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(bakta\_hyp, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, skiprows}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection{Resistance Gene Identifier (RGI)}\label{resistance-gene-identifier-rgi}
 
@@ -2933,13 +3047,13 @@ RGI is a tool for searching the Comprehensive Antibiotic Resistance Database (CA
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ rgi {-}{-}help"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ rgi {-}{-}help"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ rgi main {-}{-}help"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ rgi main {-}{-}help"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2952,11 +3066,11 @@ so checking the output folder will be necessary.
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{rgi\_out }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./rgi/chicken"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    rgi main }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}num\_threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}clean }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    rgi main }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}num\_threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}clean }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{rgi\_out}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -2986,12 +3100,12 @@ solution
 \NormalTok{rgi\_out }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./rgi/chicken"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{rgi\_out}\SpecialCharTok{.}\NormalTok{parent}\SpecialCharTok{\}}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    rgi main }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}num\_threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}clean }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}t protein }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{rgi\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    rgi main }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}num\_threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}clean }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}t protein }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{rgi\_out}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \NormalTok{rgi\_out }\OperatorTok{=}\NormalTok{ rgi\_out.with\_suffix(}\StringTok{".txt"}\NormalTok{) }\CommentTok{\# RGI adds the .txt suffix}
@@ -3006,12 +3120,14 @@ Let's take a quick peak at the results.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{\_df = pd.read\_csv(rgi\_out, sep="}\CharTok{\textbackslash{}t}\SpecialStringTok{", header=0)}
-\SpecialStringTok{\_df}
-\SpecialStringTok{"""}\NormalTok{)}
+\NormalTok{\_df }\OperatorTok{=}\NormalTok{ pd.read\_csv(rgi\_out, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, header}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{\_df}
 \end{Highlighting}
 \end{Shaded}
+
+How many resistance genes did we find?
+
+Just 10!
 
 \section{Machine learning}\label{machine-learning}
 
@@ -3045,7 +3161,7 @@ between alignment-based and machine learning-based annotation methods.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ kofamscan {-}{-}help"}\NormalTok{) }\CommentTok{\# expect crash}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ kofamscan {-}{-}help"}\NormalTok{) }\CommentTok{\# expect crash}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3058,7 +3174,7 @@ Ah, so the executable is \texttt{exec\_annotation}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ exec\_annotation {-}{-}help"}\NormalTok{)}
+\NormalTok{Shell(}\SpecialStringTok{f"apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ exec\_annotation {-}{-}help"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3072,26 +3188,26 @@ Kofamscan needs pre-trained HMM models, which have been downloaded from these li
   \texttt{ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz}
 \end{itemize}
 
-Kofamscan will take a long time to run. You may want to try running it on the hypothetical ORFs from the bakta output at
-\texttt{LIB/"outputs/bakta.full/assembly.hypotheticals.faa} instead. Pre-computed outputs are available at \texttt{LIB/"outputs/kofamscan/kos.out"}
+\textbf{Kofamscan will take a long time to run.} Use the pre-computed outputs at \texttt{LIB/"outputs/kofamscan/kos.out"}.
+To try running kofamscan, use the shorter list of hypotheticals from Bakta at \texttt{LIB/"outputs/bakta.full/assembly.hypotheticals.faa}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{kofamscan\_raw }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./kofamscan/kos.out"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p ./kofamscan}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    exec\_annotation }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}cpu=}\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}format=detail {-}{-}no{-}report{-}unannotated }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}profile=}\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/kofamscan\_db/profiles/prokaryote.hal }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}ko{-}list=}\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/kofamscan\_db/ko\_list }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{kofamscan\_raw}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{kofamscan\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    exec\_annotation }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}cpu=}\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}{-}format=detail {-}{-}no{-}report{-}unannotated }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}profile=}\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/kofamscan\_db/profiles/prokaryote.hal }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}ko{-}list=}\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/kofamscan\_db/ko\_list }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}o }\SpecialCharTok{\{}\NormalTok{kofamscan\_raw}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Kofamscan attempts to assigns KEGG orthology (KO) numbers to each ORF, linking them to rich KEGG databases
+Kofamscan attempts to assign KEGG orthology (KO) numbers to each ORF, linking them to rich KEGG databases
 which provide hierachical organization and metabolic context. We can use the provided utility to parse the
 results into a partial model of KEGG for local use.
 
@@ -3099,6 +3215,7 @@ results into a partial model of KEGG for local use.
 \begin{Highlighting}[numbers=left,,]
 \ImportTok{from}\NormalTok{ local.models.kegg\_orthology }\ImportTok{import}\NormalTok{ ParseKofamScanResults}
 
+\NormalTok{kofamscan\_raw }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"outputs/kofamscan/kos.out"}
 \NormalTok{model }\OperatorTok{=}\NormalTok{ ParseKofamScanResults(}
 \NormalTok{    kofamscan\_raw,}
 \NormalTok{    LIB}\OperatorTok{/}\StringTok{"kofamscan\_db/api\_kegg.db"}\NormalTok{,}
@@ -3107,11 +3224,15 @@ results into a partial model of KEGG for local use.
 \end{Highlighting}
 \end{Shaded}
 
+Have a look at the number of predicted functions in each category.
+
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{model.Summary()}
 \end{Highlighting}
 \end{Shaded}
+
+And the actual table of results. Kofamscan reports the confidence score, as well as the recommended threshold for each assignment.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -3172,7 +3293,7 @@ categories for each MAG. First, we will compile a count of each category by MAG.
 \end{Highlighting}
 \end{Shaded}
 
-Then, we can format it as a matrix for plotting.
+Then, we can organize the information in a matrix for easy plotting.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -3242,7 +3363,7 @@ The DeepEC model uses convolutional neural networks, a deep learning architectur
 It too scans the protein sequence and attempts to predict function based on the ``topology'' or motif structure of the amino acid sequences.
 However, the model is able to make additional abstract decisions after the results of the initial scan in the form of additional model layers,
 further differentiating it from the sequence similarity approach {[}1{]}. As the name suggests, deepEC predicts enzyme commission (EC) numbers,
-which can be linked into the KEGG database, among others. It is straightforward to run.
+which are unique IDs that link to various metabolic reference databases, including KEGG. It is straightforward to run.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3254,10 +3375,10 @@ which can be linked into the KEGG database, among others. It is straightforward 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{deepec\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    deepec }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}p }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{deepec\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    deepec }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}p }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        {-}o ./deepec}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -3288,9 +3409,9 @@ How many ORFs did deepEC assign EC numbers to?
 \end{Highlighting}
 \end{Shaded}
 
-So deep learning models are able to consider the protein sequence at a higher-level of abstraction, but what is it abstracting to?
+Deep learning models are able to consider the protein sequence at a higher-level of abstraction, but what is it abstracting to?
 We often don't know the mental model of protein function that these approaches have constucted for themselves, but deepFRI provides
-and example that can ease us into the deep learning world. DeepFRI predicts function by first examining the potential structure
+an example that can ease us into the deep learning world. DeepFRI predicts function by first examining the potential structure
 of a protein sequence by predicting the pairwise distances between all amino acids in the form of a ``contact map'' {[}1{]}. The final output
 are Gene ontology (GO) numbers, which are an alternative to KEGG more common in medical settings.
 
@@ -3302,36 +3423,36 @@ are Gene ontology (GO) numbers, which are an alternative to KEGG more common in 
 \end{enumerate}
 
 DeepFRI is quite tempermental. We must remove the \texttt{*} character indicating stop codons from the prodigal output.
+We must also create and run it within a dedicated output folder, while using absolute paths.
+As it runs, it will dump files into the current directory despite us telling it otherwise.
+Try with the reduced set of hypotheticals (\texttt{\{LIB\}/"outputs/bakta.full/assembly.hypotheticals.faa"}).
+Pre-computed results are at (\texttt{\{LIB\}/"outputs/deepfri/}).
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{prodigal\_aa\_no\_stop }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./prodigal/orfs.no\_stop.faa"}\NormalTok{)}
-\ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(prodigal\_aa\_no\_stop, }\StringTok{"w"}\NormalTok{) }\ImportTok{as}\NormalTok{ f:}
-    \ControlFlowTok{for}\NormalTok{ e }\KeywordTok{in}\NormalTok{ SeqIO.parse(prodigal\_aa, }\StringTok{"fasta"}\NormalTok{):}
+\NormalTok{deepfri\_out }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./deepfri"}\NormalTok{)}
+\ControlFlowTok{if} \KeywordTok{not}\NormalTok{ deepfri\_out.exists():}
+\NormalTok{    deepfri\_out.mkdir(parents}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{aa\_no\_stop }\OperatorTok{=}\NormalTok{ deepfri\_out}\OperatorTok{/}\StringTok{"orfs.no\_stop.faa"}
+\NormalTok{\_orfs }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"outputs/bakta.full/assembly.hypotheticals.faa"}
+\CommentTok{\# \_orfs = prodigal\_aa \# this would take too long}
+\ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(aa\_no\_stop, }\StringTok{"w"}\NormalTok{) }\ImportTok{as}\NormalTok{ f:}
+    \ControlFlowTok{for}\NormalTok{ e }\KeywordTok{in}\NormalTok{ SeqIO.parse(\_orfs, }\StringTok{"fasta"}\NormalTok{):}
         \ControlFlowTok{if}\NormalTok{ e.seq[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{] }\OperatorTok{==} \StringTok{"*"}\NormalTok{:}
 \NormalTok{            e.seq }\OperatorTok{=}\NormalTok{ e.seq[:}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}
 \NormalTok{        SeqIO.write(e, f, }\StringTok{"fasta"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-We must also create and run it within a dedicated output folder, while using absolute paths.
-As it runs, it will dump files into the current directory despite us telling it otherwise.
-Try with the reduced set of hypotheticals (\texttt{\{LIB\}/"outputs/bakta.full/assembly.hypotheticals.faa"})
-or use the pre-computed results at (\texttt{\{LIB\}/"outputs/deepfri/}).
-
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{prodigal\_aa\_no\_stop }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./prodigal/orfs.no\_stop.faa"}\NormalTok{)}
-\NormalTok{deepfri\_out }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./deepfri"}\NormalTok{)}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{deepfri\_out}\SpecialCharTok{\}}
-\SpecialStringTok{cp }\SpecialCharTok{\{}\NormalTok{prodigal\_aa\_no\_stop}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{deepfri\_out}\SpecialCharTok{\}}\SpecialStringTok{/}
 \SpecialStringTok{cd }\SpecialCharTok{\{}\NormalTok{deepfri\_out}\SpecialCharTok{\}}
-\SpecialStringTok{apptainer exec {-}B ./:/ws {-}W /ws ../}\SpecialCharTok{\{}\NormalTok{deepfri\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    deepfri }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}ont mf bp ec }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}fasta\_fn /ws/}\SpecialCharTok{\{}\NormalTok{prodigal\_aa\_no\_stop}\SpecialCharTok{.}\NormalTok{name}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}output\_fn\_prefix /ws/chicken}
+\SpecialStringTok{apptainer exec {-}B ./:/ws {-}W /ws ../}\SpecialCharTok{\{}\NormalTok{deepfri\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    deepfri }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}ont mf bp ec }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}fasta\_fn /ws/}\SpecialCharTok{\{}\NormalTok{prodigal\_aa\_no\_stop}\SpecialCharTok{.}\NormalTok{name}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}output\_fn\_prefix /ws/hypotheticals}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3366,6 +3487,29 @@ GO biological process
 \end{Highlighting}
 \end{Shaded}
 
+Have a look at the predicted functions for Bakta's 828 hypothetical proteins. Since multiple predictions are given per protein,
+use \texttt{df{[}"Protein"{]}.nunique()} to get the number of proteins with at least 1 prediction. Use the argument \texttt{comment="\#"} to skip comments in the file.
+
+How many hypothetical proteins were assigned functions?
+
+679
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"./deepfri/hypotheticals\_EC\_predictions.csv"}\NormalTok{, comment}\OperatorTok{=}\StringTok{"\#"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(df.shape, df[}\StringTok{"Protein"}\NormalTok{].nunique())}
+\NormalTok{df.head(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Do you trust these predictions?
+
+The model itself is not even confident, assigning scores as low as 0.1 in some cases.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \subsection{proteinBERT}\label{proteinbert}
 
 \url{https://quay.io/repository/hallamlab/external_proteinbert?tab=tags}
@@ -3377,12 +3521,12 @@ GO biological process
 \end{Highlighting}
 \end{Shaded}
 
-ProteinBERT ``reads'' protein sequences like reading text. The core of its architecture is an attention mechanism that is
-part of what's called a ``transformer'', often used in natural language processing {[}1, 2{]}. Residue context is considered and pairwise
-importance is predicted to enable the model to ``focus'' on what it thinks are important motifs. The pairwise attention could be
-spatial distance, as in deepFRI, but is not strictly limited to this interpretation, hence increasing the abstraction capabilities
-of the model. The core transformer architecture is used in current large language models like ChatGPT. The only difference is that
-ChatGPT is much, much larger.
+ProteinBERT ``reads'' protein sequences like how we read text. The core of its architecture is an attention mechanism that is
+part of what's called a ``transformer'', often used in natural language processing {[}1, 2{]}. Amino acid sequence context is considered by
+predicting the importance of pair-wise relationships between all residues, enabling the model to ``focus'' on what it thinks are important motifs.
+The pairwise attention could be spatial distance, as in deepFRI, but is not strictly limited to this interpretation,
+hence further abstracting the model. The core transformer architecture is used in current large language models like ChatGPT.
+The only difference is that ChatGPT is much, much larger.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3393,20 +3537,22 @@ ChatGPT is much, much larger.
   Brandes N, Ofer D, Peleg Y, Rappoport N, Linial M. ProteinBERT: a universal deep-learning model of protein sequence and function. Bioinformatics. 2022;38(8):2102--10. \url{https://doi.org/10.1093/bioinformatics/btac020}
 \end{enumerate}
 
-Since the model did not have friendly interface, a CLI was constructed courtesy of the Hallam Lab.
+This will take a few minutes. Feel free to skip and use (\texttt{LIB/"outputs/protein\_bert"}).
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{apptainer }\BuiltInTok{exec}\NormalTok{ \{proteinbert\_sif\} }\OperatorTok{\textbackslash{}}
-\NormalTok{    pbert run }\OperatorTok{\textbackslash{}}
-        \OperatorTok{{-}{-}}\NormalTok{threads \{CPUS\} }\OperatorTok{\textbackslash{}}
-        \OperatorTok{{-}}\NormalTok{i \{prodigal\_aa\} }\OperatorTok{\textbackslash{}}
-        \OperatorTok{{-}}\NormalTok{o protein\_bert}
+\NormalTok{Shell(}\SpecialStringTok{f"""}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{proteinbert\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    pbert run }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}threads }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}i }\SpecialCharTok{\{}\NormalTok{prodigal\_aa}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}o protein\_bert}
+\SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 The output of proteinBERT is an array of numbers for each ORF, representing their predicted function.
-These numbers can be used as coordinates in proteinBERT's mental model.
+These numbers can be interpreted as coordinates in proteinBERT's mental model.
 We say each ORF is embedded in proteinBERT's functional space. The euclidean distance between each ORF's
 embedding represents predicted functional similarity.
 
@@ -3418,7 +3564,7 @@ embedding represents predicted functional similarity.
 \end{Highlighting}
 \end{Shaded}
 
-ProteinBERT has 6 transformer layers, each of which reads then paraphrases the aminoacid sequence for the next.
+ProteinBERT has 6 transformer layers, each of which reads and paraphrases the amino acid sequence for the next layer.
 This information is stored in a 512-dimensional vector for each ORF, so the total embedding matrix is
 \texttt{N\_orfs\ x\ (6x512)}.
 
@@ -3488,6 +3634,9 @@ Let's load the kofamscan results to provide KEGG landmarks for these embeddings.
 \end{Highlighting}
 \end{Shaded}
 
+Let's aggregate the functions to the second level of the BRITE hierarchy. Since ORFs can be in multiple categories,
+we will sort the list of categories by size to assign ORFs to their largest parent category.
+
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{categories }\OperatorTok{=}\NormalTok{ \{\}}
@@ -3501,8 +3650,6 @@ Let's load the kofamscan results to provide KEGG landmarks for these embeddings.
 \BuiltInTok{len}\NormalTok{(categories)}
 \end{Highlighting}
 \end{Shaded}
-
-This assigns each ORF a category based on the BRITE hierarchy.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -3523,12 +3670,13 @@ This assigns each ORF a category based on the BRITE hierarchy.
 \end{Shaded}
 
 We can use UMAP to reduce the 512 dimensional embeddings to 2 dimensions for visualization
-and use the BRITE categories as a guide.
+and use the BRITE categories as a guide. This will give a few warnings, but that's ok.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \ImportTok{from}\NormalTok{ umap }\ImportTok{import}\NormalTok{ UMAP}
 
+\CommentTok{\# https://umap{-}learn.readthedocs.io/en/latest/parameters.html}
 \NormalTok{model }\OperatorTok{=}\NormalTok{ UMAP(}
 \NormalTok{    n\_components}\OperatorTok{=}\DecValTok{2}\NormalTok{, }\CommentTok{\# reduce to x, y}
 \NormalTok{    spread}\OperatorTok{=}\DecValTok{5}\NormalTok{,       }\CommentTok{\# spread out the points}
@@ -3610,6 +3758,22 @@ These are ORFs not in the top K categories, including ORFs of unknown function.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+What functions seem to be well mapped or not well mapped?
+
+Transporters (blue) and DNA repair (yellow) seem to be well mapped with distinct regions.
+Carbohydrate metabolism (red) exhibits a bit of a spread and overlaps with other categories,
+Likely reflecting the greater sequence diversity of enzymes in this category.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Suppose a hypothetical protein was placed near other proteins labelled as ``membrane transport''.
+What can we say about the hypothetical protein's function?
+
+ProteinBERT has predicted that the hypothetical protein is functionally similar to transporters, suggestig that ``membrane transport''
+be transferred to the hypothetical protein's annotation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \section{gapseq}\label{gapseq}
 
 \url{https://quay.io/repository/biocontainers/gapseq?tab=tags}
@@ -3617,7 +3781,7 @@ These are ORFs not in the top K categories, including ORFs of unknown function.
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \CommentTok{\# docker://quay.io/biocontainers/gapseq:1.4.0{-}{-}h9ee0642\_1}
-\NormalTok{gapseqt\_sif }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"gapseq.sif"}
+\NormalTok{gapseq\_sif }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"gapseq.sif"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3703,8 +3867,8 @@ Pre-computed outputs are available at \texttt{\{LIB\}/outputs/gapseq}. A quick t
 \CommentTok{\# gapseq\_p = "all" \# takes about 4 hours!!}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    gapseq find {-}p }\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{ {-}l KEGG {-}K }\SpecialCharTok{\{}\NormalTok{CPU}\SpecialCharTok{\}}\SpecialStringTok{ {-}O {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    gapseq find {-}p }\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{ {-}l KEGG {-}K }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}O {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        \textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/find.out 2\textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/find.err}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -3716,31 +3880,32 @@ Pre-computed outputs are available at \texttt{\{LIB\}/outputs/gapseq}. A quick t
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Transporters are faster, but still takes several minutes. Please use pre-computed results.
+Transporters are faster, but still takes several minutes. Please don't run and use pre-computed results.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{Shell(}\SpecialStringTok{f"""}
 \SpecialStringTok{mkdir {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    gapseq find{-}transport {-}K }\SpecialCharTok{\{}\NormalTok{CPU}\SpecialCharTok{\}}\SpecialStringTok{ {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    gapseq find{-}transport {-}K }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        \textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/findtr.out 2\textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/findtr.err}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Construct a draft model using candidate reactions, transporters, and pathways.
+Construct a draft model using the candidate reactions, transporters, and pathways generated above.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\NormalTok{out\_dir }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\SpecialStringTok{f"outputs/gapseq/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{"} \CommentTok{\# divert to using the pre{-}computed outputs}
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    gapseq draft }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}r }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}}\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{{-}Reactions.tbl }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}}\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{{-}Pathways.tbl }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}t }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}Transporter.tbl }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}c }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    gapseq draft }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}r }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}}\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{{-}Reactions.tbl }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}p }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}}\SpecialCharTok{\{}\NormalTok{gapseq\_p}\SpecialCharTok{\}}\SpecialStringTok{{-}Pathways.tbl }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}t }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}Transporter.tbl }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}c }\SpecialCharTok{\{}\NormalTok{aa\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}f }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        \textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/draft.out 2\textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/draft.err}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -3751,13 +3916,13 @@ Add additional reactions to enable growth on M9 minimal media.
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{apptainer exec }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{    gapseq fill {-}{-}quick.gf }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}m }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}draft.RDS }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}c }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}rxnWeights.RDS }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}g }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}rxnXgenes.RDS }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}n }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/gapseq/m9.csv }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{        {-}{-}output.dir }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{apptainer exec {-}B /media:/media }\SpecialCharTok{\{}\NormalTok{gapseq\_sif}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{    gapseq fill {-}{-}quick.gf }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}m }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}draft.RDS }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}c }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}rxnWeights.RDS }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}g }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/}\SpecialCharTok{\{}\NormalTok{gapseq\_mag}\SpecialCharTok{\}}\SpecialStringTok{{-}rxnXgenes.RDS }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}n }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}\SpecialStringTok{/gapseq/m9.csv }\CharTok{\textbackslash{}}
+\SpecialStringTok{        {-}{-}output.dir }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{        \textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/fill.out 2\textgreater{} }\SpecialCharTok{\{}\NormalTok{out\_dir}\SpecialCharTok{\}}\SpecialStringTok{/fill.err}
 \SpecialStringTok{"""}\NormalTok{)}
 \end{Highlighting}
@@ -3768,16 +3933,17 @@ The model will be examined further in the next lab.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{Shell(}\SpecialStringTok{f"""}
-\SpecialStringTok{mag = 1}
-\SpecialStringTok{dfp = pd.read\_csv(f"./gapseq/mag}\SpecialCharTok{\{}\NormalTok{mag}\SpecialCharTok{\}}\SpecialStringTok{/mag}\SpecialCharTok{\{}\NormalTok{mag}\SpecialCharTok{\}}\SpecialStringTok{{-}all{-}Pathways.tbl", sep="}\CharTok{\textbackslash{}t}\SpecialStringTok{", comment="\#")}
-\SpecialStringTok{dfp.sort\_values("Completeness", ascending=False, inplace=True)}
-\SpecialStringTok{dfp}
-\SpecialStringTok{"""}\NormalTok{)}
+\NormalTok{mag }\OperatorTok{=} \DecValTok{1}
+\CommentTok{\# divert to using the pre{-}computed outputs}
+\NormalTok{dfp }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\SpecialStringTok{f"./lib/outputs/gapseq/mag}\SpecialCharTok{\{}\NormalTok{mag}\SpecialCharTok{\}}\SpecialStringTok{/mag}\SpecialCharTok{\{}\NormalTok{mag}\SpecialCharTok{\}}\SpecialStringTok{{-}all{-}Pathways.tbl"}\NormalTok{, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, comment}\OperatorTok{=}\StringTok{"\#"}\NormalTok{)}
+\CommentTok{\# the newly genertated results would be here:}
+\CommentTok{\# dfp = pd.read\_csv(f"./gapseq/mag\{mag\}/mag\{mag\}{-}glycolysis{-}Pathways.tbl", sep="\textbackslash{}t", comment="\#")}
+\NormalTok{dfp.sort\_values(}\StringTok{"Completeness"}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{, inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{dfp}
 \end{Highlighting}
 \end{Shaded}
 
-The following code will generate a link to the KEGG pathway viewer with found reactions coloured.
+The following code will generate a link to the KEGG pathway viewer with found reactions coloured green.
 Pick a few and have a look.
 
 \begin{Shaded}
@@ -3797,6 +3963,8 @@ Pick a few and have a look.
 \end{Shaded}
 
 This concludes the lab!
+
+\part{Modules}\label{part-modules-3}
 
 \chapter{Module 4 Lab: Visualization and Finding Functional Significance}\label{module-4-lab-visualization-and-finding-functional-significance}
 
@@ -3838,7 +4006,7 @@ Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to 
 
 \subsubsection{Putty (Windows)}\label{putty-windows-1}
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
+\includegraphics{img/lab3/putty_port_forward.png}
 
 \subsection{Workspace}\label{workspace-1}
 
@@ -3846,9 +4014,9 @@ Create a new workspace in your home directory.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\BuiltInTok{cd}\NormalTok{ \textasciitilde{}}
-\FunctionTok{mkdir}\NormalTok{ amb\_lab4}
-\BuiltInTok{cd}\NormalTok{ amb\_lab4}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/workspace}
+\FunctionTok{mkdir}\NormalTok{ amb\_module4}
+\BuiltInTok{cd}\NormalTok{ amb\_module4}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3866,7 +4034,7 @@ Unpack the main container for this lab.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{apptainer}\NormalTok{ exec ./lib/amb\_lab4.sif unpack}
+\ExtensionTok{apptainer}\NormalTok{ exec }\AttributeTok{{-}B}\NormalTok{ /media:/media ./lib/amb\_lab4.sif unpack}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3898,7 +4066,7 @@ All software tools are packaged in the main container, so we can use \texttt{os.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{os.system(}\SpecialStringTok{f""""}
+\NormalTok{os.system(}\SpecialStringTok{f"""}
 \SpecialStringTok{pwd {-}P}
 \SpecialStringTok{echo }\SpecialCharTok{\{}\NormalTok{LIB}\SpecialCharTok{\}}
 \SpecialStringTok{"""}\NormalTok{)}
@@ -3928,7 +4096,8 @@ We also have a set of predicted genes.
 \ImportTok{from}\NormalTok{ Bio }\ImportTok{import}\NormalTok{ SeqIO}
 
 \NormalTok{count }\OperatorTok{=} \DecValTok{0}
-\ControlFlowTok{for}\NormalTok{ i, sequence }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(SeqIO.parse(GENES, }\StringTok{"fasta"}\NormalTok{)):}
+\NormalTok{genes\_fasta }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"inputs/lab3\_orfs.fna"}
+\ControlFlowTok{for}\NormalTok{ i, sequence }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(SeqIO.parse(genes\_fasta, }\StringTok{"fasta"}\NormalTok{)):}
 \NormalTok{    count }\OperatorTok{+=} \DecValTok{1}
 \NormalTok{count}
 \end{Highlighting}
@@ -3988,13 +4157,13 @@ We will need to index the reference genes before performing quantification.
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{salmon\_dir }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./salmon"}\NormalTok{)}
-\NormalTok{GENES }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"inputs/lab3\_orfs.fna"}
+\NormalTok{genes\_fasta }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"inputs/lab3\_orfs.fna"}
 \NormalTok{salmon\_index }\OperatorTok{=}\NormalTok{ salmon\_dir}\OperatorTok{/}\StringTok{"index"}
-\NormalTok{os.system(}\SpecialStringTok{f"salmon index {-}t }\SpecialCharTok{\{}\NormalTok{GENES}\SpecialCharTok{\}}\SpecialStringTok{ {-}i }\SpecialCharTok{\{}\NormalTok{salmon\_index}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{os.system(}\SpecialStringTok{f"salmon index {-}t }\SpecialCharTok{\{}\NormalTok{genes\_fasta}\SpecialCharTok{\}}\SpecialStringTok{ {-}i }\SpecialCharTok{\{}\NormalTok{salmon\_index}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Quantification will take about 6 minutes. \texttt{tqdm} is a used to display a progress bar.
+\textbf{Quantification will take about 20 minutes. Do not run.} \texttt{tqdm} is a used to display a progress bar.
 Precomputed outputs are at \texttt{./lib/outputs/salmon/}.
 
 \begin{Shaded}
@@ -4008,12 +4177,12 @@ Precomputed outputs are at \texttt{./lib/outputs/salmon/}.
 \NormalTok{    out }\OperatorTok{=}\NormalTok{ salmon\_dir}\OperatorTok{/}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{srr}\SpecialCharTok{\}}\SpecialStringTok{"}
 \NormalTok{    os.system(}\SpecialStringTok{f"""}
 \SpecialStringTok{        mkdir {-}p }\SpecialCharTok{\{}\NormalTok{out}\SpecialCharTok{\}}
-\SpecialStringTok{        salmon quant }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{            {-}l A }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{            {-}p }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{            {-}i }\SpecialCharTok{\{}\NormalTok{salmon\_index}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{            {-}r }\SpecialCharTok{\{}\NormalTok{read\_file}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
-\SpecialStringTok{            {-}o }\SpecialCharTok{\{}\NormalTok{out}\SpecialCharTok{\}}\SpecialStringTok{ }\OperatorTok{\textbackslash{}}
+\SpecialStringTok{        salmon quant }\CharTok{\textbackslash{}}
+\SpecialStringTok{            {-}l A }\CharTok{\textbackslash{}}
+\SpecialStringTok{            {-}p }\SpecialCharTok{\{}\NormalTok{CPUS}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{            {-}i }\SpecialCharTok{\{}\NormalTok{salmon\_index}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{            {-}r }\SpecialCharTok{\{}\NormalTok{read\_file}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
+\SpecialStringTok{            {-}o }\SpecialCharTok{\{}\NormalTok{out}\SpecialCharTok{\}}\SpecialStringTok{ }\CharTok{\textbackslash{}}
 \SpecialStringTok{            \textgreater{}}\SpecialCharTok{\{}\NormalTok{out}\SpecialCharTok{\}}\SpecialStringTok{/salmon.log 2\textgreater{}}\SpecialCharTok{\{}\NormalTok{out}\SpecialCharTok{\}}\SpecialStringTok{/salmon.err}
 \SpecialStringTok{    """}\NormalTok{)}
 \end{Highlighting}
@@ -4026,6 +4195,7 @@ Let's have a look at one of the results. The file we want is \texttt{quant.sf}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\NormalTok{salmon\_dir }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"outputs/salmon/"} \CommentTok{\# divert}
 \ControlFlowTok{for}\NormalTok{ srr }\KeywordTok{in}\NormalTok{ salmon\_dir.iterdir():}
     \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ srr.name.startswith(}\StringTok{"SRR"}\NormalTok{): }\ControlFlowTok{continue}
 \NormalTok{    df }\OperatorTok{=}\NormalTok{ pd.read\_csv(srr}\OperatorTok{/}\StringTok{"quant.sf"}\NormalTok{, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
@@ -4040,7 +4210,7 @@ Let's create the count matrix of genes by samples. First, create an index of gen
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{gene2i }\OperatorTok{=}\NormalTok{ \{\}}
-\ControlFlowTok{for}\NormalTok{ i, sequence }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(SeqIO.parse(GENES, }\StringTok{"fasta"}\NormalTok{)):}
+\ControlFlowTok{for}\NormalTok{ i, sequence }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(SeqIO.parse(genes\_fasta, }\StringTok{"fasta"}\NormalTok{)):}
 \NormalTok{    gene2i[sequence.}\BuiltInTok{id}\NormalTok{] }\OperatorTok{=}\NormalTok{ i}
 \BuiltInTok{len}\NormalTok{(gene2i)}
 \end{Highlighting}
@@ -4056,6 +4226,8 @@ Genes x Samples, so 3298 x 33.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
 \NormalTok{mtx }\OperatorTok{=}\NormalTok{ np.zeros(shape}\OperatorTok{=}\NormalTok{(}\BuiltInTok{len}\NormalTok{(gene2i), }\BuiltInTok{len}\NormalTok{(samples)), dtype}\OperatorTok{=}\NormalTok{np.int32) }\CommentTok{\# genes x samples}
 \ControlFlowTok{for}\NormalTok{ i, srr }\KeywordTok{in}\NormalTok{ tqdm(}\BuiltInTok{enumerate}\NormalTok{(df\_meta[}\StringTok{"sample\_name"}\NormalTok{]), total}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(df\_meta)):}
 \NormalTok{    df }\OperatorTok{=}\NormalTok{ pd.read\_csv(salmon\_dir}\OperatorTok{/}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{srr}\SpecialCharTok{\}}\SpecialStringTok{/quant.sf"}\NormalTok{, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
@@ -4078,7 +4250,7 @@ Finally, we will label the rows and columns of the matrix with gene IDs and samp
 \NormalTok{df[}\StringTok{"gene\_id"}\NormalTok{] }\OperatorTok{=}\NormalTok{ gene\_ids}
 \NormalTok{df }\OperatorTok{=}\NormalTok{ df.set\_index(}\StringTok{"gene\_id"}\NormalTok{)}
 \BuiltInTok{print}\NormalTok{(df.shape)}
-\NormalTok{df.to\_csv(salmon\_dir}\OperatorTok{/}\StringTok{"counts.mtx"}\NormalTok{)}
+\NormalTok{df.to\_csv(}\StringTok{"./salmon/counts.mtx"}\NormalTok{)}
 \NormalTok{df.head(}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4101,8 +4273,8 @@ GSEA by permuting the sample labels.
   Patro R, Duggal G, Love MI, Irizarry RA, Kingsford C. Salmon provides fast and bias-aware quantification of transcript expression. Nat Methods. 2017;14(4):417--9. \url{https://doi.org/10.1038/nmeth.4197}
 \end{enumerate}
 
-\textbf{Transistion to an R notebook.}
-\url{http://localhost:48888/lab}
+\textbf{Transistion to an R notebook.} Click on the \texttt{+} and select ``R'' under Notebook.
+\includegraphics{img/lab4/new_tab.png}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -4119,6 +4291,7 @@ load the count matrix
     \StringTok{"./salmon/counts.mtx"}\NormalTok{,}
     \AttributeTok{row.names =} \StringTok{"gene\_id"}
 \NormalTok{))}
+\NormalTok{cts}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4162,6 +4335,7 @@ We can cache the results to an ``R data serialized'' (RDS) to prevent having to 
 \NormalTok{deseq\_save }\OtherTok{\textless{}{-}} \StringTok{"./deseq2/dds.rds"}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{file.exists}\NormalTok{(deseq\_save)) \{}
 \NormalTok{  dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds)}
+  \FunctionTok{dir.create}\NormalTok{(}\StringTok{"./deseq2"}\NormalTok{, }\AttributeTok{showWarnings =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# create the directory if it doesn\textquotesingle{}t exist}
   \FunctionTok{saveRDS}\NormalTok{(dds, deseq\_save)}
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
 \NormalTok{  dds }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(deseq\_save)}
@@ -4176,6 +4350,7 @@ Extract the results and save to a dataframe. This will contain log2 fold changes
 \NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{results}\NormalTok{(dds, }\AttributeTok{contrast =} \FunctionTok{c}\NormalTok{(}\StringTok{"grouping"}\NormalTok{, }\StringTok{"Bacteroides"}\NormalTok{, }\StringTok{"Non{-}Bacteroides"}\NormalTok{))}
 \NormalTok{results\_table }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(res)}
 \FunctionTok{write.csv}\NormalTok{(results\_table, }\StringTok{"./deseq2/results.csv"}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{results\_table}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4183,10 +4358,11 @@ Next, we will compute the correlation between gene expression and the experiment
 by permuting the sample labels. This effectively randomizes the assignemnt of samples
 to each experimental condition, but preserves any relationships between genes within a single sample.
 When the number of samples is low, genes can be randomly assigned to gene sets instead, but this fails to take into account gene-gene relationships.
+The p-value is estimated as the fraction of null samples that have a GSEA score greater than or equal to the observed GSEA score.
 
 What is the minimum number of samples to simulate a null distribution with a precision of at least 0.05?
 
-4 samples (4! = 24, 1/24 is about 0.04) This will be explored further in the next section on GSEA.
+4 samples (4! = 24, 1/24 is about 0.04).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -4198,6 +4374,7 @@ which limits the high variance of the logarithm of counts when the mean is low.
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{vst }\OtherTok{\textless{}{-}} \FunctionTok{vst}\NormalTok{(dds, }\AttributeTok{blind =} \ConstantTok{FALSE}\NormalTok{)}
 \NormalTok{vst\_counts }\OtherTok{\textless{}{-}} \FunctionTok{assay}\NormalTok{(vst)}
+\NormalTok{vst\_counts}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4373,6 +4550,7 @@ Load correlations from DESeq2.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\NormalTok{deseq\_dir }\OperatorTok{=}\NormalTok{ Path(}\StringTok{"./deseq2"}\NormalTok{)}
 \NormalTok{df\_null }\OperatorTok{=}\NormalTok{ pd.read\_csv(deseq\_dir}\OperatorTok{/}\StringTok{"null\_distr.csv"}\NormalTok{, index\_col}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
 \BuiltInTok{print}\NormalTok{(df\_null.shape)}
 \NormalTok{df\_null.head(}\DecValTok{2}\NormalTok{)}
@@ -4423,21 +4601,29 @@ Rank order the genes in each permutation by their correlation.
 \end{Highlighting}
 \end{Shaded}
 
-To calculate the ES, a running sum is calculated by scanning down the ranked list of genes, increasing the score for genes that
-are in the gene set and decreasing it otherwise. Genes in the gene set are called ``hits'' and
-those not in the gene set are called ``misses''. The formulation for the running sum of hits (P\_hit) at position \emph{i}
-for gene set \emph{S} is given in the paper. Don't look at all of it at once, we will break it down.
+We can now perform GSEA and create this plot from figure 1 of the GSEA paper {[}1{]}.
 
+\includegraphics[width=0.5\textwidth,height=\textheight]{img/lab4/gsea.png}
+
+To calculate the ES, a running sum is calculated by scanning down the ranked list of genes, increasing the score for genes that
+are in the gene set and decreasing it otherwise. Genes in the gene set are called ``hits'' and those not in the gene set are called ``misses''.
+The magnitude of the increase is dependent on the correlation between the gene
+expression and the experimental grouping. The ES is the maximum deviation from 0 of this running sum statistic, caused by the commulative effect
+of the genes ranked before the maximum deviation is reached (``leading edge subset'').
+
+The running sum statistic is calculated as the difference between the effect of hits and misses.
+The equation for the running sum of hits (P\_hit) at rank \emph{i}
+for gene set \emph{S} is given in the paper. Don't look at all of it at once, we will break it down.
 First, note that the summations only consider genes in the gene set \emph{S}.
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/gsea_phit.png}}
+\includegraphics{img/lab4/gsea_phit.png}
 
 Let's create a mask to select only genes in \emph{S}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{labels }\OperatorTok{=}\NormalTok{ \_only\_enzymes(df\_corr).index.to\_numpy()}
-\NormalTok{S }\OperatorTok{=}\NormalTok{ np.array([k }\KeywordTok{in}\NormalTok{ gene\_set }\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in} \VariableTok{self}\NormalTok{.labels], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{) }\CommentTok{\# g in S}
+\NormalTok{S }\OperatorTok{=}\NormalTok{ np.array([k }\KeywordTok{in}\NormalTok{ gene\_set }\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ labels], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{) }\CommentTok{\# g in S}
 \NormalTok{S }\OperatorTok{=}\NormalTok{ S[mat\_index.T] }\CommentTok{\# same order as mat}
 \end{Highlighting}
 \end{Shaded}
@@ -4448,7 +4634,7 @@ Let's calculate NR.
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{p }\OperatorTok{=} \DecValTok{1}
-\NormalTok{corr }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{pow}\NormalTok{(np.}\BuiltInTok{abs}\NormalTok{(}\VariableTok{self}\NormalTok{.mat\_sorted), p)}
+\NormalTok{corr }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{pow}\NormalTok{(np.}\BuiltInTok{abs}\NormalTok{(mat\_sorted), p)}
 \NormalTok{N\_R }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(corr}\OperatorTok{*}\NormalTok{S, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -4481,7 +4667,7 @@ Have a look.
 
 For P\_miss, we cumulatively sum the fraction of misses.
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/gsea_pmiss.png}}
+\includegraphics{img/lab4/gsea_pmiss.png}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -4506,13 +4692,12 @@ That's it, have a look.
 \end{Highlighting}
 \end{Shaded}
 
-The running statistic is the difference between P\_hit and P\_miss.
-Finally, the ES is the maximum magnitude of the running statistic.
+Now we combine P\_hit and P\_miss to get the running sum statistic
+and find the maximum magnitude to report the enrichment score (ES).
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{S\_distr }\OperatorTok{=}\NormalTok{ (P\_hit }\OperatorTok{{-}}\NormalTok{ P\_miss).T }\CommentTok{\# running statistic}
-
 \NormalTok{ES\_pos }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{max}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
 \NormalTok{ES\_neg }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{min}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
 \NormalTok{ES\_candidates }\OperatorTok{=}\NormalTok{ np.vstack([ES\_pos, ES\_neg]).T       }\CommentTok{\# candidate is either the positive or negative}
@@ -4543,12 +4728,18 @@ We can now split the score and null distribution and estimate the p-value.
 \NormalTok{pvalue }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(null }\OperatorTok{\textgreater{}=}\NormalTok{ score) }\OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
 \ControlFlowTok{if}\NormalTok{ pvalue }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
 \NormalTok{    pvalue }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
-\NormalTok{pvalue}
+\NormalTok{score, pvalue}
 \end{Highlighting}
 \end{Shaded}
 
-Let's clean things up a bit. We will return a \texttt{dataclass}, which is just a convient way to group many variables together.
-The procedure above is also attached to the class object \texttt{Gsea}, but otherwise unchanged.
+Why do we change the pvalue if it is equal to 0?
+
+If the p-value is 0, then the resolution of the null distribution was insufficient. To be conservative, we set it to the
+smallest pvalue that is resolvable, which is 1/(the sample size of the null distribution).
+
+Let's clean things up a bit. We will encapsulate the procedure in a function and
+return a \texttt{dataclass}, which is just a convient way to organize a collection of variables.
+We will use this function to run GSEA for each pathway. Try completing the \texttt{gsea()} function below.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -4562,72 +4753,94 @@ The procedure above is also attached to the class object \texttt{Gsea}, but othe
 \NormalTok{    pvalue: }\BuiltInTok{float}
 \NormalTok{    hits: np.ndarray}
 \NormalTok{    running\_sum\_statistic: np.ndarray}
-
-\KeywordTok{class}\NormalTok{ Gsea:}
-    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, labels: np.ndarray, corr: np.ndarray, permuted: np.ndarray) }\OperatorTok{{-}\textgreater{}} \VariableTok{None}\NormalTok{:}
-        \VariableTok{self}\NormalTok{.labels }\OperatorTok{=}\NormalTok{ labels}
-\NormalTok{        mat }\OperatorTok{=}\NormalTok{ np.hstack([corr, permuted])}
-        \VariableTok{self}\NormalTok{.mat\_index }\OperatorTok{=}\NormalTok{ np.argsort(}\OperatorTok{{-}}\NormalTok{mat.T, stable}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-        \VariableTok{self}\NormalTok{.mat\_sorted }\OperatorTok{=}\NormalTok{ np.zeros\_like(mat)}
-        \ControlFlowTok{for}\NormalTok{ i, order }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(}\VariableTok{self}\NormalTok{.mat\_index):}
-            \VariableTok{self}\NormalTok{.mat\_sorted[:, i] }\OperatorTok{=}\NormalTok{ mat[:, i][order]}
-
-    \KeywordTok{def}\NormalTok{ run(}\VariableTok{self}\NormalTok{, name: }\BuiltInTok{str}\NormalTok{, gene\_set: }\BuiltInTok{set}\NormalTok{, p}\OperatorTok{=}\DecValTok{1}\NormalTok{):}
-\NormalTok{        S }\OperatorTok{=}\NormalTok{ np.array([k }\KeywordTok{in}\NormalTok{ gene\_set }\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in} \VariableTok{self}\NormalTok{.labels], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{)}
-        \ControlFlowTok{if}\NormalTok{ S.}\BuiltInTok{sum}\NormalTok{() }\OperatorTok{==} \DecValTok{0}\NormalTok{: }\ControlFlowTok{return}
-\NormalTok{        S }\OperatorTok{=}\NormalTok{ S[}\VariableTok{self}\NormalTok{.mat\_index.T]}
-
-\NormalTok{        corr }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{pow}\NormalTok{(np.}\BuiltInTok{abs}\NormalTok{(}\VariableTok{self}\NormalTok{.mat\_sorted), p)}
-\NormalTok{        N\_R }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(corr}\OperatorTok{*}\NormalTok{S, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
-
-\NormalTok{        P\_hit }\OperatorTok{=}\NormalTok{ corr}\OperatorTok{/}\NormalTok{N\_R}
-\NormalTok{        P\_hit }\OperatorTok{=}\NormalTok{ P\_hit}\OperatorTok{*}\NormalTok{S }\CommentTok{\# g\_j in S}
-\NormalTok{        P\_hit }\OperatorTok{=}\NormalTok{ np.cumsum(P\_hit, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
-
-\NormalTok{        P\_miss }\OperatorTok{=} \DecValTok{1}\OperatorTok{/}\NormalTok{(}\BuiltInTok{len}\NormalTok{(}\VariableTok{self}\NormalTok{.labels) }\OperatorTok{{-}} \BuiltInTok{len}\NormalTok{(gene\_set))}
-\NormalTok{        \_mask }\OperatorTok{=} \DecValTok{1}\OperatorTok{{-}}\NormalTok{S.T }\CommentTok{\# invert hits for misses}
-\NormalTok{        P\_miss }\OperatorTok{=}\NormalTok{ np.ones\_like(}\VariableTok{self}\NormalTok{.labels)}\OperatorTok{*}\NormalTok{\_mask}\OperatorTok{*}\NormalTok{P\_miss}
-\NormalTok{        P\_miss }\OperatorTok{=}\NormalTok{ np.cumsum(P\_miss.T, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
-
-\NormalTok{        S\_distr }\OperatorTok{=}\NormalTok{ (P\_hit }\OperatorTok{{-}}\NormalTok{ P\_miss).T}
-
-\NormalTok{        ES\_pos }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{max}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\NormalTok{        ES\_neg }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{min}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\NormalTok{        ES\_candidates }\OperatorTok{=}\NormalTok{ np.vstack([ES\_pos, ES\_neg]).T}
-\NormalTok{        to\_take }\OperatorTok{=}\NormalTok{ np.argmax(np.}\BuiltInTok{abs}\NormalTok{(ES\_candidates), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\NormalTok{        ES }\OperatorTok{=}\NormalTok{ (ES\_neg}\OperatorTok{*}\NormalTok{to\_take) }\OperatorTok{+}\NormalTok{ (ES\_pos}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{to\_take))}
-\NormalTok{        score, null }\OperatorTok{=}\NormalTok{ ES[}\DecValTok{0}\NormalTok{], ES[}\DecValTok{1}\NormalTok{:]}
-\NormalTok{        pvalue }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(null }\OperatorTok{\textgreater{}=}\NormalTok{ score) }\OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
-        \ControlFlowTok{if}\NormalTok{ pvalue }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
-\NormalTok{            pvalue }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
-
-        \ControlFlowTok{return}\NormalTok{ GseaResult(}
-\NormalTok{            set\_name}\OperatorTok{=}\NormalTok{name,}
-\NormalTok{            set\_size}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(gene\_set),}
-\NormalTok{            score}\OperatorTok{=}\NormalTok{score,}
-\NormalTok{            pvalue}\OperatorTok{=}\NormalTok{pvalue,}
-\NormalTok{            hits}\OperatorTok{=}\NormalTok{S.T[}\DecValTok{0}\NormalTok{],}
-\NormalTok{            running\_sum\_statistic}\OperatorTok{=}\NormalTok{S\_distr[}\DecValTok{0}\NormalTok{],}
-\NormalTok{        )}
     
-\KeywordTok{def}\NormalTok{ \_only\_enzymes(df: pd.DataFrame):}
-    \ControlFlowTok{return}\NormalTok{ df.loc[df.index.isin(enzymes)]}
-\NormalTok{\_df\_corr\_e }\OperatorTok{=}\NormalTok{ \_only\_enzymes(df\_corr)}
-\NormalTok{gsea }\OperatorTok{=}\NormalTok{ Gsea(}
-\NormalTok{    labels}\OperatorTok{=}\NormalTok{\_df\_corr\_e.index.to\_numpy(),}
-\NormalTok{    corr}\OperatorTok{=}\NormalTok{\_df\_corr\_e.to\_numpy(),}
-\NormalTok{    permuted}\OperatorTok{=}\NormalTok{\_only\_enzymes(df\_null).to\_numpy(),}
-\NormalTok{)}
+\KeywordTok{def}\NormalTok{ gsea(name):}
+\NormalTok{    gene\_set }\OperatorTok{=}\NormalTok{ gene\_sets[name]}
+    
+    \CommentTok{\# ...}
+
+    \ControlFlowTok{return}\NormalTok{ GseaResult(}
+\NormalTok{        set\_name}\OperatorTok{=}\NormalTok{name,}
+\NormalTok{        set\_size}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(gene\_set),}
+\NormalTok{        score}\OperatorTok{=}\NormalTok{score,}
+\NormalTok{        pvalue}\OperatorTok{=}\NormalTok{pvalue,}
+\NormalTok{        hits}\OperatorTok{=}\NormalTok{S.T[}\DecValTok{0}\NormalTok{],}
+\NormalTok{        running\_sum\_statistic}\OperatorTok{=}\NormalTok{S\_distr[}\DecValTok{0}\NormalTok{],}
+\NormalTok{    )}
+
+\NormalTok{res }\OperatorTok{=}\NormalTok{ gsea(}\StringTok{"rn00983"}\NormalTok{)}
+\NormalTok{res.score, res.pvalue}
 \end{Highlighting}
 \end{Shaded}
+
+Solution
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\ImportTok{from}\NormalTok{ dataclasses }\ImportTok{import}\NormalTok{ dataclass}
+
+\AttributeTok{@dataclass}
+\KeywordTok{class}\NormalTok{ GseaResult:}
+\NormalTok{    set\_name: }\BuiltInTok{str}
+\NormalTok{    set\_size: }\BuiltInTok{int}
+\NormalTok{    score: }\BuiltInTok{float}
+\NormalTok{    pvalue: }\BuiltInTok{float}
+\NormalTok{    hits: np.ndarray}
+\NormalTok{    running\_sum\_statistic: np.ndarray}
+    
+\KeywordTok{def}\NormalTok{ gsea(name):}
+\NormalTok{    gene\_set }\OperatorTok{=}\NormalTok{ gene\_sets[name]}
+\NormalTok{    S }\OperatorTok{=}\NormalTok{ np.array([k }\KeywordTok{in}\NormalTok{ gene\_set }\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ labels], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{) }\CommentTok{\# g in S}
+\NormalTok{    S }\OperatorTok{=}\NormalTok{ S[mat\_index.T] }\CommentTok{\# same order as mat}
+
+\NormalTok{    p }\OperatorTok{=} \DecValTok{1}
+\NormalTok{    corr }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{pow}\NormalTok{(np.}\BuiltInTok{abs}\NormalTok{(mat\_sorted), p)}
+\NormalTok{    N\_R }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(corr}\OperatorTok{*}\NormalTok{S, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{    P\_hit }\OperatorTok{=}\NormalTok{ corr}\OperatorTok{/}\NormalTok{N\_R}
+\NormalTok{    P\_hit }\OperatorTok{=}\NormalTok{ P\_hit}\OperatorTok{*}\NormalTok{S }\CommentTok{\# g\_j in S}
+\NormalTok{    P\_hit }\OperatorTok{=}\NormalTok{ np.cumsum(P\_hit, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{    P\_miss }\OperatorTok{=} \DecValTok{1}\OperatorTok{/}\NormalTok{(}\BuiltInTok{len}\NormalTok{(labels) }\OperatorTok{{-}} \BuiltInTok{len}\NormalTok{(gene\_set))}
+\NormalTok{    \_mask }\OperatorTok{=} \DecValTok{1}\OperatorTok{{-}}\NormalTok{S.T }\CommentTok{\# invert hits for misses}
+\NormalTok{    P\_miss }\OperatorTok{=}\NormalTok{ np.ones\_like(labels)}\OperatorTok{*}\NormalTok{\_mask}\OperatorTok{*}\NormalTok{P\_miss}
+\NormalTok{    P\_miss }\OperatorTok{=}\NormalTok{ np.cumsum(P\_miss.T, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{    S\_distr }\OperatorTok{=}\NormalTok{ (P\_hit }\OperatorTok{{-}}\NormalTok{ P\_miss).T }\CommentTok{\# running statistic}
+\NormalTok{    ES\_pos }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{max}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{    ES\_neg }\OperatorTok{=}\NormalTok{ S\_distr.}\BuiltInTok{min}\NormalTok{(axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{    ES\_candidates }\OperatorTok{=}\NormalTok{ np.vstack([ES\_pos, ES\_neg]).T       }\CommentTok{\# candidate is either the positive or negative}
+\NormalTok{    to\_take }\OperatorTok{=}\NormalTok{ np.argmax(np.}\BuiltInTok{abs}\NormalTok{(ES\_candidates), axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)  }\CommentTok{\# we must select for each permutation}
+\NormalTok{    ES }\OperatorTok{=}\NormalTok{ (ES\_neg}\OperatorTok{*}\NormalTok{to\_take) }\OperatorTok{+}\NormalTok{ (ES\_pos}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{to\_take))}
+
+\NormalTok{    score, null }\OperatorTok{=}\NormalTok{ ES[}\DecValTok{0}\NormalTok{], ES[}\DecValTok{1}\NormalTok{:]}
+\NormalTok{    pvalue }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(null }\OperatorTok{\textgreater{}=}\NormalTok{ score) }\OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
+    \ControlFlowTok{if}\NormalTok{ pvalue }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
+\NormalTok{        pvalue }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ null.shape[}\DecValTok{0}\NormalTok{]}
+
+    \ControlFlowTok{return}\NormalTok{ GseaResult(}
+\NormalTok{        set\_name}\OperatorTok{=}\NormalTok{name,}
+\NormalTok{        set\_size}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(gene\_set),}
+\NormalTok{        score}\OperatorTok{=}\NormalTok{score,}
+\NormalTok{        pvalue}\OperatorTok{=}\NormalTok{pvalue,}
+\NormalTok{        hits}\OperatorTok{=}\NormalTok{S.T[}\DecValTok{0}\NormalTok{],}
+\NormalTok{        running\_sum\_statistic}\OperatorTok{=}\NormalTok{S\_distr[}\DecValTok{0}\NormalTok{],}
+\NormalTok{    )}
+
+\NormalTok{res }\OperatorTok{=}\NormalTok{ gsea(}\StringTok{"rn00983"}\NormalTok{)}
+\NormalTok{res.score, res.pvalue}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 We can now run GSEA for all pathways.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{results: }\BuiltInTok{list}\NormalTok{[GseaResult] }\OperatorTok{=}\NormalTok{ []}
-\ControlFlowTok{for}\NormalTok{ k, s }\KeywordTok{in}\NormalTok{ tqdm(gene\_sets.items(), total}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(gene\_sets)):}
-\NormalTok{    res }\OperatorTok{=}\NormalTok{ gsea.run(k, s)}
+\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ tqdm(gene\_sets, total}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(gene\_sets)):}
+\NormalTok{    res }\OperatorTok{=}\NormalTok{ gsea(k)}
 \NormalTok{    results.append(res)}
 \NormalTok{results\_map }\OperatorTok{=}\NormalTok{ \{r.set\_name: r }\ControlFlowTok{for}\NormalTok{ r }\KeywordTok{in}\NormalTok{ results\}}
 \end{Highlighting}
@@ -4660,21 +4873,25 @@ Let's save the results to a table.
 \NormalTok{df\_gsea }\OperatorTok{=}\NormalTok{ pd.DataFrame(rows, columns}\OperatorTok{=}\NormalTok{[}\StringTok{"set\_name"}\NormalTok{, }\StringTok{"pvalue"}\NormalTok{, }\StringTok{"score"}\NormalTok{])}
 \NormalTok{Path(}\StringTok{"./gsea"}\NormalTok{).mkdir(exist\_ok}\OperatorTok{=}\VariableTok{True}\NormalTok{, parents}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \NormalTok{df\_gsea.to\_csv(}\StringTok{"./gsea/results.csv"}\NormalTok{, index}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\NormalTok{df\_gsea}
 \end{Highlighting}
 \end{Shaded}
 
-The nice GSEA plot is composed of 3 elements. First, we indicate the rank of genes within the selected gene set.
+The nice GSEA plots shown in the paper are omposed of 3 elements.
+First, we indicate the rank of genes within the selected gene set.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
+\ImportTok{from}\NormalTok{ local.figures.colors }\ImportTok{import}\NormalTok{ COLORS}
+
 \NormalTok{res }\OperatorTok{=}\NormalTok{ results\_map[}\StringTok{"rn00983"}\NormalTok{]}
 
 \NormalTok{fig }\OperatorTok{=}\NormalTok{ BaseFigure()}
 \NormalTok{\_f }\OperatorTok{=}\NormalTok{ res.hits.astype(}\BuiltInTok{bool}\NormalTok{)}
 \NormalTok{fig.add\_trace(}
 \NormalTok{    go.Scatter(}
-\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{])[\_f],}
-\NormalTok{        y }\OperatorTok{=}\NormalTok{ np.zeros\_like(gsea.labels)[\_f],}
+\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{])[\_f],}
+\NormalTok{        y }\OperatorTok{=}\NormalTok{ np.zeros\_like(labels)[\_f],}
 \NormalTok{        mode }\OperatorTok{=} \StringTok{"markers"}\NormalTok{,}
 \NormalTok{        marker}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(}
 \NormalTok{            size}\OperatorTok{=}\DecValTok{25}\NormalTok{,}
@@ -4697,8 +4914,8 @@ Next, we draw out the magnitudes of the correlations.
 \NormalTok{fig }\OperatorTok{=}\NormalTok{ BaseFigure()}
 \NormalTok{fig.add\_trace(}
 \NormalTok{    go.Bar(}
-\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{]),}
-\NormalTok{        y }\OperatorTok{=}\NormalTok{ gsea.mat\_sorted.T[}\DecValTok{0}\NormalTok{],}
+\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{]),}
+\NormalTok{        y }\OperatorTok{=}\NormalTok{ mat\_sorted.T[}\DecValTok{0}\NormalTok{],}
 \NormalTok{        showlegend}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
 \NormalTok{        marker}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(}
 \NormalTok{            color}\OperatorTok{=}\NormalTok{COLORS.BLACK,}
@@ -4718,7 +4935,7 @@ And draw out the running sum statistic for the ES.
 \NormalTok{fig }\OperatorTok{=}\NormalTok{ BaseFigure()}
 \NormalTok{fig.add\_trace(}
 \NormalTok{    go.Scatter(}
-\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{]),}
+\NormalTok{        x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{]),}
 \NormalTok{        y }\OperatorTok{=}\NormalTok{ res.running\_sum\_statistic,}
 \NormalTok{        mode }\OperatorTok{=} \StringTok{"lines"}\NormalTok{,}
 \NormalTok{        showlegend}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
@@ -4736,7 +4953,7 @@ Finally, we stack the 3 together to replicate the figures used in the GSEA paper
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\KeywordTok{def}\NormalTok{ draw\_gsea(res: GseaResult, gsea: Gsea):}
+\KeywordTok{def}\NormalTok{ draw\_gsea(res: GseaResult):}
 \NormalTok{    k }\OperatorTok{=}\NormalTok{ res.set\_name}
 \NormalTok{    fig }\OperatorTok{=}\NormalTok{ BaseFigure(}
 \NormalTok{        shape}\OperatorTok{=}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{),                   }\CommentTok{\# 3 subplots, vertically stacked}
@@ -4747,8 +4964,8 @@ Finally, we stack the 3 together to replicate the figures used in the GSEA paper
 \NormalTok{    \_f }\OperatorTok{=}\NormalTok{ res.hits.astype(}\BuiltInTok{bool}\NormalTok{)}
 \NormalTok{    fig.add\_trace(}
 \NormalTok{        go.Scatter(}
-\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{])[\_f],}
-\NormalTok{            y }\OperatorTok{=}\NormalTok{ np.zeros\_like(gsea.labels)[\_f],}
+\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{])[\_f],}
+\NormalTok{            y }\OperatorTok{=}\NormalTok{ np.zeros\_like(labels)[\_f],}
 \NormalTok{            mode }\OperatorTok{=} \StringTok{"markers"}\NormalTok{,}
 \NormalTok{            marker}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(}
 \NormalTok{                size}\OperatorTok{=}\DecValTok{25}\NormalTok{,}
@@ -4763,8 +4980,8 @@ Finally, we stack the 3 together to replicate the figures used in the GSEA paper
 
 \NormalTok{    fig.add\_trace(}
 \NormalTok{        go.Bar(}
-\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{]),}
-\NormalTok{            y }\OperatorTok{=}\NormalTok{ gsea.mat\_sorted.T[}\DecValTok{0}\NormalTok{],}
+\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{]),}
+\NormalTok{            y }\OperatorTok{=}\NormalTok{ mat\_sorted.T[}\DecValTok{0}\NormalTok{],}
 \NormalTok{            showlegend}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
 \NormalTok{            marker}\OperatorTok{=}\BuiltInTok{dict}\NormalTok{(}
 \NormalTok{                color}\OperatorTok{=}\NormalTok{COLORS.BLACK,}
@@ -4776,7 +4993,7 @@ Finally, we stack the 3 together to replicate the figures used in the GSEA paper
 
 \NormalTok{    fig.add\_trace(}
 \NormalTok{        go.Scatter(}
-\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(gsea.labels.shape[}\DecValTok{0}\NormalTok{]),}
+\NormalTok{            x }\OperatorTok{=}\NormalTok{ np.arange(labels.shape[}\DecValTok{0}\NormalTok{]),}
 \NormalTok{            y }\OperatorTok{=}\NormalTok{ res.running\_sum\_statistic,}
 \NormalTok{            mode }\OperatorTok{=} \StringTok{"lines"}\NormalTok{,}
 \NormalTok{            showlegend}\OperatorTok{=}\VariableTok{False}\NormalTok{,}
@@ -4800,11 +5017,17 @@ Finally, we stack the 3 together to replicate the figures used in the GSEA paper
 \NormalTok{    )}
 \NormalTok{    fig.show()}
 
-\NormalTok{draw\_gsea(results\_map[}\StringTok{"rn00983"}\NormalTok{], gsea)}
+\NormalTok{draw\_gsea(results\_map[}\StringTok{"rn00983"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
-If you have time, use the \texttt{draw\_gsea} function to explore other pathways.
+Use the \texttt{draw\_gsea} function to explore other pathways.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{df\_gsea}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Cytoscape}\label{cytoscape}
 
@@ -4890,7 +5113,6 @@ We can generate weights for edges to filter out low-information connections usin
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{compound\_promiscuity }\OperatorTok{=}\NormalTok{ \{k: }\BuiltInTok{len}\NormalTok{(v) }\ControlFlowTok{for}\NormalTok{ k, v }\KeywordTok{in}\NormalTok{ c2r.items()\}}
-
 \NormalTok{names[}\StringTok{"M\_cpd00011\_c0"}\NormalTok{], compound\_promiscuity[}\StringTok{"M\_cpd00011\_c0"}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
@@ -4918,7 +5140,7 @@ the promiscuity of each compound. In other words, we will use weighted jaccard s
 \CommentTok{\# the more promiscuous a compound is, the less weight it has in the similarity calculation}
 \NormalTok{\_promiscuity\_values }\OperatorTok{=}\NormalTok{ np.array([compound\_promiscuity[c] }\ControlFlowTok{for}\NormalTok{ c }\KeywordTok{in}\NormalTok{ c2r.keys()])}
 \NormalTok{b }\OperatorTok{=} \DecValTok{5}
-\NormalTok{\_scaled\_promiscuity }\OperatorTok{=} \FloatTok{0.5}\OperatorTok{*}\NormalTok{np.e}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{np.exp((\_cproms}\OperatorTok{{-}}\NormalTok{b}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{b)) }\CommentTok{\# sigmoid, dist=0.5 at 8, near 0 at 20}
+\NormalTok{\_scaled\_promiscuity }\OperatorTok{=} \FloatTok{0.5}\OperatorTok{*}\NormalTok{np.e}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{np.exp((\_promiscuity\_values}\OperatorTok{{-}}\NormalTok{b}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{b)) }\CommentTok{\# sigmoid, dist=0.5 at 8, near 0 at 20}
 \NormalTok{compound\_scaled\_weights }\OperatorTok{=}\NormalTok{ \{c: w }\ControlFlowTok{for}\NormalTok{ c, w }\KeywordTok{in} \BuiltInTok{zip}\NormalTok{(c2r.keys(), \_scaled\_promiscuity)\}}
 
 \CommentTok{\# calculate the weighted jaccard similarity between reactions}
@@ -4967,7 +5189,7 @@ Run UMAP to obtain the network projection.
 
 \NormalTok{pdist }\OperatorTok{=}\NormalTok{ np.ones((}\BuiltInTok{len}\NormalTok{(r2c), }\BuiltInTok{len}\NormalTok{(r2c)))}\OperatorTok{*}\FloatTok{1e6}
 \NormalTok{r2i }\OperatorTok{=}\NormalTok{ \{r: i }\ControlFlowTok{for}\NormalTok{ i, r }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(r2c)\}}
-\ControlFlowTok{for}\NormalTok{ (r1, r2), w }\KeywordTok{in}\NormalTok{ edges.items():}
+\ControlFlowTok{for}\NormalTok{ (r1, r2), w }\KeywordTok{in}\NormalTok{ reaction\_similarity.items():}
 \NormalTok{    i, j }\OperatorTok{=}\NormalTok{ r2i[r1], r2i[r2]}
 \NormalTok{    w }\OperatorTok{=} \DecValTok{1}\OperatorTok{/}\NormalTok{w}\OperatorTok{{-}}\DecValTok{1}
 \NormalTok{    pdist[i, j] }\OperatorTok{=}\NormalTok{ w}
@@ -5100,7 +5322,9 @@ we will use the local KEGG model.
 \end{Highlighting}
 \end{Shaded}
 
-Let's start to construct the cytoscape save file, starting with the nodes.
+Let's start to construct the cytoscape save file, starting with the nodes. A dictionary object for each node
+will be created to represent reactions and compounds. The pathway, gsea results, expression, and gene information
+wil be added to the object for each node so that they can be used in Cytoscape.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -5122,8 +5346,12 @@ Let's start to construct the cytoscape save file, starting with the nodes.
             
 \NormalTok{            gsea\_meta }\OperatorTok{=}\NormalTok{ gsea\_lookup.get(relavent\_pathway, }\VariableTok{None}\NormalTok{)}
 \NormalTok{            gsea\_score }\OperatorTok{=}\NormalTok{ gsea\_meta[}\StringTok{"score"}\NormalTok{] }\ControlFlowTok{if}\NormalTok{ gsea\_meta }\KeywordTok{is} \KeywordTok{not} \VariableTok{None} \ControlFlowTok{else} \VariableTok{None}
+            \ControlFlowTok{if}\NormalTok{ gsea\_score }\KeywordTok{is} \KeywordTok{not} \VariableTok{None} \KeywordTok{and}\NormalTok{ np.isnan(gsea\_score):}
+\NormalTok{                gsea\_score }\OperatorTok{=} \VariableTok{None}
 \NormalTok{            gsea\_pvalue }\OperatorTok{=}\NormalTok{ gsea\_meta[}\StringTok{"pvalue"}\NormalTok{] }\ControlFlowTok{if}\NormalTok{ gsea\_meta }\KeywordTok{is} \KeywordTok{not} \VariableTok{None} \ControlFlowTok{else} \VariableTok{None}
-            
+            \ControlFlowTok{if}\NormalTok{ gsea\_pvalue }\KeywordTok{is} \KeywordTok{not} \VariableTok{None} \KeywordTok{and}\NormalTok{ np.isnan(gsea\_pvalue):}
+\NormalTok{                gsea\_pvalue }\OperatorTok{=} \VariableTok{None}
+
 \NormalTok{            genes }\OperatorTok{=}\NormalTok{ r2genes.get(k, [])}
 \NormalTok{            genes }\OperatorTok{=}\NormalTok{ [g[}\DecValTok{2}\NormalTok{:] }\ControlFlowTok{for}\NormalTok{ g }\KeywordTok{in}\NormalTok{ genes]}
 \NormalTok{            genes }\OperatorTok{=} \BuiltInTok{sorted}\NormalTok{(genes, key}\OperatorTok{=}\KeywordTok{lambda}\NormalTok{ g: gene2rank.get(g, }\FloatTok{1e6}\NormalTok{))}
@@ -5160,7 +5388,7 @@ Let's start to construct the cytoscape save file, starting with the nodes.
 \end{Highlighting}
 \end{Shaded}
 
-Create a collection of edges, indicating the links for nodes. The only attribute added is the edge weight.
+A collection of edges indicate the links between nodes. The only attribute added is the edge weight from the metabolic proximity between reactions.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -5173,8 +5401,8 @@ Create a collection of edges, indicating the links for nodes. The only attribute
 \end{Highlighting}
 \end{Shaded}
 
-Additional parameters are obtained from creating a simple network with Cytoscape and saving it.
-The only modification is registering the node and edge attributes we created above.
+A template for the save file was obtained from creating a simple network with Cytoscape and saving it.
+The only modification is registering the node and edge attributes from above to the metadata section.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -5329,13 +5557,13 @@ We can now create the Cytoscape save file and load it into Cytoscape.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_load.png}}
+\includegraphics{img/lab4/cytoscape_load.png}
 
 Let's use the edge weights to fade the less important edges.
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_edge1.png}}
+\includegraphics{img/lab4/cytoscape_edge1.png}
 
-\pandocbounded{\includegraphics[keepaspectratio]{img/lab4/cytoscape_edge2.png}}
+\includegraphics{img/lab4/cytoscape_edge2.png}
 
 Some useful navigational tips:
 
@@ -5358,6 +5586,6 @@ Save your network with \texttt{Data\ -\textgreater{}\ Download\ Network\ File\ (
 
 This concludes the lab!
 
-\bibliography{book.bib,packages.bib}
+  \bibliography{book.bib,packages.bib}
 
 \end{document}

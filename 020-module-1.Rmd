@@ -16,7 +16,7 @@ Throughout this module, there are some questions aimed to help your understandin
 
 ### Log into your instance
 
-If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in [Beginner Module 1](https://github.com/LangilleLab/microbiome_helper/wiki/CBW%E2%80%902025%E2%80%90BMB%E2%80%90Module1#11-log-into-your-aws-instance).
+If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in [Beginner Module 1](https://bioinformaticsdotca.github.io/BMB_2025/module-1.html#log-into-your-aws-instance).
 
 ### Working on the Command Line
 
@@ -72,14 +72,14 @@ Here, we have demonstrated how `parallel` treats multiple inputs. It uses all co
 parallel --link 'echo {}' ::: a b c ::: 1 2 3
 ```
 
-In this case, the inputs are "linked", such that only one of each is used. If the lists are different lengths, `parallel` will go back to the beginning of the shortest list and continue to use it until the longest list is completed. You do not have to run the following command, as the output is provided to demonstrate this.
+In this case, the inputs are "linked", such that only one of each is used. If the lists are different lengths, `parallel` will go back to the beginning of the shortest list and continue to use it until the longest list is completed. 
 
 ```
 parallel --link 'echo {}' ::: light dark ::: red blue green
 ```
 Notice how `light` appears a second time (on the third line of the output) to satisfy the length of the second list.
 
-Another useful feature is specifying _which_ inputs we give parallel are to go _where_. This can be done intuitively by using multiple brackets `{ }` containing numbers corresponding to the list we are interested in. Again, you do not have to run the following command, as the output is provided to demonstrate this.
+Another useful feature is specifying _which_ inputs we give parallel are to go _where_. This can be done intuitively by using multiple brackets `{ }` containing numbers corresponding to the list we are interested in. 
 
 ```
 parallel --link 'echo {1} {3}; echo {2} {3}' ::: one red ::: two blue ::: fish
@@ -116,13 +116,11 @@ Remember that you can go to `http://##.uhn-hpc.ca/` (where ## is your personal n
 
 Copy across the ```multiqc.html``` file to your computer.
 
-Click on the **.html** files to view the results for each sample. Let's look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer. However, you may notice that for our samples this is not the case! This is because for the purpose of this tutorial, your raw data has already been trimmed.
+Click on the **.html** files to view the results for each sample. Let's look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer. 
 
 More often, per base sequence quality will look like the following. The FastQC documentation provides examples of "[good](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html#M1)" and "[bad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html)" data. These examples are also shown below:
 
 <img src="https://github.com/LangilleLab/microbiome_helper/assets/106988687/1ceec41e-f7ae-4763-889d-a24e95384d57" width="800">
-
-Now, you may have also noticed that most of the samples fail the "Per Base Sequence Content" module of FastQC. 
 
 This specific module plots out the proportion of each base position in a file, and raises a warning/error if there are large discrepancies in base proportions. In a given sequence, the lines for each base should run in parallel, indicating that the base calling represents proper nucleotide pairing. Additionally, the A and T lines may appear separate from the G and C lines, which is a consequence of the GC content of the sample. The relative amount of each base reflects the overall amount of the bases in the genome, and should not be imbalanced. When this is not the case, the sequence composition is **biased**. A common cause of this is the use of primers, which throws off our sequence content at the beginning of the read. Fortunately, although the module error stems from this bias, according to the [FastQC documentation for this module](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/4%20Per%20Base%20Sequence%20Content.html#:~:text=Whilst%20this%20is%20a%20true%20technical%20bias%2C%20it%20isn%27t%20something%20which%20can%20be%20corrected%20by%20trimming%20and%20in%20most%20cases%20doesn%27t%20seem%20to%20adversely%20affect%20the%20downstream%20analysis.) it will not largely impact our downstream analysis.
 
