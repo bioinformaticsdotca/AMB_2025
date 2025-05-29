@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.22)  29 MAY 2025 07:46
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.22)  29 MAY 2025 08:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -782,20 +782,20 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [14]
+Underfull \hbox (badness 10000) in paragraph at lines 337--340
+
+ []
+
+
 
 [15]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 368--368
+Overfull \hbox (43.5pt too wide) in paragraph at lines 370--370
 []\TU/lmtt/m/n/10 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt[] 
  []
 
 
-Overfull \hbox (421.5pt too wide) in paragraph at lines 398--398
+Overfull \hbox (421.5pt too wide) in paragraph at lines 400--400
 []\TU/lmtt/m/n/10 cat GCF_016699485.2_bGalGal1.mat.broiler.GRCg7b_genomic.fna.gz GCF_000819615.1_ViralProj14015_genomic.fna.gz > chicken_Gallusgallus_phiX174.fna.gz[] 
- []
-
-
-Overfull \hbox (185.25pt too wide) in paragraph at lines 405--405
-[]\TU/lmtt/m/n/10 bowtie2-build chicken_Gallusgallus_phiX174.fna.gz bowtie2_db/chicken_Gallusgallus_phiX174 --threads 4[] 
  []
 
 
@@ -806,24 +806,29 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [16]
-Overfull \hbox (437.25pt too wide) in paragraph at lines 419--419
+Overfull \hbox (185.25pt too wide) in paragraph at lines 407--407
+[]\TU/lmtt/m/n/10 bowtie2-build chicken_Gallusgallus_phiX174.fna.gz bowtie2_db/chicken_Gallusgallus_phiX174 --threads 4[] 
+ []
+
+
+Overfull \hbox (437.25pt too wide) in paragraph at lines 421--421
 []\TU/lmtt/m/n/10 parallel -j 1 --eta 'kneaddata -un {1} -o kneaddata_out -db bowtie2_db/chicken_Gallusgallus_phiX174 --remove-intermediate-output -t 4' ::: raw_data/*[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 431--431
+Overfull \hbox (90.75pt too wide) in paragraph at lines 433--433
 []\TU/lmtt/m/n/10 kneaddata_read_count_table --input kneaddata_out --output kneaddata_read_counts.txt[] 
  []
 
 
 
 [17]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 466--466
+Overfull \hbox (64.5pt too wide) in paragraph at lines 468--468
 []\TU/lmtt/m/n/10 wget https://genome-idx.s3.amazonaws.com/kraken/k2_pluspf_08gb_20250402.tar.gz[] 
  []
 
 
-Overfull \hbox (647.25pt too wide) in paragraph at lines 489--489
+Overfull \hbox (647.25pt too wide) in paragraph at lines 491--491
 []\TU/lmtt/m/n/10 parallel -j 1 --eta --dry-run 'kraken2 --db k2_pluspf_08gb --output kraken2_outraw/{/.}.kraken --report kraken2_kreport/{/.}.kreport --confidence 0 {} --threads 4' ::: kneaddata_out/*.fastq[] 
  []
 
@@ -835,24 +840,24 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [18]
-Overfull \hbox (369.0pt too wide) in paragraph at lines 512--512
+Overfull \hbox (369.0pt too wide) in paragraph at lines 514--514
 []\TU/lmtt/m/n/10 parallel -j 2 --eta 'bracken -d k2_pluspf_08gb -i {} -o bracken_out/{/.}.species.bracken -r 150 -l S -t 1' ::: kraken2_kreport/*.kreport[] 
  []
 
 
-Overfull \hbox (164.25pt too wide) in paragraph at lines 526--526
+Overfull \hbox (164.25pt too wide) in paragraph at lines 528--528
 []\TU/lmtt/m/n/10 combine_bracken_outputs.py --files bracken_out/*.species.bracken -o merged_output.species.bracken[] 
  []
 
 
 
 [19]
-Overfull \hbox (416.25pt too wide) in paragraph at lines 548--548
+Overfull \hbox (416.25pt too wide) in paragraph at lines 550--550
 []\TU/lmtt/m/n/10 parallel -j 1 --eta 'metaphlan --bowtie2db CHOCOPhlAn_201901 --input_type fastq -o metaphlan_out/{/.}.mpa {} --nproc 2' ::: kneaddata_out/*.fastq[] 
  []
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 562.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 564.
 
 
 
@@ -861,99 +866,99 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [20]
-Overfull \hbox (153.75pt too wide) in paragraph at lines 600--600
+Overfull \hbox (153.75pt too wide) in paragraph at lines 602--602
 []\TU/lmtt/m/n/10 bracken <- read.csv("merged_output.species.bracken", sep="\t") #read in the file as a dataframe[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 600--600
+Overfull \hbox (69.75pt too wide) in paragraph at lines 602--602
 []\TU/lmtt/m/n/10 rownames(bracken) = bracken[,1] #set the row names to those in the first column[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 600--600
+Overfull \hbox (33.0pt too wide) in paragraph at lines 602--602
 []\TU/lmtt/m/n/10 for (colname in colnames(bracken)) { #for each of the columns in bracken[] 
  []
 
 
-Overfull \hbox (138.0pt too wide) in paragraph at lines 600--600
+Overfull \hbox (138.0pt too wide) in paragraph at lines 602--602
 []  \TU/lmtt/m/n/10 if (grepl("bracken_num", colname, fixed = TRUE)) { #if "bracken_num" is in the column name[] 
  []
 
 
-Overfull \hbox (248.25pt too wide) in paragraph at lines 600--600
+Overfull \hbox (248.25pt too wide) in paragraph at lines 602--602
 []    \TU/lmtt/m/n/10 cols <- c(cols, colname) #add it to the columns list - we're going to use this to filter/subset the dataframe[] 
  []
 
 
-Overfull \hbox (374.25pt too wide) in paragraph at lines 600--600
+Overfull \hbox (374.25pt too wide) in paragraph at lines 602--602
 []\TU/lmtt/m/n/10 bracken = bracken[,cols] #subset the dataframe to only the columns in the cols list (i.e. only those with bracken_num in the column name)[] 
  []
 
 
-Overfull \hbox (815.25pt too wide) in paragraph at lines 600--600
+Overfull \hbox (815.25pt too wide) in paragraph at lines 602--602
 []\TU/lmtt/m/n/10 colnames(bracken) = sapply(strsplit(colnames(bracken),"_"), `[`, 1) #rename the column names by splitting them on the first occurrence of an underscore, so this means we are left with only the sample name for each of them[] 
  []
 
 
 
 [21]
-Overfull \hbox (143.25pt too wide) in paragraph at lines 628--628
+Overfull \hbox (143.25pt too wide) in paragraph at lines 630--630
 []\TU/lmtt/m/n/10 for (species in rownames(bracken)) { #for each of the rows (species) in the bracken dataframe[] 
  []
 
 
-Overfull \hbox (117.0pt too wide) in paragraph at lines 628--628
+Overfull \hbox (117.0pt too wide) in paragraph at lines 630--630
 []  \TU/lmtt/m/n/10 if (grepl("uncultured", this_species, fixed = TRUE)) { #if "uncultured" is in the name[] 
  []
 
 
-Overfull \hbox (516.0pt too wide) in paragraph at lines 628--628
+Overfull \hbox (516.0pt too wide) in paragraph at lines 630--630
 []     \TU/lmtt/m/n/10 this_species = gsub("uncultured ", "", this_species) #rename the species by removing the "uncultured" and replacing it with nothing (the empty quotation marks)[] 
  []
 
 
-Overfull \hbox (216.75pt too wide) in paragraph at lines 628--628
+Overfull \hbox (216.75pt too wide) in paragraph at lines 630--630
 []  \TU/lmtt/m/n/10 this_genus = strsplit(this_species, " ")[[1]][1] #get the first word of the species name (the genus name)[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 628--628
+Overfull \hbox (27.75pt too wide) in paragraph at lines 630--630
 []  \TU/lmtt/m/n/10 all_genus = c(all_genus, this_genus) #add this genus name to our list[] 
  []
 
 
-Overfull \hbox (269.25pt too wide) in paragraph at lines 628--628
+Overfull \hbox (269.25pt too wide) in paragraph at lines 630--630
 []\TU/lmtt/m/n/10 tax_table = data.frame(genus=all_genus, species=rownames(bracken)) #make a new table with the genus and species names[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 628--628
+Overfull \hbox (6.75pt too wide) in paragraph at lines 630--630
 []\TU/lmtt/m/n/10 rownames(tax_table) = rownames(bracken) #and add the rownames to it[] 
  []
 
 
-Overfull \hbox (122.25pt too wide) in paragraph at lines 638--638
+Overfull \hbox (122.25pt too wide) in paragraph at lines 640--640
 []\TU/lmtt/m/n/10 metadata = read.csv("metagenome_metadata.txt", sep="\t") #read in the file as a dataframe[] 
  []
 
 
-Overfull \hbox (117.0pt too wide) in paragraph at lines 638--638
+Overfull \hbox (117.0pt too wide) in paragraph at lines 640--640
 []\TU/lmtt/m/n/10 samples = data.frame(metadata[,2], stringsAsFactors = FALSE) #get only the second column[] 
  []
 
 
-Overfull \hbox (227.25pt too wide) in paragraph at lines 638--638
+Overfull \hbox (227.25pt too wide) in paragraph at lines 640--640
 []\TU/lmtt/m/n/10 samples['classifier'] = 'kraken' #add a new column that shows us that these samples were classified by Kraken[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 648--648
+Overfull \hbox (90.75pt too wide) in paragraph at lines 650--650
 []\TU/lmtt/m/n/10 BRACKEN = otu_table(bracken, taxa_are_rows = TRUE) #convert bracken to an otu_table[] 
  []
 
 
-Overfull \hbox (143.25pt too wide) in paragraph at lines 648--648
+Overfull \hbox (143.25pt too wide) in paragraph at lines 650--650
 []\TU/lmtt/m/n/10 SAMPLE = sample_data(samples) #convert the samples dataframe to a phyloseq sample_data format[] 
  []
 
@@ -965,64 +970,64 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [22]
-Overfull \hbox (127.5pt too wide) in paragraph at lines 648--648
+Overfull \hbox (127.5pt too wide) in paragraph at lines 650--650
 []\TU/lmtt/m/n/10 TAX = tax_table(tax_table) #convert the tax_table dataframe to a phyloseq tax_table format[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 648--648
+Overfull \hbox (90.75pt too wide) in paragraph at lines 650--650
 []\TU/lmtt/m/n/10 taxa_names(TAX) <- rownames(bracken) #get the taxa names from the bracken row names[] 
  []
 
 
-Overfull \hbox (38.25pt too wide) in paragraph at lines 648--648
+Overfull \hbox (38.25pt too wide) in paragraph at lines 650--650
 []\TU/lmtt/m/n/10 physeq_bracken = phyloseq(BRACKEN, TAX, SAMPLE) #make the phyloseq object[] 
  []
 
 
-Overfull \hbox (458.25pt too wide) in paragraph at lines 657--657
+Overfull \hbox (458.25pt too wide) in paragraph at lines 659--659
 []\TU/lmtt/m/n/10 physeq_bracken_genus = tax_glom(physeq_bracken) #collapse at the genus level (the default is the first level in the tax_table, which for us is the genus)[] 
  []
 
 
-Overfull \hbox (237.75pt too wide) in paragraph at lines 657--657
+Overfull \hbox (237.75pt too wide) in paragraph at lines 659--659
 []\TU/lmtt/m/n/10 taxa_names(physeq_bracken_genus) = data.frame(tax_table(physeq_bracken_genus))$ta1 #add the genus names to this[] 
  []
 
 
-Overfull \hbox (363.75pt too wide) in paragraph at lines 672--672
+Overfull \hbox (363.75pt too wide) in paragraph at lines 674--674
 []\TU/lmtt/m/n/10 print(c("Minimum sample size:",min(sample_sums(physeq_bracken_genus)), "Maximum sample size:", max(sample_sums(physeq_bracken_genus))))[] 
  []
 
 
-Overfull \hbox (206.25pt too wide) in paragraph at lines 690--690
+Overfull \hbox (206.25pt too wide) in paragraph at lines 692--692
 []\TU/lmtt/m/n/10 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,800))[] 
  []
 
 
 
 [23]
-Overfull \hbox (279.75pt too wide) in paragraph at lines 709--709
+Overfull \hbox (279.75pt too wide) in paragraph at lines 711--711
 []\TU/lmtt/m/n/10 print(c("Minimum reads:",min(taxa_sums(physeq_bracken_genus)), "Maximum reads:", max(taxa_sums(physeq_bracken_genus))))[] 
  []
 
 
-Overfull \hbox (127.5pt too wide) in paragraph at lines 715--715
+Overfull \hbox (127.5pt too wide) in paragraph at lines 717--717
 []\TU/lmtt/m/n/10 physeq_bracken_genus<-prune_taxa(taxa_sums(physeq_bracken_genus)>=10,physeq_bracken_genus)[] 
  []
 
 
-Overfull \hbox (132.75pt too wide) in paragraph at lines 721--721
+Overfull \hbox (132.75pt too wide) in paragraph at lines 723--723
 []\TU/lmtt/m/n/10 physeq_bracken_genus<-prune_taxa(taxa_sums(physeq_bracken_genus)>=100,physeq_bracken_genus)[] 
  []
 
 
-Overfull \hbox (206.25pt too wide) in paragraph at lines 729--729
+Overfull \hbox (206.25pt too wide) in paragraph at lines 731--731
 []\TU/lmtt/m/n/10 rarecurve(as.data.frame(t(otu_table(physeq_bracken_genus))), step=50,cex=0.5,label=TRUE, ylim = c(1,150))[] 
  []
 
 
-Overfull \hbox (447.75pt too wide) in paragraph at lines 747--747
+Overfull \hbox (447.75pt too wide) in paragraph at lines 749--749
 []\TU/lmtt/m/n/10 rarefied_bracken_genus<-rarefy_even_depth(physeq_bracken_genus, rngseed = FALSE, sample.size = min(sample_sums(physeq_bracken_genus)), trimOTUs = TRUE)[] 
  []
 
@@ -1034,39 +1039,39 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [24]
-Overfull \hbox (789.0pt too wide) in paragraph at lines 774--774
+Overfull \hbox (789.0pt too wide) in paragraph at lines 776--776
 []\TU/lmtt/m/n/10 plot_richness(physeq = rarefied_bracken_genus, x="group", color = "group", measures = c("Observed", "Shannon", "Fisher", "Simpson")) + geom_boxplot() +theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))[] 
  []
 
 
-Overfull \hbox (169.5pt too wide) in paragraph at lines 791--791
+Overfull \hbox (169.5pt too wide) in paragraph at lines 793--793
 []\TU/lmtt/m/n/10 relabun_bracken_genus <- transform_sample_counts(physeq_bracken_genus, function(x) x*100 / sum(x))[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 799--799
+Overfull \hbox (17.25pt too wide) in paragraph at lines 801--801
 []\TU/lmtt/m/n/10 plot_ordination(relabun_bracken_genus, ordination, color = "group") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 799--799
+Overfull \hbox (720.75pt too wide) in paragraph at lines 801--801
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
 
 [25]
-Overfull \hbox (332.25pt too wide) in paragraph at lines 818--818
+Overfull \hbox (332.25pt too wide) in paragraph at lines 820--820
 []\TU/lmtt/m/n/10 relabun_bracken_genus_top<-prune_taxa(names(sort(taxa_sums(relabun_bracken_genus),decreasing=TRUE)[1:20]), relabun_bracken_genus)[] 
  []
 
 
-Overfull \hbox (752.25pt too wide) in paragraph at lines 818--818
+Overfull \hbox (752.25pt too wide) in paragraph at lines 820--820
 []\TU/lmtt/m/n/10 plot_bar(relabun_bracken_genus_top, fill="ta1") + facet_wrap(c(~group), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
 
-Overfull \hbox (416.25pt too wide) in paragraph at lines 835--835
+Overfull \hbox (416.25pt too wide) in paragraph at lines 837--837
 []\TU/lmtt/m/n/10 plot_heatmap(relabun_bracken_genus_top, method = "PCoA", distance = "bray", low = "white", high = "red", na.value = "grey", sample.label="group")[] 
  []
 
@@ -1078,39 +1083,39 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [26]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 868--868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 870--870
 []\TU/lmtt/m/n/10 merge_metaphlan_tables.py metaphlan_out/*.mpa > metaphlan_merged_out.txt[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 900--900
+Overfull \hbox (6.75pt too wide) in paragraph at lines 902--902
 []\TU/lmtt/m/n/10 metaphlan <- read.csv("metaphlan_merged_out.txt", sep="\t", skip=1)[] 
  []
 
 
 
 [27]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 900--900
+Overfull \hbox (27.75pt too wide) in paragraph at lines 902--902
 []\TU/lmtt/m/n/10 colnames(metaphlan) = sapply(strsplit(colnames(metaphlan),"_"), `[`, 1)[] 
  []
 
 
-Overfull \hbox (143.25pt too wide) in paragraph at lines 927--927
+Overfull \hbox (143.25pt too wide) in paragraph at lines 929--929
 []\TU/lmtt/m/n/10 METAPHLAN = otu_table(metaphlan, taxa_are_rows = TRUE) #convert asv_table_num to an otu_table[] 
  []
 
 
-Overfull \hbox (673.5pt too wide) in paragraph at lines 935--935
+Overfull \hbox (673.5pt too wide) in paragraph at lines 937--937
 []\TU/lmtt/m/n/10 plot_richness(physeq = physeq_metaphlan_genus, x="group", color = "group", measures = c("Shannon", "Simpson")) + geom_boxplot() +theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))[] 
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 943--943
+Overfull \hbox (22.5pt too wide) in paragraph at lines 945--945
 []\TU/lmtt/m/n/10 plot_ordination(physeq_metaphlan_genus, ordination, color = "group") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 943--943
+Overfull \hbox (720.75pt too wide) in paragraph at lines 945--945
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
@@ -1122,74 +1127,74 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [28]
-Overfull \hbox (736.5pt too wide) in paragraph at lines 960--960
+Overfull \hbox (736.5pt too wide) in paragraph at lines 962--962
 []\TU/lmtt/m/n/10 plot_bar(physeq_metaphlan_genus, fill="ta1") + facet_wrap(c(~group), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
 
-Overfull \hbox (400.5pt too wide) in paragraph at lines 966--966
+Overfull \hbox (400.5pt too wide) in paragraph at lines 968--968
 []\TU/lmtt/m/n/10 plot_heatmap(physeq_metaphlan_genus, method = "PCoA", distance = "bray", low = "white", high = "red", na.value = "grey", sample.label="group")[] 
  []
 
 
-Overfull \hbox (180.0pt too wide) in paragraph at lines 994--994
+Overfull \hbox (180.0pt too wide) in paragraph at lines 996--996
 []\TU/lmtt/m/n/10 sample_names(relabun_bracken_genus) = paste(sample_names(relabun_bracken_genus), "_bracken", sep="")[] 
  []
 
 
-Overfull \hbox (201.0pt too wide) in paragraph at lines 994--994
+Overfull \hbox (201.0pt too wide) in paragraph at lines 996--996
 []\TU/lmtt/m/n/10 sample_names(physeq_metaphlan_genus) = paste(sample_names(physeq_metaphlan_genus), "_metaphlan", sep="")[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1002--1002
+Overfull \hbox (69.75pt too wide) in paragraph at lines 1004--1004
 []\TU/lmtt/m/n/10 physeq_combined = merge_phyloseq(relabun_bracken_genus, physeq_metaphlan_genus)[] 
  []
 
 
 
 [29]
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1014--1014
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1016--1016
 []\TU/lmtt/m/n/10 plot1 <- plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (810.0pt too wide) in paragraph at lines 1014--1014
+Overfull \hbox (810.0pt too wide) in paragraph at lines 1016--1016
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20), legend.position = "none") +  ggtitle("Beta Diversity", subtitle = "Jaccard distance")[] 
  []
 
 
-Overfull \hbox (148.5pt too wide) in paragraph at lines 1014--1014
+Overfull \hbox (148.5pt too wide) in paragraph at lines 1016--1016
 []\TU/lmtt/m/n/10 plot2 <- plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 1014--1014
+Overfull \hbox (720.75pt too wide) in paragraph at lines 1016--1016
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
-Overfull \hbox (337.5pt too wide) in paragraph at lines 1034--1034
+Overfull \hbox (337.5pt too wide) in paragraph at lines 1036--1036
 []\TU/lmtt/m/n/10 relabun_bracken_genus_top<-prune_taxa(names(sort(taxa_sums(relabun_bracken_genus),decreasing=TRUE)[1:100]), relabun_bracken_genus)[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 1034--1034
+Overfull \hbox (90.75pt too wide) in paragraph at lines 1036--1036
 []\TU/lmtt/m/n/10 physeq_combined = merge_phyloseq(relabun_bracken_genus_top, physeq_metaphlan_genus)[] 
  []
 
 
-Overfull \hbox (101.25pt too wide) in paragraph at lines 1042--1042
+Overfull \hbox (101.25pt too wide) in paragraph at lines 1044--1044
 []\TU/lmtt/m/n/10 plot_ordination(physeq_combined, ordination, color = "group", shape = "classifier") +[] 
  []
 
 
-Overfull \hbox (720.75pt too wide) in paragraph at lines 1042--1042
+Overfull \hbox (720.75pt too wide) in paragraph at lines 1044--1044
 []  \TU/lmtt/m/n/10 geom_point(size=10, alpha=0.1) + geom_point(size=5) + stat_ellipse(type = "t", linetype = 2) + theme(text = element_text(size = 20)) +  ggtitle("Beta Diversity", subtitle = "Bray-Curtis dissimilarity")[] 
  []
 
 
-Overfull \hbox (783.75pt too wide) in paragraph at lines 1048--1048
+Overfull \hbox (783.75pt too wide) in paragraph at lines 1050--1050
 []\TU/lmtt/m/n/10 plot_bar(physeq_combined, fill="ta1") + facet_wrap(c(~"group", "classifier"), scales="free_x", nrow=1) + theme(legend.text=element_text(size=5), legend.key.size = unit(0.3, "cm")) + guides(fill=guide_legend(ncol=1))[] 
  []
 
@@ -1201,52 +1206,52 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
  []
 
 [30]
-Overfull \hbox (153.75pt too wide) in paragraph at lines 1077--1077
+Overfull \hbox (153.75pt too wide) in paragraph at lines 1079--1079
 []\TU/lmtt/m/n/10 #go to https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/819/615/GCF_000819615.1_ViralProj14015/[] 
  []
 
 
-Overfull \hbox (379.5pt too wide) in paragraph at lines 1077--1077
+Overfull \hbox (379.5pt too wide) in paragraph at lines 1079--1079
 []\TU/lmtt/m/n/10 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/819/615/GCF_000819615.1_ViralProj14015/GCF_000819615.1_ViralProj14015_genomic.fna.gz[] 
  []
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 1079--1081
+Underfull \hbox (badness 2142) in paragraph at lines 1081--1083
 \TU/lmr/m/n/10 There are no samples where we seem to lost a really large number
  []
 
 
-Underfull \hbox (badness 2564) in paragraph at lines 1079--1081
+Underfull \hbox (badness 2564) in paragraph at lines 1081--1083
 \TU/lmr/m/n/10 of reads at any step - we don’t lose many reads that couldn’t be
  []
 
 
-Underfull \hbox (badness 1325) in paragraph at lines 1079--1081
+Underfull \hbox (badness 1325) in paragraph at lines 1081--1083
 \TU/lmr/m/n/10 too many of the reads are host-associated (difference between \TU/lmtt/m/n/10 trimmed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1081
+Underfull \hbox (badness 10000) in paragraph at lines 1081--1083
 \TU/lmtt/m/n/10 single \TU/lmr/m/n/10 and \TU/lmtt/m/n/10 decontaminated chicken_Gallusgallus_phiX174 single\TU/lmr/m/n/10 ).
  []
 
 
-Underfull \hbox (badness 1635) in paragraph at lines 1079--1081
+Underfull \hbox (badness 1635) in paragraph at lines 1081--1083
 \TU/lmr/m/n/10 We’ll use the \TU/lmtt/m/n/10 sample_kneaddata.fastq \TU/lmr/m/n/10 files for analysis, and not the
  []
 
 
-Overfull \hbox (1.5pt too wide) in paragraph at lines 1079--1081
+Overfull \hbox (1.5pt too wide) in paragraph at lines 1081--1083
 \TU/lmtt/m/n/10 sample_kneaddata_chicken_Gallusgallus_phiX174_bowtie2_contam.fastq
  []
 
 
-Underfull \hbox (badness 5607) in paragraph at lines 1085--1087
+Underfull \hbox (badness 5607) in paragraph at lines 1087--1089
 \TU/lmr/m/n/10 have between 52,405 (\TU/lmtt/m/n/10 min(sample_sums(physeq_bracken_genus))\TU/lmr/m/n/10 ) and
  []
 
 
-Underfull \hbox (badness 4108) in paragraph at lines 1085--1087
+Underfull \hbox (badness 4108) in paragraph at lines 1087--1089
 \TU/lmr/m/n/10 446,368 (\TU/lmtt/m/n/10 max(sample_sums(physeq_bracken_genus))\TU/lmr/m/n/10 ) - average 221,440
  []
 
@@ -1277,31 +1282,31 @@ Overfull \hbox (151.86345pt too wide) has occurred while \output is active
 [36]
 Chapter 3.
 
-LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1129.
+LaTeX Warning: Hyper reference `21-initial-setup' on page 37 undefined on input line 1131.
 
 
-LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1130.
+LaTeX Warning: Hyper reference `22-assembly-of-raw-reads-with-megahit' on page 37 undefined on input line 1132.
 
 
-LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1131.
+LaTeX Warning: Hyper reference `23-make-an-anvio-contigs-databases' on page 37 undefined on input line 1133.
 
 
-LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1132.
+LaTeX Warning: Hyper reference `24-run-hmms-to-identify-single-copy-genes' on page 37 undefined on input line 1134.
 
 
-LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1133.
+LaTeX Warning: Hyper reference `25-map-samples-onto-contigs-with-bowtie2' on page 37 undefined on input line 1135.
 
 
-LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1134.
+LaTeX Warning: Hyper reference `26-cluster-contigs-into-bins' on page 37 undefined on input line 1136.
 
 
-LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1135.
+LaTeX Warning: Hyper reference `27-interactive-refinement-of-bins' on page 37 undefined on input line 1137.
 
 
-LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1136.
+LaTeX Warning: Hyper reference `28-export-the-final-bins-into-mags' on page 37 undefined on input line 1138.
 
 
-LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1137.
+LaTeX Warning: Hyper reference `29-run-checkm' on page 37 undefined on input line 1139.
 
 
 
@@ -1318,88 +1323,88 @@ Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1245--1245
+Overfull \hbox (22.5pt too wide) in paragraph at lines 1247--1247
 []\TU/lmtt/m/n/10 #SE=$( ls reads_for_assembly/*.fastq.gz | tr '\n' ',' | sed 's/,$//' )[] 
  []
 
 
 
 [40]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1272--1272
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1274--1274
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/AMB_data/final.contigs.fa anvio/megahit_out/[] 
  []
 
 
-Underfull \hbox (badness 1960) in paragraph at lines 1280--1281
+Underfull \hbox (badness 1960) in paragraph at lines 1282--1283
 []\TU/lmr/m/n/10 The main output at this point is a fasta file containing the contigs
  []
 
 
-Underfull \hbox (badness 1571) in paragraph at lines 1280--1281
+Underfull \hbox (badness 1571) in paragraph at lines 1282--1283
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa\TU/lmr/m/n/10 . You can inspect the file with
  []
 
 
-Overfull \hbox (573.75pt too wide) in paragraph at lines 1286--1286
+Overfull \hbox (573.75pt too wide) in paragraph at lines 1288--1288
 []\TU/lmtt/m/n/10 seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F'\t' 'NR==1 { for (i=1; i<=NF; i++) keys[i]=$i; next } { for (i=1; i<=NF; i++) printf "%-12s %s\n", keys[i], $i }'[] 
  []
 
 
-Overfull \hbox (40.14836pt too wide) in paragraph at lines 1288--1289
+Overfull \hbox (40.14836pt too wide) in paragraph at lines 1290--1291
 []\TU/lmr/bx/n/10 Question 1\TU/lmr/m/n/10 : How many contigs are there in the \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa
  []
 
 
 
 [41]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1303--1303
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1305--1305
 []                               \TU/lmtt/m/n/10 -o anvio/megahit_out/final.contigs.fixed.fa[] 
  []
 
 
-Underfull \hbox (badness 1817) in paragraph at lines 1305--1306
+Underfull \hbox (badness 1817) in paragraph at lines 1307--1308
 []\TU/lmr/m/n/10 Take a quick look at both \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fa \TU/lmr/m/n/10 and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1305--1306
+Underfull \hbox (badness 10000) in paragraph at lines 1307--1308
 \TU/lmtt/m/n/10 anvio/megahit_out/final.contigs.fixed.fa \TU/lmr/m/n/10 using the less or head
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 1305--1306
+Underfull \hbox (badness 1365) in paragraph at lines 1307--1308
 \TU/lmr/m/n/10 commands to see what was changed! You can read more about the
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 1305--1306
+Underfull \hbox (badness 1436) in paragraph at lines 1307--1308
 \TU/lmtt/m/n/10 anvi-script-reformat-fasta \TU/lmr/m/n/10 command on this page. You should be
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1323--1323
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1325--1325
 []\TU/lmtt/m/n/10 anvi-gen-contigs-database -f anvio/megahit_out/final.contigs.fixed.fa \[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1323--1323
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1325--1325
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
 
 [42]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 1356--1356
+Overfull \hbox (6.75pt too wide) in paragraph at lines 1358--1358
 []\TU/lmtt/m/n/10 anvi-run-scg-taxonomy -c anvio/anvio_databases/CONTIGS.db -T 4 -P 4[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1363--1363
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1365--1365
 []\TU/lmtt/m/n/10 anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1363--1363
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1365--1365
 []                              \TU/lmtt/m/n/10 -o anvio/anvio_databases/gene_calls.fa[] 
  []
 
@@ -1409,17 +1414,17 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1363--1363
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
-Overfull \hbox (127.5pt too wide) in paragraph at lines 1412--1412
+Overfull \hbox (127.5pt too wide) in paragraph at lines 1414--1414
 []\TU/lmtt/m/n/10 # We add a soft-link here instead of running bowtie because it takes a long time to run :)[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1412--1412
+Overfull \hbox (27.75pt too wide) in paragraph at lines 1414--1414
 []\TU/lmtt/m/n/10 ln -s ~/CourseData/MIC_data/amb_module2/anvio/bam_files anvio/bam_files[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1412--1412
+Overfull \hbox (12.0pt too wide) in paragraph at lines 1414--1414
 []\TU/lmtt/m/n/10 #    # 4. remove the intermediate BAM file that is no longer needed:[] 
  []
 
@@ -1427,84 +1432,84 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 1412--1412
 
 [44]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1441.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1443.
 Missing character: There is no ⚠ (U+26A0) in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no ️ (U+FE0F) in font [lmroman10-bold]:mapping=tex-text;!
 
 
 [45]
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1462--1462
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
 []\TU/lmtt/m/n/10 cp -r ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/profiles/* anvio/anvio_databases/profiles[] 
  []
 
 
-Overfull \hbox (195.75pt too wide) in paragraph at lines 1462--1462
+Overfull \hbox (195.75pt too wide) in paragraph at lines 1464--1464
 []\TU/lmtt/m/n/10 cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anvio_databases/CONTIGS.db[] 
  []
 
 
 
 [46]
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1530--1530
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1532--1532
 []                         \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
 
 [47]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1558--1558
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1560--1560
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 1568--1568
+Overfull \hbox (75.0pt too wide) in paragraph at lines 1570--1570
 []\TU/lmtt/m/n/10 anvi-estimate-scg-taxonomy -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (106.5pt too wide) in paragraph at lines 1568--1568
+Overfull \hbox (106.5pt too wide) in paragraph at lines 1570--1570
 []                           \TU/lmtt/m/n/10 -o anvio/${DRIVER}_summary_2500/summary/bins_taxonomy.txt \[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1568--1568
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1570--1570
 []                           \TU/lmtt/m/n/10 --simplify-taxonomy-information --compute-scg-coverages[] 
  []
 
 
-Overfull \hbox (64.5pt too wide) in paragraph at lines 1577--1577
+Overfull \hbox (64.5pt too wide) in paragraph at lines 1579--1579
 []\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/abundance.txt[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1577--1577
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1579--1579
 []\TU/lmtt/m/n/10 less -S anvio/${DRIVER}_summary_2500/summary/bins_across_samples/mean_coverage.txt[] 
  []
 
 
 
 [48]
-Underfull \hbox (badness 1895) in paragraph at lines 1582--1583
+Underfull \hbox (badness 1895) in paragraph at lines 1584--1585
 \TU/lmtt/m/n/10 http://##.uhn-hpc.ca/ \TU/lmr/m/n/10 (remember to replace the \TU/lmtt/m/n/10 ## \TU/lmr/m/n/10 with your num-
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 1582--1583
+Underfull \hbox (badness 2310) in paragraph at lines 1584--1585
 \TU/lmr/m/n/10 on \TU/lmtt/m/n/10 summary \TU/lmr/m/n/10 > open in new tab. You can scroll through and ex-
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 1582--1583
+Underfull \hbox (badness 1009) in paragraph at lines 1584--1585
 \TU/lmr/m/n/10 plore what this says about our bins so far, and then go back to the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1582--1583
+Underfull \hbox (badness 10000) in paragraph at lines 1584--1585
 \TU/lmr/m/n/10 other tab with \TU/lmtt/m/n/10 amb_module2/anvio/CONCOCT_summary_2500/\TU/lmr/m/n/10 . Add
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 1582--1583
+Underfull \hbox (badness 1436) in paragraph at lines 1584--1585
 \TU/lmtt/m/n/10 /summary/bins_summary.txt \TU/lmr/m/n/10 to the URL bar and copy and paste the
  []
 
@@ -1517,29 +1522,29 @@ Underfull \hbox (badness 1436) in paragraph at lines 1582--1583
 [51]
 
 [52]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 1711--1711
+Overfull \hbox (43.5pt too wide) in paragraph at lines 1713--1713
 []                     \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 1722--1722
+Overfull \hbox (33.0pt too wide) in paragraph at lines 1724--1724
 []                   \TU/lmtt/m/n/10 -p anvio/anvio_databases/merged_profiles/PROFILE.db \[] 
  []
 
 
-Overfull \hbox (35.74pt too wide) in paragraph at lines 1730--1731
+Overfull \hbox (35.74pt too wide) in paragraph at lines 1732--1733
 []\TU/lmr/m/n/10 Have a look at the summary file \TU/lmtt/m/n/10 anvio/FINAL_${DRIVER}_summary/bins_summary.txt\TU/lmr/m/n/10 .
  []
 
 
-Overfull \hbox (17.39891pt too wide) in paragraph at lines 1732--1733
+Overfull \hbox (17.39891pt too wide) in paragraph at lines 1734--1735
 []\TU/lmr/m/n/10 Now have a look in one of those MAG folders (\TU/lmtt/m/n/10 anvio/FINAL_summary/bin_by_bin/\TU/lmr/m/n/10 )
  []
 
 
 
 [53]
-Overfull \hbox (258.75pt too wide) in paragraph at lines 1760--1760
+Overfull \hbox (258.75pt too wide) in paragraph at lines 1762--1762
 []\TU/lmtt/m/n/10 checkm2 predict -i MAG_fasta/ --output_directory MAGs_checkm2_output --allmodels -x .fa -t 4 --remove_intermediates[] 
  []
 
@@ -1571,12 +1576,12 @@ File: img/lab3/putty_port_forward.png Graphic file (type bmp)
 [60]
 
 [61]
-Underfull \hbox (badness 1092) in paragraph at lines 1895--1897
+Underfull \hbox (badness 1092) in paragraph at lines 1897--1899
 []\TU/lmr/m/n/10 Here is an example which downloads \TU/lmtt/m/n/10 prodigal \TU/lmr/m/n/10 as the container image
  []
 
 
-Overfull \hbox (44.78pt too wide) in paragraph at lines 1895--1897
+Overfull \hbox (44.78pt too wide) in paragraph at lines 1897--1899
 \TU/lmtt/m/n/10 example.sif \TU/lmr/m/n/10 from \TU/lmtt/m/n/10 docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10\TU/lmr/m/n/10 .
  []
 
@@ -1595,34 +1600,34 @@ File: img/lab3/data_layout.png Graphic file (type bmp)
 
 
 [65]
-Overfull \hbox (131.5pt too wide) in paragraph at lines 2143--2144
+Overfull \hbox (131.5pt too wide) in paragraph at lines 2145--2146
 []\TU/lmtt/m/n/10 apptainer pull prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10 
  []
 
 
-Underfull \hbox (badness 4108) in paragraph at lines 2157--2158
+Underfull \hbox (badness 4108) in paragraph at lines 2159--2160
 \TU/lmr/m/n/10 LJ. Prodigal: prokaryotic gene recognition and translation ini-
  []
 
 
-Underfull \hbox (badness 2119) in paragraph at lines 2157--2158
+Underfull \hbox (badness 2119) in paragraph at lines 2159--2160
 \TU/lmr/m/n/10 tiation site identification. BMC Bioinformatics. 2010;11(1):119.
  []
 
 
 
 [66]
-Underfull \hbox (badness 10000) in paragraph at lines 2183--2184
+Underfull \hbox (badness 10000) in paragraph at lines 2185--2186
 []\TU/lmtt/m/n/10 -i:  Specify FASTA/Genbank input file (default reads from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2193--2195
+Underfull \hbox (badness 10000) in paragraph at lines 2195--2197
 []\TU/lmtt/m/n/10 -d:  Write nucleotide sequences of genes to the selected
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2195--2197
+Underfull \hbox (badness 10000) in paragraph at lines 2197--2199
 []\TU/lmtt/m/n/10 -f:  Select output format (gbk, gff, or sco).  Default is
  []
 
@@ -1637,24 +1642,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 2195--2197
 [70]
 
 [71]
-Underfull \hbox (badness 7116) in paragraph at lines 2478--2480
+Underfull \hbox (badness 7116) in paragraph at lines 2480--2482
 []\TU/lmr/m/n/10 sequences are grouped into families: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2480--2481
+Underfull \hbox (badness 10000) in paragraph at lines 2482--2483
 []\TU/lmr/m/n/10 transporter substrates: []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][] [][] [][][] [] [][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2503--2504
+Underfull \hbox (badness 10000) in paragraph at lines 2505--2506
 []\TU/lmtt/m/n/10 --in                     input reference file in FASTA
  []
 
 
 
 [72]
-Overfull \hbox (0.25pt too wide) in paragraph at lines 2571--2572
+Overfull \hbox (0.25pt too wide) in paragraph at lines 2573--2574
 []\TU/lmtt/m/n/10 --evalue                 maximum e-value to report alignments
  []
 
@@ -1673,14 +1678,14 @@ Overfull \hbox (0.25pt too wide) in paragraph at lines 2571--2572
 [78]
 
 [79]
-Underfull \hbox (badness 2012) in paragraph at lines 2913--2914
+Underfull \hbox (badness 2012) in paragraph at lines 2915--2916
 \TU/lmr/m/n/10 mann A. Bakta: rapid and standardized annotation of bacterial
  []
 
 
 
 [80]
-Overfull \hbox (145.68001pt too wide) in paragraph at lines 2992--2993
+Overfull \hbox (145.68001pt too wide) in paragraph at lines 2994--2995
 []\TU/lmr/m/n/10 Have a look at the reported hypothetical proteins at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"
  []
 
@@ -1689,7 +1694,7 @@ Overfull \hbox (145.68001pt too wide) in paragraph at lines 2992--2993
 [81]
 
 [82]
-Overfull \hbox (29.21pt too wide) in paragraph at lines 3085--3087
+Overfull \hbox (29.21pt too wide) in paragraph at lines 3087--3089
 []\TU/lmr/m/n/10 We indicated an output path within a new folder \TU/lmtt/m/n/10 rgi_out = Path("./rgi/chicken")\TU/lmr/m/n/10 .
  []
 
@@ -1698,7 +1703,7 @@ Overfull \hbox (29.21pt too wide) in paragraph at lines 3085--3087
 [83]
 
 [84]
-Overfull \hbox (101.51pt too wide) in paragraph at lines 3191--3193
+Overfull \hbox (101.51pt too wide) in paragraph at lines 3193--3195
 \TU/lmr/m/n/10 shorter list of hypotheticals from Bakta at \TU/lmtt/m/n/10 LIB/"outputs/bakta.full/assembly.hypotheticals.faa\TU/lmr/m/n/10 . 
  []
 
@@ -1711,22 +1716,22 @@ Overfull \hbox (101.51pt too wide) in paragraph at lines 3191--3193
 [87]
 
 [88]
-Underfull \hbox (badness 2302) in paragraph at lines 3425--3430
+Underfull \hbox (badness 2302) in paragraph at lines 3427--3432
 \TU/lmr/m/n/10 dicating stop codons from the prodigal output. We must also cre-
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 3425--3430
+Underfull \hbox (badness 1292) in paragraph at lines 3427--3432
 \TU/lmr/m/n/10 ate and run it within a dedicated output folder, while using absolute
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 3425--3430
+Underfull \hbox (badness 1496) in paragraph at lines 3427--3432
 \TU/lmr/m/n/10 paths. As it runs, it will dump files into the current directory de-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3425--3430
+Underfull \hbox (badness 10000) in paragraph at lines 3427--3432
 \TU/lmr/m/n/10 (\TU/lmtt/m/n/10 {LIB}/"outputs/bakta.full/assembly.hypotheticals.faa"\TU/lmr/m/n/10 ). Pre-
  []
 
@@ -1737,7 +1742,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3425--3430
 [90]
 
 [91]
-Overfull \hbox (30.39001pt too wide) in paragraph at lines 3540--3541
+Overfull \hbox (30.39001pt too wide) in paragraph at lines 3542--3543
 []\TU/lmr/m/n/10 This will take a few minutes. Feel free to skip and use (\TU/lmtt/m/n/10 LIB/"outputs/protein_bert"\TU/lmr/m/n/10 ). 
  []
 
@@ -1748,11 +1753,11 @@ Overfull \hbox (30.39001pt too wide) in paragraph at lines 3540--3541
 [93]
 
 [94]
-Underfull \vbox (badness 10000) detected at line 3753
+Underfull \vbox (badness 10000) detected at line 3755
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3753
+Underfull \vbox (badness 10000) detected at line 3755
  []
 
 
@@ -1762,12 +1767,12 @@ Underfull \vbox (badness 10000) detected at line 3753
 [96]
 
 [97]
-Underfull \hbox (badness 10000) in paragraph at lines 3853--3855
+Underfull \hbox (badness 10000) in paragraph at lines 3855--3857
 []\TU/lmtt/m/n/10 -p keywords such as pathways or subsystems (for example
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3855--3857
+Underfull \hbox (badness 10000) in paragraph at lines 3857--3859
 []\TU/lmtt/m/n/10 -l Select the pathway database (MetaCyc, KEGG, SEED, all;
  []
 
@@ -1800,7 +1805,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [104]
-Underfull \hbox (badness 1112) in paragraph at lines 4065--4066
+Underfull \hbox (badness 1112) in paragraph at lines 4067--4068
 []\TU/lmr/m/n/10 All software tools are packaged in the main container, so we can use
  []
 
@@ -1826,7 +1831,7 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 File: img/lab4/new_tab.png Graphic file (type bmp)
 <img/lab4/new_tab.png>
 
-Overfull \hbox (28.26518pt too wide) in paragraph at lines 4276--4278
+Overfull \hbox (28.26518pt too wide) in paragraph at lines 4278--4280
 \TU/lmr/m/n/10 book. [] 
  []
 
@@ -1886,11 +1891,11 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
 [118]
 
 [119]
-Underfull \vbox (badness 10000) detected at line 4833
+Underfull \vbox (badness 10000) detected at line 4835
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4833
+Underfull \vbox (badness 10000) detected at line 4835
  []
 
 
@@ -1961,21 +1966,21 @@ Overfull \hbox (116.43454pt too wide) has occurred while \output is active
  []
 
 [132]
-Underfull \vbox (badness 10000) detected at line 5544
+Underfull \vbox (badness 10000) detected at line 5546
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5544
+Underfull \vbox (badness 10000) detected at line 5546
  []
 
 
 
 [133]
-Underfull \vbox (badness 10000) detected at line 5544
+Underfull \vbox (badness 10000) detected at line 5546
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5544
+Underfull \vbox (badness 10000) detected at line 5546
  []
 
 

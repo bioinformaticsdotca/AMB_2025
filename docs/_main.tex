@@ -241,10 +241,10 @@ cp ~/CourseData/MIC_data/AMB_data/metagenome_metadata_subset.txt metagenome_meta
 
 \subsection{About the samples}\label{about-the-samples}
 
-These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:
+These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:\\
 - \href{https://journals.asm.org/doi/full/10.1128/spectrum.03616-22}{Week-Old Chicks with High Bacteroides Abundance Have Increased Short-Chain Fatty Acids and Reduced Markers of Gut Inflammation}
 
-Or in the additional analysis done by John's lab here:
+Or in the additional analysis done by John's lab here:\\
 - \href{https://www.biorxiv.org/content/10.1101/2024.10.14.618310v1.full}{Metabolic modeling of microbial communities in the chicken ceca reveals a landscape of competition and co-operation}
 
 \subsection{A Crash Course in GNU Parallel}\label{a-crash-course-in-gnu-parallel}
@@ -255,7 +255,7 @@ First, activate our conda environment for this tutorial:
 conda activate amb_module1
 \end{verbatim}
 
-Sometimes in bioinformatics, the number of tasks you have to complete can get VERY large (e.g.~when we have thousands of samples). Fortunately, there are several tools that can help us with this. One such tool is \href{https://www.gnu.org/software/parallel/parallel_tutorial.html}{GNU Parallel}. This tool can simplify the way in which we approach large tasks, and as the name suggests, it can iterate though many tasks in \emph{parallel}, i.e.~at the same time. If you aren't familiar with using \texttt{top} or \texttt{htop} to look at the number of processes that you have available to you, take a look at \href{https://github.com/LangilleLab/microbiome_helper/wiki/CBW\%E2\%80\%902025\%E2\%80\%90BMB\%E2\%80\%90Module1\#113-htop---looking-at-the-number-of-processes-we-have-available-or-running}{this section of the beginner workshop}.
+Sometimes in bioinformatics, the number of tasks you have to complete can get VERY large (e.g.~when we have thousands of samples). Fortunately, there are several tools that can help us with this. One such tool is \href{https://www.gnu.org/software/parallel/parallel_tutorial.html}{GNU Parallel}. This tool can simplify the way in which we approach large tasks, and as the name suggests, it can iterate though many tasks in \emph{parallel}, i.e.~at the same time. If you aren't familiar with using \texttt{top} or \texttt{htop} to look at the number of processes that you have available to you, take a look at \href{https://bioinformaticsdotca.github.io/BMB_2025/module-1.html\#htop---looking-at-the-number-of-processes-we-have-available-or-running}{this section of the beginner workshop}.
 
 We can use a simple command to demonstrate how to use \texttt{parallel}:
 
@@ -312,15 +312,7 @@ First, make your desired output directory \texttt{fastqc\_out}. Then, run FastQC
 fastqc -t 4 raw_data/*fastq.gz -o fastqc_out
 \end{verbatim}
 
-Run MultiQC on the FastQC results:
-
-\begin{verbatim}
-multiqc fastqc_out --filename multiqc.html
-\end{verbatim}
-
 Remember that you can go to \texttt{http://\#\#.uhn-hpc.ca/} (where \#\# is your personal number) to find all of the files that we're creating.
-
-Copy across the \texttt{multiqc.html} file to your computer.
 
 Click on the \textbf{.html} files to view the results for each sample. Let's look at the Per base sequence quality tab. This shows a boxplot representing the quality of the base call for each position of the read. In general, due to the inherent degradation of quality with increased sequence length, the quality scores will trend downward as the read gets longer.
 
@@ -330,14 +322,24 @@ This specific module plots out the proportion of each base position in a file, a
 
 The other modules are explained in depth in the \href{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3\%20Analysis\%20Modules/}{FastQC Module Help Documentation}
 
+\href{https://github.com/MultiQC/MultiQC}{MultiQC} is a handy tool for combining the FastQC output files.
+
+Run it on our FastQC results:
+
+\begin{verbatim}
+multiqc fastqc_out --filename multiqc.html
+\end{verbatim}
+
+Then open up the \texttt{multiqc.html} file and see what else you can see in this report vs the individual ones.
+
 \subsection{Filtering with KneadData}\label{filtering-with-kneaddata}
 
-KneadData is a tool which ``wraps'' several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:
-* Run Trimmomatic to remove adapter sequences
-* Run Bowtie2 to remove reads mapping to the reference genome and the PhiX genome (commonly used as a sequencing control)
+KneadData is a tool which ``wraps'' several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:\\
+* Run Trimmomatic to remove adapter sequences\\
+* Run Bowtie2 to remove reads mapping to the reference genome and the PhiX genome (commonly used as a sequencing control)\\
 
-We don't have paired-end data here, but if we did, it would also:
-* Check whether both pairs of a read exist
+We don't have paired-end data here, but if we did, it would also:\\
+* Check whether both pairs of a read exist\\
 * Check whether they both map to the reference genome
 
 Bowtie2 needs a reference genome/index file for its mapping step. There are some pre-made indexes on \href{https://benlangmead.github.io/aws-indexes/bowtie}{this page}.
