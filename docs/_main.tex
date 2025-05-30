@@ -161,6 +161,8 @@ Welcome to CBW's Advanced Microbiome Analysis 2025 Workshop!
 
 \href{https://bioinformaticsdotca.github.io/AWS_2025}{You can find the schedule and materials for the AWS/UNIX primer here.}
 
+\section{Class Photo}\label{class-photo}
+
 \section{Course Schedule}\label{course-schedule}
 
 \begin{longtable}[]{@{}
@@ -211,19 +213,19 @@ This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.i
 
 Author: Robyn Wright
 
-\section{Overview}\label{overview}
+\subsection{Overview}\label{overview}
 
 The goal of this tutorial is to familiarise students with processes by which we analyse metagenomic data and classify taxa within our samples. Shotgun Metagenomic Sequencing, sometimes called MGS or WGS, is capable of capturing any DNA extracted from a given sample (however, this does not necessarily mean it captures ALL of the DNA). With MGS reads, we must consider that there could be significant host contamination, so - depending on our sample type - we must filter against host sequences in our pipeline. We will then classify the taxa in our samples using two popular approaches - an all reads approach (Kraken2 + Bracken) and a marker-gene approach (MetaPhlAn). In all steps of bioinformatics, there are many tools that can work to produce similar results, and there is never a one-size-fits-all solution. It is up to us to learn about the options that are available and choose which one is most appropriate for our application - people often have different opinions, so sometimes we need to educate ourselves, make a decision, and be able to justify this decision to others. This lab is therefore a foray into some popular tools and processes, and how to appropriately use them for our analyses.
 
 Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You'll find the answers at the bottom of this page, but no one will be marking them. \emph{You may wish to keep them open in another tab}.
 
-\section{1. Initial setup and pre-processing of metagenomic reads}\label{initial-setup-and-pre-processing-of-metagenomic-reads}
+\subsection{1. Initial setup and pre-processing of metagenomic reads}\label{initial-setup-and-pre-processing-of-metagenomic-reads}
 
-\subsection{Log into your instance}\label{log-into-your-instance}
+\subsubsection{Log into your instance}\label{log-into-your-instance}
 
 If you weren't in the beginner microbiome analysis workshop and need a refresher, check the notes in \href{https://bioinformaticsdotca.github.io/BMB_2025/module-1.html\#log-into-your-aws-instance}{Beginner Module 1}.
 
-\subsection{Working on the Command Line}\label{working-on-the-command-line}
+\subsubsection{Working on the Command Line}\label{working-on-the-command-line}
 
 Make a new folder in your workspace to work from:
 
@@ -242,7 +244,7 @@ ln -s ~/CourseData/MIC_data/AMB_data/raw_data_subsampled_subset/ raw_data
 cp ~/CourseData/MIC_data/AMB_data/metagenome_metadata_subset.txt metagenome_metadata.txt
 \end{verbatim}
 
-\subsection{About the samples}\label{about-the-samples}
+\subsubsection{About the samples}\label{about-the-samples}
 
 These samples are from a study that investigated gut microbiome functional capacity of chicken ceca. You can read more in the original study here:\\
 - \href{https://journals.asm.org/doi/full/10.1128/spectrum.03616-22}{Week-Old Chicks with High Bacteroides Abundance Have Increased Short-Chain Fatty Acids and Reduced Markers of Gut Inflammation}
@@ -250,7 +252,7 @@ These samples are from a study that investigated gut microbiome functional capac
 Or in the additional analysis done by John's lab here:\\
 - \href{https://www.biorxiv.org/content/10.1101/2024.10.14.618310v1.full}{Metabolic modeling of microbial communities in the chicken ceca reveals a landscape of competition and co-operation}
 
-\subsection{A Crash Course in GNU Parallel}\label{a-crash-course-in-gnu-parallel}
+\subsubsection{A Crash Course in GNU Parallel}\label{a-crash-course-in-gnu-parallel}
 
 First, activate our conda environment for this tutorial:
 
@@ -303,11 +305,11 @@ Take a look inside \texttt{test.txt} with the \texttt{less} command if you like.
 
 And with that, you're ready to use parallel for all of your bioinformatic needs! We will continue to use it throughout this tutorial and show some additional features along the way. There is also a cheat-sheet \href{https://www.gnu.org/software/parallel/parallel_cheat.pdf}{here} for quick reference.
 
-\section{Quality Control}\label{quality-control}
+\subsection{Quality Control}\label{quality-control}
 
 Quality control is an important step in any pipeline. For this tutorial, we will use FastQC to inspect the quality of our samples.
 
-\subsection{Visualization with FastQC}\label{visualization-with-fastqc}
+\subsubsection{Visualization with FastQC}\label{visualization-with-fastqc}
 
 First, make your desired output directory \texttt{fastqc\_out}. Then, run FastQC as follows:
 
@@ -335,7 +337,7 @@ multiqc fastqc_out --filename multiqc.html
 
 Then open up the \texttt{multiqc.html} file and see what else you can see in this report vs the individual ones.
 
-\subsection{Filtering with KneadData}\label{filtering-with-kneaddata}
+\subsubsection{Filtering with KneadData}\label{filtering-with-kneaddata}
 
 KneadData is a tool which ``wraps'' several programs to create a pipeline that can be executed with one command. For this tutorial though, we will use KneadData to filter our reads for contaminant sequences against a human database. KneadData will:\\
 * Run Trimmomatic to remove adapter sequences\\
@@ -415,7 +417,7 @@ This will take about ten minutes to run. If this is taking too long, feel free t
 ln -s ~/CourseData/MIC_data/amb_module1/bowtie2_db/ .
 \end{verbatim}
 
-\subsubsection{Back to KneadData}\label{back-to-kneaddata}
+\paragraph{Back to KneadData}\label{back-to-kneaddata}
 
 Now we are ready to run KneadData using parallel:
 
@@ -454,9 +456,9 @@ mkdir kneaddata_out/contam_seq
 mv kneaddata_out/*_contam*.fastq kneaddata_out/contam_seq
 \end{verbatim}
 
-\section{2. Generating Taxonomic Profiles}\label{generating-taxonomic-profiles}
+\subsection{2. Generating Taxonomic Profiles}\label{generating-taxonomic-profiles}
 
-\subsection{Annotation with Kraken2/Bracken}\label{annotation-with-kraken2bracken}
+\subsubsection{Annotation with Kraken2/Bracken}\label{annotation-with-kraken2bracken}
 
 Now that we have our reads of interest, we want to understand \emph{what} these reads are. To accomplish this, we use tools which \textbf{annotate} the reads based on different methods and databases. There are many tools which are capable of this, with varying degrees of speed and precision. For this tutorial, we will be using Kraken2 for fast exact k-mer matching against a database.
 
@@ -530,7 +532,7 @@ Finally, let's merge our bracken outputs:
 combine_bracken_outputs.py --files bracken_out/*.species.bracken -o merged_output.species.bracken
 \end{verbatim}
 
-\subsection{Annotation with MetaPhlAn}\label{annotation-with-metaphlan}
+\subsubsection{Annotation with MetaPhlAn}\label{annotation-with-metaphlan}
 
 Another tool that is commonly used for taxonomic annotation of metagenomic sequences is MetaPhlAn. This tool is different from Kraken2 in that it uses a database of marker genes, instead of a collection of genomes, and it identifies only these marker genes within our reads, rather than trying to classify all reads. It then attempts to estimate the abundance of the taxa it identified within our whole samples, but it's important to remember that this is an \textbf{estimation}, and not the actual number of reads classified. We will use MetaPhlAn 3 for this tutorial due to the constraints of the AWS instances, but a newer version (MetaPhlAn4) utilizing a larger database is available.
 
@@ -554,11 +556,11 @@ parallel -j 1 --eta 'metaphlan --bowtie2db CHOCOPhlAn_201901 --input_type fastq 
 
 This might take a while to run, so move on to the next step while this runs and then come back to this after.
 
-\section{3. Visualisation of results in R}\label{visualisation-of-results-in-r}
+\subsection{3. Visualisation of results in R}\label{visualisation-of-results-in-r}
 
 Now we'll go to RStudio server: \texttt{http://\#\#.uhn-hpc.ca:8080} (remember to replace \#\# with your own instance number). If you weren't in the beginner microbiome workshop, you may be prompted to enter your username and password. It will also take a little while to log in the first time, but will be quicker afterwards.
 
-\subsection{Create the R Notebook}\label{create-the-r-notebook}
+\subsubsection{Create the R Notebook}\label{create-the-r-notebook}
 
 Using the menus, click \texttt{File\ \textgreater{}\ New\ File\ \textgreater{}\ R\ Notebook}, which will open an Untitled R markdown (Rmd) document. R notebooks are helpful in that you can run several lines, or \textbf{\emph{chunks}} of code at the same time, and the results will appear within the document itself \emph{(in the whitespace following the chunk)}.
 
@@ -568,13 +570,13 @@ You do not need to preserve most of the information in the new, untitled documen
 
 The \textbf{chunks} are distinguished by the grey shading. Everything between the first \texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{r\}} and subsequent\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}} belongs to the chunk. Anything written in the white space surrounding the chunk is meant to be annotation. \emph{Although you can run lines of code outside of the chunks, the chunks are useful for running multiple lines in series with one click.}
 
-\subsubsection{Adding new chunks}\label{adding-new-chunks}
+\paragraph{Adding new chunks}\label{adding-new-chunks}
 
 To add a new chunk into your R notebook by navigating to \texttt{Code\ \textgreater{}\ Insert\ Chunk} from the toolbar, or clicking on the little green C and selecting R.
 
 And then save the document - it doesn't really matter what you call it, but something like \texttt{amb\_module1.rmd} would be sensible.
 
-\subsection{Setup, Importing and Formatting Data}\label{setup-importing-and-formatting-data}
+\subsubsection{Setup, Importing and Formatting Data}\label{setup-importing-and-formatting-data}
 
 Now we'll start building our R markdown notebook. Paste the following into a chunk, and then click the little green ``play'' button on the top right of the chunk to run it.
 
@@ -667,7 +669,7 @@ Have a look at it:
 View(physeq_bracken_genus)
 \end{verbatim}
 
-\subsection{Filtering and rarefying}\label{filtering-and-rarefying}
+\subsubsection{Filtering and rarefying}\label{filtering-and-rarefying}
 
 Now we can take a look at how many reads have been classified within our samples:
 
@@ -768,7 +770,7 @@ We are only going to use this rarefied object for the alpha diversity analyses!
 
 \end{greenbox}
 
-\subsection{Alpha and beta diversity analyses}\label{alpha-and-beta-diversity-analyses}
+\subsubsection{Alpha and beta diversity analyses}\label{alpha-and-beta-diversity-analyses}
 
 We're not going to go into explaining all of these again as we did that in the beginner workshop, but we'll take a look at the samples with a few different methods.
 
@@ -860,7 +862,7 @@ Note that this has just clustered our taxa together, and the tree that we see fo
 
 \end{bluebox}
 
-\subsection{Now lets do the same with the MetaPhlAn3 output}\label{now-lets-do-the-same-with-the-metaphlan3-output}
+\subsubsection{Now lets do the same with the MetaPhlAn3 output}\label{now-lets-do-the-same-with-the-metaphlan3-output}
 
 MetaPhlAn 3 should have finished running by now! So go back to your terminal window.
 
@@ -989,7 +991,7 @@ heatmap(otu_table(physeq_metaphlan_genus))
 
 \end{bluebox}
 
-\subsection{Combine Kraken and MetaPhlAn output}\label{combine-kraken-and-metaphlan-output}
+\subsubsection{Combine Kraken and MetaPhlAn output}\label{combine-kraken-and-metaphlan-output}
 
 First we'll rename both of the Bracken and MetaPhlAn phyloseq objects so that we don't have duplicated sample names in them:
 
@@ -1071,7 +1073,7 @@ heatmap(otu_table(physeq_combined))
 
 \end{bluebox}
 
-\section{Answers}\label{answers}
+\subsection{Answers}\label{answers}
 
 \textbf{Question 1}: This one isn't really a question, but you can see the code needed for these steps in the answers section if you need to!
 
@@ -1120,8 +1122,6 @@ Jaccard distance only takes into account presence/absence of taxa, while Bray-Cu
 \textbf{Question 14}: What differences do you notice between the two classifiers?
 The Bacteroides samples look very similar between the two methods, but the Non-Bacteroides samples seem to be more different. Escherichia seems to dominate three MetaPhlAn samples but only two Kraken samples. There are lots of other differences too! See if you can come up with some explanations for these differences.
 
-\part{Modules}\label{part-modules-1}
-
 \chapter{Module 2: Metagenomic Assembly and Binning}\label{module-2-metagenomic-assembly-and-binning}
 
 \section{Lecture}\label{lecture-1}
@@ -1132,7 +1132,7 @@ This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.i
 
 Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)
 
-\section{Table of Contents}\label{table-of-contents}
+\subsection{Table of Contents}\label{table-of-contents}
 
 \hyperref[introduction]{Introduction}\\
 \hyperref[21-initial-setup]{2.1 Initial setup}\\
@@ -1147,17 +1147,17 @@ Author: Robyn Wright, updated by Ryan J. Mclaughlin (2025)
 \hyperref[other-things-that-we-frequently-do-with-mags]{Other things that we do with MAGs}\\
 \hyperref[answers]{Answers}
 
-\section{Introduction}\label{introduction}
+\subsection{Introduction}\label{introduction}
 
 The main goal of this tutorial is to introduce students to the assembly of genomes from metagenomic reads (Metagenome Assembled Genomes/MAGs). There is not a one-size-fits-all pipeline for assembling MAGs. MAG assembly is incredibly computationally intensive, and the approach that we are taking here is therefore a very ``bare bones'' approach designed to demonstrate the main steps involved and give you some familiarity with the methods used. At the end of this tutorial we've provided a few other pipelines for MAG assembly that you may wish to look into if you are looking to assemble MAGs with your own metagenome data.
 
 Throughout this module, there are some questions aimed to help your understanding of some of the key concepts. You'll find the answers at the bottom of this page, but no one will be marking them.
 
-\subsection{Anvi'o}\label{anvio}
+\subsubsection{Anvi'o}\label{anvio}
 
 Anvi'o is an open-source, community-driven analysis and visualization platform for microbial 'omics. It packages together many different tools used for genomics, metagenomics, metatranscriptomics, phylogenomics, etc. and has great interactive visualisations that can be used to help this. We are just touching the surface of what Anvi'o can do today, but the website has great tutorials and learning resources for all of its capabilities - I recommend browsing through to get some inspiration!
 
-\section{2.1 Initial setup}\label{initial-setup}
+\subsection{2.1 Initial setup}\label{initial-setup}
 
 First of all, we need to create the directory that we'll be working from and change into it:
 
@@ -1188,7 +1188,7 @@ anvi-interactive --version
 \textbf{⚠️ NOTE: This lab has several steps that are quite time consuming and resource intensive!!!}
 We have included the commands for your knowledge, but they is will commented out and alternative linking or copying commands will be provided. Read carefully and copy-paste only after you understand what the step you are performing should be doing.
 
-\section{2.2 Assembly of raw reads with MEGAHIT}\label{assembly-of-raw-reads-with-megahit}
+\subsection{2.2 Assembly of raw reads with MEGAHIT}\label{assembly-of-raw-reads-with-megahit}
 
 The first step in the assembly of MAGs is the assembly of the shorter reads from sequencing into contigs. A contig is a contiguous sequence assembled from a set of sequence fragments, and there are different bioinformatic methods for assembling our reads into contigs. For this part of the tutorial, we are continuing to use reads from the same samples that we used for taxonomic annotation, but we have sub-sampled these to contain reads from only a few species, to ensure that we have the read depth required for MAG assembly while keeping the files small enough to be able to run on these small AWS instances. These are all still short reads of approximately 150 base pairs each.
 
@@ -1302,7 +1302,7 @@ seqkit stat -T -a anvio/megahit_out/final.contigs.fa | awk -F'\t' 'NR==1 { for (
 
 \textbf{Question 3}: What is the N50?
 
-\section{2.3 Make an Anvi'o contigs databases}\label{make-an-anvio-contigs-databases}
+\subsection{2.3 Make an Anvi'o contigs databases}\label{make-an-anvio-contigs-databases}
 
 First of all, we'll run a script to reformat our final contigs file from \texttt{MEGAHIT}. This ensures that they're in the right format for reading into \texttt{Anvi\textquotesingle{}o} in the next step:
 
@@ -1347,7 +1347,7 @@ You can read more about what \texttt{anvi-gen-contigs-database} is doing \href{h
 
 Throughout the next steps, we're going to be adding information to this contigs database.
 
-\section{2.4 Run HMMs to identify single copy genes}\label{run-hmms-to-identify-single-copy-genes}
+\subsection{2.4 Run HMMs to identify single copy genes}\label{run-hmms-to-identify-single-copy-genes}
 
 The first thing that we're going to add to the contigs database is information on the genes within the contigs:
 
@@ -1375,7 +1375,7 @@ anvi-get-sequences-for-gene-calls -c anvio/anvio_databases/CONTIGS.db \
 
 \textbf{Question 4}: How many genes were identified?
 
-\section{2.5 Map samples onto contigs with Bowtie2}\label{map-samples-onto-contigs-with-bowtie2}
+\subsection{2.5 Map samples onto contigs with Bowtie2}\label{map-samples-onto-contigs-with-bowtie2}
 
 The next steps are going to generate abundance profiles of our contigs within the samples - these will help us to bin the contigs together into groups that have similar abundance profiles and are therefore likely to come from the same genome.
 
@@ -1449,7 +1449,7 @@ In each of the steps within the for loop, we are giving several options:
   Then we just remove the intermediate BAM file.
 \end{enumerate}
 
-\subsection{\texorpdfstring{Add coverage and detection statistics to the \texttt{Anvi\textquotesingle{}o} profile}{Add coverage and detection statistics to the Anvi\textquotesingle o profile}}\label{add-coverage-and-detection-statistics-to-the-anvio-profile}
+\subsubsection{\texorpdfstring{Add coverage and detection statistics to the \texttt{Anvi\textquotesingle{}o} profile}{Add coverage and detection statistics to the Anvi\textquotesingle o profile}}\label{add-coverage-and-detection-statistics-to-the-anvio-profile}
 
 Now that we've created information on the coverage and detection of our contigs within our samples (how abundant they are and whether they appear in every sample or not), we can make \texttt{Anvi\textquotesingle{}o} profiles with this information:
 
@@ -1474,7 +1474,7 @@ cp ~/CourseData/MIC_data/amb_module2/anvio/anvio_databases/CONTIGS.db  anvio/anv
 
 We're again using a for loop to carry this out on each of our samples. The \texttt{anvi-profile} program quantifies coverage per nucleotide position within the contigs, and averages them per contig. It also calculates single-nucleotide, single-codon, and single-amino acid variants, as well as structural variants such as insertion and deletions and stores these data into appropriate tables.
 
-\subsection{Merge sample profiles}\label{merge-sample-profiles}
+\subsubsection{Merge sample profiles}\label{merge-sample-profiles}
 
 The command above created contig profiles for each sample individually, so now we need to merge these profiles into one single profile that we can use for clustering the contigs into bins. We'll do this with the anvi-merge program:
 
@@ -1523,7 +1523,7 @@ As long as we're satisfied with all of this, then we can carry on to the cluster
 \textbf{Question 5}: How many contigs are there? Is this the same as what we started with? Why or why not?
 \textbf{Question 6}: What are the longest and shortest contigs? What do you think of this?
 
-\section{2.6 Cluster contigs into bins}\label{cluster-contigs-into-bins}
+\subsection{2.6 Cluster contigs into bins}\label{cluster-contigs-into-bins}
 
 Next we will bin - or cluster - the contigs to create genome ``bins'', or MAGs. To do this, we typically use information on the coverage, or abundance, of contigs within samples (that we generated in step two) and the binning algorithms will usually identify patterns in nucleotide composition or k-mer frequencies in order to group together contigs that they think are likely to have originated from the same genome. We are using \texttt{CONCOCT} for this, but as with every step of this pipeline, there are multiple tools that are capable of carrying this out and may be better or worse in different circumstances. Drivers of choice include: \texttt{CONCOCT}, \texttt{MAXBIN2}, and \texttt{METABAT2}, but be mindful that each driver may have different flags that need to be set so the command below may vary.
 
@@ -1615,7 +1615,7 @@ BONUS: Try running the \texttt{MAXBIN2} and \texttt{METABAT2} drivers through th
 \textbf{Question 8}: How many bins \textgreater50\% completion are there?
 \textbf{Question 9}: What is the redundancy in these bins?
 
-\section{2.7 Interactive refinement of bins}\label{interactive-refinement-of-bins}
+\subsection{2.7 Interactive refinement of bins}\label{interactive-refinement-of-bins}
 
 Now we're going to be doing the interactive refinement, and first of all we'll have a look at the bin that's \texttt{100\%} complete and \texttt{\textless{}10\%} redundant - for me, this is called \texttt{Bin\_13}, but this naming is NOT consistent, so if that's a different bin for you then don't worry! Additionally, be sure you are using the correct \texttt{\$\{DRIVER\}} variable for the bin you're trying to view below, for me it is \texttt{CONCOCT}.
 
@@ -1642,7 +1642,7 @@ Both of these parts are to do with \texttt{Anvi\textquotesingle{}o} being run on
 
 Now the instructions are different depending on whether we're on Mac/Linux or Windows.
 
-\subsubsection{Mac}\label{mac}
+\paragraph{Mac}\label{mac}
 
 Open a second terminal window or tab and run:
 
@@ -1652,7 +1652,7 @@ ssh -L 8081:localhost:8081 -i BMB.pem ubuntu@##.uhn-hpc.ca
 
 Where \texttt{\#\#} is your number. It should just look like you logged into the server in a new window. Now go to \texttt{http://localhost:8081/} in your browser. This should have an \texttt{Anvi\textquotesingle{}o} page loaded up.
 
-\subsubsection{Windows}\label{windows}
+\paragraph{Windows}\label{windows}
 
 Open a new Putty window.
 
@@ -1662,7 +1662,7 @@ Now go to ``Connection'' \textgreater{} ``SSH'' \textgreater{} ``Tunnels''. In `
 
 Click ``Add'' and then click ``Open''. You should see a new Putty window open. Now go to \texttt{http://localhost:8081/} in your browser. This should have an \texttt{Anvi\textquotesingle{}o} page loaded up.
 
-\subsubsection{Back to both}\label{back-to-both}
+\paragraph{Back to both}\label{back-to-both}
 
 \texttt{Anvi\textquotesingle{}o} opens in the \texttt{main} tab (look at the top left).
 
@@ -1704,7 +1704,7 @@ When you are happy with what you've selected, click on ``Store refined bins in t
 
 The other two bins that are \textgreater50\% completion are already \textless10\% redundancy, so it's not necessary to do anything to these, but you can have a look at them in the same way as we did with these two if you like.
 
-\section{2.8 Export the final bins into MAGs}\label{export-the-final-bins-into-mags}
+\subsection{2.8 Export the final bins into MAGs}\label{export-the-final-bins-into-mags}
 
 Now that we've refined our bins into MAGs for our specified \texttt{driver}, we can rename them:
 
@@ -1754,7 +1754,7 @@ You can also move all the bins/MAGs for all drivers if you would like to use the
 
 Now that we have our refined MAGs, we can do anything that we like with them!
 
-\section{2.9 Run CheckM2}\label{run-checkm2}
+\subsection{2.9 Run CheckM2}\label{run-checkm2}
 
 Next, we're going to run \texttt{checkm2}. \texttt{checkm2} can give us information on the quality of genomes.
 
@@ -1780,13 +1780,13 @@ Once it's finished running, you can take a look at the output from it, \texttt{M
 
 \textbf{Question 10}: What are the purity, redundancy, completeness, and contamination of your favorite MAG from today?
 
-\section{Other things that we frequently do with MAGs}\label{other-things-that-we-frequently-do-with-mags}
+\subsection{Other things that we frequently do with MAGs}\label{other-things-that-we-frequently-do-with-mags}
 
 While I hope that you now have a reasonable idea of the steps that go into assembling MAGs, how to assess their quality, and some of the ways in which we might annotate their functions, this has really only scratched the surface of what they might be used for.
 
 If you still have time in the workshop and want to have a look, I've added some papers that I think are nice uses of MAGs as well as some other things that can be done with MAGs that you might want to explore.
 
-\subsubsection{Papers:}\label{papers}
+\paragraph{Papers:}\label{papers}
 
 \href{https://www.biorxiv.org/content/10.1101/2024.02.06.579087v1}{Bacterial ecology and evolution converge on seasonal and decadal scales}
 
@@ -1796,7 +1796,7 @@ If you still have time in the workshop and want to have a look, I've added some 
 
 \href{https://www.nature.com/articles/s41587-020-0718-6}{A genomic catalog of Earth's microbiomes}
 
-\subsubsection{Other tools:}\label{other-tools}
+\paragraph{Other tools:}\label{other-tools}
 
 \href{https://github.com/Ecogenomics/GTDBTk}{GTDB-toolkit} - this can be used for assigning taxonomy to MAGs and has a much larger reference database than CheckM, which is designed for generating quality metrics of MAGs
 
@@ -1810,15 +1810,17 @@ If you still have time in the workshop and want to have a look, I've added some 
 
 \href{https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-021-01213-8}{METABOLIC}
 
-\part{Modules}\label{part-modules-2}
+\chapter{Module 3: Assigning Functions}\label{module-3-assigning-functions}
 
-\chapter{Module 3 Lab: Assigning Functions}\label{module-3-lab-assigning-functions}
+\section{Lecture}\label{lecture-2}
+
+\section{Lab}\label{lab-1}
 
 This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.io/AMB_2025/}{Advanced Microbiome Analysis} (held in Vancouver, BC, May 29-30).
 
 Author: Tony Liu
 
-\section{Setting up the workspace}\label{setting-up-the-workspace}
+\subsection{Setting up the workspace}\label{setting-up-the-workspace}
 
 Before we begin, this section will guide you through the set up of your workspace and compute environment.
 The software tools used in this lab all have dependencies that must be installed separately.
@@ -1838,7 +1840,7 @@ One of these containers will enable the use of jupyter notebooks along with a co
   Kurtzer GM, Sochat V, Bauer MW. Singularity: Scientific containers for mobility of compute. PLOS ONE. 2017;12(5):e0177459. \url{https://doi.org/10.1371/journal.pone.0177459}
 \end{enumerate}
 
-\subsubsection{Steps for setup:}\label{steps-for-setup}
+\paragraph{Steps for setup:}\label{steps-for-setup}
 
 \pandocbounded{\includegraphics[keepaspectratio]{img/lab3/compute_env.png}}
 
@@ -1855,31 +1857,31 @@ One of these containers will enable the use of jupyter notebooks along with a co
   Open the jupyter notebook in your browser
 \end{enumerate}
 
-\subsection{SSH port forwarding}\label{ssh-port-forwarding}
+\subsubsection{SSH port forwarding}\label{ssh-port-forwarding}
 
 We will use SSH port forwarding to open the additional port.
 
-\subsubsection{Terminal (Unix/MacOS)}\label{terminal-unixmacos}
+\paragraph{Terminal (Unix/MacOS)}\label{terminal-unixmacos}
 
-Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to the server. For example:
+Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to the server. Something like:
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\FunctionTok{ssh} \AttributeTok{{-}L}\NormalTok{ 48888:localhost:48888 ubuntu@}\VariableTok{$\{your\_number\}}\NormalTok{.uhn{-}hpc.ca }\AttributeTok{{-}i} \VariableTok{$\{path\_to\_your\_key\}}
+\FunctionTok{ssh} \AttributeTok{{-}L}\NormalTok{ 48888:localhost:48888 ubuntu@\#\#.uhn{-}hpc.ca }\AttributeTok{{-}i}\NormalTok{ CBW.pem}
 \end{Highlighting}
 \end{Shaded}
 
 This means port \texttt{48888} on the remote server will be forwarded to your machine at \texttt{localhost:48888}.
 
-\subsubsection{Putty (Windows)}\label{putty-windows}
+\paragraph{Putty (Windows)}\label{putty-windows}
 
 Modern versions of Windows should have \texttt{ssh} available through Powershell. Putty is available as a backup.
 
 \pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
 
-\subsection{Workspace}\label{workspace}
+\subsubsection{Workspace}\label{workspace}
 
-Create a new workspace in your home directory.
+Let's create a new workspace for this lab.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1897,14 +1899,47 @@ Link the resource folder for easy access. This will contain all the required sof
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Start container}\label{start-container}
+The expected outputs for this lab can be found in \texttt{./lib/outputs}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{ ./lib/outputs}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Start container}\label{start-container}
 
 Most containers for this lab were obtained from the biocontainers project, which provides a large collection of bioinformatics software in a standard format.
-For each tool, we will provide URIs for the the specific container image used and where to get future versions.
-The \texttt{pull} command of \texttt{apptainer} can be used to download images (docs: \url{https://apptainer.org/docs/user/main/cli/apptainer_pull.html}).
+For each tool, we will provide URIs for the the specific container image used and where to get future versions. At the start of each section,
+you will see something like:
 
-Here is an example which downloads \texttt{prodigal} as the container image \texttt{example.sif} from \texttt{docker://quay.io/biocontainers/prodigal:2.6.3-\/-h7b50bb2\_10}.
-The image URI takes the form of \texttt{\textless{}protocol\textgreater{}://\textless{}address\textgreater{}:\textless{}tag\textgreater{}}. Tags are used to identify versions \url{https://quay.io/repository/biocontainers/prodigal?tab=tags}.
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\url{https://quay.io/repository/biocontainers/prodigal?tab=tags}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# docker://quay.io/biocontainers/prodigal:2.6.3{-}{-}h7b50bb2\_10}
+\NormalTok{prodigal\_sif }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"prodigal.sif"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  The link (\url{https://quay.io/repository/biocontainers/prodigal?tab=tags}) will point to the container's repository for future versions.
+\item
+  The comment (\texttt{\#\ docker://quay.io/biocontainers/prodigal:2.6.3-\/-h7b50bb2\_10}) is the \emph{URI} for the specific version used in this lab.
+\item
+  The code snippet (\texttt{prodigal\_sif\ =\ LIB/"prodigal.sif"}) saves the path to the pre-downloaded container image for this lab.
+\end{itemize}
+
+After the workshop, you can use the \texttt{pull} command of \texttt{apptainer} to obtain these tools on your (linux) machine
+(additional documentation: \url{https://apptainer.org/docs/user/main/cli/apptainer_pull.html}).
+Here is an example for downloading the \texttt{prodigal} container image as \texttt{example.sif} from the \emph{URI} \texttt{docker://quay.io/biocontainers/prodigal:2.6.3-\/-h7b50bb2\_10}.
+The image URI takes the form of \texttt{\textless{}protocol\textgreater{}://\textless{}address\textgreater{}:\textless{}tag\textgreater{}}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -1912,7 +1947,7 @@ The image URI takes the form of \texttt{\textless{}protocol\textgreater{}://\tex
 \end{Highlighting}
 \end{Shaded}
 
-What is the version of prodigal and the prodigal container image?
+What do you think is the version of prodigal versus the prodigal container image?
 
 Prodigal: 2.6.3. Image: 2.6.3--h7b50bb2\_10
 
@@ -1924,7 +1959,8 @@ We can now run the prodigal executable inside the container using \texttt{exec} 
 \end{Highlighting}
 \end{Shaded}
 
-All containers for this lab were pre-downloaded in the resource folder now linked as \texttt{./lib}, including a main container with Jupyter and miscellaneous utilities.
+All containers for this lab were pre-downloaded in the resource folder now linked as \texttt{./lib},
+including a main container with Jupyter and miscellaneous utilities (\url{https://quay.io/repository/hallamlab/cbw_amb_lab3?tab=tags}).
 The main container provides an automated setup script named \texttt{unpack}. Let's run it.
 
 \begin{Shaded}
@@ -1947,7 +1983,7 @@ You may want to connect another terminal to maintain terminal access.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Jupyter}\label{jupyter}
+\subsubsection{Jupyter}\label{jupyter}
 
 JupyterLab should now be accessible at \url{http://localhost:48888/lab}. Create a new python notebook and import dependencies.
 
@@ -2086,7 +2122,7 @@ Triple quotes allows multi-line strings. The \texttt{f} prefix enables the evalu
 For example, \texttt{f"echo\ \{LIB\}"} evaluates to \texttt{echo\ ./lib}.
 This is a convient way to simplify commands by saving repeated sections to variables.
 
-\section{Overview}\label{overview-1}
+\subsection{Overview}\label{overview-1}
 
 This lab will guide you through finding and identifying the functional units encoded in the assembled metagenome from the previous labs
 (represented by the red and orange features below), with a focus on proteins and enzymes.
@@ -2130,7 +2166,7 @@ Finally, we will use gapseq to construct metabolic models from the given MAGs.
   \hyperref[gapseq]{gapseq}
 \end{itemize}
 
-\section{Prodigal}\label{prodigal}
+\subsection{Prodigal}\label{prodigal}
 
 The container image for prodigal:
 
@@ -2138,7 +2174,7 @@ The container image for prodigal:
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\CommentTok{\# apptainer pull ./lib/prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3{-}{-}h7b50bb2\_10}
+\CommentTok{\# docker://quay.io/biocontainers/prodigal:2.6.3{-}{-}h7b50bb2\_10}
 \NormalTok{prodigal\_sif }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"prodigal.sif"}
 \end{Highlighting}
 \end{Shaded}
@@ -2408,7 +2444,7 @@ How many ORFs were not from MAGs?
 
 1060 of 7176, or about 15\%
 
-\section{Sequence similarity}\label{sequence-similarity}
+\subsection{Sequence similarity}\label{sequence-similarity}
 
 In this section, we will use tools to find proteins with known sequences similar to that of the predicted ORFs.
 By assuming similar sequences equate to similar functions, we can assign functions through reference databases of known proteins.
@@ -2423,7 +2459,7 @@ While not perfect {[}1, 2{]}, this is a common first-pass approach to assign fun
   Seffernick JL, de Souza ML, Sadowsky MJ, Wackett LP. Melamine deaminase and atrazine chlorohydrolase: 98 percent identical but functionally different. J Bacteriol. 2001;183(8):2405--10. \url{https://doi.org/10.1128/JB.183.8.2405-2410.2001}
 \end{enumerate}
 
-\subsection{Diamond}\label{diamond}
+\subsubsection{Diamond}\label{diamond}
 
 \url{https://quay.io/repository/biocontainers/diamond?tab=tags}
 
@@ -2902,7 +2938,7 @@ Can you put MAG1 on the right and MAG2 on the left?
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Bakta}\label{bakta}
+\subsubsection{Bakta}\label{bakta}
 
 \url{https://quay.io/repository/biocontainers/bakta?tab=tags}
 
@@ -3033,7 +3069,9 @@ How many hypotheticals did Bakta report?
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{Resistance Gene Identifier (RGI)}\label{resistance-gene-identifier-rgi}
+\subsubsection{Resistance Gene Identifier (RGI)}\label{resistance-gene-identifier-rgi}
+
+(Optional: For when you want to use a specific database, in this case, we will demo antibiotic resistance)
 
 \url{https://quay.io/repository/biocontainers/rgi?tab=tags}
 
@@ -3140,13 +3178,13 @@ How many resistance genes did we find?
 
 Just 10!
 
-\section{Machine learning}\label{machine-learning}
+\subsection{Machine learning}\label{machine-learning}
 
 Alignment-based approaches that assign functional annotations based on sequence similarity rely on databases of known sequnces
 to transfer their known functions to the ORFs of a given sample. Machine learning may be able to discover more general patterns
 that can extend annotations to previously unseen sequences.
 
-\subsection{Kofamscan}\label{kofamscan}
+\subsubsection{Kofamscan}\label{kofamscan}
 
 \url{https://quay.io/repository/hallamlab/external_kofamscan?tab=tags}
 
@@ -3359,7 +3397,9 @@ Plot the top 10 largest categories.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{deepEC}\label{deepec}
+\subsubsection{deepEC}\label{deepec}
+
+(Optional: For predicting enzymes)
 
 \url{https://quay.io/repository/hallamlab/external_deepec?tab=tags}
 
@@ -3409,7 +3449,9 @@ How many ORFs did deepEC assign EC numbers to?
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{deepFRI}\label{deepfri}
+\subsubsection{deepFRI}\label{deepfri}
+
+(Optional: For predicting Gene Ontology (GO) functions)
 
 \url{https://quay.io/repository/hallamlab/external_deepfri?tab=tags}
 
@@ -3521,7 +3563,9 @@ The model itself is not even confident, assigning scores as low as 0.1 in some c
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{proteinBERT}\label{proteinbert}
+\subsubsection{proteinBERT}\label{proteinbert}
+
+(Optional: For previously unseen hypothetical proteins)
 
 \url{https://quay.io/repository/hallamlab/external_proteinbert?tab=tags}
 
@@ -3785,7 +3829,7 @@ be transferred to the hypothetical protein's annotation.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\section{gapseq}\label{gapseq}
+\subsection{gapseq}\label{gapseq}
 
 \url{https://quay.io/repository/biocontainers/gapseq?tab=tags}
 
@@ -3975,9 +4019,11 @@ Pick a few and have a look.
 
 This concludes the lab!
 
-\part{Modules}\label{part-modules-3}
+\chapter{Module 4: Visualization and Finding Functional Significance}\label{module-4-visualization-and-finding-functional-significance}
 
-\chapter{Module 4 Lab: Visualization and Finding Functional Significance}\label{module-4-lab-visualization-and-finding-functional-significance}
+\section{Lecture}\label{lecture-3}
+
+\section{Lab}\label{lab-2}
 
 This tutorial is part of the 2025 CBW \href{https://bioinformaticsdotca.github.io/AMB_2025/}{Advanced Microbiome Analysis} (held in Vancouver, BC, May 29-30).
 
@@ -3990,7 +4036,7 @@ and gene sets. Metagenomic reads will be used in place of transcriptomic data, s
 abundance instead of expression, but the analyses shown will remain unchanged.
 For the sake of consistency, the abundance data will be referred to ``expression'' for the rest of the lab.
 
-\section{Setting up the workspace}\label{setting-up-the-workspace-1}
+\subsection{Setting up the workspace}\label{setting-up-the-workspace-1}
 
 The following procedure is near identical to that of lab3.
 \href{module-3---lab-practical.html\#setting-up-the-workspace}{Please refer to the setup sectiom of lab3 for justifications and context.}
@@ -4009,25 +4055,25 @@ We will need to perform the following steps:
   Open the jupyter notebook in your browser
 \end{enumerate}
 
-\subsection{SSH port forwarding}\label{ssh-port-forwarding-1}
+\subsubsection{SSH port forwarding}\label{ssh-port-forwarding-1}
 
-\subsubsection{Terminal (Unix/MacOS)}\label{terminal-unixmacos-1}
+\paragraph{Terminal (Unix/MacOS)}\label{terminal-unixmacos-1}
 
-Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to the server. For example:
+Add \texttt{-L\ 48888:localhost:48888} to the SSH command you use to connect to the server. Something like:
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\FunctionTok{ssh} \AttributeTok{{-}L}\NormalTok{ 48888:localhost:48888 ubuntu@}\VariableTok{$\{your\_number\}}\NormalTok{.uhn{-}hpc.ca }\AttributeTok{{-}i} \VariableTok{$\{path\_to\_your\_key\}}
+\FunctionTok{ssh} \AttributeTok{{-}L}\NormalTok{ 48888:localhost:48888 ubuntu@\#\#.uhn{-}hpc.ca }\AttributeTok{{-}i}\NormalTok{ CBW.pem}
 \end{Highlighting}
 \end{Shaded}
 
-\subsubsection{Putty (Windows)}\label{putty-windows-1}
+\paragraph{Putty (Windows)}\label{putty-windows-1}
 
 \pandocbounded{\includegraphics[keepaspectratio]{img/lab3/putty_port_forward.png}}
 
-\subsection{Workspace}\label{workspace-1}
+\subsubsection{Workspace}\label{workspace-1}
 
-Create a new workspace in your home directory.
+Let's create a new workspace for this lab.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4045,9 +4091,17 @@ Link the resource folder for easy access.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Start container}\label{start-container-1}
+The expected outputs for this lab can be found in \texttt{./lib/outputs}.
 
-Unpack the main container for this lab.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{ ./lib/outputs}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Start container}\label{start-container-1}
+
+Unpack the main container for this lab (\url{https://quay.io/repository/hallamlab/cbw_amb_lab4?tab=tags}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4064,7 +4118,7 @@ You may want to connect another terminal to maintain terminal access.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Jupyter}\label{jupyter-1}
+\subsubsection{Jupyter}\label{jupyter-1}
 
 JupyterLab should now be accessible at \url{http://localhost:48888/lab}. Create a new python notebook and import dependencies.
 
@@ -4090,7 +4144,7 @@ All software tools are packaged in the main container, so we can use \texttt{os.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Overview}\label{overview-2}
+\subsection{Overview}\label{overview-2}
 
 To understand the objective of this lab, let's first have a look at the metadata.
 
@@ -4136,7 +4190,7 @@ To do this we will:
   Visualize the metabolic network in \href{Cytoscape}{cytoscape} with expression information.
 \end{enumerate}
 
-\section{Salmon}\label{salmon}
+\subsection{Salmon}\label{salmon}
 
 The alignment of transcriptomic reads to genes is often ambiguous. A single read can map to multiple genes and the length of genes compared to reads
 means that multiple reads will map to different regions of the same gene. Salmon uses probabilistic and statistical models to quantify the expression of
@@ -4274,7 +4328,7 @@ Finally, we will label the rows and columns of the matrix with gene IDs and samp
 
 We are now ready for deseq2.
 
-\section{DESeq2}\label{deseq2}
+\subsection{DESeq2}\label{deseq2}
 
 DESeq2 is a statistical package for R that is used to analyze count data from RNA-Seq experiments {[}1{]}.
 It uses a negative binomial distribution to model count data, taking into account large biological diversity and technical noise
@@ -4490,7 +4544,7 @@ Since this is computationally expensive, we will use the caching technique shown
 \end{Highlighting}
 \end{Shaded}
 
-\section{Gene set enrichment analysis (GSEA)}\label{gene-set-enrichment-analysis-gsea}
+\subsection{Gene set enrichment analysis (GSEA)}\label{gene-set-enrichment-analysis-gsea}
 
 \textbf{Back to python.}
 
@@ -4618,7 +4672,22 @@ Rank order the genes in each permutation by their correlation.
 \end{Highlighting}
 \end{Shaded}
 
-We can now perform GSEA and create this plot from figure 1 of the GSEA paper {[}1{]}.
+Let's make a human-readable list of genes so we know what each position of the matrix corresponds to.
+Notice how the length of labels corresponds to the genes axis of the matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ \_only\_enzymes(df\_corr).index.to\_numpy()}
+\BuiltInTok{len}\NormalTok{(labels)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{(Optional: implementing GSEA)}\label{optional-implementing-gsea}
+
+This section dives deep into python to implement GSEA from scratch.
+It is often sufficient to use existing software, but especially new or domain specific algorithms may be more difficult to install
+than implementing from scratch. Sometimes installation or implementation are both difficult\ldots{}
+Our ultimate goal is to create this plot from figure 1 of the GSEA paper {[}1{]}
 
 \includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{img/lab4/gsea.png}
 
@@ -4639,7 +4708,6 @@ Let's create a mask to select only genes in \emph{S}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\NormalTok{labels }\OperatorTok{=}\NormalTok{ \_only\_enzymes(df\_corr).index.to\_numpy()}
 \NormalTok{S }\OperatorTok{=}\NormalTok{ np.array([k }\KeywordTok{in}\NormalTok{ gene\_set }\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ labels], dtype}\OperatorTok{=}\BuiltInTok{int}\NormalTok{) }\CommentTok{\# g in S}
 \NormalTok{S }\OperatorTok{=}\NormalTok{ S[mat\_index.T] }\CommentTok{\# same order as mat}
 \end{Highlighting}
@@ -4789,6 +4857,8 @@ We will use this function to run GSEA for each pathway. Try completing the \text
 \NormalTok{res.score, res.pvalue}
 \end{Highlighting}
 \end{Shaded}
+
+\subsubsection{Running GSEA}\label{running-gsea}
 
 Solution
 
@@ -5046,7 +5116,7 @@ Use the \texttt{draw\_gsea} function to explore other pathways.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Cytoscape}\label{cytoscape}
+\subsection{Cytoscape}\label{cytoscape}
 
 Cytoscape is a powerful visualization environment for biological networks {[}1, 2{]}. We will combine the previously generated gapseq metabolic model\\
 with the gene expression data from this lab for visualization.
