@@ -4181,13 +4181,13 @@ To do this we will:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Use \href{Salmon}{salmon} to obtain a count matrix representing the expression level of each gene in each sample.
+  Use \hyperref[salmon]{salmon} to obtain a count matrix representing the expression level of each gene in each sample.
 \item
-  Use \href{DESeq2}{deseq2} to identify significantly expressed genes and generate a null distribution for gene set enrichment analysis.
+  Use \hyperref[deseq2]{deseq2} to identify significantly expressed genes and generate a null distribution for gene set enrichment analysis.
 \item
-  Perform \href{gene-set-enrichment-analysis-gsea}{Gene set enrichment analysis (GSEA)} to identify significantly enriched pathways.
+  Perform \hyperref[gene-set-enrichment-analysis-gsea]{Gene set enrichment analysis (GSEA)} to identify significantly enriched pathways.
 \item
-  Visualize the metabolic network in \href{Cytoscape}{cytoscape} with expression information.
+  Visualize the metabolic network in \hyperref[cytoscape]{cytoscape} with expression information.
 \end{enumerate}
 
 \subsection{Salmon}\label{salmon}
@@ -4234,15 +4234,22 @@ We will need to index the reference genes before performing quantification.
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Quantification will take about 20 minutes. Do not run.} \texttt{tqdm} is a used to display a progress bar.
+We will quantify our samples. First, let's load them into a list.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\ImportTok{from}\NormalTok{ tqdm }\ImportTok{import}\NormalTok{ tqdm }\CommentTok{\# this draws progress bars for us}
+
+\NormalTok{reads\_dir }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"inputs/reads"}
+\NormalTok{samples }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(reads\_dir.iterdir())}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Quantification will take about 20 minutes. Do not run.}
 Precomputed outputs are at \texttt{./lib/outputs/salmon/}.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\ImportTok{from}\NormalTok{ tqdm }\ImportTok{import}\NormalTok{ tqdm}
-
-\NormalTok{reads\_dir }\OperatorTok{=}\NormalTok{ LIB}\OperatorTok{/}\StringTok{"inputs/reads"}
-\NormalTok{samples }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(reads\_dir.iterdir())}
 \ControlFlowTok{for}\NormalTok{ read\_file }\KeywordTok{in}\NormalTok{ tqdm(samples, total}\OperatorTok{=}\BuiltInTok{len}\NormalTok{(samples)):}
 \NormalTok{    srr }\OperatorTok{=}\NormalTok{ read\_file.name.split(}\StringTok{"\_"}\NormalTok{)[}\DecValTok{0}\NormalTok{]}
 \NormalTok{    out }\OperatorTok{=}\NormalTok{ salmon\_dir}\OperatorTok{/}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{srr}\SpecialCharTok{\}}\SpecialStringTok{"}

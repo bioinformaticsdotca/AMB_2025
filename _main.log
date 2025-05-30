@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.20)  30 MAY 2025 11:48
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.5.20)  30 MAY 2025 16:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1818,7 +1818,7 @@ Overfull \hbox (95.04955pt too wide) has occurred while \output is active
 File: img/lab4/new_tab.png Graphic file (type bmp)
 <img/lab4/new_tab.png>
 
-Overfull \hbox (28.26518pt too wide) in paragraph at lines 4347--4349
+Overfull \hbox (28.26518pt too wide) in paragraph at lines 4354--4356
 \TU/lmr/m/n/10 book. [] 
  []
 
@@ -1863,7 +1863,7 @@ Overfull \hbox (95.04955pt too wide) has occurred while \output is active
 File: img/lab4/gsea_phit.png Graphic file (type bmp)
 <img/lab4/gsea_phit.png>
 
-Overfull \vbox (1.53581pt too high) detected at line 4725
+Overfull \vbox (1.53581pt too high) detected at line 4732
  []
 
 
@@ -1888,11 +1888,11 @@ Overfull \hbox (95.04955pt too wide) has occurred while \output is active
  []
 
 [114]
-Underfull \vbox (badness 10000) detected at line 4920
+Underfull \vbox (badness 10000) detected at line 4927
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4920
+Underfull \vbox (badness 10000) detected at line 4927
  []
 
 
@@ -1958,11 +1958,11 @@ Overfull \hbox (95.04955pt too wide) has occurred while \output is active
 [126]
 
 [127]
-Underfull \vbox (badness 10000) detected at line 5631
+Underfull \vbox (badness 10000) detected at line 5638
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5631
+Underfull \vbox (badness 10000) detected at line 5638
  []
 
 
@@ -1973,11 +1973,11 @@ Overfull \hbox (95.04955pt too wide) has occurred while \output is active
  []
 
 [128]
-Underfull \vbox (badness 10000) detected at line 5631
+Underfull \vbox (badness 10000) detected at line 5638
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5631
+Underfull \vbox (badness 10000) detected at line 5638
  []
 
 

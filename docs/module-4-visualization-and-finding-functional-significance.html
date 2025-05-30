@@ -53,9 +53,8 @@
 
 
 <style type="text/css">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -65,7 +64,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -246,6 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Module 4: Visualization and Finding Functional Significance<a href="module-4-visualization-and-finding-functional-significance.html#module-4-visualization-and-finding-functional-significance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="lecture-3" class="section level2 hasAnchor">
 <h2>Lecture<a href="module-4-visualization-and-finding-functional-significance.html#lecture-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/qFmWDZvA7-0?si=mVpKWmLm4AmPqLrb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
 <iframe width="640" height="360" src="https://docs.google.com/presentation/d/1O0OXV6T6qxyzz66eoYKZEtY4H8JqrxIF/preview" allow="autoplay">
 </iframe>
 </div>
@@ -374,12 +375,12 @@ Precomputed outputs are at <code>./lib/outputs/salmon/</code>.</p>
 <span id="cb236-3"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-3"></a>    out <span class="op">=</span> salmon_dir<span class="op">/</span><span class="ss">f&quot;</span><span class="sc">{</span>srr<span class="sc">}</span><span class="ss">&quot;</span></span>
 <span id="cb236-4"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-4"></a>    os.system(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb236-5"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-5"></a><span class="ss">        mkdir -p </span><span class="sc">{</span>out<span class="sc">}</span></span>
-<span id="cb236-6"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-6"></a><span class="ss">        salmon quant </span><span class="op">\</span></span>
-<span id="cb236-7"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-7"></a><span class="ss">            -l A </span><span class="op">\</span></span>
-<span id="cb236-8"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-8"></a><span class="ss">            -p </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
-<span id="cb236-9"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-9"></a><span class="ss">            -i </span><span class="sc">{</span>salmon_index<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
-<span id="cb236-10"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-10"></a><span class="ss">            -r </span><span class="sc">{</span>read_file<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
-<span id="cb236-11"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-11"></a><span class="ss">            -o </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb236-6"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-6"></a><span class="ss">        salmon quant </span><span class="ch">\</span></span>
+<span id="cb236-7"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-7"></a><span class="ss">            -l A </span><span class="ch">\</span></span>
+<span id="cb236-8"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-8"></a><span class="ss">            -p </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb236-9"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-9"></a><span class="ss">            -i </span><span class="sc">{</span>salmon_index<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb236-10"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-10"></a><span class="ss">            -r </span><span class="sc">{</span>read_file<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb236-11"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-11"></a><span class="ss">            -o </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
 <span id="cb236-12"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-12"></a><span class="ss">            &gt;</span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">/salmon.log 2&gt;</span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">/salmon.err</span></span>
 <span id="cb236-13"><a href="module-4-visualization-and-finding-functional-significance.html#cb236-13"></a><span class="ss">    &quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>Salmon requires information about the reads’ library type, such as stranded, unstranded, facing, paired-end, etc. <code>-l A</code> will tell Salmon to infer the type
