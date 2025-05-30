@@ -159,13 +159,17 @@ salmon_index = salmon_dir/"index"
 os.system(f"salmon index -t {genes_fasta} -i {salmon_index}")
 ```
 
-**Quantification will take about 20 minutes. Do not run.** `tqdm` is a used to display a progress bar.
-Precomputed outputs are at `./lib/outputs/salmon/`.
+We will quantify our samples. First, let's load them into a list.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-from tqdm import tqdm
+from tqdm import tqdm # this draws progress bars for us
 
 reads_dir = LIB/"inputs/reads"
 samples = list(reads_dir.iterdir())
+```
+
+**Quantification will take about 20 minutes. Do not run.**
+Precomputed outputs are at `./lib/outputs/salmon/`.
+```{python, eval=FALSE, attr.source='.numberLines'}
 for read_file in tqdm(samples, total=len(samples)):
     srr = read_file.name.split("_")[0]
     out = salmon_dir/f"{srr}"
