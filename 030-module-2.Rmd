@@ -1,6 +1,9 @@
 # Module 2: Metagenomic Assembly and Binning
 
 ## Lecture
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/f84aGg1wNDw?si=mvrOFpScnKOT7s2W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 <iframe src="https://docs.google.com/presentation/d/1r4aJMyt7dbZJwEWgI-Mk8ltf2ECm2BK1/preview" width="640" height="480" allow="autoplay"></iframe>  
 
 ## Lab

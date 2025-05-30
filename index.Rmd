@@ -21,3 +21,7 @@ Welcome to CBW’s Advanced Microbiome Analysis 2025 Workshop!
 ## AWS/UNIX primer
 
 [You can find the schedule and materials for the AWS/UNIX primer here.](https://bioinformaticsdotca.github.io/AWS_2025)
+
+## Class Photo
+
+<iframe src="https://drive.google.com/file/d/1NPJxrGAv3Ew9FNQe5EF9Qc0-liQea22x/view?usp=sharing" width="100%" height="600" allow="autoplay"></iframe>
