@@ -53,8 +53,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +65,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -512,9 +513,9 @@ gene length and overlap, start and stop codons, ribosome binding sites, and GC c
 <div class="sourceCode" id="cb127"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb127-1"><a href="module-3-assigning-functions.html#cb127-1"></a>out_dir <span class="op">=</span> <span class="st">&quot;./prodigal&quot;</span></span>
 <span id="cb127-2"><a href="module-3-assigning-functions.html#cb127-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb127-3"><a href="module-3-assigning-functions.html#cb127-3"></a><span class="ss">mkdir -p </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span></span>
-<span id="cb127-4"><a href="module-3-assigning-functions.html#cb127-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb127-5"><a href="module-3-assigning-functions.html#cb127-5"></a><span class="ss">    prodigal </span><span class="ch">\</span></span>
-<span id="cb127-6"><a href="module-3-assigning-functions.html#cb127-6"></a><span class="ss">        -i </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/inputs/assembly.fa </span><span class="ch">\</span></span>
+<span id="cb127-4"><a href="module-3-assigning-functions.html#cb127-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb127-5"><a href="module-3-assigning-functions.html#cb127-5"></a><span class="ss">    prodigal </span><span class="op">\</span></span>
+<span id="cb127-6"><a href="module-3-assigning-functions.html#cb127-6"></a><span class="ss">        -i </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/inputs/assembly.fa </span><span class="op">\</span></span>
 <span id="cb127-7"><a href="module-3-assigning-functions.html#cb127-7"></a><span class="ss">        ...</span></span>
 <span id="cb127-8"><a href="module-3-assigning-functions.html#cb127-8"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <details>
@@ -540,16 +541,16 @@ Suggested answer
 <div class="sourceCode" id="cb128"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb128-1"><a href="module-3-assigning-functions.html#cb128-1"></a>out_dir <span class="op">=</span> Path(<span class="st">&quot;./prodigal&quot;</span>)</span>
 <span id="cb128-2"><a href="module-3-assigning-functions.html#cb128-2"></a>prodigal_aa <span class="op">=</span> out_dir<span class="op">/</span><span class="st">&quot;orfs.faa&quot;</span></span>
 <span id="cb128-3"><a href="module-3-assigning-functions.html#cb128-3"></a>prodigal_gff <span class="op">=</span> out_dir<span class="op">/</span><span class="st">&quot;orfs.gff&quot;</span></span>
-<span id="cb128-4"><a href="module-3-assigning-functions.html#cb128-4"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span><span class="ch">\</span></span>
+<span id="cb128-4"><a href="module-3-assigning-functions.html#cb128-4"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span><span class="op">\</span></span>
 <span id="cb128-5"><a href="module-3-assigning-functions.html#cb128-5"></a><span class="ss">mkdir -p </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span></span>
-<span id="cb128-6"><a href="module-3-assigning-functions.html#cb128-6"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb128-7"><a href="module-3-assigning-functions.html#cb128-7"></a><span class="ss">    prodigal </span><span class="ch">\</span></span>
-<span id="cb128-8"><a href="module-3-assigning-functions.html#cb128-8"></a><span class="ss">        -p meta </span><span class="ch">\</span></span>
-<span id="cb128-9"><a href="module-3-assigning-functions.html#cb128-9"></a><span class="ss">        -i </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/inputs/assembly.fa </span><span class="ch">\</span></span>
-<span id="cb128-10"><a href="module-3-assigning-functions.html#cb128-10"></a><span class="ss">        -a </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb128-11"><a href="module-3-assigning-functions.html#cb128-11"></a><span class="ss">        -d </span><span class="sc">{</span>prodigal_aa<span class="sc">.</span>with_suffix(<span class="st">&#39;.fna&#39;</span>)<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb128-12"><a href="module-3-assigning-functions.html#cb128-12"></a><span class="ss">        -f gff </span><span class="ch">\</span></span>
-<span id="cb128-13"><a href="module-3-assigning-functions.html#cb128-13"></a><span class="ss">        -o </span><span class="sc">{</span>prodigal_gff<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb128-6"><a href="module-3-assigning-functions.html#cb128-6"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>prodigal_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb128-7"><a href="module-3-assigning-functions.html#cb128-7"></a><span class="ss">    prodigal </span><span class="op">\</span></span>
+<span id="cb128-8"><a href="module-3-assigning-functions.html#cb128-8"></a><span class="ss">        -p meta </span><span class="op">\</span></span>
+<span id="cb128-9"><a href="module-3-assigning-functions.html#cb128-9"></a><span class="ss">        -i </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/inputs/assembly.fa </span><span class="op">\</span></span>
+<span id="cb128-10"><a href="module-3-assigning-functions.html#cb128-10"></a><span class="ss">        -a </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb128-11"><a href="module-3-assigning-functions.html#cb128-11"></a><span class="ss">        -d </span><span class="sc">{</span>prodigal_aa<span class="sc">.</span>with_suffix(<span class="st">&#39;.fna&#39;</span>)<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb128-12"><a href="module-3-assigning-functions.html#cb128-12"></a><span class="ss">        -f gff </span><span class="op">\</span></span>
+<span id="cb128-13"><a href="module-3-assigning-functions.html#cb128-13"></a><span class="ss">        -o </span><span class="sc">{</span>prodigal_gff<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb128-14"><a href="module-3-assigning-functions.html#cb128-14"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <hr />
 </details>
@@ -691,7 +692,7 @@ Running a your command is a good way to check for correctness and resulting erro
 <div class="sourceCode" id="cb141"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb141-1"><a href="module-3-assigning-functions.html#cb141-1"></a>tcdb_fasta <span class="op">=</span> LIB<span class="op">/</span><span class="st">&quot;transporter_classification_db/tcdb.faa&quot;</span></span>
 <span id="cb141-2"><a href="module-3-assigning-functions.html#cb141-2"></a>tcdb_db <span class="op">=</span> Path(<span class="st">&quot;./diamond/tcdb.dmnd&quot;</span>)</span>
 <span id="cb141-3"><a href="module-3-assigning-functions.html#cb141-3"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb141-4"><a href="module-3-assigning-functions.html#cb141-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond makedb </span><span class="ch">\</span></span>
+<span id="cb141-4"><a href="module-3-assigning-functions.html#cb141-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond makedb </span><span class="op">\</span></span>
 <span id="cb141-5"><a href="module-3-assigning-functions.html#cb141-5"></a><span class="ss">    ...</span></span>
 <span id="cb141-6"><a href="module-3-assigning-functions.html#cb141-6"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <details>
@@ -702,9 +703,9 @@ Possible solution
 <span id="cb142-2"><a href="module-3-assigning-functions.html#cb142-2"></a>tcdb_db <span class="op">=</span> Path(<span class="st">&quot;./diamond/tcdb.dmnd&quot;</span>)</span>
 <span id="cb142-3"><a href="module-3-assigning-functions.html#cb142-3"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb142-4"><a href="module-3-assigning-functions.html#cb142-4"></a><span class="ss">mkdir -p </span><span class="sc">{</span>tcdb_db<span class="sc">.</span>parent<span class="sc">}</span><span class="ss"> # parent folder of given path</span></span>
-<span id="cb142-5"><a href="module-3-assigning-functions.html#cb142-5"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond makedb </span><span class="ch">\</span></span>
-<span id="cb142-6"><a href="module-3-assigning-functions.html#cb142-6"></a><span class="ss">    --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb142-7"><a href="module-3-assigning-functions.html#cb142-7"></a><span class="ss">    --in </span><span class="sc">{</span>tcdb_fasta<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb142-5"><a href="module-3-assigning-functions.html#cb142-5"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> diamond makedb </span><span class="op">\</span></span>
+<span id="cb142-6"><a href="module-3-assigning-functions.html#cb142-6"></a><span class="ss">    --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb142-7"><a href="module-3-assigning-functions.html#cb142-7"></a><span class="ss">    --in </span><span class="sc">{</span>tcdb_fasta<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb142-8"><a href="module-3-assigning-functions.html#cb142-8"></a><span class="ss">    --db </span><span class="sc">{</span>tcdb_db<span class="sc">}</span></span>
 <span id="cb142-9"><a href="module-3-assigning-functions.html#cb142-9"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 </details>
@@ -729,12 +730,12 @@ Possible solution
 <div class="sourceCode" id="cb144"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb144-1"><a href="module-3-assigning-functions.html#cb144-1"></a>columns <span class="op">=</span> <span class="st">&quot;qseqid sseqid score pident evalue&quot;</span></span>
 <span id="cb144-2"><a href="module-3-assigning-functions.html#cb144-2"></a>diamond_out <span class="op">=</span> Path(<span class="st">&quot;./diamond/orfs.tsv&quot;</span>)</span>
 <span id="cb144-3"><a href="module-3-assigning-functions.html#cb144-3"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb144-4"><a href="module-3-assigning-functions.html#cb144-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb144-5"><a href="module-3-assigning-functions.html#cb144-5"></a><span class="ss">    diamond blastp </span><span class="ch">\</span></span>
-<span id="cb144-6"><a href="module-3-assigning-functions.html#cb144-6"></a><span class="ss">        --query ./prodigal/orfs.faa </span><span class="ch">\</span></span>
-<span id="cb144-7"><a href="module-3-assigning-functions.html#cb144-7"></a><span class="ss">        --db </span><span class="sc">{</span>tcdb_db<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb144-8"><a href="module-3-assigning-functions.html#cb144-8"></a><span class="ss">        --out </span><span class="sc">{</span>diamond_out<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb144-9"><a href="module-3-assigning-functions.html#cb144-9"></a><span class="ss">        --outfmt 6 </span><span class="sc">{</span>columns<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb144-4"><a href="module-3-assigning-functions.html#cb144-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb144-5"><a href="module-3-assigning-functions.html#cb144-5"></a><span class="ss">    diamond blastp </span><span class="op">\</span></span>
+<span id="cb144-6"><a href="module-3-assigning-functions.html#cb144-6"></a><span class="ss">        --query ./prodigal/orfs.faa </span><span class="op">\</span></span>
+<span id="cb144-7"><a href="module-3-assigning-functions.html#cb144-7"></a><span class="ss">        --db </span><span class="sc">{</span>tcdb_db<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb144-8"><a href="module-3-assigning-functions.html#cb144-8"></a><span class="ss">        --out </span><span class="sc">{</span>diamond_out<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb144-9"><a href="module-3-assigning-functions.html#cb144-9"></a><span class="ss">        --outfmt 6 </span><span class="sc">{</span>columns<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb144-10"><a href="module-3-assigning-functions.html#cb144-10"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span></span>
 <span id="cb144-11"><a href="module-3-assigning-functions.html#cb144-11"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>In addition to e-evalue, we can calculate a blast score ratio (BSR) to assign confidence to the hits.
@@ -746,14 +747,14 @@ A BSR of less than 0.4 was found to be a good threshold [1].</p>
 <p>Perform a self blast. We can skip making a database since the number of sequences is small.</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb145-1"><a href="module-3-assigning-functions.html#cb145-1"></a>diamond_self <span class="op">=</span> Path(<span class="st">&quot;./diamond/self.raw&quot;</span>)</span>
 <span id="cb145-2"><a href="module-3-assigning-functions.html#cb145-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb145-3"><a href="module-3-assigning-functions.html#cb145-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb145-4"><a href="module-3-assigning-functions.html#cb145-4"></a><span class="ss">    diamond blastp </span><span class="ch">\</span></span>
-<span id="cb145-5"><a href="module-3-assigning-functions.html#cb145-5"></a><span class="ss">        --query </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb145-6"><a href="module-3-assigning-functions.html#cb145-6"></a><span class="ss">        --db </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb145-7"><a href="module-3-assigning-functions.html#cb145-7"></a><span class="ss">        --out </span><span class="sc">{</span>diamond_self<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb145-8"><a href="module-3-assigning-functions.html#cb145-8"></a><span class="ss">        --outfmt 6 </span><span class="sc">{</span>columns<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb145-9"><a href="module-3-assigning-functions.html#cb145-9"></a><span class="ss">        --max-target-seqs 1 </span><span class="ch">\</span></span>
-<span id="cb145-10"><a href="module-3-assigning-functions.html#cb145-10"></a><span class="ss">        --faster </span><span class="ch">\</span></span>
+<span id="cb145-3"><a href="module-3-assigning-functions.html#cb145-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>diamond_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb145-4"><a href="module-3-assigning-functions.html#cb145-4"></a><span class="ss">    diamond blastp </span><span class="op">\</span></span>
+<span id="cb145-5"><a href="module-3-assigning-functions.html#cb145-5"></a><span class="ss">        --query </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb145-6"><a href="module-3-assigning-functions.html#cb145-6"></a><span class="ss">        --db </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb145-7"><a href="module-3-assigning-functions.html#cb145-7"></a><span class="ss">        --out </span><span class="sc">{</span>diamond_self<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb145-8"><a href="module-3-assigning-functions.html#cb145-8"></a><span class="ss">        --outfmt 6 </span><span class="sc">{</span>columns<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb145-9"><a href="module-3-assigning-functions.html#cb145-9"></a><span class="ss">        --max-target-seqs 1 </span><span class="op">\</span></span>
+<span id="cb145-10"><a href="module-3-assigning-functions.html#cb145-10"></a><span class="ss">        --faster </span><span class="op">\</span></span>
 <span id="cb145-11"><a href="module-3-assigning-functions.html#cb145-11"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span></span>
 <span id="cb145-12"><a href="module-3-assigning-functions.html#cb145-12"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <details>
@@ -992,12 +993,12 @@ that run off the edge of contigs, so we will need to filter these out.</p>
 <span id="cb166-11"><a href="module-3-assigning-functions.html#cb166-11"></a>gff[complete_orfs].to_csv(gff_complete, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, header<span class="op">=</span><span class="va">False</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>Running Bakta, even on this reduced dataset, may take <strong>15+ minutes</strong>. Precomputed outputs are available at <code>{LIB}/outputs/bakta.full</code>.</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb167-1"><a href="module-3-assigning-functions.html#cb167-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb167-2"><a href="module-3-assigning-functions.html#cb167-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb167-3"><a href="module-3-assigning-functions.html#cb167-3"></a><span class="ss">    bakta --meta --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --force --skip-plot </span><span class="ch">\</span></span>
-<span id="cb167-4"><a href="module-3-assigning-functions.html#cb167-4"></a><span class="ss">        --db </span><span class="sc">{</span>bakta_db<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb167-5"><a href="module-3-assigning-functions.html#cb167-5"></a><span class="ss">        --keep-contig-headers </span><span class="ch">\</span></span>
-<span id="cb167-6"><a href="module-3-assigning-functions.html#cb167-6"></a><span class="ss">        --output ./bakta/ </span><span class="ch">\</span></span>
-<span id="cb167-7"><a href="module-3-assigning-functions.html#cb167-7"></a><span class="ss">        --regions </span><span class="sc">{</span>gff_complete<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb167-2"><a href="module-3-assigning-functions.html#cb167-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>bakta_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb167-3"><a href="module-3-assigning-functions.html#cb167-3"></a><span class="ss">    bakta --meta --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --force --skip-plot </span><span class="op">\</span></span>
+<span id="cb167-4"><a href="module-3-assigning-functions.html#cb167-4"></a><span class="ss">        --db </span><span class="sc">{</span>bakta_db<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb167-5"><a href="module-3-assigning-functions.html#cb167-5"></a><span class="ss">        --keep-contig-headers </span><span class="op">\</span></span>
+<span id="cb167-6"><a href="module-3-assigning-functions.html#cb167-6"></a><span class="ss">        --output ./bakta/ </span><span class="op">\</span></span>
+<span id="cb167-7"><a href="module-3-assigning-functions.html#cb167-7"></a><span class="ss">        --regions </span><span class="sc">{</span>gff_complete<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb167-8"><a href="module-3-assigning-functions.html#cb167-8"></a><span class="ss">        </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/inputs/assembly.fa</span></span>
 <span id="cb167-9"><a href="module-3-assigning-functions.html#cb167-9"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>Have a look at the reported hypothetical proteins at <code>LIB/"outputs/bakta.full/assembly.hypotheticals.tsv"</code> and read the results into a dataframe.</p>
@@ -1039,11 +1040,11 @@ that do not crash the program. These can be ignored. RGI also provides no indica
 so checking the output folder will be necessary.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb173-1"><a href="module-3-assigning-functions.html#cb173-1"></a>rgi_out <span class="op">=</span> Path(<span class="st">&quot;./rgi/chicken&quot;</span>)</span>
 <span id="cb173-2"><a href="module-3-assigning-functions.html#cb173-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb173-3"><a href="module-3-assigning-functions.html#cb173-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb173-4"><a href="module-3-assigning-functions.html#cb173-4"></a><span class="ss">    rgi main </span><span class="ch">\</span></span>
-<span id="cb173-5"><a href="module-3-assigning-functions.html#cb173-5"></a><span class="ss">        --num_threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb173-6"><a href="module-3-assigning-functions.html#cb173-6"></a><span class="ss">        --clean </span><span class="ch">\</span></span>
-<span id="cb173-7"><a href="module-3-assigning-functions.html#cb173-7"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb173-3"><a href="module-3-assigning-functions.html#cb173-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb173-4"><a href="module-3-assigning-functions.html#cb173-4"></a><span class="ss">    rgi main </span><span class="op">\</span></span>
+<span id="cb173-5"><a href="module-3-assigning-functions.html#cb173-5"></a><span class="ss">        --num_threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb173-6"><a href="module-3-assigning-functions.html#cb173-6"></a><span class="ss">        --clean </span><span class="op">\</span></span>
+<span id="cb173-7"><a href="module-3-assigning-functions.html#cb173-7"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb173-8"><a href="module-3-assigning-functions.html#cb173-8"></a><span class="ss">        -o </span><span class="sc">{</span>rgi_out<span class="sc">}</span></span>
 <span id="cb173-9"><a href="module-3-assigning-functions.html#cb173-9"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <details>
@@ -1078,12 +1079,12 @@ solution
 <div class="sourceCode" id="cb174"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb174-1"><a href="module-3-assigning-functions.html#cb174-1"></a>rgi_out <span class="op">=</span> Path(<span class="st">&quot;./rgi/chicken&quot;</span>)</span>
 <span id="cb174-2"><a href="module-3-assigning-functions.html#cb174-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb174-3"><a href="module-3-assigning-functions.html#cb174-3"></a><span class="ss">mkdir -p </span><span class="sc">{</span>rgi_out<span class="sc">.</span>parent<span class="sc">}</span></span>
-<span id="cb174-4"><a href="module-3-assigning-functions.html#cb174-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb174-5"><a href="module-3-assigning-functions.html#cb174-5"></a><span class="ss">    rgi main </span><span class="ch">\</span></span>
-<span id="cb174-6"><a href="module-3-assigning-functions.html#cb174-6"></a><span class="ss">        --num_threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb174-7"><a href="module-3-assigning-functions.html#cb174-7"></a><span class="ss">        --clean </span><span class="ch">\</span></span>
-<span id="cb174-8"><a href="module-3-assigning-functions.html#cb174-8"></a><span class="ss">        -t protein </span><span class="ch">\</span></span>
-<span id="cb174-9"><a href="module-3-assigning-functions.html#cb174-9"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb174-4"><a href="module-3-assigning-functions.html#cb174-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>rgi_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb174-5"><a href="module-3-assigning-functions.html#cb174-5"></a><span class="ss">    rgi main </span><span class="op">\</span></span>
+<span id="cb174-6"><a href="module-3-assigning-functions.html#cb174-6"></a><span class="ss">        --num_threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb174-7"><a href="module-3-assigning-functions.html#cb174-7"></a><span class="ss">        --clean </span><span class="op">\</span></span>
+<span id="cb174-8"><a href="module-3-assigning-functions.html#cb174-8"></a><span class="ss">        -t protein </span><span class="op">\</span></span>
+<span id="cb174-9"><a href="module-3-assigning-functions.html#cb174-9"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb174-10"><a href="module-3-assigning-functions.html#cb174-10"></a><span class="ss">        -o </span><span class="sc">{</span>rgi_out<span class="sc">}</span></span>
 <span id="cb174-11"><a href="module-3-assigning-functions.html#cb174-11"></a><span class="ss">&quot;&quot;&quot;</span>)</span>
 <span id="cb174-12"><a href="module-3-assigning-functions.html#cb174-12"></a>rgi_out <span class="op">=</span> rgi_out.with_suffix(<span class="st">&quot;.txt&quot;</span>) <span class="co"># RGI adds the .txt suffix</span></span>
@@ -1135,12 +1136,12 @@ To try running kofamscan, use the shorter list of hypotheticals from Bakta at <c
 <div class="sourceCode" id="cb179"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb179-1"><a href="module-3-assigning-functions.html#cb179-1"></a>kofamscan_raw <span class="op">=</span> Path(<span class="st">&quot;./kofamscan/kos.out&quot;</span>)</span>
 <span id="cb179-2"><a href="module-3-assigning-functions.html#cb179-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb179-3"><a href="module-3-assigning-functions.html#cb179-3"></a><span class="ss">mkdir -p ./kofamscan</span></span>
-<span id="cb179-4"><a href="module-3-assigning-functions.html#cb179-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>kofamscan_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb179-5"><a href="module-3-assigning-functions.html#cb179-5"></a><span class="ss">    exec_annotation </span><span class="ch">\</span></span>
-<span id="cb179-6"><a href="module-3-assigning-functions.html#cb179-6"></a><span class="ss">        --cpu=</span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --format=detail --no-report-unannotated </span><span class="ch">\</span></span>
-<span id="cb179-7"><a href="module-3-assigning-functions.html#cb179-7"></a><span class="ss">        --profile=</span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/kofamscan_db/profiles/prokaryote.hal </span><span class="ch">\</span></span>
-<span id="cb179-8"><a href="module-3-assigning-functions.html#cb179-8"></a><span class="ss">        --ko-list=</span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/kofamscan_db/ko_list </span><span class="ch">\</span></span>
-<span id="cb179-9"><a href="module-3-assigning-functions.html#cb179-9"></a><span class="ss">        -o </span><span class="sc">{</span>kofamscan_raw<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb179-4"><a href="module-3-assigning-functions.html#cb179-4"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>kofamscan_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb179-5"><a href="module-3-assigning-functions.html#cb179-5"></a><span class="ss">    exec_annotation </span><span class="op">\</span></span>
+<span id="cb179-6"><a href="module-3-assigning-functions.html#cb179-6"></a><span class="ss">        --cpu=</span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> --format=detail --no-report-unannotated </span><span class="op">\</span></span>
+<span id="cb179-7"><a href="module-3-assigning-functions.html#cb179-7"></a><span class="ss">        --profile=</span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/kofamscan_db/profiles/prokaryote.hal </span><span class="op">\</span></span>
+<span id="cb179-8"><a href="module-3-assigning-functions.html#cb179-8"></a><span class="ss">        --ko-list=</span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/kofamscan_db/ko_list </span><span class="op">\</span></span>
+<span id="cb179-9"><a href="module-3-assigning-functions.html#cb179-9"></a><span class="ss">        -o </span><span class="sc">{</span>kofamscan_raw<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb179-10"><a href="module-3-assigning-functions.html#cb179-10"></a><span class="ss">        </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span></span>
 <span id="cb179-11"><a href="module-3-assigning-functions.html#cb179-11"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>Kofamscan attempts to assign KEGG orthology (KO) numbers to each ORF, linking them to rich KEGG databases
@@ -1246,10 +1247,10 @@ which are unique IDs that link to various metabolic reference databases, includi
 <li>Ryu JY, Kim HU, Lee SY. Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. Proc Natl Acad Sci. 2019;116(28):13996–4001. <a href="https://doi.org/10.1073/pnas.1821905116" class="uri">https://doi.org/10.1073/pnas.1821905116</a></li>
 </ol>
 <div class="sourceCode" id="cb190"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb190-1"><a href="module-3-assigning-functions.html#cb190-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb190-2"><a href="module-3-assigning-functions.html#cb190-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>deepec_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb190-3"><a href="module-3-assigning-functions.html#cb190-3"></a><span class="ss">    deepec </span><span class="ch">\</span></span>
-<span id="cb190-4"><a href="module-3-assigning-functions.html#cb190-4"></a><span class="ss">        -p </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb190-5"><a href="module-3-assigning-functions.html#cb190-5"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb190-2"><a href="module-3-assigning-functions.html#cb190-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>deepec_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb190-3"><a href="module-3-assigning-functions.html#cb190-3"></a><span class="ss">    deepec </span><span class="op">\</span></span>
+<span id="cb190-4"><a href="module-3-assigning-functions.html#cb190-4"></a><span class="ss">        -p </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb190-5"><a href="module-3-assigning-functions.html#cb190-5"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb190-6"><a href="module-3-assigning-functions.html#cb190-6"></a><span class="ss">        -o ./deepec</span></span>
 <span id="cb190-7"><a href="module-3-assigning-functions.html#cb190-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb191"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb191-1"><a href="module-3-assigning-functions.html#cb191-1"></a>dfec <span class="op">=</span> pd.read_csv(<span class="st">&quot;./deepec/DeepEC_Result.txt&quot;</span>, sep<span class="op">=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
@@ -1295,10 +1296,10 @@ Pre-computed results are at (<code>{LIB}/"outputs/deepfri/</code>).</p>
 <span id="cb193-11"><a href="module-3-assigning-functions.html#cb193-11"></a>        SeqIO.write(e, f, <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb194"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb194-1"><a href="module-3-assigning-functions.html#cb194-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb194-2"><a href="module-3-assigning-functions.html#cb194-2"></a><span class="ss">cd </span><span class="sc">{</span>deepfri_out<span class="sc">}</span></span>
-<span id="cb194-3"><a href="module-3-assigning-functions.html#cb194-3"></a><span class="ss">apptainer exec -B ./:/ws -W /ws ../</span><span class="sc">{</span>deepfri_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb194-4"><a href="module-3-assigning-functions.html#cb194-4"></a><span class="ss">    deepfri </span><span class="ch">\</span></span>
-<span id="cb194-5"><a href="module-3-assigning-functions.html#cb194-5"></a><span class="ss">        --ont mf bp ec </span><span class="ch">\</span></span>
-<span id="cb194-6"><a href="module-3-assigning-functions.html#cb194-6"></a><span class="ss">        --fasta_fn /ws/</span><span class="sc">{</span>aa_no_stop<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb194-3"><a href="module-3-assigning-functions.html#cb194-3"></a><span class="ss">apptainer exec -B ./:/ws -W /ws ../</span><span class="sc">{</span>deepfri_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb194-4"><a href="module-3-assigning-functions.html#cb194-4"></a><span class="ss">    deepfri </span><span class="op">\</span></span>
+<span id="cb194-5"><a href="module-3-assigning-functions.html#cb194-5"></a><span class="ss">        --ont mf bp ec </span><span class="op">\</span></span>
+<span id="cb194-6"><a href="module-3-assigning-functions.html#cb194-6"></a><span class="ss">        --fasta_fn /ws/</span><span class="sc">{</span>aa_no_stop<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb194-7"><a href="module-3-assigning-functions.html#cb194-7"></a><span class="ss">        --output_fn_prefix /ws/hypotheticals</span></span>
 <span id="cb194-8"><a href="module-3-assigning-functions.html#cb194-8"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>EC:</p>
@@ -1351,10 +1352,10 @@ The only difference is that ChatGPT is much, much larger.</p>
 </ol>
 <p>This will take a few minutes. Feel free to skip and use (<code>LIB/"outputs/protein_bert"</code>).</p>
 <div class="sourceCode" id="cb200"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb200-1"><a href="module-3-assigning-functions.html#cb200-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb200-2"><a href="module-3-assigning-functions.html#cb200-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>proteinbert_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb200-3"><a href="module-3-assigning-functions.html#cb200-3"></a><span class="ss">    pbert run </span><span class="ch">\</span></span>
-<span id="cb200-4"><a href="module-3-assigning-functions.html#cb200-4"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb200-5"><a href="module-3-assigning-functions.html#cb200-5"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb200-2"><a href="module-3-assigning-functions.html#cb200-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>proteinbert_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb200-3"><a href="module-3-assigning-functions.html#cb200-3"></a><span class="ss">    pbert run </span><span class="op">\</span></span>
+<span id="cb200-4"><a href="module-3-assigning-functions.html#cb200-4"></a><span class="ss">        --threads </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb200-5"><a href="module-3-assigning-functions.html#cb200-5"></a><span class="ss">        -i </span><span class="sc">{</span>prodigal_aa<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb200-6"><a href="module-3-assigning-functions.html#cb200-6"></a><span class="ss">        -o protein_bert</span></span>
 <span id="cb200-7"><a href="module-3-assigning-functions.html#cb200-7"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>The output of proteinBERT is an array of numbers for each ORF, representing their predicted function.
@@ -1584,8 +1585,8 @@ Pre-computed outputs are available at <code>{LIB}/outputs/gapseq</code>. A quick
 <span id="cb215-2"><a href="module-3-assigning-functions.html#cb215-2"></a><span class="co"># gapseq_p = &quot;all&quot; # takes about 4 hours!!</span></span>
 <span id="cb215-3"><a href="module-3-assigning-functions.html#cb215-3"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb215-4"><a href="module-3-assigning-functions.html#cb215-4"></a><span class="ss">mkdir -p </span><span class="sc">{</span>out_dir<span class="sc">}</span></span>
-<span id="cb215-5"><a href="module-3-assigning-functions.html#cb215-5"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb215-6"><a href="module-3-assigning-functions.html#cb215-6"></a><span class="ss">    gapseq find -p </span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss"> -l KEGG -K </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> -O -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb215-5"><a href="module-3-assigning-functions.html#cb215-5"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb215-6"><a href="module-3-assigning-functions.html#cb215-6"></a><span class="ss">    gapseq find -p </span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss"> -l KEGG -K </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> -O -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb215-7"><a href="module-3-assigning-functions.html#cb215-7"></a><span class="ss">        &gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/find.out 2&gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/find.err</span></span>
 <span id="cb215-8"><a href="module-3-assigning-functions.html#cb215-8"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <details>
@@ -1598,31 +1599,31 @@ Pre-computed outputs are available at <code>{LIB}/outputs/gapseq</code>. A quick
 <p>Transporters are faster, but still takes several minutes. Please don’t run and use pre-computed results.</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb216-1"><a href="module-3-assigning-functions.html#cb216-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb216-2"><a href="module-3-assigning-functions.html#cb216-2"></a><span class="ss">mkdir -p </span><span class="sc">{</span>out_dir<span class="sc">}</span></span>
-<span id="cb216-3"><a href="module-3-assigning-functions.html#cb216-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb216-4"><a href="module-3-assigning-functions.html#cb216-4"></a><span class="ss">    gapseq find-transport -K </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb216-3"><a href="module-3-assigning-functions.html#cb216-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb216-4"><a href="module-3-assigning-functions.html#cb216-4"></a><span class="ss">    gapseq find-transport -K </span><span class="sc">{</span>CPUS<span class="sc">}</span><span class="ss"> -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb216-5"><a href="module-3-assigning-functions.html#cb216-5"></a><span class="ss">        &gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/findtr.out 2&gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/findtr.err</span></span>
 <span id="cb216-6"><a href="module-3-assigning-functions.html#cb216-6"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>Construct a draft model using the candidate reactions, transporters, and pathways generated above.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb217-1"><a href="module-3-assigning-functions.html#cb217-1"></a>out_dir <span class="op">=</span> LIB<span class="op">/</span><span class="ss">f&quot;outputs/gapseq/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">&quot;</span> <span class="co"># divert to using the pre-computed outputs</span></span>
 <span id="cb217-2"><a href="module-3-assigning-functions.html#cb217-2"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb217-3"><a href="module-3-assigning-functions.html#cb217-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb217-4"><a href="module-3-assigning-functions.html#cb217-4"></a><span class="ss">    gapseq draft </span><span class="ch">\</span></span>
-<span id="cb217-5"><a href="module-3-assigning-functions.html#cb217-5"></a><span class="ss">        -r </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss">-Reactions.tbl </span><span class="ch">\</span></span>
-<span id="cb217-6"><a href="module-3-assigning-functions.html#cb217-6"></a><span class="ss">        -p </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss">-Pathways.tbl </span><span class="ch">\</span></span>
-<span id="cb217-7"><a href="module-3-assigning-functions.html#cb217-7"></a><span class="ss">        -t </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-Transporter.tbl </span><span class="ch">\</span></span>
-<span id="cb217-8"><a href="module-3-assigning-functions.html#cb217-8"></a><span class="ss">        -c </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb217-9"><a href="module-3-assigning-functions.html#cb217-9"></a><span class="ss">        -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb217-3"><a href="module-3-assigning-functions.html#cb217-3"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb217-4"><a href="module-3-assigning-functions.html#cb217-4"></a><span class="ss">    gapseq draft </span><span class="op">\</span></span>
+<span id="cb217-5"><a href="module-3-assigning-functions.html#cb217-5"></a><span class="ss">        -r </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss">-Reactions.tbl </span><span class="op">\</span></span>
+<span id="cb217-6"><a href="module-3-assigning-functions.html#cb217-6"></a><span class="ss">        -p </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>gapseq_p<span class="sc">}</span><span class="ss">-Pathways.tbl </span><span class="op">\</span></span>
+<span id="cb217-7"><a href="module-3-assigning-functions.html#cb217-7"></a><span class="ss">        -t </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-Transporter.tbl </span><span class="op">\</span></span>
+<span id="cb217-8"><a href="module-3-assigning-functions.html#cb217-8"></a><span class="ss">        -c </span><span class="sc">{</span>aa_fasta<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb217-9"><a href="module-3-assigning-functions.html#cb217-9"></a><span class="ss">        -f </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb217-10"><a href="module-3-assigning-functions.html#cb217-10"></a><span class="ss">        &gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/draft.out 2&gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/draft.err</span></span>
 <span id="cb217-11"><a href="module-3-assigning-functions.html#cb217-11"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>Add additional reactions to enable growth on M9 minimal media.</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb218-1"><a href="module-3-assigning-functions.html#cb218-1"></a>Shell(<span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb218-2"><a href="module-3-assigning-functions.html#cb218-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
-<span id="cb218-3"><a href="module-3-assigning-functions.html#cb218-3"></a><span class="ss">    gapseq fill --quick.gf </span><span class="ch">\</span></span>
-<span id="cb218-4"><a href="module-3-assigning-functions.html#cb218-4"></a><span class="ss">        -m </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-draft.RDS </span><span class="ch">\</span></span>
-<span id="cb218-5"><a href="module-3-assigning-functions.html#cb218-5"></a><span class="ss">        -c </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-rxnWeights.RDS </span><span class="ch">\</span></span>
-<span id="cb218-6"><a href="module-3-assigning-functions.html#cb218-6"></a><span class="ss">        -g </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-rxnXgenes.RDS </span><span class="ch">\</span></span>
-<span id="cb218-7"><a href="module-3-assigning-functions.html#cb218-7"></a><span class="ss">        -n </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/gapseq/m9.csv </span><span class="ch">\</span></span>
-<span id="cb218-8"><a href="module-3-assigning-functions.html#cb218-8"></a><span class="ss">        --output.dir </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="ch">\</span></span>
+<span id="cb218-2"><a href="module-3-assigning-functions.html#cb218-2"></a><span class="ss">apptainer exec -B /media:/media </span><span class="sc">{</span>gapseq_sif<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
+<span id="cb218-3"><a href="module-3-assigning-functions.html#cb218-3"></a><span class="ss">    gapseq fill --quick.gf </span><span class="op">\</span></span>
+<span id="cb218-4"><a href="module-3-assigning-functions.html#cb218-4"></a><span class="ss">        -m </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-draft.RDS </span><span class="op">\</span></span>
+<span id="cb218-5"><a href="module-3-assigning-functions.html#cb218-5"></a><span class="ss">        -c </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-rxnWeights.RDS </span><span class="op">\</span></span>
+<span id="cb218-6"><a href="module-3-assigning-functions.html#cb218-6"></a><span class="ss">        -g </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>gapseq_mag<span class="sc">}</span><span class="ss">-rxnXgenes.RDS </span><span class="op">\</span></span>
+<span id="cb218-7"><a href="module-3-assigning-functions.html#cb218-7"></a><span class="ss">        -n </span><span class="sc">{</span>LIB<span class="sc">}</span><span class="ss">/gapseq/m9.csv </span><span class="op">\</span></span>
+<span id="cb218-8"><a href="module-3-assigning-functions.html#cb218-8"></a><span class="ss">        --output.dir </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss"> </span><span class="op">\</span></span>
 <span id="cb218-9"><a href="module-3-assigning-functions.html#cb218-9"></a><span class="ss">        &gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/fill.out 2&gt; </span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/fill.err</span></span>
 <span id="cb218-10"><a href="module-3-assigning-functions.html#cb218-10"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
 <p>We can take a peek at the observed completion of each pathway.

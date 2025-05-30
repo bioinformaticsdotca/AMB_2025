@@ -125,10 +125,10 @@ count
 The objective of this lab is to identify and visualize the pathways who's gene expression patterns correlate with the Bacteroides vs Non-Bacteroides grouping.
 To do this we will:
 
-1. Use [salmon](Salmon) to obtain a count matrix representing the expression level of each gene in each sample. 
-1. Use [deseq2](DESeq2) to identify significantly expressed genes and generate a null distribution for gene set enrichment analysis.
-1. Perform [Gene set enrichment analysis (GSEA)](gene-set-enrichment-analysis-gsea) to identify significantly enriched pathways.
-1. Visualize the metabolic network in [cytoscape](Cytoscape) with expression information.
+1. Use [salmon](#salmon) to obtain a count matrix representing the expression level of each gene in each sample. 
+1. Use [deseq2](#deseq2) to identify significantly expressed genes and generate a null distribution for gene set enrichment analysis.
+1. Perform [Gene set enrichment analysis (GSEA)](#gene-set-enrichment-analysis-gsea) to identify significantly enriched pathways.
+1. Visualize the metabolic network in [cytoscape](#cytoscape) with expression information.
 
 ### Salmon
 
