@@ -1315,7 +1315,7 @@ cd {deepfri_out}
 apptainer exec -B ./:/ws -W /ws ../{deepfri_sif} \
     deepfri \
         --ont mf bp ec \
-        --fasta_fn /ws/{prodigal_aa_no_stop.name} \
+        --fasta_fn /ws/{aa_no_stop.name} \
         --output_fn_prefix /ws/hypotheticals
 """)
 ```
