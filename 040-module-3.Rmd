@@ -965,6 +965,10 @@ df
 
 #### Resistance Gene Identifier (RGI)
 
+(Optional: For when you want to use a specific database, in this case, we will demo antibiotic resistance)
+
+---
+
 https://quay.io/repository/biocontainers/rgi?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
 # docker://quay.io/biocontainers/rgi:6.0.4--pyh05cac1d_0
@@ -1228,6 +1232,10 @@ fig.show()
 
 #### deepEC
 
+(Optional: For predicting enzymes)
+
+---
+
 https://quay.io/repository/hallamlab/external_deepec?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
 # docker://quay.io/hallamlab/external_deepec:0.4.1
@@ -1268,6 +1276,10 @@ dfec.head(2)
 </details>
 
 #### deepFRI
+
+(Optional: For predicting Gene Ontology (GO) functions)
+
+---
 
 https://quay.io/repository/hallamlab/external_deepfri?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
@@ -1362,6 +1374,10 @@ The model itself is not even confident, assigning scores as low as 0.1 in some c
 </details>
 
 #### proteinBERT
+
+(Optional: For previously unseen hypothetical proteins)
+
+---
 
 https://quay.io/repository/hallamlab/external_proteinbert?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}

@@ -519,7 +519,19 @@ for i, order in enumerate(mat_index):
 mat_sorted.shape
 ```
 
-We can now perform GSEA and create this plot from figure 1 of the GSEA paper [1]. 
+Let's make a human-readable list of genes so we know what each position of the matrix corresponds to.
+Notice how the length of labels corresponds to the genes axis of the matrix.
+```{python, eval=FALSE, attr.source='.numberLines'}
+labels = _only_enzymes(df_corr).index.to_numpy()
+len(labels)
+```
+
+#### (Optional: implementing GSEA)
+
+This section dives deep into python to implement GSEA from scratch. 
+It is often sufficient to use existing software, but especially new or domain specific algorithms may be more difficult to install
+than implementing from scratch. Sometimes installation or implementation are both difficult...
+Our ultimate goal is to create this plot from figure 1 of the GSEA paper [1]
 
 ![](img/lab4/gsea.png){width=50%}
 
@@ -538,7 +550,6 @@ First, note that the summations only consider genes in the gene set _S_.
 
 Let's create a mask to select only genes in _S_.
 ```{python, eval=FALSE, attr.source='.numberLines'}
-labels = _only_enzymes(df_corr).index.to_numpy()
 S = np.array([k in gene_set for k in labels], dtype=int) # g in S
 S = S[mat_index.T] # same order as mat
 ```
@@ -666,6 +677,8 @@ def gsea(name):
 res = gsea("rn00983")
 res.score, res.pvalue
 ```
+
+#### Running GSEA
 
 <details>
     <summary>Solution</summary>
