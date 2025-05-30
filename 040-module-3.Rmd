@@ -42,9 +42,9 @@ We will use SSH port forwarding to open the additional port.
 
 ##### Terminal (Unix/MacOS)
 
-Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. For example:
+Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. Something like:
 ```{bash, eval=FALSE, attr.source='.numberLines'}
-ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_key}
+ssh -L 48888:localhost:48888 ubuntu@##.uhn-hpc.ca -i CBW.pem
 ```
 This means port `48888` on the remote server will be forwarded to your machine at `localhost:48888`.
 
@@ -56,7 +56,7 @@ Modern versions of Windows should have `ssh` available through Powershell. Putty
 
 #### Workspace
 
-Create a new workspace in your home directory.
+Let's create a new workspace for this lab.
 
 ```{bash, eval=FALSE}
 cd ~/workspace
@@ -70,20 +70,41 @@ Link the resource folder for easy access. This will contain all the required sof
 ln -s ~/CourseData/MIC_data/amb_module3/ ./lib
 ```
 
+The expected outputs for this lab can be found in `./lib/outputs`.
+```{bash, eval=FALSE}
+ls ./lib/outputs
+```
+
 #### Start container
 
 Most containers for this lab were obtained from the biocontainers project, which provides a large collection of bioinformatics software in a standard format.
-For each tool, we will provide URIs for the the specific container image used and where to get future versions.
-The `pull` command of `apptainer` can be used to download images (docs: https://apptainer.org/docs/user/main/cli/apptainer_pull.html).
+For each tool, we will provide URIs for the the specific container image used and where to get future versions. At the start of each section,
+you will see something like:
 
-Here is an example which downloads `prodigal` as the container image `example.sif` from `docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10`.
-The image URI takes the form of `<protocol>://<address>:<tag>`. Tags are used to identify versions https://quay.io/repository/biocontainers/prodigal?tab=tags.
+---
+
+https://quay.io/repository/biocontainers/prodigal?tab=tags
+```{python, eval=FALSE, attr.source='.numberLines'}
+# docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10
+prodigal_sif = LIB/"prodigal.sif"
+```
+
+---
+
+- The link (https://quay.io/repository/biocontainers/prodigal?tab=tags) will point to the container's repository for future versions.
+- The comment (`# docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10`) is the *URI* for the specific version used in this lab.
+- The code snippet (`prodigal_sif = LIB/"prodigal.sif"`) saves the path to the pre-downloaded container image for this lab.
+
+After the workshop, you can use the `pull` command of `apptainer` to obtain these tools on your (linux) machine
+(additional documentation: https://apptainer.org/docs/user/main/cli/apptainer_pull.html).
+Here is an example for downloading the `prodigal` container image as `example.sif` from the *URI* `docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10`.
+The image URI takes the form of `<protocol>://<address>:<tag>`.
 ```{python, eval=FALSE, attr.source='.numberLines'}
 apptainer pull example.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10
 ```
 
 <details>
-    <summary>What is the version of prodigal and the prodigal container image?</summary>
+    <summary>What do you think is the version of prodigal versus the prodigal container image?</summary>
 
 Prodigal: 2.6.3. Image: 2.6.3--h7b50bb2_10
 
@@ -94,7 +115,8 @@ We can now run the prodigal executable inside the container using `exec` (execut
 apptainer exec ./example.sif prodigal -h
 ```
 
-All containers for this lab were pre-downloaded in the resource folder now linked as `./lib`, including a main container with Jupyter and miscellaneous utilities.
+All containers for this lab were pre-downloaded in the resource folder now linked as `./lib`,
+including a main container with Jupyter and miscellaneous utilities (https://quay.io/repository/hallamlab/cbw_amb_lab3?tab=tags).
 The main container provides an automated setup script named `unpack`. Let's run it.
 ```{bash, eval=FALSE}
 apptainer exec -B /media:/media ./lib/amb_lab3.sif unpack
@@ -258,7 +280,7 @@ The container image for prodigal:
 
 https://quay.io/repository/biocontainers/prodigal?tab=tags
 ```{python, eval=FALSE, attr.source='.numberLines'}
-# apptainer pull ./lib/prodigal.sif docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10
+# docker://quay.io/biocontainers/prodigal:2.6.3--h7b50bb2_10
 prodigal_sif = LIB/"prodigal.sif"
 ```
 

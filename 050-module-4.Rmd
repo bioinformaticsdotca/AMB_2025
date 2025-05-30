@@ -34,9 +34,9 @@ We will need to perform the following steps:
 
 ##### Terminal (Unix/MacOS)
 
-Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. For example:
+Add `-L 48888:localhost:48888` to the SSH command you use to connect to the server. Something like:
 ```{bash, eval=FALSE, attr.source='.numberLines'}
-ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_key}
+ssh -L 48888:localhost:48888 ubuntu@##.uhn-hpc.ca -i CBW.pem
 ```
 ##### Putty (Windows)
 
@@ -44,7 +44,7 @@ ssh -L 48888:localhost:48888 ubuntu@${your_number}.uhn-hpc.ca -i ${path_to_your_
 
 #### Workspace
 
-Create a new workspace in your home directory.
+Let's create a new workspace for this lab.
 
 ```{bash, eval=FALSE}
 cd ~/workspace
@@ -58,9 +58,14 @@ Link the resource folder for easy access.
 ln -s ~/CourseData/MIC_data/amb_module4/ ./lib
 ```
 
+The expected outputs for this lab can be found in `./lib/outputs`.
+```{bash, eval=FALSE}
+ls ./lib/outputs
+```
+
 #### Start container
 
-Unpack the main container for this lab.
+Unpack the main container for this lab (https://quay.io/repository/hallamlab/cbw_amb_lab4?tab=tags).
 ```{bash, eval=FALSE}
 apptainer exec -B /media:/media ./lib/amb_lab4.sif unpack
 ```
